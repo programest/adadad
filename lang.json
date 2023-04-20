@@ -1,0 +1,102 @@
+{
+	"ru": {
+		"insurance": {
+			"program": [
+				{
+					"label": "Страховая сумма"
+					
+				},
+				{
+					"label": "Вы резидент РК?"
+			
+				}
+			],
+			"price" : "тг"
+		},
+		"discount": {
+			"button": "Застроховаться"
+		},
+		"authorization": {
+			"button": "Войти"
+		},
+		"nav":{
+			"cabinet": "Личный кабинет"
+		}
+		
+	},
+	"en": {
+		"insurance": {
+			"program": [
+				{
+					"label": "Amount insured"
+					
+				},
+				{
+					"label": "Are you a resident of Kazakhstan?"
+					
+				}
+				
+			],
+			"price" : "tg"
+		},
+		"discount": {
+			"button": "Buy insurance"
+		},
+		"authorization": {
+			"button": "Enter"
+		},
+		"nav":{
+			"cabinet": "Log In"
+		}
+	},
+	"kz": {
+		"insurance": {
+			"program": [
+				{
+					"label": "Сақтандыру сомасы"
+					
+				},
+				{
+					"label": "Сіз PK резидентісіз бе?"
+				}
+				
+			],
+			"price" : "тг"
+		},
+		"discount": {
+			"button": "Сатып алу"
+		},
+		"authorization": {
+			"button": "Кіру"
+		},
+		"nav":{
+			"cabinet": "Жеке бөлме"
+		}
+	},
+	"lat": {
+		"insurance": {
+			"program": [
+				{
+					"label": "Securus sum"
+					
+				},
+				{
+					"label": "Esne incola RK?"
+				}
+				
+			],
+			"price" : "tg"
+		},
+		"discount": {
+			"button": "Buy assecurationis"
+		},
+		"authorization": {
+			"button": "Venire in"
+		},
+		"nav":{
+			"cabinet": "Venire in"
+		}
+		
+	}
+	
+}
