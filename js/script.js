@@ -16,30 +16,31 @@ if (anchors) {
 	for (let anchor of anchors) {
 		anchor.addEventListener('click', function (e) {
 			e.preventDefault()
-		
+
 			const blockID = anchor.getAttribute('href').substr(1)
-		
+
 			document.getElementById(blockID).scrollIntoView({
 				behavior: 'smooth',
 				block: 'start'
 			})
 		})
 	}
-	}
+}
 function show() {
 	var a = document.getElementById("pwd");
 	var b = document.getElementById("eye");
 	if (a.type == "password") {
 		a.type = "text";
-		b.src = "/img/eye_hide.svg";
+		b.src = "img/eye_hide.svg";
 	} else {
 		a.type = "password";
-		b.src = "/img/eye_show.svg";
+		b.src = "img/eye_show.svg";
 	}
 }
 
-document.addEventListener("DOMContentLoaded", (function () {
+function MaskPhone() {
 	var phoneInputs = document.querySelectorAll("input[data-tel-input]");
+	console.log(phoneInputs)
 	var getInputNumbersValue = function (input) {
 		return input.value.replace(/\D/g, "");
 	};
@@ -56,10 +57,25 @@ document.addEventListener("DOMContentLoaded", (function () {
 	};
 	var onPhoneInput = function (e) {
 		var input = e.target, inputNumbersValue = getInputNumbersValue(input), selectionStart = input.selectionStart, formattedInputValue = "";
-		if (!inputNumbersValue) return input.value = "";
+		if (inputNumbersValue.length < 11) {
+			if (document.querySelector('.needs-validation2').classList.contains('was-validated')) {
+				e.target.classList.add('is-invalid');
+				e.target.classList.add('custom-phone');
+				ValidateInJs_UNCORRECT(input)
+			}
+		} else {
+			if (document.querySelector('.needs-validation2').classList.contains('was-validated')) {
+				e.target.classList.remove('is-invalid');
+				e.target.classList.add('custom-phone');
+				ValidateInJs_CORRECT(input)
+			}
+		}
 		if (input.value.length != selectionStart) {
 			if (e.data && /\D/g.test(e.data)) input.value = inputNumbersValue;
+
 			return;
+		} else {
+
 		}
 		if (["7", "8", "9"].indexOf(inputNumbersValue[0]) > -1) {
 			if ("9" == inputNumbersValue[0]) inputNumbersValue = "7" + inputNumbersValue;
@@ -75,6 +91,7 @@ document.addEventListener("DOMContentLoaded", (function () {
 	var onPhoneKeyDown = function (e) {
 		var inputValue = e.target.value.replace(/\D/g, "");
 		if (8 == e.keyCode && 1 == inputValue.length) e.target.value = "";
+
 	};
 	for (var phoneInput of phoneInputs) {
 		phoneInput.addEventListener("keydown", onPhoneKeyDown);
@@ -82,7 +99,7 @@ document.addEventListener("DOMContentLoaded", (function () {
 		phoneInput.addEventListener("paste", onPhonePaste, false);
 	}
 
-}));
+};
 
 var dateBirthday = document.getElementById("dateBirthday0");
 var datePasport = document.getElementById("datePasportStart0");
@@ -102,12 +119,12 @@ if (dateBirthday) {
 		autoClose: true,
 		maxDate: new Date(),
 		onSelect: function (formattedDate, date) {
-			if (checkAge() == false){
+			if (checkAge() == false) {
 				console.log(this)
 				document.getElementById('dateBirthday0').classList.add('is-invalid')
 				document.getElementById('dateBirthday0').value = ''
-				document.getElementById('dateBirthday0').placeholder = 'Возраст должен быть от 18 до 70 лет'
-			}else if (checkAge() == true){
+				document.getElementById('dateBirthday0').placeholder = 'Страхователь может быть не младше 18 лет'
+			} else if (checkAge() == true) {
 				document.getElementById('dateBirthday0').classList.remove('is-invalid')
 			}
 		},
@@ -180,17 +197,17 @@ var nm = document.querySelector('.add-classlist')
 var checkbox = document.getElementById("uniqueID");
 if (checkbox) {
 	checkbox.onchange = function () {
-	if (this.checked) {
-		console.log('asds')
-		nm.classList.add('insurance-block-add-subinsurance')
+		if (this.checked) {
+			console.log('asds')
+			nm.classList.add('insurance-block-add-subinsurance')
 
-	} else {
+		} else {
 
-		console.log('asd')
-		nm.classList.remove('insurance-block-add-subinsurance')
+			console.log('asd')
+			nm.classList.remove('insurance-block-add-subinsurance')
 
-	}
-	console.log(nm)
+		}
+		console.log(nm)
 	};
 }
 function collectSubInsurance() {
@@ -406,22 +423,22 @@ function TranslateEventHandler(event, selector, handler) {
 // 	document.querySelector(".sub-forms").addEventListener("click", function (e) {
 // 		const inputs = document.querySelectorAll('input[type="file"]');
 // 		const output = document.querySelector('.file-text');
-	
+
 // 		inputs.forEach((input) => {
-	
+
 // 			input.addEventListener('change', async (event) => {
-	
+
 // 				const files = event.target.files;
-	
+
 // 				for (let i = 0; i < files.length; i++) {
 // 					const file = files[i];
-	
+
 // 					try {
 // 						const response = await fetch('/upload', {
 // 							method: 'POST',
 // 							body: file
 // 						});
-	
+
 // 						if (response.ok) {
 // 							output.textContent = `Загружено ${i} из ${files.length} файлов`;
 // 						}
@@ -535,8 +552,9 @@ const childaddButtonContainer = document.querySelector('.form__action-people')
 
 
 function Add() {
+
 	const xhr = new XMLHttpRequest();
-	xhr.open('GET', '/fd.html', true);
+	xhr.open('GET', 'fd.html', true);
 	xhr.onreadystatechange = function () {
 		if (xhr.readyState === 4 && xhr.status === 200 && blockCount <= 5) {
 			const newBlock = document.createElement('div');
@@ -554,12 +572,12 @@ function Add() {
 
 				new AirDatepicker('#dateBirthday' + blockCount, {
 					autoClose: true,
-					
+
 					onSelect: function (formattedDate, date) {
 						var ininput = formattedDate.datepicker.$el
 						console.log(ininput)
 						OtherCoficent(ininput);
-						
+
 
 					},
 					maxDate: new Date(),
@@ -567,9 +585,9 @@ function Add() {
 				});
 				new AirDatepicker('#datePasportStart' + blockCount, {
 					autoClose: true,
-					
-					
-					
+
+
+
 					maxDate: new Date(),
 
 				});
@@ -593,7 +611,7 @@ function Add() {
 					}
 				}
 			});
-			
+
 			$('#country-people' + numCount).on("change", function (e) {
 				console.log('change');
 				var selectElementThree = document.getElementById("country-people" + numCount);
@@ -606,9 +624,11 @@ function Add() {
 			toastBody.innerHTML = 'Не может быть больше 5 туристов '
 			BsAlert.show();
 		}
+		MaskPhone()
 	};
 
 	xhr.send();
+
 
 
 }
@@ -652,10 +672,10 @@ function AddPeoples() {
 			if (block[i].checkValidity()) {
 				console.log('Проходит валидацию')
 				Add();
-	
+
 			} else {
 				console.log(document.getElementById('kostil'))
-				
+
 				console.log('Не проходит валидацию')
 
 			}
@@ -672,7 +692,7 @@ function AddPeoples() {
 
 
 function formatStateInsurancePeople(state) {
-	var baseUrl = "/img/flags";
+	var baseUrl = "img/flags";
 	var $state = $(
 		'<span><img class="img-flag" /> <span></span></span>'
 	);
@@ -731,27 +751,27 @@ function OtherCoficent(a) {
 
 	// Получите ссылку на кнопку
 	var button = document.querySelector('.some-block-polis');
-	if (button){
-	// Добавьте обработчик событий на кнопку
-	button.addEventListener('click', function (event) {
-	// Получите ссылку на форму, связанную с кнопкой
-	var item = document.querySelector('.needs-validation')
-	
-	// Проверьте форму на валидность
-	if (item.checkValidity() && results >= 500) {
-		block2.style.display = 'flex';
-		block1.style.display = 'none';
-	} else {
-		event.preventDefault();
-		event.stopPropagation();
-		console.log('Не валидно');
+	if (button) {
+		// Добавьте обработчик событий на кнопку
+		button.addEventListener('click', function (event) {
+			// Получите ссылку на форму, связанную с кнопкой
+			var item = document.querySelector('.needs-validation')
+
+			// Проверьте форму на валидность
+			if (item.checkValidity() && results >= 500) {
+				block2.style.display = 'flex';
+				block1.style.display = 'none';
+			} else {
+				event.preventDefault();
+				event.stopPropagation();
+				console.log('Не валидно');
+			}
+
+			// Добавьте класс 'was-validated' к форме
+			item.classList.add('was-validated');
+		}, false);
 	}
 
-	// Добавьте класс 'was-validated' к форме
-	item.classList.add('was-validated');
-}, false);
-	}
-	
 
 })();
 
@@ -765,11 +785,11 @@ function OtherCoficent(a) {
 // 	console.log(formSelector2);
 // 	const forms = [document.querySelector(formSelector1), document.querySelector(formSelector2)];
 // 	const result = [];
-  
+
 // 	forms.forEach(form => {
 // 	  const formData = new FormData(form);
 // 	  const newFormData = new FormData();
-  
+
 // 	  for (let [name, value] of formData.entries()) {
 // 		const element = form.querySelector(`[name="${name}"]`);
 // 		console.log(element);
@@ -780,7 +800,7 @@ function OtherCoficent(a) {
 // 		  console.log(`Name: ${name}, Data-Response: ${dataResponse}`);
 // 		  // ваш код для выполнения при наличии атрибута data-responce
 // 		  newFormData.append(name, dataResponse);
-  
+
 // 		} else if (element.getAttribute('data-responce-list-people')) {
 // 		  console.log(value)
 // 		  const insuredList = [
@@ -797,7 +817,7 @@ function OtherCoficent(a) {
 // 		} else {
 // 		  console.log(`Name: ${name}`);
 // 		  // ваш код для выполнения при отсутствии атрибута data-responce или элемента selectedOption
-  
+
 // 		  newFormData.append(name, value);
 // 		}
 // 	  }
@@ -805,10 +825,10 @@ function OtherCoficent(a) {
 // 	  result.push(JSON.parse(json));
 // 	  console.log(result);
 // 	});
-  
+
 // 	return result;
 //   }
-  
+
 
 // const insuredList = [];
 // function getFormData(formSelector1, formSelector2) {
@@ -836,15 +856,15 @@ function OtherCoficent(a) {
 //           newFormData.append(name, 0);
 //         }
 //       } 
-	  
-	
-	
+
+
+
 //     } 
 //   });
- 
-  
 
-  
+
+
+
 //   const insuredListName = document.getElementById('dateBirthday0').value
 //   const insuredListBirthday = document.getElementById('insurance__name-list').value;
 //   const diffDays = dateCouf(insuredListName);
@@ -852,7 +872,7 @@ function OtherCoficent(a) {
 //   insuredList.push({'fname': insuredListBirthday}, {'age': diffDays});
 
 
-	
+
 
 
 //   console.log(document.getElementById('date__start').value);
@@ -864,12 +884,12 @@ function OtherCoficent(a) {
 //   };
 //   newFormData.append('insured_list', JSON.stringify(insuredList));
 //   newFormData.append('insurant', JSON.stringify(insurant));
- 
+
 //   console.log(newFormData);
 
 
 
- 
+
 
 // }
 
@@ -881,25 +901,25 @@ function OtherCoficent(a) {
 	// Получите ссылку на кнопку
 	var button = document.querySelector('.puy');
 	// Добавьте обработчик событий на кнопку
-		document.getElementById('dateBirthday0').value 
-		form.addEventListener('change', function () {
-			button.classList.toggle('active-btn', form.checkValidity());
-	
-		});
-	
-	
+	document.getElementById('dateBirthday0').value
+	form.addEventListener('change', function () {
+		button.classList.toggle('active-btn', form.checkValidity());
+
+	});
+
+
 	button.addEventListener('click', function (event) {
-		var bird  = checkAge() 
-		if (!document.querySelector('.block') && !checkbox.checked)  {
+
+		if (!document.querySelector('.block') && !checkbox.checked) {
 			document.querySelector('.hidden-attentional-sec').style.display = 'flex'
-			  setTimeout(function() {
+			setTimeout(function () {
 				document.querySelector('.hidden-attentional-sec').style.display = 'none';
-			  }, 3000);
+			}, 3000);
 		} else {
 			if (block) {
 				block.forEach(function (item) {
 					// Получите ссылку на форму, связанную с кнопкой
-					if (form.checkValidity() && item.checkValidity()){
+					if (form.checkValidity() && item.checkValidity()) {
 
 						block2.style.display = 'none';
 						block3.style.display = 'block';
@@ -912,7 +932,7 @@ function OtherCoficent(a) {
 					}
 				})
 			} else {
-				if (form.checkValidity() && bird === true ) {
+				if (form.checkValidity()) {
 					block2.style.display = 'none';
 					block3.style.display = 'block';
 					append()
@@ -920,21 +940,14 @@ function OtherCoficent(a) {
 					event.preventDefault();
 					event.stopPropagation();
 					console.log('Не валидно');
-					if (bird === false) {
-						document.querySelector('.message-total-text').textContent = 'Возраст страхователя должен быть не менее 18 лет'
-						document.querySelector('.hidden-attentional-sec').style.display = 'flex'
-						
-						  setTimeout(function() {
-							document.querySelector('.hidden-attentional-sec').style.display = 'none';
-						  }, 3000);
-					}
+
 				}
 			}
 		}
 
 		form.classList.add('was-validated');
 	}, false);
-	
+
 })();
 
 
@@ -945,18 +958,18 @@ function checkAge() {
 	const birthdayInput = document.getElementById('dateBirthday0').value;
 	const birthdayParts = birthdayInput.split('.');
 	const birthday = new Date(`${birthdayParts[1]}.${birthdayParts[0]}.${birthdayParts[2]}`);
-		const today = new Date();
+	const today = new Date();
 	var age = today.getFullYear() - birthday.getFullYear();
 	const monthDiff = today.getMonth() - birthday.getMonth();
 	if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthday.getDate())) {
-	  age--;
+		age--;
 	}
 
 	if (age >= 18) {
 		return true;
 	}
 	return false;
-	
+
 }
 
 
@@ -971,7 +984,7 @@ function checkAge() {
 
 
 
-function append(){
+function append() {
 	console.log('append');
 	var obj = {
 		"insurance_summ": selecta('insurance__sum'),
@@ -995,46 +1008,46 @@ function append(){
 			"Phone": document.getElementById('Phone0').value,
 			"Address": document.getElementById('adress0').value
 		},
-		
+
 		"insured_list": []
 	}
 	//Цикл для  добавления всех застрахованных в OBJ
 	var allBlock = document.querySelectorAll('.block')
 	if (checkbox.checked) {
 		console.log('checked');
-		for (var i = 0; i <= allBlock.length; i++) {		
-			var lname = document.getElementById('LastName'+ [i]).value;
-			var pasport = document.getElementById('pasport'+ [i]).value;
-			var iin = document.getElementById('IIN'+ [i]).value;
-			var phone = document.getElementById('Phone'+ [i]).value;
-			var fname = document.getElementById('Name'+ [i]).value;
-			var dob = document.getElementById('dateBirthday'+ [i]).value;
-			var age =  calculateAgeInYears(document.getElementById('dateBirthday'+ [i]).value)
-			var PassportDate = document.getElementById('datePasportStart'+ [i]).value;
-			var country = selectaInCountry('country-people'+ [i])
+		for (var i = 0; i <= allBlock.length; i++) {
+			var lname = document.getElementById('LastName' + [i]).value;
+			var pasport = document.getElementById('pasport' + [i]).value;
+			var iin = document.getElementById('IIN' + [i]).value;
+			var phone = document.getElementById('Phone' + [i]).value;
+			var fname = document.getElementById('Name' + [i]).value;
+			var dob = document.getElementById('dateBirthday' + [i]).value;
+			var age = calculateAgeInYears(document.getElementById('dateBirthday' + [i]).value)
+			var PassportDate = document.getElementById('datePasportStart' + [i]).value;
+			var country = selectaInCountry('country-people' + [i])
 			console.log(i);
-			obj.insured_list.push({"FirstName": fname, "LastName": lname, "IIN": iin, "Passport": pasport, "DOB": dob, "PassportDate": PassportDate, "ResidentCountry": country, "Phone": phone,  "age": age})
+			obj.insured_list.push({ "FirstName": fname, "LastName": lname, "IIN": iin, "Passport": pasport, "DOB": dob, "PassportDate": PassportDate, "ResidentCountry": country, "Phone": phone, "age": age })
 		}
 	} else {
 		console.log('unchecked');
-		if (allBlock.length >=1	) {
-			for (var i = 1; i <= allBlock.length; i++) {	
-				var lname = document.getElementById('LastName'+ [i]).value;
-				var pasport = document.getElementById('pasport'+ [i]).value;
-				var iin = document.getElementById('IIN'+ [i]).value;
-				var phone = document.getElementById('Phone'+ [i]).value;
-				var fname = document.getElementById('Name'+ [i]).value;
-				var dob = document.getElementById('dateBirthday'+ [i]).value;
-				var age =  calculateAgeInYears(document.getElementById('dateBirthday'+ [i]).value)
-				var PassportDate = document.getElementById('datePasportStart'+ [i]).value;
-				var country = selectaInCountry('country-people'+ [i])
+		if (allBlock.length >= 1) {
+			for (var i = 1; i <= allBlock.length; i++) {
+				var lname = document.getElementById('LastName' + [i]).value;
+				var pasport = document.getElementById('pasport' + [i]).value;
+				var iin = document.getElementById('IIN' + [i]).value;
+				var phone = document.getElementById('Phone' + [i]).value;
+				var fname = document.getElementById('Name' + [i]).value;
+				var dob = document.getElementById('dateBirthday' + [i]).value;
+				var age = calculateAgeInYears(document.getElementById('dateBirthday' + [i]).value)
+				var PassportDate = document.getElementById('datePasportStart' + [i]).value;
+				var country = selectaInCountry('country-people' + [i])
 				console.log(i);
-				obj.insured_list.push({"FirstName": fname, "LastName": lname, "IIN": iin, "Passport": pasport, "DOB": dob, "PassportDate": PassportDate, "ResidentCountry": country, "Phone": phone,  "age": age})
+				obj.insured_list.push({ "FirstName": fname, "LastName": lname, "IIN": iin, "Passport": pasport, "DOB": dob, "PassportDate": PassportDate, "ResidentCountry": country, "Phone": phone, "age": age })
 			}
-		}else{
+		} else {
 			obj.insured_list = ""
 		}
-	
+
 	}
 	var linkPay = document.getElementById('payment')
 	var residentButton = document.getElementById("RK");
@@ -1043,52 +1056,52 @@ function append(){
 		document.querySelector('.message-total').style.display = 'none';
 		linkPay.innerHTML = "Оплатить";
 		linkPay.href = "https://www.sberbank.kz/ru/person/credit_cards/credit_cards/credit_cards_for_individuals/visa_gold";
-	
-	}else{
+
+	} else {
 		obj.isresident = "2";
 		document.querySelector('.message-total').style.display = 'flex';
-		
+
 	}
 	//Добавление стран
 	var selectedOptions = $('#country').select2('data');
 	obj.territory = [];
 
 	var ter = [];
-	selectedOptions.forEach(function(option) {
-	  var atributes = option.element.getAttribute('data-name-lat');
-	  ter.push(atributes);
+	selectedOptions.forEach(function (option) {
+		var atributes = option.element.getAttribute('data-name-lat');
+		ter.push(atributes);
 	});
 
-	if (ter.length > 1){
-	  obj.territory = ter.map(function(item) {
-	    return item;
-	  });
+	if (ter.length > 1) {
+		obj.territory = ter.map(function (item) {
+			return item;
+		});
 	} else {
-	  obj.territory = [ter[0]];
+		obj.territory = [ter[0]];
 	}
 
 
 
-	
+
 
 	var days = calculateDaysDiff(document.getElementById('date__start').value, document.getElementById('date__end').value);
 	var age = calculateAgeInYears(document.getElementById('dateBirthday0').value)
 	obj.days = days;
 	obj.insurant.age = age;
-	var input = document.querySelector('.field__file') 
-    const formData = new FormData();
-    const str = JSON.stringify(obj);
-    formData.append( 'file', input.files[0] );
-    formData.append( 'json', str );
+	var input = document.querySelector('.field__file')
+	const formData = new FormData();
+	const str = JSON.stringify(obj);
+	formData.append('file', input.files[0]);
+	formData.append('json', str);
 
 	fetch("http://10.2.5.16/dmsajax/test.php", {
-	  method: 'POST',
-	  body: formData
-	  
+		method: 'POST',
+		body: formData
+
 	})
-	.then(response => response.json())
-	.then(convert)
-	.catch(error => console.error(error));
+		.then(response => response.json())
+		.then(convert)
+		.catch(error => console.error(error));
 }
 //Считает разницу в днях между датами
 function calculateDaysDiff(dateString1, dateString2) {
@@ -1108,16 +1121,16 @@ function calculateDaysDiff(dateString1, dateString2) {
 function calculateAgeInYears(dateString) {
 	const parts = dateString.split('.');
 	const dateStrings = `${parts[2]}-${parts[1]}-${parts[0]}`;
-	
+
 	const today = new Date();
 	const birthDate = new Date(dateStrings);
 	let age = today.getFullYear() - birthDate.getFullYear();
 	const monthDiff = today.getMonth() - birthDate.getMonth();
-  
+
 	if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-	  age--;
+		age--;
 	}
-  
+
 	return age;
 }
 //Функция для получения атрибута data-responce
@@ -1125,29 +1138,29 @@ function selecta(selectElement) {
 	var sel = document.getElementById(selectElement);
 	var selectedOption = sel.options[sel.selectedIndex];
 	if (selectedOption == null || selectedOption.getAttribute('data-responce') == null) {
-	  return 0;
+		return 0;
 	}
 	var hh = selectedOption.getAttribute('data-responce');
 	return hh;
 }
- //Функция для получения атрибута data-name-lat
+//Функция для получения атрибута data-name-lat
 function selectaInCountry(selectElement) {
 	var sel = document.getElementById(selectElement);
 	var selectedOption = sel.options[sel.selectedIndex];
 	if (selectedOption == null || selectedOption.getAttribute('data-name-lat') == null) {
-	  return 0;
+		return 0;
 	}
 	var hh = selectedOption.getAttribute('data-name-lat');
 	return hh;
 }
 
- //Функция для получения атрибута data-zone
+//Функция для получения атрибута data-zone
 
- function selectaInZone(selectElement) {
+function selectaInZone(selectElement) {
 	var sel = document.getElementById(selectElement);
 	var selectedOption = sel.options[sel.selectedIndex];
 	if (selectedOption == null || selectedOption.getAttribute('data-zone') == null) {
-	  return 0;
+		return 0;
 	}
 	var hh = selectedOption.getAttribute('data-zone');
 	return hh;
@@ -1199,25 +1212,25 @@ function selectaInCountry(selectElement) {
 // 				 "ResidentCountry":"Kazakhstan",
 // 				 "Phone":"77777777777"
 // 			 }
-		
+
 // 		]
-		
+
 
 // 	}`
 // 	})
-	
+
 // 	.then(response => response.json())
 // 	.then(convert)
 // 	.catch(error => console.error(error));
 
 
-function convert(data){
-	
+function convert(data) {
+
 	const itogSum = data.insurance_premium;
 	document.querySelector('.total__text-num').innerHTML = itogSum
 	console.log(data);
 	const insurantData = data.insurant;
-	
+
 	Object.entries(insurantData).forEach(([key, value]) => {
 		const elements = document.querySelectorAll('[data-beckend-response]');
 		elements.forEach(element => {
@@ -1225,9 +1238,9 @@ function convert(data){
 			else if (element.getAttribute('data-beckend-response') === 'LastName') element.innerHTML = insurantData.LastName + ' ' + insurantData.FirstName;
 		});
 		console.log(`${key}: ${value}`);
-	  });
-	  console.log(data.insured_list.length);
-	  for (let i = 0; i < data.insured_list.length; i++) {
+	});
+	console.log(data.insured_list.length);
+	for (let i = 0; i < data.insured_list.length; i++) {
 		console.log(`Это: insured_list ${i}`);
 		const insuredList = data.insured_list[i];
 		console.log(i);
@@ -1235,12 +1248,12 @@ function convert(data){
 		const elements = document.querySelectorAll(`[data-beckend-response-insured][data-insured-index="${i}"]`);
 		console.log(elements);
 		Object.entries(insuredList).forEach(([key, value]) => {
-	
-					let element;
+
+			let element;
 			elements.forEach(el => {
-			  if (el.getAttribute('data-beckend-response-insured') === key) {
-			    element = el;
-			  }
+				if (el.getAttribute('data-beckend-response-insured') === key) {
+					element = el;
+				}
 			});
 			console.log();
 			if (element) {
@@ -1253,11 +1266,11 @@ function convert(data){
 						nameElement.innerHTML = insuredList.LastName + ' ' + insuredList.FirstName;
 					});
 				}
-			} 
+			}
 		});
-		
+
 	}
-	
+
 
 	const territory = data.territory;
 
@@ -1265,7 +1278,7 @@ function convert(data){
 	document.getElementById('total-insuranceNum').innerHTML = data.insurance_summ;
 	document.getElementById('total-dateStart').innerHTML = data.date_start;
 	document.getElementById('total-dateEnd').innerHTML = data.date_end
-	
+
 }
 
 
@@ -1273,14 +1286,14 @@ function convert(data){
 function collectInsurance(index) {
 	var container = document.querySelector('.accordion-subinsuarnce');
 	console.log(index);
-	if(index >= 0) {
+	if (index >= 0) {
 		document.getElementById('delete-acc').style.display = 'block';
 	}
-	else{
+	else {
 		document.getElementById('delete-acc').style.display = 'none';
 	}
 
-	
+
 
 
 	const newDiv = document.createElement("div");
@@ -1329,31 +1342,31 @@ function collectInsurance(index) {
 
 
 	`;
-	
-	
 
-	
+
+
+
 	const inputBlocks = document.querySelectorAll('.newDiv'); // выбираем все блоки с информацией
 	let isDuplicate = false; // флаг, показывающий, есть ли дубликат застрахованного
 
 	inputBlocks.forEach((inputBlock) => {
-	  const insuredIndex = inputBlock.dataset.insuredIndex;
-	  console.log(inputBlock.querySelector('.number'));
-	  if (inputBlock.querySelector('.number') === index) {
-		console.log('Дубликат');
-		isDuplicate = true; // если индексы совпадают, значит застрахованный уже существует
-	  }
+		const insuredIndex = inputBlock.dataset.insuredIndex;
+		console.log(inputBlock.querySelector('.number'));
+		if (inputBlock.querySelector('.number') === index) {
+			console.log('Дубликат');
+			isDuplicate = true; // если индексы совпадают, значит застрахованный уже существует
+		}
 	});
- 
+
 	// если есть дубликат, удаляем все блоки newDiv
 	if (isDuplicate) {
-	  const oldDivs = document.querySelectorAll('.newDiv');
-	  oldDivs.forEach((div) => {
-		div.remove();
-	  });
+		const oldDivs = document.querySelectorAll('.newDiv');
+		oldDivs.forEach((div) => {
+			div.remove();
+		});
 	}
-	
-	
+
+
 	container.appendChild(newDiv);
 }
 
@@ -1390,7 +1403,7 @@ function ClearInputNameLastName(a) {
 //         let formattedDate = '';
 //         const value = this.value.replace(/\D/g, '');
 //         const datePattern = /^(\d{1,2})(\d{0,2})(\d{0,4})$/;
-        
+
 //         if (datePattern.test(value)) {
 //             const day = value.slice(0, 2);
 //             const month = value.slice(2, 4);
@@ -1426,7 +1439,7 @@ function ClearInputNameLastName(a) {
 //                     console.log('error');
 //                 }
 //             }
-		
+
 // 		if (value.length >= 2) {
 // 			console.log(1);
 // 		  formattedDate += day + '.';
@@ -1439,7 +1452,7 @@ function ClearInputNameLastName(a) {
 // 			console.log(3);
 // 		  formattedDate += year;
 // 		}
-  
+
 // 		this.value = formattedDate;
 // 	  } 
 // 	});
@@ -1448,224 +1461,219 @@ function ClearInputNameLastName(a) {
 
 function maskDateInput(input, values, secondInput) {
 
-	
-	  
-	input.addEventListener('input', function() {
-		
-	  const value = this.value.replace(/\D/g, '');
-	  const datePattern = /^(\d{1,2})(\d{0,2})(\d{0,4})$/;
-	  if (datePattern.test(value) ) {
-		const day = value.slice(0, 2);
-		const month = value.slice(2, 4);
-		const year = value.slice(4, 8);
-  
-		function isLeapYear(year) {
-			return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
-		  }
-
-		
-		const currentDate = new Date();
-		const inputDate = new Date(year, month - 1, day);
-		inputDate.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
-  
-		const firstInputInput = dateStart.value;
-		const [dayFirst, monthFirst, yearFirst] = firstInputInput.split('.');
-		const firstInput = new Date(yearFirst, monthFirst - 1, dayFirst);
-		firstInput.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
-  
-		const currentYear = currentDate.getFullYear();
-		const currentMonth = String(currentDate.getMonth() + 1).padStart(2, '0');
-		const currentDay = String(currentDate.getDate()).padStart(2, '0');
-  
-		const currentDateFormatted = `${currentYear}-${currentMonth}-${currentDay}`;
-		const currentDateObj = new Date(currentDateFormatted);
-		currentDateObj.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
 
 
-		const birthdayDate = new Date();
+	input.addEventListener('input', function () {
 
-		// Set the date when the person turns 18
-		const birthYear = birthdayDate.getFullYear() - 18;
-		const birthMonth = birthdayDate.getMonth() + 1; // January is 0
-		const birthDay = birthdayDate.getDate();
-		const birthDate = new Date(birthYear, birthMonth - 1, birthDay, 0, 0, 0, 0);
-		birthDate.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
-		
+		const value = this.value.replace(/\D/g, '');
+		const datePattern = /^(\d{1,2})(\d{0,2})(\d{0,4})$/;
+		if (datePattern.test(value)) {
+			const day = value.slice(0, 2);
+			const month = value.slice(2, 4);
+			const year = value.slice(4, 8);
 
-
-
-
-		let formattedDate = '';
-		if (values === 'plus') {
-		
-		  if (inputDate > currentDateObj || inputDate.getTime() === currentDateObj.getTime()) {
-			this.value = '';
-			return;
-		  }
-		} else if (values === 'minus') {
-		  if (value.length === 8) {
-			
-			if (inputDate < currentDateObj || inputDate.getTime() === currentDateObj.getTime()) {
-			  this.value = '';
-			  return;
-			} 
-		  }
-		} else if (values === 'modificed') {
-		  if (value.length === 8) {
-	
-			if (inputDate < firstInput || inputDate.getTime() === firstInput.getTime()) {
-			  this.value = '';
-			  return;
-			} else {
-				if (target.value == 2){
-					document.querySelector('.hidden-sportype').style.display = 'none';
-					document.querySelector('.hidden-sportcategory').style.display = 'none';
-					document.getElementById('sporttype').removeAttribute("required");
-					document.getElementById('categorysporttype').removeAttribute("required");
-					target.value= ''
-				}else{
-					target.value= ''
-				}
-				
-				endNum.innerHTML = "0" + ' ' + '₸';
-				priceNum.innerHTML = "0" + ' ' + '₸';
-				
-			  	target.removeAttribute('disabled')
+			function isLeapYear(year) {
+				return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 			}
-		  }
-		} else if (values === 'birthday') {
+
+
+			const currentDate = new Date();
+			const inputDate = new Date(year, month - 1, day);
+			inputDate.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
+
+			const firstInputInput = dateStart.value;
+			const [dayFirst, monthFirst, yearFirst] = firstInputInput.split('.');
+			const firstInput = new Date(yearFirst, monthFirst - 1, dayFirst);
+			firstInput.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
+
+			const currentYear = currentDate.getFullYear();
+			const currentMonth = String(currentDate.getMonth() + 1).padStart(2, '0');
+			const currentDay = String(currentDate.getDate()).padStart(2, '0');
+
+			const currentDateFormatted = `${currentYear}-${currentMonth}-${currentDay}`;
+			const currentDateObj = new Date(currentDateFormatted);
+			currentDateObj.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
+
+
+			const birthdayDate = new Date();
+
+			// Set the date when the person turns 18
+			const birthYear = birthdayDate.getFullYear() - 18;
+			const birthMonth = birthdayDate.getMonth() + 1; // January is 0
+			const birthDay = birthdayDate.getDate();
+			const birthDate = new Date(birthYear, birthMonth - 1, birthDay, 0, 0, 0, 0);
+			birthDate.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
+
+
+
+
+
+			let formattedDate = '';
+			if (values === 'plus') {
+
+				if (inputDate > currentDateObj || inputDate.getTime() === currentDateObj.getTime()) {
+					this.value = '';
+					return;
+				}
+			} else if (values === 'minus') {
+				if (value.length === 8) {
+
+					if (inputDate < currentDateObj || inputDate.getTime() === currentDateObj.getTime()) {
+						this.value = '';
+						return;
+					}
+				}
+			} else if (values === 'modificed') {
+				if (value.length === 8) {
+
+					if (inputDate < firstInput || inputDate.getTime() === firstInput.getTime()) {
+						this.value = '';
+						return;
+					} else {
+						if (target.value == 2) {
+							document.querySelector('.hidden-sportype').style.display = 'none';
+							document.querySelector('.hidden-sportcategory').style.display = 'none';
+							document.getElementById('sporttype').removeAttribute("required");
+							document.getElementById('categorysporttype').removeAttribute("required");
+							target.value = ''
+						} else {
+							target.value = ''
+						}
+
+						endNum.innerHTML = "0" + ' ' + '₸';
+						priceNum.innerHTML = "0" + ' ' + '₸';
+
+						target.removeAttribute('disabled')
+					}
+				}
+			} else if (values === 'birthday') {
+				if (value.length === 8) {
+
+					if (inputDate > birthDate || currentDate.getTime() === birthDate.getTime()) {
+
+						this.value = '';
+						this.placeholder = 'Страхователь может быть не младше 18 лет'
+						return;
+
+					}
+				}
+			}
+
 			if (value.length === 8) {
-	
-				if (inputDate > birthDate || currentDate.getTime() === birthDate.getTime()) {
-				  this.value = '';
-				  return;
-				} 
-			  }
-		}
-	
-		if (value.length === 8) {
-			if (inputDate.toString() === "Invalid Date" || day > 31 || (month === 2 && (day > 29 || (!isLeapYear(year) && day > 28))) || ((month === 4 || month === 6 || month === 9 || month === 11) && day > 30)) {
-			this.value = '';
-			return;
-			} else if (inputDate.toString() !== "Invalid Date") {
-				if (secondInput){
-					if (form.classList.contains('was-validated')){
-						this.classList.remove('is-invalid');
-						this.style.setProperty('border-color', '#198754', 'important');
-						this.style.setProperty('background-image', 'url("data:image/svg+xml,%3csvg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 8 8\\"%3e%3cpath fill=\'%23198754\' d=\'M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z\'/%3e%3c/svg%3e"), url(/img/date.svg)', 'important');
-						this.style.setProperty('box-shadow', 'none');
-					}
-				}else{
-					if (document.querySelector('.needs-validation').classList.contains('was-validated')){
-						this.classList.remove('is-invalid');
-				this.style.setProperty('border-color', '#198754', 'important');
-				this.style.setProperty('background-image', 'url("data:image/svg+xml,%3csvg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 8 8\\"%3e%3cpath fill=\'%23198754\' d=\'M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z\'/%3e%3c/svg%3e"), url(/img/date.svg)', 'important');
-				this.style.setProperty('box-shadow', 'none');
+				if (inputDate.toString() === "Invalid Date" || day > 31 || (month === 2 && (day > 29 || (!isLeapYear(year) && day > 28))) || ((month === 4 || month === 6 || month === 9 || month === 11) && day > 30)) {
+					this.value = '';
+					return;
+				} else if (inputDate.toString() !== "Invalid Date") {
+					if (secondInput) {
+						if (form.classList.contains('was-validated')) {
+							this.classList.remove('is-invalid');
+							ValidateInJs_CORRECT(this)
+						}
+					} else {
+						if (document.querySelector('.needs-validation').classList.contains('was-validated')) {
+							this.classList.remove('is-invalid');
+							ValidateInJs_CORRECT(this)
+						}
 					}
 				}
-		  }
-		} else  {
-			if (secondInput){
-				if (form.classList.contains('was-validated')){
-					this.classList.add('is-invalid');
-					this.style.setProperty('border-color', '#dc3545', 'important');
-					this.style.setProperty('background-image', 'url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 12 12\' width=\'12\' height=\'12\' fill=\'none\' stroke=\'%23dc3545\'%3e%3ccircle cx=\'6\' cy=\'6\' r=\'4.5\'/%3e%3cpath stroke-linejoin=\'round\' d=\'M5.8 3.6h.4L6 6.5z\'/%3e%3ccircle cx=\'6\' cy=\'8.2\' r=\'.6\' fill=\'%23dc3545\' stroke=\'none\'/%3e%3c/svg%3e"), url(/img/date.svg)', 'important');
-					this.style.setProperty('box-shadow', 'none');
+			} else {
+				if (secondInput) {
+					if (form.classList.contains('was-validated')) {
+						this.classList.add('is-invalid');
+						ValidateInJs_UNCORRECT(this)
+					}
+				} else {
+					if (document.querySelector('.needs-validation').classList.contains('was-validated')) {
+						this.classList.add('is-invalid');
+						ValidateInJs_UNCORRECT(this)
+					}
 				}
-			}else{
-				if (document.querySelector('.needs-validation').classList.contains('was-validated')){
-					this.classList.add('is-invalid');
-					this.style.setProperty('border-color', '#dc3545', 'important');
-					this.style.setProperty('background-image', 'url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 12 12\' width=\'12\' height=\'12\' fill=\'none\' stroke=\'%23dc3545\'%3e%3ccircle cx=\'6\' cy=\'6\' r=\'4.5\'/%3e%3cpath stroke-linejoin=\'round\' d=\'M5.8 3.6h.4L6 6.5z\'/%3e%3ccircle cx=\'6\' cy=\'8.2\' r=\'.6\' fill=\'%23dc3545\' stroke=\'none\'/%3e%3c/svg%3e"), url(/img/date.svg)', 'important');
-					this.style.setProperty('box-shadow', 'none');
+
+
+				if (day) {
+					formattedDate += day;
+
+					if (day.length === 2 && month) {
+						formattedDate += '.';
+					}
 				}
+
+				if (month) {
+					formattedDate += month;
+
+					if (month.length === 2 && year) {
+						formattedDate += '.';
+					}
+				}
+
+				if (year) {
+					formattedDate += year.slice(0, 4);
+				}
+				console.log(formattedDate);
+				this.value = formattedDate;
 			}
-			
-			
-		  if (day) {
-			formattedDate += day;
-  
-			if (day.length === 2 && month) {
-			  formattedDate += '.';
+		} else {
+			const numPattern = /^[0-9]*$/;
+			if (!numPattern.test(input.value)) {
+				input.value = input.value.replace(/\D/g, '');
 			}
-		  }
-  
-		  if (month) {
-			formattedDate += month;
-  
-			if (month.length === 2 && year) {
-			  formattedDate += '.';
-			}
-		  }
-  
-		  if (year) {
-			formattedDate += year.slice(0, 4);
-		  }
-		  console.log(formattedDate);
-		  this.value = formattedDate;
+			console.log('else');
+			this.value = this.value.slice(0, 7);
 		}
-	  } else {
-		const numPattern = /^[0-9]*$/;
-	if (!numPattern.test(input.value)) {
-	    input.value = input.value.replace(/\D/g, '');
-	}
-		console.log('else');
-		this.value = this.value.slice(0, 7);
-	  }
 	});
-  
-  }
-  
-  function get_countries(current_lang , resident, i) {
-    $.ajax({
-        url: 'https://dms.interteach.kz/ajax/ajax_get_country.php',
-        // url: 'https://dms.interteach.kz/ajax/ajax_get_country.php',
-        dataType: "json",
-        success: function(data) {
-			if (resident){
+
+}
+
+function get_countries(current_lang, resident, i) {
+	$.ajax({
+		url: 'https://dms.interteach.kz/ajax/ajax_get_country.php',
+		// url: 'https://dms.interteach.kz/ajax/ajax_get_country.php',
+		dataType: "json",
+		success: function (data) {
+			if (resident) {
 				var option_data_kz = '<option value=""  disabled class="sel" >Выберите страну</option> <option  data-currency="KZT" data-zone="3" data-flag-name="kz" data-name-lat="Kazakhstan" value="16">Казахстан</option> ';
-			}else{
+			} else {
 				var option_data = '<option value=""  disabled class="sel" >Выберите страну</option>';
 			}
-				
-			
-            let name = '';
-            $.each(data, function(i, dat) {
-                switch (current_lang) {
-                    case 'ru':
-                        name=dat.name;
-                        break;
-                    case 'kz':
-                        name=dat.name_kz;
-                        break;
-                    case 'lat':
-                        name=dat.name_lat;
-                        break;
-                    case 'en':
-                        name=dat.name_en;
-                        break;
-                    default:
-                        name=dat.name;
-                        break;
-                }
-				if (resident){
+
+
+			let name = '';
+			$.each(data, function (i, dat) {
+				switch (current_lang) {
+					case 'ru':
+						name = dat.name;
+						break;
+					case 'kz':
+						name = dat.name_kz;
+						break;
+					case 'lat':
+						name = dat.name_lat;
+						break;
+					case 'en':
+						name = dat.name_en;
+						break;
+					default:
+						name = dat.name;
+						break;
+				}
+				if (resident) {
 					option_data_kz += '<option value="' + dat.country_id + '" data-currency="' + dat.currency + '"data-zone="' + dat.zone + '" data-name-lat="' + dat.name_en + '">' + name + '</option>';
-				}else{
+				} else {
 					option_data += '<option value="' + dat.country_id + '" data-currency="' + dat.currency + '"data-zone="' + dat.zone + '" data-name-lat="' + dat.name_en + '">' + name + '</option>';
 
 				}
-            });
-			
-            //console.log(option_data);
-            $('#country').html(option_data);
+			});
+
+			//console.log(option_data);
+			$('#country').html(option_data);
 			console.log(i)
-			if (resident){
+			if (resident) {
 				$('#country-people' + i).html(option_data_kz);
-			}else{
+			} else {
 				$('#country-people' + i).html(option_data);
 			}
-        }
-    });
+		}
+	});
 }
 
 
@@ -1683,73 +1691,109 @@ function fillAllFields() {
 	const dates = form.querySelectorAll('.itsdate');
 	document.getElementById('country').disabled = false;
 	console.log(inputs)
-	
+
 	inputs.forEach(input => {
-	  input.value = 'ASDASDASDASD';
-	  input.disabled = false;
-	  
-	  input.dispatchEvent(event2);
+		input.value = 'ASDASDASDASD';
+		input.disabled = false;
+
+		input.dispatchEvent(event2);
 	});
-	
+
 	email.forEach(input => {
 		input.value = 'adddd@mail.ru';
 		input.disabled = false;
 		input.dispatchEvent(event2);
-	  });
-	  selects.forEach(select => {
-		
+	});
+	selects.forEach(select => {
+
 		select.selectedIndex = 3;
-		if (select.id == 'country'){
+		if (select.id == 'country') {
 			console.log('asdasd')
 			var select = $('#country').select2();
 			select.val('18').trigger('change');;
-			
+
 		}
-		else if (select.selectedIndex !== 3){
+		else if (select.selectedIndex !== 3) {
 			select.selectedIndex = 1;
 			select.dispatchEvent(event2);
-		}else{
+		} else {
 			select.selectedIndex = 2;
 			select.dispatchEvent(event2);
 		}
-		
-		
-	
+
+
+
 		document.getElementById("section1").dispatchEvent(event);
-		
-		select.disabled = false; 
-	  });
-	  dates.forEach(input => {
+
+		select.disabled = false;
+	});
+	dates.forEach(input => {
 		input.value = '29.12.2024';
 		input.disabled = false;
 		input.dispatchEvent(event2);
 	});
-  }
-
-  const countEl = document.querySelector('.file-text');
-  const input = document.getElementById('uploaddocs1'); // получаем input элемент по ID
-  const maxSize = 5 * 1024 * 1024; // устанавливаем максимальный размер файла в байтах (в данном случае 5 МБ)
-  
-  input.addEventListener('change', function() {
+}
+const countEl = document.querySelector('.file-text');
+const input = document.getElementById('uploaddocs1'); // получаем input элемент по ID
+const maxSize = 5 * 1024 * 1024; // устанавливаем максимальный размер файла в байтах (в данном случае 5 МБ)
+const formInput = document.querySelector('.form__input-file');
+const insuranceUpload = document.querySelector('.insurance-upload');
+input.addEventListener('change', function (event) {
 	const files = this.files; // получаем массив выбранных файлов
 	let totalSize = 0; // устанавливаем начальное значение суммарного размера файлов
-	
+
 	for (let i = 0; i < files.length; i++) {
-	  const file = files[i];
-	  
-	  // проверяем тип файла
-	  if (!file.type.includes('pdf') && !file.type.includes('image/')) {
-		console.log('Файл должен быть PDF или изображением'); // устанавливаем ошибку, если тип файла неподходящий
-		return;
-	  }
-	  
-	  totalSize += file.size; // добавляем размер каждого файла к суммарному размеру
+		const file = files[i];
+
+		// проверяем тип файла
+		if (!file.type.includes('pdf') && !file.type.includes('image')) {
+			event.preventDefault(); // отменяем действие по умолчанию (добавление файла)
+			formInput.querySelector('.invalid-feedback').innerText = 'Файл должен быть PDF или изображением';
+		}
+
+		// проверяем размер файла
+		totalSize += file.size; // добавляем размер каждого файла к суммарному размеру
+		if (totalSize > maxSize) { // если суммарный размер превышает максимальный
+			event.preventDefault();
+			document.querySelector('.invalid-feedback').innerText = 'Размер файлов не должен превышать 5 МБ';
+		}
+		if ((file.type.includes('pdf') || file.type.includes('image')) && totalSize < maxSize) {
+			countEl.innerText = `Файл выбран`;
+			input.setCustomValidity(''); // убираем ошибку, если размер и тип файлов в пределах допустимого
+			input.classList.remove('is-invalid');
+			ValidateInJs_CORRECT(input)
+
+		} else {
+			event.preventDefault();
+			input.classList.add('is-invalid'); // добавляем класс ошибки, если размер и тип файлов в пределах допустимого
+			countEl.innerText = `Ошибка`;
+			input.setCustomValidity('');
+			return
+		}
+
 	}
-	
-	if (totalSize > maxSize) { // если суммарный размер превышает максимальный
-	  console.log('Размер файлов не должен превышать 5 МБ'); // устанавливаем ошибку, если размер превышает допустимый
-	} else if (totalSize < maxSize && files.every(file => (file.type.includes('pdf') || file.type.includes('image/')))) { // если суммарный размер меньше максимального и все файлы являются PDF или изображениями
-	  countEl.innerText = `Файл выбран`;
-	  input.setCustomValidity(''); // убираем ошибку, если размер и тип файлов в пределах допустимого
+
+});
+
+
+function ValidateInJs_CORRECT(a) {
+	if (a.classList.contains('custom-phone')) {
+		a.style.setProperty('background-image', 'url("data:image/svg+xml,%3csvg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 8 8\\"%3e%3cpath fill=\'%23198754\' d=\'M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z\'/%3e%3c/svg%3e")', 'important');
+
+	} else {
+		a.style.setProperty('background-image', 'url("data:image/svg+xml,%3csvg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 8 8\\"%3e%3cpath fill=\'%23198754\' d=\'M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z\'/%3e%3c/svg%3e"), url(img/date.svg)', 'important');
+
 	}
-  });
+	a.style.setProperty('border-color', '#198754', 'important');
+	a.style.setProperty('box-shadow', 'none');
+}
+function ValidateInJs_UNCORRECT(a) {
+	if (a.classList.contains('custom-phone')) {
+		a.style.setProperty('background-image', 'url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 12 12\' width=\'12\' height=\'12\' fill=\'none\' stroke=\'%23dc3545\'%3e%3ccircle cx=\'6\' cy=\'6\' r=\'4.5\'/%3e%3cpath stroke-linejoin=\'round\' d=\'M5.8 3.6h.4L6 6.5z\'/%3e%3ccircle cx=\'6\' cy=\'8.2\' r=\'.6\' fill=\'%23dc3545\' stroke=\'none\'/%3e%3c/svg%3e")', 'important');
+	} else {
+		a.style.setProperty('background-image', 'url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 12 12\' width=\'12\' height=\'12\' fill=\'none\' stroke=\'%23dc3545\'%3e%3ccircle cx=\'6\' cy=\'6\' r=\'4.5\'/%3e%3cpath stroke-linejoin=\'round\' d=\'M5.8 3.6h.4L6 6.5z\'/%3e%3ccircle cx=\'6\' cy=\'8.2\' r=\'.6\' fill=\'%23dc3545\' stroke=\'none\'/%3e%3c/svg%3e"), url(img/date.svg)', 'important');
+	}
+	a.style.setProperty('border-color', '#dc3545', 'important');
+	a.style.setProperty('box-shadow', 'none');
+}
+MaskPhone()
