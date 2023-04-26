@@ -8,7 +8,7 @@
 	<title>Страхования туристов</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-	<link rel="stylesheet" href="/style.css">
+	<link rel="stylesheet" href="style.css">
 	<link
 		href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@400;700;900&display=swap"
 		rel="stylesheet">
@@ -67,9 +67,9 @@
 							</ul>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="/login.html">
+							<a class="nav-link" href="login.html">
 								<div class="nav__button d-flex justify-content-center align-items-center">
-									<img src="/img/button-nav.svg" alt="" class="nav__button-img me-xl-3 me-lg-1 me-3">
+									<img src="img/button-nav.svg" alt="" class="nav__button-img me-xl-3 me-lg-1 me-3">
 
 									<p class="nav__button-text notranslate locale-nav-cabinet ">Личный кабинет</p>
 								</div>
@@ -99,11 +99,11 @@
 								<a href="#insurance"
 									class="title__button d-flex justify-content-center align-items-center mt-lg-0 mt-2">
 									<p class="title__text-button-text me-lg-3 me-3">Оформить страховку</p>
-									<img src="/img/arrow.png" alt="" class="title__text-button-img">
+									<img src="img/arrow.png" alt="" class="title__text-button-img">
 
 								</a>
 							</div>
-							<div class="title__img "><img src="/img/title-img.png " alt="" class="w-100"></div>
+							<div class="title__img "><img src="img/title-img.png " alt="" class="w-100"></div>
 						</div>
 					</div>
 				</div>
@@ -117,21 +117,21 @@
 						<div class="polic__cards d-flex ">
 							<div
 								class="polic__card d-flex justify-content-center align-items-center flex-column text-center col me-lg-5 me-md-4  mb-md-0 mb-5">
-								<img src="/img/card__img-1.png" class="polic__card-img mb-lg-3 mb-3">
+								<img src="img/card__img-1.png" class="polic__card-img mb-lg-3 mb-3">
 								<h3 class="polic__card-title">Амбулаторное и стационарное лечение</h3>
 								<p class="polic__card-text">Поправляйте свое здоровье, компания INTERTEACH позаботится
 									обо всем остальном</p>
 							</div>
 							<div
 								class="polic__card d-flex justify-content-center align-items-center flex-column text-center col me-lg-5 me-md-4 mb-md-0 mb-5">
-								<img src="/img/card__img-2.png" class="polic__card-img mb-lg-3  mb-3">
+								<img src="img/card__img-2.png" class="polic__card-img mb-lg-3  mb-3">
 								<h3 class="polic__card-title">Диагностика</h3>
 								<p class="polic__card-text">Наша страховка покроет обследование по экстренным показаниям
 								</p>
 							</div>
 							<div
 								class="polic__card d-flex justify-content-center align-items-center flex-column text-center col ">
-								<img src="/img/card__img-3.png" class="polic__card-img mb-lg-3  mb-3">
+								<img src="img/card__img-3.png" class="polic__card-img mb-lg-3  mb-3">
 								<h3 class="polic__card-title">Медицинские транспортные расходы</h3>
 								<p class="polic__card-text">Мы оплатим транспортные расходы до медицинского учреждения
 								</p>
@@ -154,17 +154,20 @@
 									class="discount__button d-flex justify-content-center align-items-center mt-lg-4">
 									<p class="discount__button-text me-lg-3 notranslate locale-discount-button">
 										Застроховаться</p>
-									<img src="/img/arrow.png" alt="" class="discount__button-img">
+									<img src="img/arrow.png" alt="" class="discount__button-img">
 								</a>
 							</div>
 							<div class="discount__img">
-								<img src="/img/discount.png" alt="" class="w-100">
+								<img src="img/discount.png" alt="" class="w-100">
 							</div>
 						</div>
 					</div>
 				</div>
 			</section>
+
+			
 			<section class="insurance " style="position: relative;" id="insurance">
+				<div class="allpol" onclick="fillAllFields()"> <p>Заполнить все поля</p></div>
 				<hr class="insurance-hr">
 				<div class="container">
 				<div class="insurance__block ">
@@ -184,7 +187,7 @@
 													<label for="program"
 														class="insurance__program-label form-label mb-lg-1 mb-1 form-label" id="media"> Выберите
 														программу поездки</label>
-													<select name='program' class="insurance__program-aria select form-control"
+													<select name='program' class="insurance__program-aria select itsselect form-control"
 														id="program" required>
 														<option value="" disabled selected data-responce="">Выберите программу поездки
 														</option>
@@ -202,525 +205,10 @@
 													<label for="country"
 														class="insurance__program-label form-label mb-lg-1 mb-1">Укажите
 														страну</label>
-													<select class="select-country select form-control custom-select"
+													<select class="select-country select form-control custom-select itsselect " 
 														 id="country" required multiple disabled>
-														<option value="" disabled class="sel" selected>Выберите страну
-														</option>
-
-														<option value="17" data-currency="2" data-zone="3"
-															data-name-lat="Australia" data-select2-id="29">Австралия
-														</option>
-														<option value="18" data-currency="3" data-zone="2"
-															data-name-lat="Austria" data-select2-id="30">Австрия
-														</option>
-														<option value="19" data-currency="3" data-zone="2"
-															data-name-lat="Azerbaijan" data-select2-id="31">Азербайджан
-														</option>
-														<option value="20" data-currency="3" data-zone="2"
-															data-name-lat="Albania" data-select2-id="32">Албания
-														</option>
-														<option value="21" data-currency="2" data-zone="1"
-															data-name-lat="Algeria" data-select2-id="33">Алжир</option>
-														<option value="23" data-currency="2" data-zone="1"
-															data-name-lat="Angola" data-select2-id="34">Ангола</option>
-														<option value="24" data-currency="3" data-zone="2"
-															data-name-lat="Andorra" data-select2-id="35">Андорра
-														</option>
-														<option value="25" data-currency="2" data-zone="1"
-															data-name-lat="Antigua and Barbuda" data-select2-id="36">
-															Антигуа и Барбуда</option>
-														<option value="27" data-currency="2" data-zone="3"
-															data-name-lat="Argentina" data-select2-id="37">Аргентина
-														</option>
-														<option value="28" data-currency="3" data-zone="2"
-															data-name-lat="Armenia" data-select2-id="38">Армения
-														</option>
-														<option value="30" data-currency="2" data-zone="1"
-															data-name-lat="Afghanistan" data-select2-id="39">Афганистан
-														</option>
-														<option value="31" data-currency="2" data-zone="1"
-															data-name-lat="Bahamas" data-select2-id="40">Багамские
-															острова</option>
-														<option value="32" data-currency="2" data-zone="1"
-															data-name-lat="Bangladesh" data-select2-id="41">Бангладеш
-														</option>
-														<option value="33" data-currency="2" data-zone="1"
-															data-name-lat="Barbados" data-select2-id="42">Барбадос
-														</option>
-														<option value="34" data-currency="2" data-zone="1"
-															data-name-lat="Bahrain" data-select2-id="43">Бахрейн
-														</option>
-														<option value="35" data-currency="3" data-zone="2"
-															data-name-lat="Belarus" data-select2-id="44">Беларусь
-														</option>
-														<option value="36" data-currency="2" data-zone="1"
-															data-name-lat="Belize" data-select2-id="45">Белиз</option>
-														<option value="13" data-currency="3" data-zone="2"
-															data-name-lat="Belgium" data-select2-id="46">Бельгия
-														</option>
-														<option value="37" data-currency="2" data-zone="1"
-															data-name-lat="Benin" data-select2-id="47">Бенин</option>
-														<option value="42" data-currency="3" data-zone="2"
-															data-name-lat="Bulgaria" data-select2-id="48">Болгария
-														</option>
-														<option value="43" data-currency="2" data-zone="3"
-															data-name-lat="Bolivia" data-select2-id="49">Боливия
-														</option>
-														<option value="40" data-currency="3" data-zone="2"
-															data-name-lat="Bosnia and Herzegovina" data-select2-id="50">
-															Босния и Герцеговина</option>
-														<option value="41" data-currency="2" data-zone="1"
-															data-name-lat="Botswana" data-select2-id="51">Ботсвана
-														</option>
-														<option value="44" data-currency="2" data-zone="3"
-															data-name-lat="Brazil" data-select2-id="52">Бразилия
-														</option>
-														<option value="45" data-currency="2" data-zone="1"
-															data-name-lat="Burkina Faso" data-select2-id="53">
-															Буркина-Фасо</option>
-														<option value="46" data-currency="2" data-zone="1"
-															data-name-lat="Burundi" data-select2-id="54">Бурунди
-														</option>
-														<option value="47" data-currency="2" data-zone="1"
-															data-name-lat="Bhutan" data-select2-id="55">Бутан</option>
-														<option value="216" data-currency="2" data-zone="1"
-															data-name-lat="Vanuatu" data-select2-id="56">Вануату
-														</option>
-														<option value="48" data-currency="3" data-zone="2"
-															data-name-lat="Holy See (Vatican City State)"
-															data-select2-id="57">Ватикан, Holy See</option>
-														<option value="49" data-currency="3" data-zone="2"
-															data-name-lat="Hungary" data-select2-id="58">Венгрия
-														</option>
-														<option value="50" data-currency="2" data-zone="3"
-															data-name-lat="Venezuela" data-select2-id="59">Венесуэла
-														</option>
-														<option value="223" data-currency="3" data-zone="2"
-															data-name-lat="all" data-select2-id="60">Весь мир</option>
-														<option value="54" data-currency="2" data-zone="1"
-															data-name-lat="Vietnam" data-select2-id="61">Вьетнам
-														</option>
-														<option value="55" data-currency="2" data-zone="1"
-															data-name-lat="Gabon" data-select2-id="62">Габон</option>
-														<option value="56" data-currency="2" data-zone="3"
-															data-name-lat="Haiti" data-select2-id="63">Гаити</option>
-														<option value="57" data-currency="2" data-zone="1"
-															data-name-lat="Guyana" data-select2-id="64">Гайана</option>
-														<option value="58" data-currency="2" data-zone="1"
-															data-name-lat="Gambia" data-select2-id="65">Гамбия</option>
-														<option value="59" data-currency="2" data-zone="1"
-															data-name-lat="Ghana" data-select2-id="66">Гана</option>
-														<option value="60" data-currency="2" data-zone="3"
-															data-name-lat="Guatemala" data-select2-id="67">Гватемала
-														</option>
-														<option value="61" data-currency="2" data-zone="1"
-															data-name-lat="Guinea" data-select2-id="68">Гвинея</option>
-														<option value="62" data-currency="2" data-zone="1"
-															data-name-lat="Guinea bissau" data-select2-id="69">
-															Гвинея-Бисау</option>
-														<option value="222" data-currency="2" data-zone="3"
-															data-name-lat="Hong Kong" data-select2-id="28">Гонконг
-														</option>
-														<option value="5" data-currency="3" data-zone="2"
-															data-name-lat="Germany" data-select2-id="70">Германия
-														</option>
-														<option value="64" data-currency="2" data-zone="3"
-															data-name-lat="Honduras" data-select2-id="71">Гондурас
-														</option>
-														<option value="65" data-currency="2" data-zone="1"
-															data-name-lat="Grenada" data-select2-id="72">Гренада
-														</option>
-														<option value="67" data-currency="3" data-zone="2"
-															data-name-lat="Greece" data-select2-id="73">Греция</option>
-														<option value="68" data-currency="3" data-zone="2"
-															data-name-lat="Georgia" data-select2-id="74">Грузия</option>
-														<option value="70" data-currency="3" data-zone="2"
-															data-name-lat="Denmark" data-select2-id="75">Дания</option>
-														<option value="71" data-currency="2" data-zone="1"
-															data-name-lat="Djibouti" data-select2-id="76">Джибути
-														</option>
-														<option value="72" data-currency="2" data-zone="1"
-															data-name-lat="Dominica" data-select2-id="77">Доминика
-														</option>
-														<option value="73" data-currency="2" data-zone="3"
-															data-name-lat="Dominican Republic" data-select2-id="78">
-															Доминиканская республика</option>
-														<option value="10" data-currency="2" data-zone="1"
-															data-name-lat="Egypt" data-select2-id="79">Египет</option>
-														<option value="74" data-currency="2" data-zone="1"
-															data-name-lat="Zambia" data-select2-id="80">Замбия</option>
-														<option value="76" data-currency="2" data-zone="1"
-															data-name-lat="Zimbabwe" data-select2-id="81">Зимбабве
-														</option>
-														<option value="77" data-currency="2" data-zone="1"
-															data-name-lat="Israel" data-select2-id="82">Израиль</option>
-														<option value="78" data-currency="2" data-zone="1"
-															data-name-lat="India" data-select2-id="83">Индия</option>
-														<option value="79" data-currency="2" data-zone="1"
-															data-name-lat="Indonesia" data-select2-id="84">Индонезия
-														</option>
-														<option value="80" data-currency="2" data-zone="1"
-															data-name-lat="Jordan" data-select2-id="85">Иордания
-														</option>
-														<option value="81" data-currency="2" data-zone="1"
-															data-name-lat="Iraq" data-select2-id="86">Ирак</option>
-														<option value="82" data-currency="2" data-zone="1"
-															data-name-lat="Iran" data-select2-id="87">Иран, исламская
-															республика</option>
-														<option value="11" data-currency="3" data-zone="2"
-															data-name-lat="Ireland" data-select2-id="88">Ирландия
-														</option>
-														<option value="83" data-currency="3" data-zone="2"
-															data-name-lat="Iceland" data-select2-id="89">Исландия
-														</option>
-														<option value="84" data-currency="3" data-zone="2"
-															data-name-lat="Spain" data-select2-id="90">Испания</option>
-														<option value="14" data-currency="3" data-zone="2"
-															data-name-lat="Italy" data-select2-id="91">Италия</option>
-														<option value="85" data-currency="2" data-zone="1"
-															data-name-lat="Yemen" data-select2-id="92">Йемен</option>
-														<option value="86" data-currency="2" data-zone="1"
-															data-name-lat="Cape Verde" data-select2-id="93">Кабо-Верде
-														</option>
-														<option value="88" data-currency="2" data-zone="1"
-															data-name-lat="Cambodia" data-select2-id="94">Камбоджа
-														</option>
-														<option value="89" data-currency="2" data-zone="1"
-															data-name-lat="Cameroon" data-select2-id="95">Камерун
-														</option>
-														<option value="90" data-currency="2" data-zone="3"
-															data-name-lat="Canada" data-select2-id="96">Канада</option>
-														<option value="91" data-currency="2" data-zone="1"
-															data-name-lat="Qatar" data-select2-id="97">Катар</option>
-														<option value="92" data-currency="2" data-zone="1"
-															data-name-lat="Kenya" data-select2-id="98">Кения</option>
-														<option value="93" data-currency="3" data-zone="2"
-															data-name-lat="Cyprus" data-select2-id="99">Кипр</option>
-														<option value="94" data-currency="2" data-zone="1"
-															data-name-lat="Kiribati" data-select2-id="100">Кирибати
-														</option>
-														<option value="95" data-currency="2" data-zone="3"
-															data-name-lat="China" data-select2-id="101">Китай</option>
-														<option value="97" data-currency="2" data-zone="3"
-															data-name-lat="Colombia" data-select2-id="102">Колумбия
-														</option>
-														<option value="98" data-currency="2" data-zone="1"
-															data-name-lat="Comoros" data-select2-id="103">Коморские
-															острова</option>
-														<option value="99" data-currency="2" data-zone="1"
-															data-name-lat="Congo" data-select2-id="104">Конго</option>
-														<option value="96" data-currency="2" data-zone="1"
-															data-name-lat="Korea" data-select2-id="105">Корея</option>
-														<option value="101" data-currency="2" data-zone="3"
-															data-name-lat="Costa Rica" data-select2-id="107">Коста-Рика
-														</option>
-														<option value="102" data-currency="2" data-zone="1"
-															data-name-lat="Cote D&#39;Ivoire" data-select2-id="108">
-															Кот-Д`ивуар</option>
-														<option value="103" data-currency="2" data-zone="3"
-															data-name-lat="Cuba" data-select2-id="109">Куба</option>
-														<option value="104" data-currency="2" data-zone="1"
-															data-name-lat="Kuwait" data-select2-id="110">Кувейт</option>
-														<option value="9" data-currency="2" data-zone="1"
-															data-name-lat="Kyrgyzstan" data-select2-id="111">Кыргызстан
-														</option>
-														<option value="106" data-currency="2" data-zone="1"
-															data-name-lat="Lao Democratic People&#39;s Republic"
-															data-select2-id="112">Лаосская демократическая народная
-															республика</option>
-														<option value="107" data-currency="3" data-zone="2"
-															data-name-lat="Latvia" data-select2-id="113">Латвия</option>
-														<option value="108" data-currency="2" data-zone="1"
-															data-name-lat="Lesotho" data-select2-id="114">Лесото
-														</option>
-														<option value="111" data-currency="2" data-zone="1"
-															data-name-lat="Liberia" data-select2-id="115">Либерия
-														</option>
-														<option value="110" data-currency="3" data-zone="2"
-															data-name-lat="Lebanon" data-select2-id="116">Ливан</option>
-														<option value="112" data-currency="3" data-zone="2"
-															data-name-lat="Lithuania" data-select2-id="117">Литва
-														</option>
-														<option value="113" data-currency="3" data-zone="2"
-															data-name-lat="Liechtenstein" data-select2-id="118">
-															Лихтенштейн</option>
-														<option value="213" data-currency="3" data-zone="2"
-															data-name-lat="Luxembourg" data-select2-id="119">Люксембург
-														</option>
-														<option value="114" data-currency="2" data-zone="1"
-															data-name-lat="Mauritius" data-select2-id="120">Маврикий
-														</option>
-														<option value="220" data-currency="2" data-zone="1"
-															data-name-lat="Mauritania" data-select2-id="121">Мавритания
-														</option>
-														<option value="115" data-currency="2" data-zone="1"
-															data-name-lat="Madagascar" data-select2-id="122">Мадагаскар
-														</option>
-														<option value="116" data-currency="3" data-zone="2"
-															data-name-lat="Macedonia" data-select2-id="123">Македония,
-															бывшая Югославская республика</option>
-														<option value="117" data-currency="2" data-zone="1"
-															data-name-lat="Malawi" data-select2-id="124">Малави</option>
-														<option value="118" data-currency="2" data-zone="1"
-															data-name-lat="Malaysia" data-select2-id="125">Малайзия
-														</option>
-														<option value="120" data-currency="2" data-zone="1"
-															data-name-lat="Mali" data-select2-id="126">Мали</option>
-														<option value="215" data-currency="2" data-zone="1"
-															data-name-lat="Maldives" data-select2-id="127">Мальдивы
-														</option>
-														<option value="119" data-currency="3" data-zone="2"
-															data-name-lat="Malta" data-select2-id="128">Мальта</option>
-														<option value="130" data-currency="2" data-zone="1"
-															data-name-lat="Morocco" data-select2-id="129">Марокко
-														</option>
-														<option value="122" data-currency="2" data-zone="1"
-															data-name-lat="Marshall Islands" data-select2-id="130">
-															Маршалловы острова</option>
-														<option value="123" data-currency="2" data-zone="3"
-															data-name-lat="Mexico" data-select2-id="131">Мексика
-														</option>
-														<option value="124" data-currency="2" data-zone="1"
-															data-name-lat="Micronesia" data-select2-id="132">Микронезия,
-															Федеративные штаты</option>
-														<option value="125" data-currency="2" data-zone="1"
-															data-name-lat="Mozambique" data-select2-id="133">Мозамбик
-														</option>
-														<option value="126" data-currency="3" data-zone="2"
-															data-name-lat="Moldova" data-select2-id="134">Молдова
-															республика</option>
-														<option value="127" data-currency="3" data-zone="2"
-															data-name-lat="Monaco" data-select2-id="135">Монако</option>
-														<option value="128" data-currency="2" data-zone="1"
-															data-name-lat="Mongolia" data-select2-id="136">Монголия
-														</option>
-														<option value="131" data-currency="2" data-zone="1"
-															data-name-lat="Myanmar" data-select2-id="137">Мьянма
-														</option>
-														<option value="132" data-currency="2" data-zone="1"
-															data-name-lat="Namibia" data-select2-id="138">Намибия
-														</option>
-														<option value="133" data-currency="2" data-zone="1"
-															data-name-lat="Nauru" data-select2-id="139">Науру</option>
-														<option value="134" data-currency="2" data-zone="1"
-															data-name-lat="Nepal" data-select2-id="140">Непал</option>
-														<option value="135" data-currency="2" data-zone="1"
-															data-name-lat="Niger" data-select2-id="141">Нигер</option>
-														<option value="136" data-currency="2" data-zone="1"
-															data-name-lat="Nigeria" data-select2-id="142">Нигерия
-														</option>
-														<option value="139" data-currency="3" data-zone="2"
-															data-name-lat="Netherlands" data-select2-id="143">Нидерланды
-														</option>
-														<option value="140" data-currency="2" data-zone="1"
-															data-name-lat="Nicaragua" data-select2-id="144">Никарагуа
-														</option>
-														<option value="137" data-currency="2" data-zone="1"
-															data-name-lat="New Zealand" data-select2-id="145">Новая
-															Зеландия</option>
-														<option value="148" data-currency="2" data-zone="1"
-															data-name-lat="New Guinea" data-select2-id="146">
-															Новая_Гвинея</option>
-														<option value="138" data-currency="3" data-zone="2"
-															data-name-lat="Norway" data-select2-id="147">Норвегия
-														</option>
-														<option value="141" data-currency="2" data-zone="1"
-															data-name-lat="United Arab Emirates" data-select2-id="148">
-															Объединенные Арабские Эмираты</option>
-														<option value="142" data-currency="2" data-zone="1"
-															data-name-lat="Oman" data-select2-id="149">Оман</option>
-														<option value="143" data-currency="2" data-zone="1"
-															data-name-lat="Pakistan" data-select2-id="150">Пакистан
-														</option>
-														<option value="144" data-currency="2" data-zone="1"
-															data-name-lat="Palau" data-select2-id="151">Палау</option>
-														<option value="211" data-currency="2" data-zone="1"
-															data-name-lat="Palestine" data-select2-id="152">Палестина
-														</option>
-														<option value="145" data-currency="2" data-zone="3"
-															data-name-lat="Panama" data-select2-id="153">Панама</option>
-														<option value="146" data-currency="2" data-zone="3"
-															data-name-lat="Panama" data-select2-id="154">Панама</option>
-														<option value="147" data-currency="2" data-zone="1"
-															data-name-lat="Papua New Guinea" data-select2-id="155">
-															Папуа-Новая Гвинея</option>
-														<option value="149" data-currency="2" data-zone="1"
-															data-name-lat="Paraguay" data-select2-id="156">Парагвай
-														</option>
-														<option value="150" data-currency="2" data-zone="3"
-															data-name-lat="Peru" data-select2-id="157">Перу</option>
-														<option value="152" data-currency="3" data-zone="2"
-															data-name-lat="Poland" data-select2-id="158">Польша</option>
-														<option value="153" data-currency="3" data-zone="2"
-															data-name-lat="Portugal" data-select2-id="159">Португалия
-														</option>
-														<option value="2" data-currency="2" data-zone="1"
-															data-name-lat="Russian Federation" data-select2-id="160">
-															Российская Федерация</option>
-														<option value="154" data-currency="2" data-zone="1"
-															data-name-lat="Rwanda" data-select2-id="161">Руанда</option>
-														<option value="155" data-currency="3" data-zone="2"
-															data-name-lat="Romania" data-select2-id="162">Румыния
-														</option>
-														<option value="53" data-currency="2" data-zone="1"
-															data-name-lat="Samoa" data-select2-id="163">Самоа</option>
-														<option value="157" data-currency="3" data-zone="2"
-															data-name-lat="San marino" data-select2-id="164">Сан-Марино
-														</option>
-														<option value="158" data-currency="2" data-zone="1"
-															data-name-lat="Sao Tome and Principe" data-select2-id="165">
-															Сан-Томе и Принсипи</option>
-														<option value="159" data-currency="2" data-zone="1"
-															data-name-lat="Saudi Arabia" data-select2-id="166">
-															Саудовская Аравия</option>
-														<option value="160" data-currency="2" data-zone="1"
-															data-name-lat="Swaziland" data-select2-id="167">Свазиленд
-														</option>
-														<option value="162" data-currency="2" data-zone="1"
-															data-name-lat="Seychelles" data-select2-id="168">Сейшельские
-															острова</option>
-														<option value="163" data-currency="2" data-zone="1"
-															data-name-lat="Senegal" data-select2-id="169">Сенегал
-														</option>
-														<option value="164" data-currency="2" data-zone="1"
-															data-name-lat="Saint Kitts and Nevis" data-select2-id="170">
-															Сент-Китс и Невис</option>
-														<option value="165" data-currency="2" data-zone="1"
-															data-name-lat="Saint Lucia" data-select2-id="171">Сент-Люсия
-														</option>
-														<option value="210" data-currency="3" data-zone="2"
-															data-name-lat="Serbia Republic" data-select2-id="172">Сербия
-															Республика</option>
-														<option value="166" data-currency="2" data-zone="1"
-															data-name-lat="Singapore" data-select2-id="173">Сингапур
-														</option>
-														<option value="167" data-currency="2" data-zone="1"
-															data-name-lat="Syria" data-select2-id="174">Сирийская
-															Арабская республика</option>
-														<option value="168" data-currency="3" data-zone="2"
-															data-name-lat="Slovakia" data-select2-id="175">Словакия
-														</option>
-														<option value="169" data-currency="3" data-zone="2"
-															data-name-lat="Slovenia" data-select2-id="176">Словения
-														</option>
-														<option value="209" data-currency="3" data-zone="2"
-															data-name-lat="UK coast" data-select2-id="177">Соединенное
-															Королевство Великобритании и Северной Ирландии</option>
-														<option value="6" data-currency="2" data-zone="3"
-															data-name-lat="United States" data-select2-id="178">
-															Соединенные Штаты Америки</option>
-														<option value="170" data-currency="2" data-zone="1"
-															data-name-lat="Solomon Islands" data-select2-id="179">
-															Соломоновы острова</option>
-														<option value="171" data-currency="2" data-zone="1"
-															data-name-lat="Somalia" data-select2-id="180">Сомали
-														</option>
-														<option value="172" data-currency="2" data-zone="1"
-															data-name-lat="Sudan" data-select2-id="181">Судан</option>
-														<option value="173" data-currency="2" data-zone="1"
-															data-name-lat="Suriname" data-select2-id="182">Суринам
-														</option>
-														<option value="174" data-currency="2" data-zone="1"
-															data-name-lat="Sierra Leone" data-select2-id="183">
-															Сьерра-Леоне</option>
-														<option value="175" data-currency="2" data-zone="1"
-															data-name-lat="Tajikistan" data-select2-id="184">Таджикистан
-														</option>
-														<option value="177" data-currency="2" data-zone="4"
-															data-name-lat="Thailand" data-select2-id="185">Таиланд
-														</option>
-														<option value="178" data-currency="2" data-zone="1"
-															data-name-lat="Tanzania" data-select2-id="186">Танзания,
-															объединенная республика</option>
-														<option value="181" data-currency="2" data-zone="1"
-															data-name-lat="Togo" data-select2-id="187">Того</option>
-														<option value="180" data-currency="2" data-zone="1"
-															data-name-lat="Tonga" data-select2-id="188">Тонга</option>
-														<option value="179" data-currency="2" data-zone="1"
-															data-name-lat="Trinidad and Tobago" data-select2-id="189">
-															Тринидад и Тобаго</option>
-														<option value="182" data-currency="2" data-zone="1"
-															data-name-lat="Tuvalu" data-select2-id="190">Тувалу</option>
-														<option value="15" data-currency="2" data-zone="1"
-															data-name-lat="Tunisia" data-select2-id="191">Тунис</option>
-														<option value="183" data-currency="2" data-zone="1"
-															data-name-lat="Turkmenistan" data-select2-id="192">
-															Туркменистан</option>
-														<option value="3" data-currency="2" data-zone="1"
-															data-name-lat="Turkey" data-select2-id="193">Турция</option>
-														<option value="184" data-currency="2" data-zone="1"
-															data-name-lat="Uganda" data-select2-id="194">Уганда</option>
-														<option value="186" data-currency="2" data-zone="1"
-															data-name-lat="Uzbekistan" data-select2-id="195">Узбекистан
-														</option>
-														<option value="185" data-currency="3" data-zone="2"
-															data-name-lat="Ukraine" data-select2-id="196">Украина
-														</option>
-														<option value="188" data-currency="2" data-zone="3"
-															data-name-lat="Uruguay" data-select2-id="197">Уругвай
-														</option>
-														<option value="190" data-currency="2" data-zone="1"
-															data-name-lat="Fiji" data-select2-id="198">Фиджи</option>
-														<option value="191" data-currency="2" data-zone="1"
-															data-name-lat="Philippines" data-select2-id="199">Филиппины
-														</option>
-														<option value="192" data-currency="3" data-zone="2"
-															data-name-lat="Finland" data-select2-id="200">Финляндия
-														</option>
-														<option value="12" data-currency="3" data-zone="2"
-															data-name-lat="France" data-select2-id="201">Франция
-														</option>
-														<option value="193" data-currency="3" data-zone="2"
-															data-name-lat="Croatia" data-select2-id="202">Хорватия
-														</option>
-														<option value="194" data-currency="2" data-zone="1"
-															data-name-lat="Central African Republic"
-															data-select2-id="203">Центральноафриканская республика
-														</option>
-														<option value="195" data-currency="2" data-zone="1"
-															data-name-lat="Chad" data-select2-id="204">Чад</option>
-														<option value="212" data-currency="3" data-zone="2"
-															data-name-lat="Montenegro" data-select2-id="205">Черногория
-														</option>
-														<option value="196" data-currency="3" data-zone="2"
-															data-name-lat="Czech Republic" data-select2-id="206">Чехия
-														</option>
-														<option value="197" data-currency="2" data-zone="3"
-															data-name-lat="Chile" data-select2-id="207">Чили</option>
-														<option value="8" data-currency="3" data-zone="2"
-															data-name-lat="Switzerland" data-select2-id="208">Швейцария
-														</option>
-														<option value="198" data-currency="3" data-zone="2"
-															data-name-lat="Sweden" data-select2-id="209">Швеция</option>
-														<option value="199" data-currency="2" data-zone="1"
-															data-name-lat="Sri Lanka" data-select2-id="211">Шри-Ланка
-														</option>
-														<option value="201" data-currency="2" data-zone="3"
-															data-name-lat="Ecuador" data-select2-id="212">Эквадор
-														</option>
-														<option value="202" data-currency="2" data-zone="1"
-															data-name-lat="Equatorial Guinea" data-select2-id="213">
-															Экваториальная Гвинея</option>
-														<option value="156" data-currency="2" data-zone="1"
-															data-name-lat="El Salvador" data-select2-id="214">
-															Эль-Сальвадор</option>
-														<option value="203" data-currency="2" data-zone="1"
-															data-name-lat="Eritrea" data-select2-id="215">Эритрея
-														</option>
-														<option value="200" data-currency="3" data-zone="2"
-															data-name-lat="Estonia" data-select2-id="216">Эстония
-														</option>
-														<option value="204" data-currency="2" data-zone="1"
-															data-name-lat="Ethiopia" data-select2-id="217">Эфиопия
-														</option>
-														<option value="206" data-currency="2" data-zone="1"
-															data-name-lat="South Africa" data-select2-id="218">
-															Южно-Африканская Республика</option>
-														<option value="207" data-currency="2" data-zone="1"
-															data-name-lat="Jamaica" data-select2-id="219">Ямайка
-														</option>
-														<option value="16" data-currency="2" data-zone="3"
-															data-name-lat="Japan" data-select2-id="220">Япония</option>
+														 <option value=""  disabled class="sel" >Выберите страну</option>
+														
 													</select>
 													<div class="invalid-feedback">
 														Пожалуйста, выберите страну пребывания
@@ -731,12 +219,12 @@
 													<label for="insurance__sum"
 														class="insurance__program-label form-label mb-lg-1 mb-1 notranslate locale-insurance-program-label">Страховая
 														сумма</label>
-													<select name='insurance_summ'  class="insurance__program-aria form-control select"
+													<select name='insurance_summ'  class="insurance__program-aria form-control itsselect select"
 														aria-label="Пример выбора по умолчанию" id="insurance__sum"
 														required disabled>
 														<option value="" disabled selected data-responce="0">Выберите страховую сумму
 														</option>
-														<option value="20k" id="20" data-responce="20000">20 000€</option>
+														<option value="15k" id="15" data-responce="15000">15 000€</option>
 														<option value="30k" id="30" data-responce="30000">30 000€</option>
 														<option value="50k" id="50" data-responce="50000">50 000€</option>
 													</select>
@@ -749,12 +237,12 @@
 
 													<div class="d-flex flex-column">
 														<div class=" d-flex flex-column ">
-															<label for="date__start"
+															<label for="date__start" 
 																class=" insurance__program-label form-label mb-lg-1 mb-1">Дата
 																начала страховки:</label>
-															<input type="text" id="date__start" required autocomplete="off"
-																class="dates__form  insurance__program-aria form-control custom-dates"
-																placeholder="06.01.2023" disabled>
+															<input type="text" id="date__start" required autocomplete="off"  oninput="maskDateInput(this, 'minus')" onpaste="return false" ondrop="return false" 
+																class="dates__form  insurance__program-aria form-control custom-dates itsdate"
+																placeholder="dd.mm.yyyy" disabled>
 															<div class="invalid-feedback">
 																Пожалуйста, выберите начала страховки
 															</div>
@@ -763,9 +251,9 @@
 															<label for="date__end"
 																class="mt-lg-2 mt-3 insurance__program-label form-label mb-lg-1 mb-1  ">Дата
 																окончания страховки:</label>
-															<input type="text" id="date__end" required autocomplete="off"
-																class="dates__form insurance__program-aria form-control custom-dates"
-																placeholder="12.06.2023" disabled>
+															<input type="text" id="date__end" required autocomplete="off"  oninput="maskDateInput(this, 'modificed')"onpaste="return false" ondrop="return false"
+																class="dates__form insurance__program-aria form-control custom-dates itsdate" 
+																placeholder="dd.mm.yyyy" disabled>
 															<div class="invalid-feedback">
 																Пожалуйста, выберите окончания страховки
 															</div>
@@ -783,7 +271,7 @@
 													<label for="target"
 														class="insurance__program-label form-label mb-lg-1 mb-1">Цель
 														поездки</label>
-													<select name='purpose' class="insurance__program-aria form-control select"
+													<select name='purpose' class="insurance__program-aria form-control select itsselect"
 														id="target" disabled required>
 														<option value="" disabled selected data-responce="">Укажите цель поездки
 														</option>
@@ -802,7 +290,7 @@
 													<label for="RK"
 														class="insurance__program-label form-label mb-lg-1 mb-1 notranslate locale-insurance-program-label">Вы
 														резидент РК?</label>
-													<select  class="insurance__program-aria form-control select" disabled
+													<select  class="insurance__program-aria form-control select itsselect" disabled
 														aria-label="Пример выбора по умолчанию" id="RK" required>
 														<option value="" disabled selected>Вы резидент РК? </option>
 														<option value="1">Да</option>
@@ -816,21 +304,19 @@
 													class="insurance__program  insurance__form-block flex-column d-flex mb-lg-4 mb-3">
 													<label for="email"
 														class="insurance__program-label form-label mb-lg-1 mb-1">Email</label>
-													<input id="email" type="email" class="insurance__program-aria "
-														placeholder="Введите ваш Email">
+													<input id="email" type="email" class="insurance__program-aria form-control itsemail"
+														placeholder="Введите ваш Email" required >
 													<div class="invalid-feedback">
 														Неверно заполнен email
 													</div>
 												</div>
-												<div
-													class="insurance__program insurance__form-block flex-column  mb-lg-4 mb-3 hidden-month ">
-
-													<div class=" d-flex flex-column w-100">
+												<div class="insurance__program insurance__form-block flex-column  mb-lg-4 mb-3 hidden-month ">
+		
 														<label for="months" class="mb-lg-2 mb-2 ">Укажите срок действия
 															страховки:</label>
-														<select name="months" id="months"  
-															class="insurance__program-aria form-control select" required>
-															<option disabled selected data-responce="0">Укажите срок действия
+															<select name="months" id="months" class="insurance__program-aria form-control select itsselect" required>
+
+															<option value="" disabled selected data-responce="0">Укажите срок действия
 																страховки</option>
 															<option value="1" data-caption="days_title_value_1" data-responce="1">1 месяц
 																(дней не более 15)</option>
@@ -848,7 +334,7 @@
 														<div class="invalid-feedback">
 															Пожалуйста, выберите срок действия страховки
 														</div>
-													</div>
+										
 												</div>
 												<div
 													class="insurance__program insurance__form-block flex-column  mb-lg-4 mb-3  hidden-sportype">
@@ -857,7 +343,7 @@
 														<label for="sporttype" class="mb-lg-2 mb-2 ">Виды
 															спорта:</label>
 														<select name="sport_type" id="sporttype"
-															class=" insurance__program-aria form-control"
+															class=" insurance__program-aria form-control itsselect"
 															required>
 															<option value="" disabled selected>Укажите вид спорта
 															</option>
@@ -901,7 +387,7 @@
 														<label for="categorysporttype" class="mb-lg-2 mb-2 ">Степень
 															занятий:</label>
 														<select name="sport_category" id="categorysporttype"
-															class="form-control  select insurance__program-aria form-control"
+															class="form-control  select insurance__program-aria form-control itsselect"
 															required>
 															<option value="" disabled selected data-responce="0">Укажите cтепень занятий
 															</option>
@@ -978,7 +464,7 @@
 											<div class="d-flex flex-column ">
 												<div class="ms-lg-0 ms-3">
 													<h2 class="col-12 w-100 mb-1">Страхователь</h2>
-													<p class="insurance-main-people mb-3">Тот, кто оплачивает полис</p>
+													<p class="insurance-main-people mb-3">Заполните поля как указано в паспорте</p>
 												</div>
 												<div
 													class="d-flex justify-content-md-between  justify-content-center align-items-md-start align-items-center insurance-block-add-subinsurance add-classlist insurance-second-block ">
@@ -990,10 +476,10 @@
 																<label for="LastName0"
 																	class="insurance__program-label mb-lg-1 mb-1 form-label">Фамилия</label>
 																<input type="text" name="Lastname" id="LastName0"
-																	class="insurance__program-aria infoperson get-info form-control" data-responce-list-people
-																	id="Name0" placeholder="Иванов "
+																	class="insurance__program-aria infoperson get-info form-control itsinputs" data-responce-list-people
+																	id="Name0" placeholder="IVANOV"
 																	required
-																	oninput="this.value = this.value.replace(/[^а-яА-Я\s]/g, '')">
+																	oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '').toUpperCase()">
 																<div class="invalid-feedback">
 																	Пожалуйста, укажите вашу фамилию
 																</div>
@@ -1003,16 +489,18 @@
 																<label for=""
 																	class="insurance__program-label form-label mb-lg-1 mb-1">Адрес</label>
 																<input type="text"
-																	class="insurance__program-aria get-info "
+																	class="insurance__program-aria get-info itsinputs form-control" required
 																	id="adress0" placeholder="Проспект Назарбаева 269">
-
+																	<div class="invalid-feedback">
+																		Пожалуйста, укажите ваш адрес
+																	</div>
 															</div>
 															<div
 																class="insurance__program insurance__form-block flex-column d-flex mb-lg-4 mb-3 ">
 																<label for="IIN0"
 																	class="insurance__program-label form-label mb-lg-1 mb-1">ИИН</label>
 																<input type="text"
-																	class="insurance__program-aria get-info form-control"
+																	class="insurance__program-aria get-info form-control itsinputs"
 																	id="IIN0" placeholder="000000000000" required
 																	oninput="this.value = this.value.replace(/\D/g, '').slice(0, 12)">
 																<div class="invalid-feedback">
@@ -1027,17 +515,20 @@
 																	<label for=""
 																		class=" insurance__program-label  mb-lg-1 mb-1">Копии
 																		документов:</label>
-																	<input class=" field__file" type="file"
-																		id="uploaddocs1" multiple>
+																	<input class=" field__file form-control " type="file"
+																		id="uploaddocs1"  required>
 																	<label for="file"
-																		class="insurance__program-aria insurance-upload d-flex align-items-center justify-content-between pe-0">
+																		class="insurance__program-aria insurance-upload d-flex align-items-center justify-content-between pe-0 form-label">
 
 																		<span class="file-text">Выбрать файл</span>
 																		<div class="file-img"
 																			style="background: #0172B7; border-left: 1px solid #000000;">
-																			<img src="/img/upload.svg" alt="">
+																			<img src="img/upload.svg" alt="">
 																		</div>
 																	</label>
+																	<div class="invalid-feedback">
+																		Пожалуйста, загрузите документы
+																	</div>
 																</div>
 															</div>
 															
@@ -1055,10 +546,10 @@
 																<label for="Name0"
 																	class="insurance__program-label mb-lg-1 mb-1 form-label">Имя</label>
 																<input type="text" name="fname" id="Name0"
-																	class="insurance__program-aria infoperson get-info form-control" data-responce-list-people
-																	id="Name0" placeholder="Иван"
+																	class="insurance__program-aria infoperson get-info form-control itsinputs" data-responce-list-people
+																	id="Name0" placeholder="IVAN"
 																	required
-																	oninput="this.value = this.value.replace(/[^а-яА-Я\s]/g, '')">
+																	oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '').toUpperCase()">
 																<div class="invalid-feedback">
 																	Пожалуйста, укажите ваше имя
 																</div>
@@ -1070,7 +561,7 @@
 																	выдачи паспорта:</label>
 																<input type="text" autocomplete="off"
 																	class="dates__form insurance__program-aria custom-dates"
-																	placeholder="XX.XX.XXXX" id="datePasportStart0"
+																	placeholder="XX.XX.XXXX" id="datePasportStart0" oninput="maskDateInput(this, 'plus', 'secondInput')"onpaste="return false" ondrop="return false"
 																	required>
 																<div class="invalid-feedback">
 																	Пожалуйста, укажите дату выдачи паспорта
@@ -1084,7 +575,7 @@
 																<input type="text"
 																	class="insurance__program-aria get-info form-control"
 																	placeholder="N0395277" pattern="[N]\d{7}"
-																	maxlength="9" required id="pasport0">
+																	 required id="pasport0">
 																<div class="invalid-feedback">
 																	Пожалуйста, укажите номер паспорта
 																</div>
@@ -1116,7 +607,7 @@
 																	class=" insurance__program-label form-label mb-lg-1 mb-1 ">Дата
 																	рождения:</label>
 
-																<input type="text" autocomplete="off"
+																<input type="text" autocomplete="off" oninput="maskDateInput(this, 'birthday' , 'secondInput')"onpaste="return false" ondrop="return false"
 																	class="dates__form  insurance__program-aria get-info form-control "
 																	id="dateBirthday0" required name="age"
 																	placeholder="XX.XX.XXXX">
@@ -1128,607 +619,13 @@
 																class="insurance__program  insurance__form-block flex-column d-flex mb-lg-4 mb-3">
 																<label for="country-people0"
 																	class="insurance__program-label form-label mb-lg-1 mb-1">Укажите
-																	место рождение</label>
+																	страну резеденства</label>
 
 																<select
 																	class="insurance__program-aria select2 custom-select select-user-country get-info form-control"
 																	id="country-people0"  required>
-																	<option value="" disabled class="sel" selected>
-																		Выберите страну</option>
-																	<option value="16" data-currency="2" data-zone="3"
-																		data-name-lat="Kazakhstan" data-select2-id="28">
-																		Казахстан
-																	</option>
-																	<option value="17" data-currency="2" data-zone="3"
-																		data-name-lat="Australia" data-select2-id="29">
-																		Австралия</option>
-																	<option value="18" data-currency="3" data-zone="2"
-																		data-name-lat="Austria" data-select2-id="30">
-																		Австрия</option>
-																	<option value="19" data-currency="3" data-zone="2"
-																		data-name-lat="Azerbaijan" data-select2-id="31">
-																		Азербайджан</option>
-																	<option value="20" data-currency="3" data-zone="2"
-																		data-name-lat="Albania" data-select2-id="32">
-																		Албания</option>
-																	<option value="21" data-currency="2" data-zone="1"
-																		data-name-lat="Algeria" data-select2-id="33">
-																		Алжир</option>
-																	<option value="23" data-currency="2" data-zone="1"
-																		data-name-lat="Angola" data-select2-id="34">
-																		Ангола</option>
-																	<option value="24" data-currency="3" data-zone="2"
-																		data-name-lat="Andorra" data-select2-id="35">
-																		Андорра</option>
-																	<option value="25" data-currency="2" data-zone="1"
-																		data-name-lat="Antigua and Barbuda"
-																		data-select2-id="36">Антигуа и Барбуда</option>
-																	<option value="27" data-currency="2" data-zone="3"
-																		data-name-lat="Argentina" data-select2-id="37">
-																		Аргентина</option>
-																	<option value="28" data-currency="3" data-zone="2"
-																		data-name-lat="Armenia" data-select2-id="38">
-																		Армения</option>
-																	<option value="30" data-currency="2" data-zone="1"
-																		data-name-lat="Afghanistan"
-																		data-select2-id="39">Афганистан</option>
-																	<option value="31" data-currency="2" data-zone="1"
-																		data-name-lat="Bahamas" data-select2-id="40">
-																		Багамские острова</option>
-																	<option value="32" data-currency="2" data-zone="1"
-																		data-name-lat="Bangladesh" data-select2-id="41">
-																		Бангладеш</option>
-																	<option value="33" data-currency="2" data-zone="1"
-																		data-name-lat="Barbados" data-select2-id="42">
-																		Барбадос</option>
-																	<option value="34" data-currency="2" data-zone="1"
-																		data-name-lat="Bahrain" data-select2-id="43">
-																		Бахрейн</option>
-																	<option value="35" data-currency="3" data-zone="2"
-																		data-name-lat="Belarus" data-select2-id="44">
-																		Беларусь</option>
-																	<option value="36" data-currency="2" data-zone="1"
-																		data-name-lat="Belize" data-select2-id="45">
-																		Белиз</option>
-																	<option value="13" data-currency="3" data-zone="2"
-																		data-name-lat="Belgium" data-select2-id="46">
-																		Бельгия</option>
-																	<option value="37" data-currency="2" data-zone="1"
-																		data-name-lat="Benin" data-select2-id="47">Бенин
-																	</option>
-																	<option value="42" data-currency="3" data-zone="2"
-																		data-name-lat="Bulgaria" data-select2-id="48">
-																		Болгария</option>
-																	<option value="43" data-currency="2" data-zone="3"
-																		data-name-lat="Bolivia" data-select2-id="49">
-																		Боливия</option>
-																	<option value="40" data-currency="3" data-zone="2"
-																		data-name-lat="Bosnia and Herzegovina"
-																		data-select2-id="50">Босния и Герцеговина
-																	</option>
-																	<option value="41" data-currency="2" data-zone="1"
-																		data-name-lat="Botswana" data-select2-id="51">
-																		Ботсвана</option>
-																	<option value="44" data-currency="2" data-zone="3"
-																		data-name-lat="Brazil" data-select2-id="52">
-																		Бразилия</option>
-																	<option value="45" data-currency="2" data-zone="1"
-																		data-name-lat="Burkina Faso"
-																		data-select2-id="53">Буркина-Фасо</option>
-																	<option value="46" data-currency="2" data-zone="1"
-																		data-name-lat="Burundi" data-select2-id="54">
-																		Бурунди</option>
-																	<option value="47" data-currency="2" data-zone="1"
-																		data-name-lat="Bhutan" data-select2-id="55">
-																		Бутан</option>
-																	<option value="216" data-currency="2" data-zone="1"
-																		data-name-lat="Vanuatu" data-select2-id="56">
-																		Вануату</option>
-																	<option value="48" data-currency="3" data-zone="2"
-																		data-name-lat="Holy See (Vatican City State)"
-																		data-select2-id="57">Ватикан, Holy See</option>
-																	<option value="49" data-currency="3" data-zone="2"
-																		data-name-lat="Hungary" data-select2-id="58">
-																		Венгрия</option>
-																	<option value="50" data-currency="2" data-zone="3"
-																		data-name-lat="Venezuela" data-select2-id="59">
-																		Венесуэла</option>
-																	<option value="223" data-currency="3" data-zone="2"
-																		data-name-lat="all" data-select2-id="60">Весь
-																		мир</option>
-																	<option value="54" data-currency="2" data-zone="1"
-																		data-name-lat="Vietnam" data-select2-id="61">
-																		Вьетнам</option>
-																	<option value="55" data-currency="2" data-zone="1"
-																		data-name-lat="Gabon" data-select2-id="62">Габон
-																	</option>
-																	<option value="56" data-currency="2" data-zone="3"
-																		data-name-lat="Haiti" data-select2-id="63">Гаити
-																	</option>
-																	<option value="57" data-currency="2" data-zone="1"
-																		data-name-lat="Guyana" data-select2-id="64">
-																		Гайана</option>
-																	<option value="58" data-currency="2" data-zone="1"
-																		data-name-lat="Gambia" data-select2-id="65">
-																		Гамбия</option>
-																	<option value="59" data-currency="2" data-zone="1"
-																		data-name-lat="Ghana" data-select2-id="66">Гана
-																	</option>
-																	<option value="60" data-currency="2" data-zone="3"
-																		data-name-lat="Guatemala" data-select2-id="67">
-																		Гватемала</option>
-																	<option value="61" data-currency="2" data-zone="1"
-																		data-name-lat="Guinea" data-select2-id="68">
-																		Гвинея</option>
-																	<option value="62" data-currency="2" data-zone="1"
-																		data-name-lat="Guinea bissau"
-																		data-select2-id="69">Гвинея-Бисау</option>
-																	<option value="222" data-currency="2" data-zone="3"
-																		data-name-lat="Hong Kong" data-select2-id="28">
-																		Гонконг</option>
-																	<option value="5" data-currency="3" data-zone="2"
-																		data-name-lat="Germany" data-select2-id="70">
-																		Германия</option>
-																	<option value="64" data-currency="2" data-zone="3"
-																		data-name-lat="Honduras" data-select2-id="71">
-																		Гондурас</option>
-																	<option value="65" data-currency="2" data-zone="1"
-																		data-name-lat="Grenada" data-select2-id="72">
-																		Гренада</option>
-																	<option value="67" data-currency="3" data-zone="2"
-																		data-name-lat="Greece" data-select2-id="73">
-																		Греция</option>
-																	<option value="68" data-currency="3" data-zone="2"
-																		data-name-lat="Georgia" data-select2-id="74">
-																		Грузия</option>
-																	<option value="70" data-currency="3" data-zone="2"
-																		data-name-lat="Denmark" data-select2-id="75">
-																		Дания</option>
-																	<option value="71" data-currency="2" data-zone="1"
-																		data-name-lat="Djibouti" data-select2-id="76">
-																		Джибути</option>
-																	<option value="72" data-currency="2" data-zone="1"
-																		data-name-lat="Dominica" data-select2-id="77">
-																		Доминика</option>
-																	<option value="73" data-currency="2" data-zone="3"
-																		data-name-lat="Dominican Republic"
-																		data-select2-id="78">Доминиканская республика
-																	</option>
-																	<option value="10" data-currency="2" data-zone="1"
-																		data-name-lat="Egypt" data-select2-id="79">
-																		Египет</option>
-																	<option value="74" data-currency="2" data-zone="1"
-																		data-name-lat="Zambia" data-select2-id="80">
-																		Замбия</option>
-																	<option value="76" data-currency="2" data-zone="1"
-																		data-name-lat="Zimbabwe" data-select2-id="81">
-																		Зимбабве</option>
-																	<option value="77" data-currency="2" data-zone="1"
-																		data-name-lat="Israel" data-select2-id="82">
-																		Израиль</option>
-																	<option value="78" data-currency="2" data-zone="1"
-																		data-name-lat="India" data-select2-id="83">Индия
-																	</option>
-																	<option value="79" data-currency="2" data-zone="1"
-																		data-name-lat="Indonesia" data-select2-id="84">
-																		Индонезия</option>
-																	<option value="80" data-currency="2" data-zone="1"
-																		data-name-lat="Jordan" data-select2-id="85">
-																		Иордания</option>
-																	<option value="81" data-currency="2" data-zone="1"
-																		data-name-lat="Iraq" data-select2-id="86">Ирак
-																	</option>
-																	<option value="82" data-currency="2" data-zone="1"
-																		data-name-lat="Iran" data-select2-id="87">Иран,
-																		исламская республика</option>
-																	<option value="11" data-currency="3" data-zone="2"
-																		data-name-lat="Ireland" data-select2-id="88">
-																		Ирландия</option>
-																	<option value="83" data-currency="3" data-zone="2"
-																		data-name-lat="Iceland" data-select2-id="89">
-																		Исландия</option>
-																	<option value="84" data-currency="3" data-zone="2"
-																		data-name-lat="Spain" data-select2-id="90">
-																		Испания</option>
-																	<option value="14" data-currency="3" data-zone="2"
-																		data-name-lat="Italy" data-select2-id="91">
-																		Италия</option>
-																	<option value="85" data-currency="2" data-zone="1"
-																		data-name-lat="Yemen" data-select2-id="92">Йемен
-																	</option>
-																	<option value="86" data-currency="2" data-zone="1"
-																		data-name-lat="Cape Verde" data-select2-id="93">
-																		Кабо-Верде</option>
-																	<option value="88" data-currency="2" data-zone="1"
-																		data-name-lat="Cambodia" data-select2-id="94">
-																		Камбоджа</option>
-																	<option value="89" data-currency="2" data-zone="1"
-																		data-name-lat="Cameroon" data-select2-id="95">
-																		Камерун</option>
-																	<option value="90" data-currency="2" data-zone="3"
-																		data-name-lat="Canada" data-select2-id="96">
-																		Канада</option>
-																	<option value="91" data-currency="2" data-zone="1"
-																		data-name-lat="Qatar" data-select2-id="97">Катар
-																	</option>
-																	<option value="92" data-currency="2" data-zone="1"
-																		data-name-lat="Kenya" data-select2-id="98">Кения
-																	</option>
-																	<option value="93" data-currency="3" data-zone="2"
-																		data-name-lat="Cyprus" data-select2-id="99">Кипр
-																	</option>
-																	<option value="94" data-currency="2" data-zone="1"
-																		data-name-lat="Kiribati" data-select2-id="100">
-																		Кирибати</option>
-																	<option value="95" data-currency="2" data-zone="3"
-																		data-name-lat="China" data-select2-id="101">
-																		Китай</option>
-																	<option value="97" data-currency="2" data-zone="3"
-																		data-name-lat="Colombia" data-select2-id="102">
-																		Колумбия</option>
-																	<option value="98" data-currency="2" data-zone="1"
-																		data-name-lat="Comoros" data-select2-id="103">
-																		Коморские острова</option>
-																	<option value="99" data-currency="2" data-zone="1"
-																		data-name-lat="Congo" data-select2-id="104">
-																		Конго</option>
-																	<option value="96" data-currency="2" data-zone="1"
-																		data-name-lat="Korea" data-select2-id="105">
-																		Корея</option>
-																	<option value="101" data-currency="2" data-zone="3"
-																		data-name-lat="Costa Rica"
-																		data-select2-id="107">Коста-Рика</option>
-																	<option value="102" data-currency="2" data-zone="1"
-																		data-name-lat="Cote D&#39;Ivoire"
-																		data-select2-id="108">Кот-Д`ивуар</option>
-																	<option value="103" data-currency="2" data-zone="3"
-																		data-name-lat="Cuba" data-select2-id="109">Куба
-																	</option>
-																	<option value="104" data-currency="2" data-zone="1"
-																		data-name-lat="Kuwait" data-select2-id="110">
-																		Кувейт</option>
-																	<option value="9" data-currency="2" data-zone="1"
-																		data-name-lat="Kyrgyzstan"
-																		data-select2-id="111">Кыргызстан</option>
-																	<option value="106" data-currency="2" data-zone="1"
-																		data-name-lat="Lao Democratic People&#39;s Republic"
-																		data-select2-id="112">Лаосская демократическая
-																		народная республика</option>
-																	<option value="107" data-currency="3" data-zone="2"
-																		data-name-lat="Latvia" data-select2-id="113">
-																		Латвия</option>
-																	<option value="108" data-currency="2" data-zone="1"
-																		data-name-lat="Lesotho" data-select2-id="114">
-																		Лесото</option>
-																	<option value="111" data-currency="2" data-zone="1"
-																		data-name-lat="Liberia" data-select2-id="115">
-																		Либерия</option>
-																	<option value="110" data-currency="3" data-zone="2"
-																		data-name-lat="Lebanon" data-select2-id="116">
-																		Ливан</option>
-																	<option value="112" data-currency="3" data-zone="2"
-																		data-name-lat="Lithuania" data-select2-id="117">
-																		Литва</option>
-																	<option value="113" data-currency="3" data-zone="2"
-																		data-name-lat="Liechtenstein"
-																		data-select2-id="118">Лихтенштейн</option>
-																	<option value="213" data-currency="3" data-zone="2"
-																		data-name-lat="Luxembourg"
-																		data-select2-id="119">Люксембург</option>
-																	<option value="114" data-currency="2" data-zone="1"
-																		data-name-lat="Mauritius" data-select2-id="120">
-																		Маврикий</option>
-																	<option value="220" data-currency="2" data-zone="1"
-																		data-name-lat="Mauritania"
-																		data-select2-id="121">Мавритания</option>
-																	<option value="115" data-currency="2" data-zone="1"
-																		data-name-lat="Madagascar"
-																		data-select2-id="122">Мадагаскар</option>
-																	<option value="116" data-currency="3" data-zone="2"
-																		data-name-lat="Macedonia" data-select2-id="123">
-																		Македония, бывшая Югославская республика
-																	</option>
-																	<option value="117" data-currency="2" data-zone="1"
-																		data-name-lat="Malawi" data-select2-id="124">
-																		Малави</option>
-																	<option value="118" data-currency="2" data-zone="1"
-																		data-name-lat="Malaysia" data-select2-id="125">
-																		Малайзия</option>
-																	<option value="120" data-currency="2" data-zone="1"
-																		data-name-lat="Mali" data-select2-id="126">Мали
-																	</option>
-																	<option value="215" data-currency="2" data-zone="1"
-																		data-name-lat="Maldives" data-select2-id="127">
-																		Мальдивы</option>
-																	<option value="119" data-currency="3" data-zone="2"
-																		data-name-lat="Malta" data-select2-id="128">
-																		Мальта</option>
-																	<option value="130" data-currency="2" data-zone="1"
-																		data-name-lat="Morocco" data-select2-id="129">
-																		Марокко</option>
-																	<option value="122" data-currency="2" data-zone="1"
-																		data-name-lat="Marshall Islands"
-																		data-select2-id="130">Маршалловы острова
-																	</option>
-																	<option value="123" data-currency="2" data-zone="3"
-																		data-name-lat="Mexico" data-select2-id="131">
-																		Мексика</option>
-																	<option value="124" data-currency="2" data-zone="1"
-																		data-name-lat="Micronesia"
-																		data-select2-id="132">Микронезия, Федеративные
-																		штаты</option>
-																	<option value="125" data-currency="2" data-zone="1"
-																		data-name-lat="Mozambique"
-																		data-select2-id="133">Мозамбик</option>
-																	<option value="126" data-currency="3" data-zone="2"
-																		data-name-lat="Moldova" data-select2-id="134">
-																		Молдова республика</option>
-																	<option value="127" data-currency="3" data-zone="2"
-																		data-name-lat="Monaco" data-select2-id="135">
-																		Монако</option>
-																	<option value="128" data-currency="2" data-zone="1"
-																		data-name-lat="Mongolia" data-select2-id="136">
-																		Монголия</option>
-																	<option value="131" data-currency="2" data-zone="1"
-																		data-name-lat="Myanmar" data-select2-id="137">
-																		Мьянма</option>
-																	<option value="132" data-currency="2" data-zone="1"
-																		data-name-lat="Namibia" data-select2-id="138">
-																		Намибия</option>
-																	<option value="133" data-currency="2" data-zone="1"
-																		data-name-lat="Nauru" data-select2-id="139">
-																		Науру</option>
-																	<option value="134" data-currency="2" data-zone="1"
-																		data-name-lat="Nepal" data-select2-id="140">
-																		Непал</option>
-																	<option value="135" data-currency="2" data-zone="1"
-																		data-name-lat="Niger" data-select2-id="141">
-																		Нигер</option>
-																	<option value="136" data-currency="2" data-zone="1"
-																		data-name-lat="Nigeria" data-select2-id="142">
-																		Нигерия</option>
-																	<option value="139" data-currency="3" data-zone="2"
-																		data-name-lat="Netherlands"
-																		data-select2-id="143">Нидерланды</option>
-																	<option value="140" data-currency="2" data-zone="1"
-																		data-name-lat="Nicaragua" data-select2-id="144">
-																		Никарагуа</option>
-																	<option value="137" data-currency="2" data-zone="1"
-																		data-name-lat="New Zealand"
-																		data-select2-id="145">Новая Зеландия</option>
-																	<option value="148" data-currency="2" data-zone="1"
-																		data-name-lat="New Guinea"
-																		data-select2-id="146">Новая_Гвинея</option>
-																	<option value="138" data-currency="3" data-zone="2"
-																		data-name-lat="Norway" data-select2-id="147">
-																		Норвегия</option>
-																	<option value="141" data-currency="2" data-zone="1"
-																		data-name-lat="United Arab Emirates"
-																		data-select2-id="148">Объединенные Арабские
-																		Эмираты</option>
-																	<option value="142" data-currency="2" data-zone="1"
-																		data-name-lat="Oman" data-select2-id="149">Оман
-																	</option>
-																	<option value="143" data-currency="2" data-zone="1"
-																		data-name-lat="Pakistan" data-select2-id="150">
-																		Пакистан</option>
-																	<option value="144" data-currency="2" data-zone="1"
-																		data-name-lat="Palau" data-select2-id="151">
-																		Палау</option>
-																	<option value="211" data-currency="2" data-zone="1"
-																		data-name-lat="Palestine" data-select2-id="152">
-																		Палестина</option>
-																	<option value="145" data-currency="2" data-zone="3"
-																		data-name-lat="Panama" data-select2-id="153">
-																		Панама</option>
-																	<option value="146" data-currency="2" data-zone="3"
-																		data-name-lat="Panama" data-select2-id="154">
-																		Панама</option>
-																	<option value="147" data-currency="2" data-zone="1"
-																		data-name-lat="Papua New Guinea"
-																		data-select2-id="155">Папуа-Новая Гвинея
-																	</option>
-																	<option value="149" data-currency="2" data-zone="1"
-																		data-name-lat="Paraguay" data-select2-id="156">
-																		Парагвай</option>
-																	<option value="150" data-currency="2" data-zone="3"
-																		data-name-lat="Peru" data-select2-id="157">Перу
-																	</option>
-																	<option value="152" data-currency="3" data-zone="2"
-																		data-name-lat="Poland" data-select2-id="158">
-																		Польша</option>
-																	<option value="153" data-currency="3" data-zone="2"
-																		data-name-lat="Portugal" data-select2-id="159">
-																		Португалия</option>
-																	<option value="2" data-currency="2" data-zone="1"
-																		data-name-lat="Russian Federation"
-																		data-select2-id="160">Российская Федерация
-																	</option>
-																	<option value="154" data-currency="2" data-zone="1"
-																		data-name-lat="Rwanda" data-select2-id="161">
-																		Руанда</option>
-																	<option value="155" data-currency="3" data-zone="2"
-																		data-name-lat="Romania" data-select2-id="162">
-																		Румыния</option>
-																	<option value="53" data-currency="2" data-zone="1"
-																		data-name-lat="Samoa" data-select2-id="163">
-																		Самоа</option>
-																	<option value="157" data-currency="3" data-zone="2"
-																		data-name-lat="San marino"
-																		data-select2-id="164">Сан-Марино</option>
-																	<option value="158" data-currency="2" data-zone="1"
-																		data-name-lat="Sao Tome and Principe"
-																		data-select2-id="165">Сан-Томе и Принсипи
-																	</option>
-																	<option value="159" data-currency="2" data-zone="1"
-																		data-name-lat="Saudi Arabia"
-																		data-select2-id="166">Саудовская Аравия</option>
-																	<option value="160" data-currency="2" data-zone="1"
-																		data-name-lat="Swaziland" data-select2-id="167">
-																		Свазиленд</option>
-																	<option value="162" data-currency="2" data-zone="1"
-																		data-name-lat="Seychelles"
-																		data-select2-id="168">Сейшельские острова
-																	</option>
-																	<option value="163" data-currency="2" data-zone="1"
-																		data-name-lat="Senegal" data-select2-id="169">
-																		Сенегал</option>
-																	<option value="164" data-currency="2" data-zone="1"
-																		data-name-lat="Saint Kitts and Nevis"
-																		data-select2-id="170">Сент-Китс и Невис</option>
-																	<option value="165" data-currency="2" data-zone="1"
-																		data-name-lat="Saint Lucia"
-																		data-select2-id="171">Сент-Люсия</option>
-																	<option value="210" data-currency="3" data-zone="2"
-																		data-name-lat="Serbia Republic"
-																		data-select2-id="172">Сербия Республика</option>
-																	<option value="166" data-currency="2" data-zone="1"
-																		data-name-lat="Singapore" data-select2-id="173">
-																		Сингапур</option>
-																	<option value="167" data-currency="2" data-zone="1"
-																		data-name-lat="Syria" data-select2-id="174">
-																		Сирийская Арабская республика</option>
-																	<option value="168" data-currency="3" data-zone="2"
-																		data-name-lat="Slovakia" data-select2-id="175">
-																		Словакия</option>
-																	<option value="169" data-currency="3" data-zone="2"
-																		data-name-lat="Slovenia" data-select2-id="176">
-																		Словения</option>
-																	<option value="209" data-currency="3" data-zone="2"
-																		data-name-lat="UK coast" data-select2-id="177">
-																		Соединенное Королевство Великобритании и
-																		Северной Ирландии</option>
-																	<option value="6" data-currency="2" data-zone="3"
-																		data-name-lat="United States"
-																		data-select2-id="178">Соединенные Штаты Америки
-																	</option>
-																	<option value="170" data-currency="2" data-zone="1"
-																		data-name-lat="Solomon Islands"
-																		data-select2-id="179">Соломоновы острова
-																	</option>
-																	<option value="171" data-currency="2" data-zone="1"
-																		data-name-lat="Somalia" data-select2-id="180">
-																		Сомали</option>
-																	<option value="172" data-currency="2" data-zone="1"
-																		data-name-lat="Sudan" data-select2-id="181">
-																		Судан</option>
-																	<option value="173" data-currency="2" data-zone="1"
-																		data-name-lat="Suriname" data-select2-id="182">
-																		Суринам</option>
-																	<option value="174" data-currency="2" data-zone="1"
-																		data-name-lat="Sierra Leone"
-																		data-select2-id="183">Сьерра-Леоне</option>
-																	<option value="175" data-currency="2" data-zone="1"
-																		data-name-lat="Tajikistan"
-																		data-select2-id="184">Таджикистан</option>
-																	<option value="177" data-currency="2" data-zone="4"
-																		data-name-lat="Thailand" data-select2-id="185">
-																		Таиланд</option>
-																	<option value="178" data-currency="2" data-zone="1"
-																		data-name-lat="Tanzania" data-select2-id="186">
-																		Танзания, объединенная республика</option>
-																	<option value="181" data-currency="2" data-zone="1"
-																		data-name-lat="Togo" data-select2-id="187">Того
-																	</option>
-																	<option value="180" data-currency="2" data-zone="1"
-																		data-name-lat="Tonga" data-select2-id="188">
-																		Тонга</option>
-																	<option value="179" data-currency="2" data-zone="1"
-																		data-name-lat="Trinidad and Tobago"
-																		data-select2-id="189">Тринидад и Тобаго</option>
-																	<option value="182" data-currency="2" data-zone="1"
-																		data-name-lat="Tuvalu" data-select2-id="190">
-																		Тувалу</option>
-																	<option value="15" data-currency="2" data-zone="1"
-																		data-name-lat="Tunisia" data-select2-id="191">
-																		Тунис</option>
-																	<option value="183" data-currency="2" data-zone="1"
-																		data-name-lat="Turkmenistan"
-																		data-select2-id="192">Туркменистан</option>
-																	<option value="3" data-currency="2" data-zone="1"
-																		data-name-lat="Turkey" data-select2-id="193">
-																		Турция</option>
-																	<option value="184" data-currency="2" data-zone="1"
-																		data-name-lat="Uganda" data-select2-id="194">
-																		Уганда</option>
-																	<option value="186" data-currency="2" data-zone="1"
-																		data-name-lat="Uzbekistan"
-																		data-select2-id="195">Узбекистан</option>
-																	<option value="185" data-currency="3" data-zone="2"
-																		data-name-lat="Ukraine" data-select2-id="196">
-																		Украина</option>
-																	<option value="188" data-currency="2" data-zone="3"
-																		data-name-lat="Uruguay" data-select2-id="197">
-																		Уругвай</option>
-																	<option value="190" data-currency="2" data-zone="1"
-																		data-name-lat="Fiji" data-select2-id="198">Фиджи
-																	</option>
-																	<option value="191" data-currency="2" data-zone="1"
-																		data-name-lat="Philippines"
-																		data-select2-id="199">Филиппины</option>
-																	<option value="192" data-currency="3" data-zone="2"
-																		data-name-lat="Finland" data-select2-id="200">
-																		Финляндия</option>
-																	<option value="12" data-currency="3" data-zone="2"
-																		data-name-lat="France" data-select2-id="201">
-																		Франция</option>
-																	<option value="193" data-currency="3" data-zone="2"
-																		data-name-lat="Croatia" data-select2-id="202">
-																		Хорватия</option>
-																	<option value="194" data-currency="2" data-zone="1"
-																		data-name-lat="Central African Republic"
-																		data-select2-id="203">Центральноафриканская
-																		республика</option>
-																	<option value="195" data-currency="2" data-zone="1"
-																		data-name-lat="Chad" data-select2-id="204">Чад
-																	</option>
-																	<option value="212" data-currency="3" data-zone="2"
-																		data-name-lat="Montenegro"
-																		data-select2-id="205">Черногория</option>
-																	<option value="196" data-currency="3" data-zone="2"
-																		data-name-lat="Czech Republic"
-																		data-select2-id="206">Чехия</option>
-																	<option value="197" data-currency="2" data-zone="3"
-																		data-name-lat="Chile" data-select2-id="207">Чили
-																	</option>
-																	<option value="8" data-currency="3" data-zone="2"
-																		data-name-lat="Switzerland"
-																		data-select2-id="208">Швейцария</option>
-																	<option value="198" data-currency="3" data-zone="2"
-																		data-name-lat="Sweden" data-select2-id="209">
-																		Швеция</option>
-																	<option value="199" data-currency="2" data-zone="1"
-																		data-name-lat="Sri Lanka" data-select2-id="211">
-																		Шри-Ланка</option>
-																	<option value="201" data-currency="2" data-zone="3"
-																		data-name-lat="Ecuador" data-select2-id="212">
-																		Эквадор</option>
-																	<option value="202" data-currency="2" data-zone="1"
-																		data-name-lat="Equatorial Guinea"
-																		data-select2-id="213">Экваториальная Гвинея
-																	</option>
-																	<option value="156" data-currency="2" data-zone="1"
-																		data-name-lat="El Salvador"
-																		data-select2-id="214">Эль-Сальвадор</option>
-																	<option value="203" data-currency="2" data-zone="1"
-																		data-name-lat="Eritrea" data-select2-id="215">
-																		Эритрея</option>
-																	<option value="200" data-currency="3" data-zone="2"
-																		data-name-lat="Estonia" data-select2-id="216">
-																		Эстония</option>
-																	<option value="204" data-currency="2" data-zone="1"
-																		data-name-lat="Ethiopia" data-select2-id="217">
-																		Эфиопия</option>
-																	<option value="206" data-currency="2" data-zone="1"
-																		data-name-lat="South Africa"
-																		data-select2-id="218">Южно-Африканская
-																		Республика</option>
-																	<option value="207" data-currency="2" data-zone="1"
-																		data-name-lat="Jamaica" data-select2-id="219">
-																		Ямайка</option>
-																	<option value="16" data-currency="2" data-zone="3"
-																		data-name-lat="Japan" data-select2-id="220">
-																		Япония</option>
+																
+																	
 																</select>
 																<div class="invalid-feedback">
 																	Пожалуйста, укажите место рождение
@@ -1749,7 +646,7 @@
 																			<p
 																				class="form__add-people-text form__action-text me-3">
 																				Добавить</p>
-																			<img src="/img/plus-tourist.svg" alt="">
+																			<img src="img/plus-tourist.svg" alt="">
 																		</div>
 																	</div>
 
@@ -1761,6 +658,7 @@
 													</div>
 													
 												</div>
+												<div class="d-flex align-items-center">
 												<label class="toggle" for="uniqueID">
 													<input type="checkbox" checked class="toggle__input"
 														id="uniqueID" />
@@ -1800,26 +698,33 @@
 															</span>
 														</span>
 													</span>
-													<p class="targetTextCss">Добавить страхователя в список застрахованных </p>
-
 												</label>
+												<p class="targetTextCss">Добавить страхователя в список застрахованных </p>
+												</div>
 											</div>
 
 										</div>
 
 										<hr class="form-hr">
 										<div class="checkbox__block mb-3">
-											<div class="d-flex mb-lg-2 mb-2">
+											<div class="d-flex mb-lg-2 mb-2 form-check">
 												<input type="checkbox"
-													class="insurance__checkbox-checkbox me-2 form-check-input" required>
-												<p class="insurance__checkbox-text ">Согласен на обработку персональных
-													данных</p>
+													class="insurance__checkbox-checkbox me-2 form-check-input form-check-input" id="invalidCheckSecond" required>
+												<label class="insurance__checkbox-text form-check-label" for="invalidCheckSecond">Согласен на обработку персональных
+													данных</label>
+													
 											</div>
-											<div class="d-flex mb-lg-3 mb-2">
-												<input type="checkbox"
-													class="insurance__checkbox-checkbox me-2 form-check-input" required>
-												<p class="insurance__checkbox-text">C правами ознакомлен</p>
+											<div class="d-flex mb-lg-3 mb-2 form-check">
+												<input type="checkbox" 
+													class=" form-check-input insurance__checkbox-checkbox me-2 form-check-input" id="invalidCheck" required>
+												<label class="insurance__checkbox-text form-check-label" for="invalidCheck">C правами ознакомлен</label>
+												
 											</div>
+											
+										</div>
+										<div class=" justify-content-center align-items-center mb-lg-4 hidden-attentional-sec">
+											<img src="/img/attention.svg" alt="" class="message-total-img me-3">
+											<p class="message-total-text ">Для оформления полиса необходим хотя бы 1 застрахованный </p>
 										</div>
 										<div class="d-flex justify-content-center align-items-center text-center">
 											<div
@@ -1906,7 +811,7 @@
 									</div>
 									
 								</div>
-								<div class="accordion col-12" id="accordionAuthorization">
+								<div class="accordion col-12" id="accordionAuthorization" data-bs-parent="">
 									<div class="accordion-item mb-lg-4 mb-4">
 										<h2 class="accordion-header" id="headingOne">
 											<button class="accordion-button rel collapsed" type="button"
@@ -1915,14 +820,14 @@
 												Данные страхователя
 											</button>
 										</h2>
-										<div id="collapseOne" class="accordion-collapse collapse "
-											aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-											<div class="accordion-body ">
-												<div class="accordion-body-block mb-lg-3">
+										<div id="collapseOne" class="accordion-collapse collapse  show"
+											aria-labelledby="headingOne" data-bs-parent="#accordionExample" >
+											<div class="accordion-body show" >
+												<div class="accordion-body-block mb-lg-3 ">
 													<h3 class="accordion-body-title">Cтрахователь:</h3>
 													<p class="accordion-body-text" id="itog-name-insuarance" data-beckend-response="LastName"></p>
 												</div>
-												<div class="d-flex justify-content-ms-between flre qe">
+												<div class="d-flex justify-content-ms-between flre qe ">
 													<div class="w-100 justify-content-between">
 														<div class="accordion-body-block">
 															<h3 class="accordion-body-title">Номер телефона:</h3>
@@ -1964,7 +869,7 @@
 												Данные застрахованных
 											</button>
 										</h2>
-										<div id="collapseTwo" class="accordion-collapse collapse"
+										<div id="collapseTwo" class="accordion-collapse collapse  show"
 											aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
 											<div class="accordion-body accordion-subinsuarnce">
 
@@ -1982,11 +887,11 @@
 									</div>
 									<div
 										class="message-total  justify-content-center align-items-center mb-lg-5 mb-3">
-										<img src="/img/attention.svg" class="message-total-img me-3" alt="">
+										<img src="img/attention.svg" class="message-total-img me-3" alt="">
 										<p class="message-total-text">Наш менеджер скоро свяжется с вами!</p>
 									</div>
 									<div class="d-flex justify-content-center align-items-center text-center">
-										<a href="/index.html" id="payment"
+										<a href="index.html" id="payment"
 											class=" insurance__button-second-section insurance__people-button col-8 d-flex  justify-content-center align-items-center">На
 											главную</a>
 									</div>
@@ -2019,7 +924,7 @@
 							</ul>
 						</div>
 						<div class="case__img">
-							<img src="/img/insurance__img.png" alt="" class="w-100 case__img-image">
+							<img src="img/insurance__img.png" alt="" class="w-100 case__img-image">
 						</div>
 					</div>
 				</div>
@@ -2035,7 +940,7 @@
 							<div
 								class="docs__card col-lg-5   d-flex flex-column justify-content-center align-items-center mb-lg-5 mb-5 me-5">
 								<div class="d-flex">
-									<div class="docs-img me-lg-3 me-5"><img src="/img/docs-img.svg" alt=""
+									<div class="docs-img me-lg-3 me-5"><img src="img/docs-img.svg" alt=""
 											class="docs__image"></div>
 									<p class="docs-text ">Информация Министра иностранных дел Республики Польши о
 										страховщиках и предлагаемых ими страховках, отвечающих необходимым условиям в
@@ -2043,7 +948,7 @@
 										от 12 декабря 2013 г. «Об иностранцах»</p>
 								</div>
 								<div class="d-flex  align-items-center docs-info mt-lg-3  justify-content-between ">
-									<a href="/ENG_Lista_ubezpieczycieli_i_oferowanych_produktów_ubezpieczeniowych_nowelizacja (3).pdf"
+									<a href="ENG_Lista_ubezpieczycieli_i_oferowanych_produktów_ubezpieczeniowych_nowelizacja (3).pdf"
 										download="" class="docs-read">Читать</a>
 									<p class="docs-date">25.12.2017</p>
 								</div>
@@ -2051,27 +956,27 @@
 							<div
 								class="docs__card col-lg-5 d-flex flex-column justify-content-center align-items-center mb-lg-0 mb-5 me-5">
 								<div class="d-flex">
-									<div class="docs-img me-lg-3 me-5"><img src="/img/docs-img.svg" alt=""
+									<div class="docs-img me-lg-3 me-5"><img src="img/docs-img.svg" alt=""
 											class="docs__image"></div>
 									<p class="docs-text">Просим Вас скачать и распечатать ответ-разъяснение МИД РК №
 										1-22/2820 от 14.02.2022г. после оформления полиса.</p>
 								</div>
 								<div class="d-flex  align-items-center docs-info mt-lg-3  justify-content-between ">
-									<a href="/MID_1-22-2820.pdf" download="" class="docs-read">Читать</a>
+									<a href="MID_1-22-2820.pdf" download="" class="docs-read">Читать</a>
 									<p class="docs-date">25.12.2017</p>
 								</div>
 							</div>
 							<div
 								class="docs__card col-lg-5 d-flex flex-column justify-content-center align-items-center mb-lg-0 mb-5">
 								<div class="d-flex">
-									<div class="docs-img me-lg-3 me-5"><img src="/img/docs-img.svg" alt=""
+									<div class="docs-img me-lg-3 me-5"><img src="img/docs-img.svg" alt=""
 											class="docs__image"></div>
 									<p class="docs-text">Правила страхования - ОБЪЕКТЫ СТРАХОВАНИЯ,СТРАХОВОЙ
 										СЛУЧАЙ,ОГРАНИЧЕНИЯ СТРАХОВАНИЯ И ИСКЛЮЧЕНИЯ ИЗ СТРАХОВЫХ СЛУЧАЕВ,СРОК И
 										ТЕРРИТОРИЯ ДЕЙСТВИЯ ДОГОВОРА СТРАХОВАНИЯ</p>
 								</div>
 								<div class="d-flex  align-items-center docs-info mt-lg-3  justify-content-between ">
-									<a href="/rules.doc" download="" class="docs-read">Читать</a>
+									<a href="rules.doc" download="" class="docs-read">Читать</a>
 									<p class="docs-date">25.12.2017</p>
 								</div>
 							</div>
@@ -2561,36 +1466,36 @@
 						<h4>Мобильное приложение</h4>
 						<div class="social-links">
 							<a href="https://play.google.com/store/apps/details?id=kz.interteach.app"
-								style="width: 200px; height: 60px"><img src="/img/playMarket.png" width="200"
+								style="width: 200px; height: 60px"><img src="img/playMarket.png" width="200"
 									height="60"></a>
 							<br>
 							<br>
 							<a href="https://apps.apple.com/kz/app/interteach-medical-assistance/id1608481158?uo=4&amp;at=1010lpjB&amp;ct=tas"
-								style="width: 200px; height: 60px"><img src="/img/appStore.png" width="200"
+								style="width: 200px; height: 60px"><img src="img/appStore.png" width="200"
 									height="60"></a>
 
 							<br>
 							<br>
 							<a href="https://appgallery.huawei.com/app/C106705589"
-								style="width: 200px; height: 60px"><img src="/img/AppGallery.png" width="200"
+								style="width: 200px; height: 60px"><img src="img/AppGallery.png" width="200"
 									height="60"></a>
 						</div>
 					</div>
 					<div class="footer-col">
 						<h4>Мы в соцсетях</h4>
 						<div class="social-links">
-							<a href="https://ru-ru.facebook.com/interteach.kz/"><img src="/img/facebook.svg" alt=""
+							<a href="https://ru-ru.facebook.com/interteach.kz/"><img src="img/facebook.svg" alt=""
 									class="footer-social"></a>
-							<a href="https://twitter.com/JSC_INTERTEACH"><img src="/img/twitter.svg" alt=""
+							<a href="https://twitter.com/JSC_INTERTEACH"><img src="img/twitter.svg" alt=""
 									class="footer-social"></a>
 							<a href="https://instagram.com/interteach_global?utm_medium=copy_link"><img
-									src="/img/instagram.svg" alt="" class="footer-social"></a>
+									src="img/instagram.svg" alt="" class="footer-social"></a>
 							<a
 								href="https://kz.linkedin.com/in/%D1%81%D1%82%D1%80%D0%B0%D1%85%D0%BE%D0%B2%D0%B0%D1%8F-%D0%BA%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%82%D0%B8%D1%87-267048115"><img
-									src="/img/Linkedin.svg" alt="" class="footer-social"></a>
+									src="img/Linkedin.svg" alt="" class="footer-social"></a>
 						</div>
 						<div class="social-links">
-							<img src="/img/logo-ru.svg" width="280" height="60">
+							<img src="img/logo-ru.svg" width="280" height="60">
 						</div>
 
 					</div>
@@ -2614,17 +1519,17 @@
 
 	<script src="//translate.google.com/translate_a/element.js?cb=TranslateInit"></script>
 	<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-	<script src="/air-datepicker.js"></script>
+	<script src="air-datepicker.js"></script>
 	<script src="https://unpkg.com/cookielib/src/cookie.min.js "></script>
 	<script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
 	<script src="/moment.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
 		crossorigin="anonymous"></script>
-	<script src="/jquery.js"></script>
+	<script src="jquery.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-	<script src="/js/script.js"></script>
-	<script src="/calc.js"></script>
+	<script src="js/script.js"></script>
+	<script src="calc.js"></script>
 	<script>
 		changeLocaleService.loadLocale("ru");
 	</script>

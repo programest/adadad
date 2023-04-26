@@ -634,7 +634,7 @@ p {
 
 
 .block__insurance-form2 {
-	display: none;
+ 
 }
 .block__insurance-form3{
   display: none;
@@ -1996,15 +1996,20 @@ ul {
   border: 1px solid #000000 !important;
 }
 
+.insurance__checkbox-checkbox{
+  border: 1px solid #000000;
+}
 
 
 
 
-
-
+.hidden-attentional-sec{
+  display: none;
+  transition: 3s;
+}
 
 .toggle {
-  margin-bottom: 5px;
+  width: 75px;
   align-items: center;
   border-radius: 100px;
   display: flex;
@@ -2101,7 +2106,10 @@ ul {
   }
   }
   
- 
+  .disabled-select {
+    opacity: 0.5; /* уменьшить прозрачность */
+    pointer-events: none; /* запретить взаимодействие */
+  }
  @media (max-width: 500px) {
   .toggle-track{
     width: 70px;

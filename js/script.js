@@ -101,12 +101,22 @@ if (dateBirthday) {
 	new AirDatepicker('#dateBirthday0', {
 		autoClose: true,
 		maxDate: new Date(),
+		onSelect: function (formattedDate, date) {
+			if (checkAge() == false){
+				console.log(this)
+				document.getElementById('dateBirthday0').classList.add('is-invalid')
+				document.getElementById('dateBirthday0').value = ''
+				document.getElementById('dateBirthday0').placeholder = 'Возраст должен быть от 18 до 70 лет'
+			}else if (checkAge() == true){
+				document.getElementById('dateBirthday0').classList.remove('is-invalid')
+			}
+		},
 	})
 }
 if (datePasport) {
 	new AirDatepicker('#datePasportStart0', {
 		autoClose: true,
-
+		maxDate: new Date(),
 
 	})
 }
@@ -242,17 +252,20 @@ var changeLocaleService = (function () {
 				console.log("locale loaded");
 				if (defLang) changeLocale(defLang);
 				if (cookie === 'kz') {
+					get_countries('kz')
 					changeLocale('kz')
 					document.querySelector('.nav__dropdown-flag').src = 'img/kz.png'
 					document.querySelector('.nav__dropdown-text').innerHTML = 'Қазақша'
 				} else if (cookie === 'ru') {
 					changeLocale('ru')
-
+					get_countries('ru')
 				} else if (cookie === 'en') {
 					changeLocale('en')
+					get_countries('en')
 					document.querySelector('.nav__dropdown-flag').src = 'img/en.png'
 					document.querySelector('.nav__dropdown-text').innerHTML = 'English'
 				} else {
+					get_countries('ru')
 					changeLocale('ru')
 
 				}
@@ -389,37 +402,37 @@ function TranslateEventHandler(event, selector, handler) {
 }
 
 
-if (document.querySelector(".sub-forms")){
-	document.querySelector(".sub-forms").addEventListener("click", function (e) {
-		const inputs = document.querySelectorAll('input[type="file"]');
-		const output = document.querySelector('.file-text');
+// if (document.querySelector(".sub-forms")){
+// 	document.querySelector(".sub-forms").addEventListener("click", function (e) {
+// 		const inputs = document.querySelectorAll('input[type="file"]');
+// 		const output = document.querySelector('.file-text');
 	
-		inputs.forEach((input) => {
+// 		inputs.forEach((input) => {
 	
-			input.addEventListener('change', async (event) => {
+// 			input.addEventListener('change', async (event) => {
 	
-				const files = event.target.files;
+// 				const files = event.target.files;
 	
-				for (let i = 0; i < files.length; i++) {
-					const file = files[i];
+// 				for (let i = 0; i < files.length; i++) {
+// 					const file = files[i];
 	
-					try {
-						const response = await fetch('/upload', {
-							method: 'POST',
-							body: file
-						});
+// 					try {
+// 						const response = await fetch('/upload', {
+// 							method: 'POST',
+// 							body: file
+// 						});
 	
-						if (response.ok) {
-							output.textContent = `Загружено ${i} из ${files.length} файлов`;
-						}
-					} catch (error) {
-						console.error(error);
-					}
-				}
-			});
-		});
-	});
-}
+// 						if (response.ok) {
+// 							output.textContent = `Загружено ${i} из ${files.length} файлов`;
+// 						}
+// 					} catch (error) {
+// 						console.error(error);
+// 					}
+// 				}
+// 			});
+// 		});
+// 	});
+// }
 
 
 
@@ -567,6 +580,7 @@ function Add() {
 			numCount++;
 			console.log(numCount)
 			console.log(blockCount)
+			get_countries('ru', 'true', numCount);
 			$('#country-people' + numCount).select2({
 				placeholder: "Выберите страну",
 				templateSelection: formatStateInsurancePeople,
@@ -579,6 +593,7 @@ function Add() {
 					}
 				}
 			});
+			
 			$('#country-people' + numCount).on("change", function (e) {
 				console.log('change');
 				var selectElementThree = document.getElementById("country-people" + numCount);
@@ -717,11 +732,11 @@ function OtherCoficent(a) {
 	// Получите ссылку на кнопку
 	var button = document.querySelector('.some-block-polis');
 	if (button){
-// Добавьте обработчик событий на кнопку
-button.addEventListener('click', function (event) {
+	// Добавьте обработчик событий на кнопку
+	button.addEventListener('click', function (event) {
 	// Получите ссылку на форму, связанную с кнопкой
 	var item = document.querySelector('.needs-validation')
-	console.log(results)
+	
 	// Проверьте форму на валидность
 	if (item.checkValidity() && results >= 500) {
 		block2.style.display = 'flex';
@@ -866,7 +881,7 @@ button.addEventListener('click', function (event) {
 	// Получите ссылку на кнопку
 	var button = document.querySelector('.puy');
 	// Добавьте обработчик событий на кнопку
-	
+		document.getElementById('dateBirthday0').value 
 		form.addEventListener('change', function () {
 			button.classList.toggle('active-btn', form.checkValidity());
 	
@@ -874,32 +889,46 @@ button.addEventListener('click', function (event) {
 	
 	
 	button.addEventListener('click', function (event) {
-		
-		if (block) {
-			block.forEach(function (item) {
-				// Получите ссылку на форму, связанную с кнопкой
-				if (form.checkValidity() && item.checkValidity()){
-					
+		var bird  = checkAge() 
+		if (!document.querySelector('.block') && !checkbox.checked)  {
+			document.querySelector('.hidden-attentional-sec').style.display = 'flex'
+			  setTimeout(function() {
+				document.querySelector('.hidden-attentional-sec').style.display = 'none';
+			  }, 3000);
+		} else {
+			if (block) {
+				block.forEach(function (item) {
+					// Получите ссылку на форму, связанную с кнопкой
+					if (form.checkValidity() && item.checkValidity()){
+
+						block2.style.display = 'none';
+						block3.style.display = 'block';
+					} else {
+
+
+						event.preventDefault();
+						event.stopPropagation();
+						console.log('Не валидно');
+					}
+				})
+			} else {
+				if (form.checkValidity() && bird === true ) {
 					block2.style.display = 'none';
 					block3.style.display = 'block';
+					append()
 				} else {
-					
-					
 					event.preventDefault();
 					event.stopPropagation();
 					console.log('Не валидно');
+					if (bird === false) {
+						document.querySelector('.message-total-text').textContent = 'Возраст страхователя должен быть не менее 18 лет'
+						document.querySelector('.hidden-attentional-sec').style.display = 'flex'
+						
+						  setTimeout(function() {
+							document.querySelector('.hidden-attentional-sec').style.display = 'none';
+						  }, 3000);
+					}
 				}
-			})
-		} else {
-			if (form.checkValidity()) {
-				block2.style.display = 'none';
-				block3.style.display = 'block';
-				append()
-			} else {
-				
-				event.preventDefault();
-				event.stopPropagation();
-				console.log('Не валидно');
 			}
 		}
 
@@ -912,8 +941,23 @@ button.addEventListener('click', function (event) {
 
 
 
+function checkAge() {
+	const birthdayInput = document.getElementById('dateBirthday0').value;
+	const birthdayParts = birthdayInput.split('.');
+	const birthday = new Date(`${birthdayParts[1]}.${birthdayParts[0]}.${birthdayParts[2]}`);
+		const today = new Date();
+	var age = today.getFullYear() - birthday.getFullYear();
+	const monthDiff = today.getMonth() - birthday.getMonth();
+	if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthday.getDate())) {
+	  age--;
+	}
 
-
+	if (age >= 18) {
+		return true;
+	}
+	return false;
+	
+}
 
 
 
@@ -999,6 +1043,7 @@ function append(){
 		document.querySelector('.message-total').style.display = 'none';
 		linkPay.innerHTML = "Оплатить";
 		linkPay.href = "https://www.sberbank.kz/ru/person/credit_cards/credit_cards/credit_cards_for_individuals/visa_gold";
+	
 	}else{
 		obj.isresident = "2";
 		document.querySelector('.message-total').style.display = 'flex';
@@ -1030,10 +1075,16 @@ function append(){
 	var age = calculateAgeInYears(document.getElementById('dateBirthday0').value)
 	obj.days = days;
 	obj.insurant.age = age;
+	var input = document.querySelector('.field__file') 
+    const formData = new FormData();
+    const str = JSON.stringify(obj);
+    formData.append( 'file', input.files[0] );
+    formData.append( 'json', str );
 
 	fetch("http://10.2.5.16/dmsajax/test.php", {
 	  method: 'POST',
-	  body: JSON.stringify(obj)
+	  body: formData
+	  
 	})
 	.then(response => response.json())
 	.then(convert)
@@ -1334,3 +1385,371 @@ function ClearInputNameLastName(a) {
 	}
 	return nameArray.join(' ');
 }
+// function maskDateInput(input, values) {
+//     input.addEventListener('input', function() {
+//         let formattedDate = '';
+//         const value = this.value.replace(/\D/g, '');
+//         const datePattern = /^(\d{1,2})(\d{0,2})(\d{0,4})$/;
+        
+//         if (datePattern.test(value)) {
+//             const day = value.slice(0, 2);
+//             const month = value.slice(2, 4);
+//             const year = value.slice(4, 8);
+
+//             const currentDate = new Date();
+//             console.log(`Текущая дата: день ${currentDate.getDate()}, месяц ${currentDate.getMonth() + 1}, год ${currentDate.getFullYear()}`);
+
+//             if (value.length === 8) {
+//                 const inputDate = new Date(`${year}-${month}-${day}`);
+
+// 				const currentYear = currentDate.getFullYear();
+// 				const currentMonth = String(currentDate.getMonth() + 1).padStart(2, '0');
+// 				const currentDay = String(currentDate.getDate()).padStart(2, '0');
+
+// 				const currentDateFormatted = `${currentYear}-${currentMonth}-${currentDay}`;
+// 				const currentDateObj = new Date(currentDateFormatted);
+
+
+//                 if (values === 'plus') {
+//                     if ( currentDateObj > inputDate) {
+//                         this.value = '';
+//                         return;
+//                     }
+//                 } else if (values && values === 'minus') {
+//                     console.log('minus');
+
+//                     if (currentDateObj < inputDate) {
+//                         this.value = '';
+//                         return;
+//                     }
+//                 } else {
+//                     console.log('error');
+//                 }
+//             }
+		
+// 		if (value.length >= 2) {
+// 			console.log(1);
+// 		  formattedDate += day + '.';
+// 		}
+// 		if (value.length >= 2) {
+// 			console.log(2);
+// 		  formattedDate += month + '.';
+// 		}
+// 		if (value.length >= 4) {
+// 			console.log(3);
+// 		  formattedDate += year;
+// 		}
+  
+// 		this.value = formattedDate;
+// 	  } 
+// 	});
+//   }
+
+
+function maskDateInput(input, values, secondInput) {
+
+	
+	  
+	input.addEventListener('input', function() {
+		
+	  const value = this.value.replace(/\D/g, '');
+	  const datePattern = /^(\d{1,2})(\d{0,2})(\d{0,4})$/;
+	  if (datePattern.test(value) ) {
+		const day = value.slice(0, 2);
+		const month = value.slice(2, 4);
+		const year = value.slice(4, 8);
+  
+		function isLeapYear(year) {
+			return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+		  }
+
+		
+		const currentDate = new Date();
+		const inputDate = new Date(year, month - 1, day);
+		inputDate.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
+  
+		const firstInputInput = dateStart.value;
+		const [dayFirst, monthFirst, yearFirst] = firstInputInput.split('.');
+		const firstInput = new Date(yearFirst, monthFirst - 1, dayFirst);
+		firstInput.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
+  
+		const currentYear = currentDate.getFullYear();
+		const currentMonth = String(currentDate.getMonth() + 1).padStart(2, '0');
+		const currentDay = String(currentDate.getDate()).padStart(2, '0');
+  
+		const currentDateFormatted = `${currentYear}-${currentMonth}-${currentDay}`;
+		const currentDateObj = new Date(currentDateFormatted);
+		currentDateObj.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
+
+
+		const birthdayDate = new Date();
+
+		// Set the date when the person turns 18
+		const birthYear = birthdayDate.getFullYear() - 18;
+		const birthMonth = birthdayDate.getMonth() + 1; // January is 0
+		const birthDay = birthdayDate.getDate();
+		const birthDate = new Date(birthYear, birthMonth - 1, birthDay, 0, 0, 0, 0);
+		birthDate.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
+		
+
+
+
+
+		let formattedDate = '';
+		if (values === 'plus') {
+		
+		  if (inputDate > currentDateObj || inputDate.getTime() === currentDateObj.getTime()) {
+			this.value = '';
+			return;
+		  }
+		} else if (values === 'minus') {
+		  if (value.length === 8) {
+			
+			if (inputDate < currentDateObj || inputDate.getTime() === currentDateObj.getTime()) {
+			  this.value = '';
+			  return;
+			} 
+		  }
+		} else if (values === 'modificed') {
+		  if (value.length === 8) {
+	
+			if (inputDate < firstInput || inputDate.getTime() === firstInput.getTime()) {
+			  this.value = '';
+			  return;
+			} else {
+				if (target.value == 2){
+					document.querySelector('.hidden-sportype').style.display = 'none';
+					document.querySelector('.hidden-sportcategory').style.display = 'none';
+					document.getElementById('sporttype').removeAttribute("required");
+					document.getElementById('categorysporttype').removeAttribute("required");
+					target.value= ''
+				}else{
+					target.value= ''
+				}
+				
+				endNum.innerHTML = "0" + ' ' + '₸';
+				priceNum.innerHTML = "0" + ' ' + '₸';
+				
+			  	target.removeAttribute('disabled')
+			}
+		  }
+		} else if (values === 'birthday') {
+			if (value.length === 8) {
+	
+				if (inputDate > birthDate || currentDate.getTime() === birthDate.getTime()) {
+				  this.value = '';
+				  return;
+				} 
+			  }
+		}
+	
+		if (value.length === 8) {
+			if (inputDate.toString() === "Invalid Date" || day > 31 || (month === 2 && (day > 29 || (!isLeapYear(year) && day > 28))) || ((month === 4 || month === 6 || month === 9 || month === 11) && day > 30)) {
+			this.value = '';
+			return;
+			} else if (inputDate.toString() !== "Invalid Date") {
+				if (secondInput){
+					if (form.classList.contains('was-validated')){
+						this.classList.remove('is-invalid');
+						this.style.setProperty('border-color', '#198754', 'important');
+						this.style.setProperty('background-image', 'url("data:image/svg+xml,%3csvg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 8 8\\"%3e%3cpath fill=\'%23198754\' d=\'M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z\'/%3e%3c/svg%3e"), url(/img/date.svg)', 'important');
+						this.style.setProperty('box-shadow', 'none');
+					}
+				}else{
+					if (document.querySelector('.needs-validation').classList.contains('was-validated')){
+						this.classList.remove('is-invalid');
+				this.style.setProperty('border-color', '#198754', 'important');
+				this.style.setProperty('background-image', 'url("data:image/svg+xml,%3csvg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 8 8\\"%3e%3cpath fill=\'%23198754\' d=\'M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z\'/%3e%3c/svg%3e"), url(/img/date.svg)', 'important');
+				this.style.setProperty('box-shadow', 'none');
+					}
+				}
+		  }
+		} else  {
+			if (secondInput){
+				if (form.classList.contains('was-validated')){
+					this.classList.add('is-invalid');
+					this.style.setProperty('border-color', '#dc3545', 'important');
+					this.style.setProperty('background-image', 'url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 12 12\' width=\'12\' height=\'12\' fill=\'none\' stroke=\'%23dc3545\'%3e%3ccircle cx=\'6\' cy=\'6\' r=\'4.5\'/%3e%3cpath stroke-linejoin=\'round\' d=\'M5.8 3.6h.4L6 6.5z\'/%3e%3ccircle cx=\'6\' cy=\'8.2\' r=\'.6\' fill=\'%23dc3545\' stroke=\'none\'/%3e%3c/svg%3e"), url(/img/date.svg)', 'important');
+					this.style.setProperty('box-shadow', 'none');
+				}
+			}else{
+				if (document.querySelector('.needs-validation').classList.contains('was-validated')){
+					this.classList.add('is-invalid');
+					this.style.setProperty('border-color', '#dc3545', 'important');
+					this.style.setProperty('background-image', 'url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 12 12\' width=\'12\' height=\'12\' fill=\'none\' stroke=\'%23dc3545\'%3e%3ccircle cx=\'6\' cy=\'6\' r=\'4.5\'/%3e%3cpath stroke-linejoin=\'round\' d=\'M5.8 3.6h.4L6 6.5z\'/%3e%3ccircle cx=\'6\' cy=\'8.2\' r=\'.6\' fill=\'%23dc3545\' stroke=\'none\'/%3e%3c/svg%3e"), url(/img/date.svg)', 'important');
+					this.style.setProperty('box-shadow', 'none');
+				}
+			}
+			
+			
+		  if (day) {
+			formattedDate += day;
+  
+			if (day.length === 2 && month) {
+			  formattedDate += '.';
+			}
+		  }
+  
+		  if (month) {
+			formattedDate += month;
+  
+			if (month.length === 2 && year) {
+			  formattedDate += '.';
+			}
+		  }
+  
+		  if (year) {
+			formattedDate += year.slice(0, 4);
+		  }
+		  console.log(formattedDate);
+		  this.value = formattedDate;
+		}
+	  } else {
+		const numPattern = /^[0-9]*$/;
+	if (!numPattern.test(input.value)) {
+	    input.value = input.value.replace(/\D/g, '');
+	}
+		console.log('else');
+		this.value = this.value.slice(0, 7);
+	  }
+	});
+  
+  }
+  
+  function get_countries(current_lang , resident, i) {
+    $.ajax({
+        url: 'https://dms.interteach.kz/ajax/ajax_get_country.php',
+        // url: 'https://dms.interteach.kz/ajax/ajax_get_country.php',
+        dataType: "json",
+        success: function(data) {
+			if (resident){
+				var option_data_kz = '<option value=""  disabled class="sel" >Выберите страну</option> <option  data-currency="KZT" data-zone="3" data-flag-name="kz" data-name-lat="Kazakhstan" value="16">Казахстан</option> ';
+			}else{
+				var option_data = '<option value=""  disabled class="sel" >Выберите страну</option>';
+			}
+				
+			
+            let name = '';
+            $.each(data, function(i, dat) {
+                switch (current_lang) {
+                    case 'ru':
+                        name=dat.name;
+                        break;
+                    case 'kz':
+                        name=dat.name_kz;
+                        break;
+                    case 'lat':
+                        name=dat.name_lat;
+                        break;
+                    case 'en':
+                        name=dat.name_en;
+                        break;
+                    default:
+                        name=dat.name;
+                        break;
+                }
+				if (resident){
+					option_data_kz += '<option value="' + dat.country_id + '" data-currency="' + dat.currency + '"data-zone="' + dat.zone + '" data-name-lat="' + dat.name_en + '">' + name + '</option>';
+				}else{
+					option_data += '<option value="' + dat.country_id + '" data-currency="' + dat.currency + '"data-zone="' + dat.zone + '" data-name-lat="' + dat.name_en + '">' + name + '</option>';
+
+				}
+            });
+			
+            //console.log(option_data);
+            $('#country').html(option_data);
+			console.log(i)
+			if (resident){
+				$('#country-people' + i).html(option_data_kz);
+			}else{
+				$('#country-people' + i).html(option_data);
+			}
+        }
+    });
+}
+
+
+
+
+
+
+function fillAllFields() {
+	const event = new Event('change');
+	const event2 = new Event('click');
+	const form = document.querySelector('.needs-validation');
+	const inputs = form.querySelectorAll('.itsinputs');
+	const selects = form.querySelectorAll('.itsselect');
+	const email = form.querySelectorAll('.itsemail');
+	const dates = form.querySelectorAll('.itsdate');
+	document.getElementById('country').disabled = false;
+	console.log(inputs)
+	
+	inputs.forEach(input => {
+	  input.value = 'ASDASDASDASD';
+	  input.disabled = false;
+	  
+	  input.dispatchEvent(event2);
+	});
+	
+	email.forEach(input => {
+		input.value = 'adddd@mail.ru';
+		input.disabled = false;
+		input.dispatchEvent(event2);
+	  });
+	  selects.forEach(select => {
+		
+		select.selectedIndex = 3;
+		if (select.id == 'country'){
+			console.log('asdasd')
+			var select = $('#country').select2();
+			select.val('18').trigger('change');;
+			
+		}
+		else if (select.selectedIndex !== 3){
+			select.selectedIndex = 1;
+			select.dispatchEvent(event2);
+		}else{
+			select.selectedIndex = 2;
+			select.dispatchEvent(event2);
+		}
+		
+		
+	
+		document.getElementById("section1").dispatchEvent(event);
+		
+		select.disabled = false; 
+	  });
+	  dates.forEach(input => {
+		input.value = '29.12.2024';
+		input.disabled = false;
+		input.dispatchEvent(event2);
+	});
+  }
+
+  const countEl = document.querySelector('.file-text');
+  const input = document.getElementById('uploaddocs1'); // получаем input элемент по ID
+  const maxSize = 5 * 1024 * 1024; // устанавливаем максимальный размер файла в байтах (в данном случае 5 МБ)
+  
+  input.addEventListener('change', function() {
+	const files = this.files; // получаем массив выбранных файлов
+	let totalSize = 0; // устанавливаем начальное значение суммарного размера файлов
+	
+	for (let i = 0; i < files.length; i++) {
+	  const file = files[i];
+	  
+	  // проверяем тип файла
+	  if (!file.type.includes('pdf') && !file.type.includes('image/')) {
+		console.log('Файл должен быть PDF или изображением'); // устанавливаем ошибку, если тип файла неподходящий
+		return;
+	  }
+	  
+	  totalSize += file.size; // добавляем размер каждого файла к суммарному размеру
+	}
+	
+	if (totalSize > maxSize) { // если суммарный размер превышает максимальный
+	  console.log('Размер файлов не должен превышать 5 МБ'); // устанавливаем ошибку, если размер превышает допустимый
+	} else if (totalSize < maxSize && files.every(file => (file.type.includes('pdf') || file.type.includes('image/')))) { // если суммарный размер меньше максимального и все файлы являются PDF или изображениями
+	  countEl.innerText = `Файл выбран`;
+	  input.setCustomValidity(''); // убираем ошибку, если размер и тип файлов в пределах допустимого
+	}
+  });
