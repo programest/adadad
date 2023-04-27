@@ -27,27 +27,29 @@ let otherCoefficient = 1;
 let currency = 450.55;
 
 if (dateStart) {
-	new AirDatepicker('#date__start', {
+	datepickerModificedStart = new AirDatepicker('#date__start', {
 		autoClose: true,
 		onSelect: function (formattedDate, date) {
-
+			console.log(dateStart.value);
+			console.log(document.getElementById('date__start').value);
+			
 			target.removeAttribute('disabled')
 			dateSelected.innerHTML = 'С' + '  ' + dateStart.value + ' ' + 'по' + ' ' + dateEnd.value;
 			document.getElementById('total-dateStart').innerHTML = dateStart.value;
 			if (program.value == '2') {
 				// Если выбран Multi Trip:
-				nextmonths()
+				nextmonths(dateStart.value)
 
 			} else {
 				// Если выбран Base Trip:
 				dateEnd.removeAttribute('disabled')
-				CalcInsuranceDays()
+				CalcInsuranceDays(dateStart.value , dateEnd.value)
 				dateEnd.value = ''
 			}
 
 			if (dateEnd) {
 
-				new AirDatepicker('#date__end', {
+				datepickerModificedEnd = new AirDatepicker('#date__end', {
 					autoClose: true,
 
 					onSelect: function (formattedDate, date) {
@@ -60,7 +62,7 @@ if (dateStart) {
 
 						} else {
 							// Если выбран Base Trip:
-							CalcInsuranceDays()
+							CalcInsuranceDays(dateStart.value , dateEnd.value)
 						}
 						// target.removeAttribute('disabled')
 						// insuranceSumSportCoefficient = 0;
@@ -247,11 +249,11 @@ function CalcSport() {
 
 }
 // Функция для автозаполнения даты окончания действия страхового полиса при тарифе Multi Trip
-function nextmonths() {
+function nextmonths(a) {
 	// Получаю дату и преобразую в формат DD.MM.YYYY
-	var startInput = document.getElementById('date__start');
-	var startDateString = startInput.value;
-	var startDateParts = startDateString.split('.');
+	var startInput = a;
+
+	var startDateParts = startInput.split('.');
 	var start = new Date(startDateParts[2], startDateParts[1] - 1, startDateParts[0]);
 	var start_multi = new Date(start);
 	var end_multi = new Date(start);
@@ -339,13 +341,16 @@ function nextmonths() {
 	Calc()
 }
 // Функция для подсчета количества дней  при тарифе Base Trip
-function CalcInsuranceDays() {
-	var startDateString = document.getElementById('date__start').value;
+function CalcInsuranceDays(a, b) {
+	console.log('asdasdasd')
+	var startDateString = a
+
 	var startDateParts = startDateString.split(".");
 	var startDate = new Date(startDateParts[2], startDateParts[1] - 1, startDateParts[0]);
-	var endDateString = document.getElementById('date__end').value;
+	var endDateString = b
 	var endDateParts = endDateString.split(".");
 	var endDate = new Date(endDateParts[2], endDateParts[1] - 1, endDateParts[0]);
+
 	var days = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24));
 
 	if (days <= '14') {
@@ -496,7 +501,7 @@ document.getElementById("section1").addEventListener("change", function () {
 		console.log(document.querySelector('.sel'))
 		document.getElementById('months').setAttribute("required", true);
 		// Если выбран Multi Trip:
-		nextmonths()
+		nextmonths(dateEnd.value)
 
 
 
@@ -648,7 +653,7 @@ document.getElementById("section1").addEventListener("change", function () {
 		document.querySelector('.sel').setAttribute("selected", true);
 		document.getElementById('months').removeAttribute("required");
 		// Если выбран Base Trip:
-		CalcInsuranceDays()
+		CalcInsuranceDays(dateStart.value , dateEnd.value)
 		$('.select-country').prop('multiple', false);
 		$('.select-country').select2({
 			placeholder: 'Выберите страну',

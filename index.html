@@ -259,7 +259,7 @@
 																начала страховки:</label>
 															<input type="text" id="date__start" required
 																autocomplete="off"
-																oninput="maskDateInput(this, 'minus')"
+																onfocus="maskDateInput(this, 'minus')" maxlength="10"
 																onpaste="return false" ondrop="return false"
 																class="dates__form  insurance__program-aria form-control custom-dates itsdate"
 																placeholder="dd.mm.yyyy" disabled>
@@ -273,7 +273,7 @@
 																окончания страховки:</label>
 															<input type="text" id="date__end" required
 																autocomplete="off"
-																oninput="maskDateInput(this, 'modificed')"
+																onfocus="maskDateInput(this, 'modificed')" maxlength="10"
 																onpaste="return false" ondrop="return false"
 																class="dates__form insurance__program-aria form-control custom-dates itsdate"
 																placeholder="dd.mm.yyyy" disabled>
@@ -545,7 +545,7 @@
 																class="insurance__program insurance__form-block flex-column d-flex mb-lg-4 mb-3">
 																<label for=""
 																	class="insurance__program-label form-label mb-lg-1 mb-1">Адрес</label>
-																<input type="text" pattern="[A-Za-z]+"
+																<input type="text"
 																	class="insurance__program-aria get-info itsinputs form-control"
 																	required id="adress0"
 																	placeholder="Проспект Назарбаева 269">
@@ -559,7 +559,7 @@
 																	class="insurance__program-label form-label mb-lg-1 mb-1">ИИН</label>
 																<input type="text"
 																	class="insurance__program-aria get-info form-control itsinputs"
-																	id="IIN0" placeholder="000000000000" required
+																	id="IIN0" placeholder="000000000000" required maxlength="12"
 																	oninput="this.value = this.value.replace(/\D/g, '').slice(0, 12)">
 																<div class="invalid-feedback">
 																	Пожалуйста, укажите ваш ИИН
@@ -569,22 +569,22 @@
 
 															<div
 																class="insurance__program insurance__form-block flex-column d-flex mb-lg-4 mb-3 ">
-																<div class="form__input-file">
+																<div class="form__input-file" id="formInputMes0">
 																	<label for=""
 																		class=" insurance__program-label  mb-lg-1 mb-1">Копии
 																		документов:</label>
-																	<input class=" field__file form-label  " type="file"
-																		id="uploaddocs1" required>
+																	<input class=" field__file form-label" type="file"
+																		id="uploaddocs0" required>
 																	<label for="file"
-																		class="insurance__program-aria insurance-upload d-flex align-items-center justify-content-between pe-0 form-control">
+																		class="insurance__program-aria  d-flex align-items-center justify-content-between pe-0 form-control insurance-upload" >
 
-																		<span class="file-text">Выбрать файл</span>
+																		<span class="file-text" id="fileText0">Выбрать файл</span>
 																		<div class="file-img"
 																			style="background: #0172B7; border-left: 1px solid #000000;">
 																			<img src="img/upload.svg" alt="">
 																		</div>
 																	</label>
-																	<div class="invalid-feedback">
+																	<div class="invalid-feedback " id="invalidfd0">
 																		Пожалуйста, загрузите документы
 																	</div>
 																</div>
@@ -620,7 +620,7 @@
 																<input type="text" autocomplete="off"
 																	class="dates__form insurance__program-aria custom-dates"
 																	placeholder="XX.XX.XXXX" id="datePasportStart0"
-																	oninput="maskDateInput(this, 'plus', 'secondInput')"
+																	onfocus="maskDateInput(this, 'plus', 'secondInput')" maxlength="10"
 																	onpaste="return false" ondrop="return false"
 																	required>
 																<div class="invalid-feedback">
@@ -668,7 +668,7 @@
 																	рождения:</label>
 
 																<input type="text" autocomplete="off"
-																	oninput="maskDateInput(this, 'birthday' , 'secondInput')"
+																	onfocus="maskDateInput(this, 'birthday' , 'secondInput')" maxlength="10"
 																	onpaste="return false" ondrop="return false"
 																	class="dates__form custom-dates insurance__program-aria get-info form-control "
 																	id="dateBirthday0" required name="age"
