@@ -45,7 +45,7 @@
 										Пожалуйста, укажите номер телефона
 									</div>
 								</div>
-								
+
 								<div class="insurance__program insurance__form-block flex-column d-flex mb-lg-4 mb-3 ">
 									<div class="form__input-file changeid" id="formInputMes0">
 										<label for="" class=" insurance__program-label  mb-lg-1 mb-1">Копии
@@ -67,89 +67,86 @@
 									</div>
 								</div>
 							</div>
-							</div>
+						</div>
 
-							<div class="row col-md-4 col-12">
-								<div class="insurance__program insurance__form-block flex-column d-flex mb-lg-4 mb-3">
-									<label class="insurance__program-label mb-lg-1 mb-1 form-label"
-										for="for">Имя</label><input
-										class="insurance__program-aria infoperson changeid form-control" required
-										data-itog="itog-name-subinsuarance" id="Name1" type="text" placeholder="MARAT"
-										oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '').toUpperCase()" />
-									<div class="invalid-feedback">
-										Пожалуйста, введите имя для застрахованного.
-									</div>
-								</div>
-								<div class="insurance__program insurance__form-block flex-column d-flex mb-lg-4 mb-3 ">
-									<label for="datePasportStart0"
-										class=" insurance__program-label form-label mb-lg-1 mb-1">Дата
-										выдачи паспорта:</label>
-									<input type="text" class="dates__form insurance__program-aria custom-dates changeid"
-										autocomplete="off" placeholder="XX.XX.XXXX" id="datePasportStart1"
-										oninput="maskDateInput(this, 'plus' , 'secondInput')" onpaste="return false"
-										ondrop="return false" required>
-									<div class="invalid-feedback">
-										Пожалуйста, укажите дату выдачи паспорта
-									</div>
-								</div>
-								<div class="insurance__program insurance__form-block flex-column d-flex mb-lg-4 mb-3 ">
-									<label for="" class=" insurance__program-label  mb-lg-1 mb-1 ">Дата
-										рождения:</label>
-
-									<input type="text"
-										class="dates__form datebirthday insurance__program-aria changeid custom-dates"
-										autocomplete="off" oninput="maskDateInput(this, 'plus',  'secondInput')"
-										onpaste="return false" ondrop="return false" data-itog="itog-datebirtghday"
-										id="dateBirthday1" placeholder="XX.XX.XXXX" required>
-									<div class="invalid-feedback">
-										Пожалуйста, выберите дату для застрахованного.
-									</div>
+						<div class="row col-md-4 col-12">
+							<div class="insurance__program insurance__form-block flex-column d-flex mb-lg-4 mb-3">
+								<label class="insurance__program-label mb-lg-1 mb-1 form-label"
+									for="for">Имя</label><input
+									class="insurance__program-aria infoperson changeid form-control" required
+									data-itog="itog-name-subinsuarance" id="Name1" type="text" placeholder="MARAT"
+									oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '').toUpperCase()" />
+								<div class="invalid-feedback">
+									Пожалуйста, введите имя для застрахованного.
 								</div>
 							</div>
-							<div class="row col-md-4 col-12 h-100">
+							<div class="insurance__program insurance__form-block flex-column d-flex mb-lg-4 mb-3 ">
+								<label for="datePasportStart0"
+									class=" insurance__program-label form-label mb-lg-1 mb-1">Дата
+									выдачи паспорта:</label>
+								<input type="text" class="dates__form insurance__program-aria custom-dates changeid"
+									autocomplete="off" placeholder="XX.XX.XXXX" id="datePasportStart1"
+									oninput="maskDateInput(this, 'plus' , 'secondInput')" onpaste="return false"
+									ondrop="return false" required>
+								<div class="invalid-feedback">
+									Пожалуйста, укажите дату выдачи паспорта
+								</div>
+							</div>
+							<div class="insurance__program insurance__form-block flex-column d-flex mb-lg-4 mb-3 ">
+								<label for="dateBirthday1" class=" insurance__program-label  mb-lg-1 mb-1 ">Дата
+									рождения:</label>
+
+								<input type="text"
+									class="dates__form datebirthday insurance__program-aria changeid custom-dates"
+									autocomplete="off" oninput="maskDateInput(this, 'plus',  'secondInput')"
+									onpaste="return false" ondrop="return false" data-itog="itog-datebirtghday"
+									id="dateBirthday1" placeholder="XX.XX.XXXX" required>
+								<div class="invalid-feedback">
+									Пожалуйста, выберите дату для застрахованного.
+								</div>
+							</div>
+						</div>
+						<div class="row col-md-4 col-12 h-100">
+							<div
+								class="insurance__three insurance-flex justify-content-center flex-column align-items-center">
 								<div
-									class="insurance__three insurance-flex justify-content-center flex-column align-items-center">
-									<div
-										class=" insurance__program insurance__form-block flex-column d-flex mb-lg-4 mb-3 mb-xxl-6 ">
-										<label class="insurance__program-label mb-lg-1 mb-1" for="for">Укажите место
-											рождение</label><select
-											class="insurance__program-aria select2 custom-select select-user-country changeid"
-											data-itog="itog-inbirtghday" id="country-people1" name="states[]" required>
+									class=" insurance__program insurance__form-block flex-column d-flex mb-lg-4 mb-3 mb-xxl-6 ">
+									<label class="insurance__program-label mb-lg-1 mb-1" for="for">Укажите место
+										рождение</label><select
+										class="insurance__program-aria select2 custom-select select-user-country changeid"
+										data-itog="itog-inbirtghday" id="country-people1" name="states[]" required>
 
-										</select> </select></select>
-										<div class="invalid-feedback">
-											Пожалуйста, выберите место рождение для застрахованного.
-										</div>
+									</select> </select></select>
+									<div class="invalid-feedback">
+										Пожалуйста, выберите место рождение для застрахованного.
+									</div>
 
+								</div>
+								<div class="insurance__program insurance__form-block flex-column d-flex mb-lg-4 mb-3 ">
+									<label for="pasport0"
+										class="insurance__program-label form-label mb-lg-1 mb-1 get-info">Номер
+										паспорта</label>
+									<input type="text" class="insurance__program-aria get-info form-control changeid"
+										placeholder="N0395277" pattern="[N]\d{7}" required id="pasport1">
+									<div class="invalid-feedback">
+										Пожалуйста, укажите номер паспорта
 									</div>
-									<div
-										class="insurance__program insurance__form-block flex-column d-flex mb-lg-4 mb-3 ">
-										<label for="pasport0"
-											class="insurance__program-label form-label mb-lg-1 mb-1 get-info">Номер
-											паспорта</label>
-										<input type="text"
-											class="insurance__program-aria get-info form-control changeid"
-											placeholder="N0395277" pattern="[N]\d{7}" required id="pasport1">
-										<div class="invalid-feedback">
-											Пожалуйста, укажите номер паспорта
-										</div>
+								</div>
+								<div class="insurance__program insurance__form-block d-flex h-100  " id="kostil">
+									<div class="form__remove-people-block d-flex align-items-center form__action-block  kostil-btn"
+										id="remove-button" onclick="RemovePeoples()">
+										<p class="form__remove-people-text form__action-text" id="kostil-text">
+											Удалить
+										</p>
+										<div class="form__remove-people-img form__action-img ms-sm-3 ms-2"><img
+												src="img/mines-tourist.svg" alt="alt" class="form-imgs" /></div>
 									</div>
-									<div class="insurance__program insurance__form-block d-flex h-100  " id="kostil">
-										<div class="form__remove-people-block d-flex align-items-center form__action-block  kostil-btn"
-											id="remove-button" onclick="RemovePeoples()">
-											<p class="form__remove-people-text form__action-text" id="kostil-text">
-												Удалить
-											</p>
-											<div class="form__remove-people-img form__action-img ms-sm-3 ms-2"><img
-													src="img/mines-tourist.svg" alt="alt" class="form-imgs" /></div>
-										</div>
-										<div class="form__add-people-block justify-content-center d-flex align-items-center form__action-block  kostil-btn"
-											id="add-button" onclick="AddPeoples()">
-											<p class="form__add-people-text form__action-text" id="kostil-text">Добавить
-											</p>
-											<div class="form__add-people-img form__action-img ms-sm-3 ms-2"><img
-													src="img/plus-tourist.svg" alt="alt" class="form-imgs" /></div>
-										</div>
+									<div class="form__add-people-block justify-content-center d-flex align-items-center form__action-block  kostil-btn"
+										id="add-button" onclick="AddPeoples()">
+										<p class="form__add-people-text form__action-text" id="kostil-text">Добавить
+										</p>
+										<div class="form__add-people-img form__action-img ms-sm-3 ms-2"><img
+												src="img/plus-tourist.svg" alt="alt" class="form-imgs" /></div>
 									</div>
 								</div>
 							</div>
@@ -158,4 +155,5 @@
 				</div>
 			</div>
 		</div>
+	</div>
 </form>

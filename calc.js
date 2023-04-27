@@ -14,6 +14,7 @@ var dateEnd = document.getElementById("date__end");
 var months = document.getElementById("months");
 var sporttype = document.getElementById("sporttype");
 var categorysporttype = document.getElementById("categorysporttype");
+
 //Переменные - счетчики 
 let insuranceSumMonth = 1;
 let insuranceSumSportCoefficient = 1;
@@ -32,18 +33,18 @@ if (dateStart) {
 		onSelect: function (formattedDate, date) {
 			console.log(dateStart.value);
 			console.log(document.getElementById('date__start').value);
-			
+
 			target.removeAttribute('disabled')
 			dateSelected.innerHTML = 'С' + '  ' + dateStart.value + ' ' + 'по' + ' ' + dateEnd.value;
 			document.getElementById('total-dateStart').innerHTML = dateStart.value;
 			if (program.value == '2') {
 				// Если выбран Multi Trip:
-				nextmonths(dateStart.value)
+				nextmonths()
 
 			} else {
 				// Если выбран Base Trip:
 				dateEnd.removeAttribute('disabled')
-				CalcInsuranceDays(dateStart.value , dateEnd.value)
+				CalcInsuranceDays()
 				dateEnd.value = ''
 			}
 
@@ -58,11 +59,11 @@ if (dateStart) {
 						document.getElementById('total-dateEnd').innerHTML = dateEnd.value;
 						if (program.value == '2') {
 							// Если выбран Multi Trip:
-							dateEnd.value = dateStart.value
+
 
 						} else {
 							// Если выбран Base Trip:
-							CalcInsuranceDays(dateStart.value , dateEnd.value)
+							CalcInsuranceDays()
 						}
 						// target.removeAttribute('disabled')
 						// insuranceSumSportCoefficient = 0;
@@ -123,16 +124,24 @@ function convertDate(dateString) {
 
 // Функция для расчета
 function Calc() {
-	results = (insuranceSumMonth * currency) * insuranceSumSportCoefficient - TargetEducationProcent;
-	console.log("Страховая сумма равна: " + insuranceSumMonth * 490.55)
+	var targetValue = target.options[target.selectedIndex].value;
+	console.log(TargetEducationProcent)
+	results = (insuranceSumMonth * currency) * insuranceSumSportCoefficient;
+	if (targetValue == '3') {
+		console.log('Студент')
+		TargetEducationProcent = results * 20 / 100;
+		results = (insuranceSumMonth * currency) * insuranceSumSportCoefficient - TargetEducationProcent;
+	}
+	console.log("Страховая сумма равна: " + insuranceSumMonth * currency)
 	console.log('Коэфициент на тг ' + insuranceSumMonth)
 	console.log("Коэфицент спортивных меорпирятий: " + insuranceSumSportCoefficient)
 	console.log("Скидка студентам: " + TargetEducationProcent)
-	results = results.toFixed(1);
 	endresults = results - (results / 100 * 15);
-	endresults = endresults.toFixed(1);
-	let endresultsSum = new Intl.NumberFormat('ru-RU').format(endresults.replace(',', '.')).replace('.', ',');
-	let resultsSum = new Intl.NumberFormat('ru-RU').format(results.replace(',', '.')).replace('.', ',');
+	results = Math.round(results * 10) / 10;
+	endresults = Math.round(endresults * 10) / 10;
+	let endresultsSum = new Intl.NumberFormat('ru-RU').format(Math.round(endresults)).replace('.', ',');
+	let resultsSum = new Intl.NumberFormat('ru-RU').format(Math.round(results)).replace('.', ',');
+
 	//проверка на ошибку с негативной датой со знаком минус (-)
 
 	if (results >= 0) {
@@ -151,12 +160,12 @@ function Calc() {
 }
 // Функция Расчета коэффициентов для выбранной опции "Спорт" 
 function CalcSport() {
+	console.log(targetValue)
 	var sportType = document.getElementById("sporttype");
 	var sportCategory = document.getElementById("categorysporttype");
-	var target = document.getElementById("target");
+	var targetValue = target.options[target.selectedIndex].value;
 	var sportTypeValue = sportType.options[sportType.selectedIndex].value;
 	var sportCategoryValue = sportCategory.options[sportCategory.selectedIndex].value;
-	var targetValue = target.options[target.selectedIndex].value;
 	// Получаю targetValue с селекта получаю option value
 	if (targetValue == '2') {
 		endNum.innerHTML = "0" + ' ' + '₸';
@@ -235,13 +244,11 @@ function CalcSport() {
 		console.log('1')
 		insuranceSumSportCoefficient = 1;
 		TargetEducationProcent = 0
-
 		Calc()
 
 	} else if (targetValue == '3') {
 		console.log('3')
 		insuranceSumSportCoefficient = 1;
-		TargetEducationProcent = results * 15 / 100;
 
 		Calc()
 
@@ -249,9 +256,9 @@ function CalcSport() {
 
 }
 // Функция для автозаполнения даты окончания действия страхового полиса при тарифе Multi Trip
-function nextmonths(a) {
+function nextmonths() {
 	// Получаю дату и преобразую в формат DD.MM.YYYY
-	var startInput = a;
+	var startInput = document.getElementById('date__start').value;
 
 	var startDateParts = startInput.split('.');
 	var start = new Date(startDateParts[2], startDateParts[1] - 1, startDateParts[0]);
@@ -329,9 +336,10 @@ function nextmonths(a) {
 
 	// Преобразую
 	document.getElementById("date__end").value = end_multi.toLocaleDateString();
-	if (isNaN(end_multi)) {
+
+	if (isNaN(end_multi) || startInput === (next_date_unformatted.toLocaleDateString())) {
 		document.getElementById("date__end").value = "dd.mm.yyyy";
-	}
+	} else { }
 	// Вывожу результат в блок
 	console.log(start_multi)
 	if (start_multi == 'Invalid Date') {
@@ -341,13 +349,12 @@ function nextmonths(a) {
 	Calc()
 }
 // Функция для подсчета количества дней  при тарифе Base Trip
-function CalcInsuranceDays(a, b) {
-	console.log('asdasdasd')
-	var startDateString = a
+function CalcInsuranceDays() {
+	var startDateString = document.getElementById('date__start').value;
 
 	var startDateParts = startDateString.split(".");
 	var startDate = new Date(startDateParts[2], startDateParts[1] - 1, startDateParts[0]);
-	var endDateString = b
+	var endDateString = document.getElementById('date__end').value;
 	var endDateParts = endDateString.split(".");
 	var endDate = new Date(endDateParts[2], endDateParts[1] - 1, endDateParts[0]);
 
@@ -406,7 +413,7 @@ function CalcInsuranceDays(a, b) {
 	} else {
 		insuranceSumMonth = '1'
 	}
-
+	Calc()
 	console.log('Дней' + days)
 	console.log('Коэфициент' + insuranceSumMonth)
 	return days
@@ -501,7 +508,7 @@ document.getElementById("section1").addEventListener("change", function () {
 		console.log(document.querySelector('.sel'))
 		document.getElementById('months').setAttribute("required", true);
 		// Если выбран Multi Trip:
-		nextmonths(dateEnd.value)
+		nextmonths()
 
 
 
@@ -533,15 +540,16 @@ document.getElementById("section1").addEventListener("change", function () {
 							$("#15").text("15 000 $");
 							$("#30").text("30 000 $");
 							$("#50").text("50 000 $");
-							$("#15").addClass(" visible-sum");
-							$("#30").addClass(" visible-sum");
+							$("#15").removeClass(" visible-sum");
+							$("#30").removeClass(" visible-sum");
 							$("#50").removeClass(" visible-sum");
 						} if (allZone.includes("2")) {
 							tarif = "2";
 							$("#15").addClass(" visible-sum");
-							$("#30").addClass(" visible-sum");
+							$("#30").removeClass(" visible-sum");
 							$("#50").removeClass(" visible-sum");
-							$("#50").text("50 000 €");
+							$("#30").text("30 000 $");
+							$("#50").text("50 000 $");
 						} if (allZone.includes("1")) {
 							tarif = "1";
 							$("#15").removeClass(" visible-sum");
@@ -596,6 +604,8 @@ document.getElementById("section1").addEventListener("change", function () {
 
 					insuranceSumMonth = 1;
 					insuranceSum.value = ''
+					endNum.innerHTML = "0" + ' ' + '₸';
+					priceNum.innerHTML = "0" + ' ' + '₸';
 					Calc()
 
 
@@ -612,8 +622,8 @@ document.getElementById("section1").addEventListener("change", function () {
 						$("#15").removeClass(" visible-sum");
 						$("#30").addClass(" visible-sum");
 						$("#50").addClass(" visible-sum");
-						$("#30").text("30 000 €");
-						$("#50").text("50 000 €");
+						$("#15").text("15 000 $");
+
 
 					}
 					else if (zone == "2") {
@@ -623,8 +633,9 @@ document.getElementById("section1").addEventListener("change", function () {
 						$("#15").addClass(" visible-sum");
 						$("#30").removeClass(" visible-sum");
 						$("#50").removeClass(" visible-sum");
-						$("#50").text("50 000 €");
 						$("#30").text("30 000 €");
+						$("#50").text("50 000 €");
+
 					}
 					else if (zone == "3") {
 
@@ -653,7 +664,7 @@ document.getElementById("section1").addEventListener("change", function () {
 		document.querySelector('.sel').setAttribute("selected", true);
 		document.getElementById('months').removeAttribute("required");
 		// Если выбран Base Trip:
-		CalcInsuranceDays(dateStart.value , dateEnd.value)
+		CalcInsuranceDays()
 		$('.select-country').prop('multiple', false);
 		$('.select-country').select2({
 			placeholder: 'Выберите страну',
@@ -677,17 +688,18 @@ document.getElementById("section1").addEventListener("change", function () {
 					$("#15").removeClass(" visible-sum");
 					$("#30").addClass(" visible-sum");
 					$("#50").addClass(" visible-sum");
-					$("#30").text("30 000 €");
-					$("#50").text("50 000 €");
+					$("#15").text("15 000 $");
+
 
 				}
 				else if (zone == "2") {
 
 					console.log("Выбрана зона 2")
 					tarif = "2";
-					$("#15").removeClass(" visible-sum");
+					$("#15").addClass(" visible-sum");
 					$("#30").removeClass(" visible-sum");
-					$("#50").addClass(" visible-sum");
+					$("#50").removeClass(" visible-sum");
+					$("#30").text("30 000 €");
 					$("#50").text("50 000 €");
 
 				}
@@ -707,14 +719,16 @@ document.getElementById("section1").addEventListener("change", function () {
 				insuranceSum.value = ''
 				Calc()
 			});
+			endNum.innerHTML = "0" + ' ' + '₸';
+			priceNum.innerHTML = "0" + ' ' + '₸';
 		});
 	}
 
 
-	if (tarif == "2" || tarif == "3") {
-		currency = "494.89"
+	if (tarif == "1" || tarif == "3") {
+		currency = "456.18"
 	} else {
-		currency = "450.55"
+		currency = "501.18"
 	}
 })
 

@@ -273,8 +273,9 @@
 																окончания страховки:</label>
 															<input type="text" id="date__end" required
 																autocomplete="off"
-																onfocus="maskDateInput(this, 'modificed')" maxlength="10"
-																onpaste="return false" ondrop="return false"
+																onfocus="maskDateInput(this, 'modificed')"
+																maxlength="10" onpaste="return false"
+																ondrop="return false"
 																class="dates__form insurance__program-aria form-control custom-dates itsdate"
 																placeholder="dd.mm.yyyy" disabled>
 															<div class="invalid-feedback">
@@ -559,8 +560,8 @@
 																	class="insurance__program-label form-label mb-lg-1 mb-1">ИИН</label>
 																<input type="text"
 																	class="insurance__program-aria get-info form-control itsinputs"
-																	id="IIN0" placeholder="000000000000" required maxlength="12"
-																	oninput="this.value = this.value.replace(/\D/g, '').slice(0, 12)">
+																	id="IIN0" placeholder="000000000000" required
+																	minlength="12" maxlength="12">
 																<div class="invalid-feedback">
 																	Пожалуйста, укажите ваш ИИН
 																</div>
@@ -576,9 +577,10 @@
 																	<input class=" field__file form-label" type="file"
 																		id="uploaddocs0" required>
 																	<label for="file"
-																		class="insurance__program-aria  d-flex align-items-center justify-content-between pe-0 form-control insurance-upload" >
+																		class="insurance__program-aria  d-flex align-items-center justify-content-between pe-0 form-control insurance-upload">
 
-																		<span class="file-text" id="fileText0">Выбрать файл</span>
+																		<span class="file-text" id="fileText0">Выбрать
+																			файл</span>
 																		<div class="file-img"
 																			style="background: #0172B7; border-left: 1px solid #000000;">
 																			<img src="img/upload.svg" alt="">
@@ -620,9 +622,9 @@
 																<input type="text" autocomplete="off"
 																	class="dates__form insurance__program-aria custom-dates"
 																	placeholder="XX.XX.XXXX" id="datePasportStart0"
-																	onfocus="maskDateInput(this, 'plus', 'secondInput')" maxlength="10"
-																	onpaste="return false" ondrop="return false"
-																	required>
+																	onfocus="maskDateInput(this, 'plus', 'secondInput')"
+																	maxlength="10" onpaste="return false"
+																	ondrop="return false" required>
 																<div class="invalid-feedback">
 																	Пожалуйста, укажите дату выдачи паспорта
 																</div>
@@ -668,8 +670,9 @@
 																	рождения:</label>
 
 																<input type="text" autocomplete="off"
-																	onfocus="maskDateInput(this, 'birthday' , 'secondInput')" maxlength="10"
-																	onpaste="return false" ondrop="return false"
+																	onfocus="maskDateInput(this, 'birthday' , 'secondInput')"
+																	maxlength="10" onpaste="return false"
+																	ondrop="return false"
 																	class="dates__form custom-dates insurance__program-aria get-info form-control "
 																	id="dateBirthday0" required name="age"
 																	placeholder="XX.XX.XXXX">

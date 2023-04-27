@@ -592,21 +592,21 @@ function Add() {
 
 				});
 			}
-			const blockNumber = newBlock.querySelector('.number');
-			if (checkbox.checked) {
-				blockNumber.textContent = blockCount + 1;
-			} else {
-				blockNumber.textContent = blockCount;
-			}
-			checkbox.onchange = function () {
-				if (checkbox.checked) {
-					blockNumber.textContent = blockCount ;
-				} else {
-					blockNumber.textContent = blockCount - 1;
-				}
-			};
-				
-			
+			// const blockNumber = newBlock.querySelector('.number');
+			// if (checkbox.checked) {
+			// 	blockNumber.textContent = blockCount + 1;
+			// } else {
+			// 	blockNumber.textContent = blockCount;
+			// }
+			// checkbox.onchange = function () {
+			// 	if (checkbox.checked) {
+			// 		blockNumber.textContent = blockCount;
+			// 	} else {
+			// 		blockNumber.textContent = blockCount - 1;
+			// 	}
+			// };
+
+
 			blockCount++;
 			numCount++;
 			console.log(numCount)
@@ -643,7 +643,7 @@ function Add() {
 
 	xhr.send();
 
-	
+
 
 }
 function RemovePeoples() {
@@ -1099,7 +1099,7 @@ function append() {
 
 
 
-	
+
 
 	var days = calculateDaysDiff(document.getElementById('date__start').value, document.getElementById('date__end').value);
 	var age = calculateAgeInYears(document.getElementById('dateBirthday0').value)
@@ -1112,7 +1112,7 @@ function append() {
 		console.log(i);
 		var input = document.getElementById('uploaddocs' + i);
 		var formDataIin = document.getElementById('IIN' + i).value; // получаем значение из элемента формы
-		
+
 		formData.append(`file[${formDataIin}]`, input.files[0]);
 	}
 	console.log(formData);
@@ -1512,12 +1512,12 @@ function maskDateInput(input, values, secondInput) {
 
 
 	input.addEventListener('input', function () {
-		
+
 		const value = this.value.replace(/\D/g, '');
-	
+
 		const datePattern = /^(\d{1,2})(\d{0,2})(\d{0,4})$/;
 		const letterPattern = /[^\d]/; // matches any character that is not a digit
-		if (datePattern.test(value) && !letterPattern.test(value)) {	
+		if (datePattern.test(value) && !letterPattern.test(value)) {
 			const day = value.slice(0, 2);
 			const month = value.slice(2, 4);
 			const year = value.slice(4, 8);
@@ -1561,43 +1561,43 @@ function maskDateInput(input, values, secondInput) {
 			let formattedDate = '';
 			if (values === 'plus') {
 				if (value.length === 8) {
-				if (inputDate > currentDateObj || inputDate.getTime() === currentDateObj.getTime()) {
-					this.value = '';
-					return;
-				}else{
-					if (this.id = 'datePasportStart0') {
-						if (inputDate < currentDateObj || inputDate.getTime() === currentDateObj.getTime()) {
+					if (inputDate > currentDateObj || inputDate.getTime() === currentDateObj.getTime()) {
+						this.value = '';
+						return;
+					} else {
+						if (this.id = 'datePasportStart0') {
+							if (inputDate < currentDateObj || inputDate.getTime() === currentDateObj.getTime()) {
 
-							//datePasportAll
-							//datePasport0
-						  if (datePasport0) {
-						
-							 datePasport0.selectDate(inputDate);
-						  }
-						//  if (datePasportAll) {
-						// 		dateBirthdayAll.selectDate(inputDate);
-						// 	  }
+								//datePasportAll
+								//datePasport0
+								if (datePasport0) {
+
+									datePasport0.selectDate(inputDate);
+								}
+								//  if (datePasportAll) {
+								// 		dateBirthdayAll.selectDate(inputDate);
+								// 	  }
+							}
 						}
-					  }
+					}
 				}
-			}
 			} else if (values === 'minus') {
 				if (value.length === 8) {
 
 					if (inputDate < currentDateObj || inputDate.getTime() === currentDateObj.getTime()) {
 						this.value = '';
 						return;
-					}else{
+					} else {
 
-							console.log(document.getElementById('date__start'));
-							if (firstInput > currentDateObj || firstInput.getTime() === currentDateObj.getTime()) {
-							  if (datepickerModificedStart) {
-								
-								 document.getElementById('date__start').value = firstInput
+						console.log(document.getElementById('date__start'));
+						if (firstInput > currentDateObj || firstInput.getTime() === currentDateObj.getTime()) {
+							if (datepickerModificedStart) {
+
+								document.getElementById('date__start').value = firstInput
 								datepickerModificedStart.selectDate(firstInput);
-							  }
 							}
-						  
+						}
+
 					}
 				}
 			} else if (values === 'modificed') {
@@ -1607,15 +1607,15 @@ function maskDateInput(input, values, secondInput) {
 						this.value = '';
 						return;
 					} else {
-							if ((firstInput > currentDateObj || firstInput.getTime() === currentDateObj.getTime()) && (inputDate > firstInput || inputDate.getTime() === firstInput.getTime()) ) {
-								if  (datepickerModificedEnd && datepickerModificedStart) {
-									datepickerModificedEnd.selectDate(inputDate);
-									
-								  }
+						if ((firstInput > currentDateObj || firstInput.getTime() === currentDateObj.getTime()) && (inputDate > firstInput || inputDate.getTime() === firstInput.getTime())) {
+							if (datepickerModificedEnd && datepickerModificedStart) {
+								datepickerModificedEnd.selectDate(inputDate);
+
 							}
-						
-						
-					
+						}
+
+
+
 						if (target.value == 2) {
 							document.querySelector('.hidden-sportype').style.display = 'none';
 							document.querySelector('.hidden-sportcategory').style.display = 'none';
@@ -1641,30 +1641,30 @@ function maskDateInput(input, values, secondInput) {
 						this.placeholder = 'Страхователь может быть не младше 18 лет'
 						return;
 
-					}else{
-						if (this.id = 'dateBirthday' + numCount ) {
+					} else {
+						if (this.id = 'dateBirthday' + numCount) {
 							if (inputDate < birthDate || currentDate.getTime() === birthDate.getTime()) {
-	
+
 								//datePasportAll
 								//datePasport0
-							  if (dateBirthday0) {
-								 var valued = firstInput.getDate().toString().padStart(2, '0') + '.' +
-											  (firstInput.getMonth() + 1).toString().padStart(2, '0') + '.' +
-											  firstInput.getFullYear();
-								 var parts = valued.split('.');
-								 var selectedDate = new Date(parts[2], parts[1] - 1, parts[0]);
-			
-								 dateBirthday0.selectDate(inputDate);
-							  }
-							  
+								if (dateBirthday0) {
+									var valued = firstInput.getDate().toString().padStart(2, '0') + '.' +
+										(firstInput.getMonth() + 1).toString().padStart(2, '0') + '.' +
+										firstInput.getFullYear();
+									var parts = valued.split('.');
+									var selectedDate = new Date(parts[2], parts[1] - 1, parts[0]);
+
+									dateBirthday0.selectDate(inputDate);
+								}
+
 							}
-						  }
+						}
 					}
 				}
 			}
 			console.log(value.length)
 			if (value.length === 8) {
-				if (inputDate.toString() === "Invalid Date"  && typeof day == 'number' &&  typeof month == 'number' &&  typeof year == 'number') {
+				if (inputDate.toString() === "Invalid Date" && typeof day == 'number' && typeof month == 'number' && typeof year == 'number') {
 					this.value = '';
 					return;
 				} else {
@@ -1682,12 +1682,12 @@ function maskDateInput(input, values, secondInput) {
 						}
 					}
 					console.log('else');
-					
+
 				}
-				
-			 
-			 
-			}else {
+
+
+
+			} else {
 				if (secondInput) {
 					if (form.classList.contains('was-validated')) {
 						this.classList.add('is-invalid');
@@ -1720,12 +1720,12 @@ function maskDateInput(input, values, secondInput) {
 				if (year) {
 					formattedDate += year.slice(0, 4);
 				}
-				
+
 				this.value = formattedDate;
 				console.log(formattedDate);
-			
+
 			}
-		}else{
+		} else {
 			this.value = '';
 		}
 	});
@@ -1829,7 +1829,7 @@ function fillAllFields() {
 			select.dispatchEvent(event);
 		}
 
-		
+
 
 		document.getElementById("section1").dispatchEvent(event);
 
@@ -1844,62 +1844,62 @@ function fillAllFields() {
 }
 function UploadFiles() {
 
-const maxSize = 5 * 1024 * 1024; // устанавливаем максимальный размер файла в байтах (в данном случае 5 МБ)
+	const maxSize = 5 * 1024 * 1024; // устанавливаем максимальный размер файла в байтах (в данном случае 5 МБ)
 
-const inputsLabel = document.querySelectorAll('.insurance-upload');
-const inputs = document.querySelectorAll('.field__file'); // получаем input элемент по ID
+	const inputsLabel = document.querySelectorAll('.insurance-upload');
+	const inputs = document.querySelectorAll('.field__file'); // получаем input элемент по ID
 
-for (let i = 0; i < inputs.length; i++) {
-	console.log(inputsLabel[i])
-	const formInput = document.getElementById('formInputMes' + i);
-	const countEl = document.getElementById('fileText' + i) 
-	document.getElementById('invalidfd0').classList.add('changeid')
-	const invalid = document.getElementById('invalidfd' + i)
-	inputs[i].addEventListener('change', function (event) {
-	const files = this.files; // получаем массив выбранных файлов
+	for (let i = 0; i < inputs.length; i++) {
+		console.log(inputsLabel[i])
+		const formInput = document.getElementById('formInputMes' + i);
+		const countEl = document.getElementById('fileText' + i)
+		document.getElementById('invalidfd0').classList.add('changeid')
+		const invalid = document.getElementById('invalidfd' + i)
+		inputs[i].addEventListener('change', function (event) {
+			const files = this.files; // получаем массив выбранных файлов
 
-	let totalSize = 0; // устанавливаем начальное значение суммарного размера файлов
-		console.log(countEl)
-	for (let i = 0; i < files.length; i++) {
-		const file = files[i];
-		
-		// проверяем тип файла
-		if (!file.type.includes('image')) {
-			event.preventDefault(); // отменяем действие по умолчанию (добавление файла)
-			console.log(invalid)
-			invalid.innerHTML = `Файл должен быть изображением`;
-			invalid.style.display = 'block';
-			inputsLabel[i].classList.add('is-invalid');
-		}
+			let totalSize = 0; // устанавливаем начальное значение суммарного размера файлов
+			console.log(countEl)
+			for (let i = 0; i < files.length; i++) {
+				const file = files[i];
 
-		// проверяем размер файла
-		totalSize += file.size; // добавляем размер каждого файла к суммарному размеру
-		if (totalSize > maxSize) { // если суммарный размер превышает максимальный
-			event.preventDefault();
-			invalid.innerHTML = `Размер файлов не должен превышать 5 МБ`;
-			invalid.style.display = 'block';
-			inputsLabel[i].classList.add('is-invalid');
-		}
-		if ((file.type.includes('image')) && totalSize < maxSize) {
-			countEl.innerText = this.files[0].name;
-			 // убираем ошибку, если размер и тип файлов в пределах допустимого
-			inputsLabel[i].classList.remove('is-invalid');
+				// проверяем тип файла
+				if (!file.type.includes('image')) {
+					event.preventDefault(); // отменяем действие по умолчанию (добавление файла)
+					console.log(invalid)
+					invalid.innerHTML = `Файл должен быть изображением`;
+					invalid.style.display = 'block';
+					inputsLabel[i].classList.add('is-invalid');
+				}
 
-			invalid.style.display = 'none';
-			inputs[i].setCustomValidity('');
+				// проверяем размер файла
+				totalSize += file.size; // добавляем размер каждого файла к суммарному размеру
+				if (totalSize > maxSize) { // если суммарный размер превышает максимальный
+					event.preventDefault();
+					invalid.innerHTML = `Размер файлов не должен превышать 5 МБ`;
+					invalid.style.display = 'block';
+					inputsLabel[i].classList.add('is-invalid');
+				}
+				if ((file.type.includes('image')) && totalSize < maxSize) {
+					countEl.innerText = this.files[0].name;
+					// убираем ошибку, если размер и тип файлов в пределах допустимого
+					inputsLabel[i].classList.remove('is-invalid');
 
-		} else {
-			event.preventDefault();
-			inputsLabel[i].classList.add('is-invalid'); // добавляем класс ошибки, если размер и тип файлов в пределах допустимого
-			countEl.innerText = `Ошибка`;
-			
-			invalid.style.display = 'block';
-			return
-		}
-	
-	}
-	});
-};
+					invalid.style.display = 'none';
+					inputs[i].setCustomValidity('');
+
+				} else {
+					event.preventDefault();
+					inputsLabel[i].classList.add('is-invalid'); // добавляем класс ошибки, если размер и тип файлов в пределах допустимого
+					countEl.innerText = `Ошибка`;
+
+					invalid.style.display = 'block';
+					return
+				}
+
+			}
+		});
+	};
 
 }
 UploadFiles();
