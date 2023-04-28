@@ -168,9 +168,9 @@
 
 
 		<section class="insurance " style="position: relative;" id="insurance">
-			<div class="allpol" onclick="fillAllFields()">
+			<!-- <div class="allpol" onclick="fillAllFields()">
 				<p>Заполнить все поля</p>
-			</div>
+			</div> -->
 			<hr class="insurance-hr">
 			<div class="container">
 				<div class="insurance__block ">
@@ -259,7 +259,7 @@
 																начала страховки:</label>
 															<input type="text" id="date__start" required
 																autocomplete="off"
-																onfocus="maskDateInput(this, 'minus')" maxlength="10"
+																oninput="maskDateInput(this, 'minus')" maxlength="10"
 																onpaste="return false" ondrop="return false"
 																class="dates__form  insurance__program-aria form-control custom-dates itsdate"
 																placeholder="dd.mm.yyyy" disabled>
@@ -273,7 +273,7 @@
 																окончания страховки:</label>
 															<input type="text" id="date__end" required
 																autocomplete="off"
-																onfocus="maskDateInput(this, 'modificed')"
+																oninput="maskDateInput(this, 'modificed')"
 																maxlength="10" onpaste="return false"
 																ondrop="return false"
 																class="dates__form insurance__program-aria form-control custom-dates itsdate"
@@ -320,7 +320,7 @@
 														резидент РК?</label>
 													<select
 														class="insurance__program-aria form-control select itsselect"
-														disabled aria-label="Пример выбора по умолчанию" id="RK"
+														 aria-label="Пример выбора по умолчанию" id="RK"
 														required>
 														<option value="" disabled selected>Вы резидент РК? </option>
 														<option value="1">Да</option>
@@ -575,7 +575,7 @@
 																		class=" insurance__program-label  mb-lg-1 mb-1">Копии
 																		документов:</label>
 																	<input class=" field__file form-label" type="file"
-																		id="uploaddocs0" required>
+																		id="uploaddocs0" required accept="image/*">
 																	<label for="file"
 																		class="insurance__program-aria  d-flex align-items-center justify-content-between pe-0 form-control insurance-upload">
 
@@ -622,7 +622,7 @@
 																<input type="text" autocomplete="off"
 																	class="dates__form insurance__program-aria custom-dates"
 																	placeholder="XX.XX.XXXX" id="datePasportStart0"
-																	onfocus="maskDateInput(this, 'plus', 'secondInput')"
+																	oninput="maskDateInput(this, 'plus', 'secondInput')"
 																	maxlength="10" onpaste="return false"
 																	ondrop="return false" required>
 																<div class="invalid-feedback">
@@ -657,8 +657,8 @@
 																	телефона</label>
 																<input type="tel"
 																	class="insurance__program-aria phone-insuarance get-info form-control"
-																	id="Phone0" data-tel-input required
-																	placeholder="+7(777)777-77-77 ">
+																	id="Phone0" data-tel-input required minlength="12"
+																	placeholder="+7(777)777-77-77 " >
 																<div class="invalid-feedback">
 																	Пожалуйста, укажите номер телефона
 																</div>
@@ -670,7 +670,7 @@
 																	рождения:</label>
 
 																<input type="text" autocomplete="off"
-																	onfocus="maskDateInput(this, 'birthday' , 'secondInput')"
+																	oninput="maskDateInput(this, 'birthday' , 'secondInput')"
 																	maxlength="10" onpaste="return false"
 																	ondrop="return false"
 																	class="dates__form custom-dates insurance__program-aria get-info form-control "

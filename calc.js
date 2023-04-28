@@ -33,14 +33,14 @@ if (dateStart) {
 		onSelect: function (formattedDate, date) {
 			console.log(dateStart.value);
 			console.log(document.getElementById('date__start').value);
-
+			maskDateInput(dateStart)
 			target.removeAttribute('disabled')
 			dateSelected.innerHTML = 'С' + '  ' + dateStart.value + ' ' + 'по' + ' ' + dateEnd.value;
 			document.getElementById('total-dateStart').innerHTML = dateStart.value;
 			if (program.value == '2') {
 				// Если выбран Multi Trip:
 				nextmonths()
-
+			
 			} else {
 				// Если выбран Base Trip:
 				dateEnd.removeAttribute('disabled')
@@ -52,9 +52,9 @@ if (dateStart) {
 
 				datepickerModificedEnd = new AirDatepicker('#date__end', {
 					autoClose: true,
-
+					
 					onSelect: function (formattedDate, date) {
-
+						maskDateInput(dateEnd)
 						dateSelected.innerHTML = 'С' + '  ' + dateStart.value + ' ' + 'по' + ' ' + dateEnd.value;
 						document.getElementById('total-dateEnd').innerHTML = dateEnd.value;
 						if (program.value == '2') {
@@ -123,12 +123,15 @@ function convertDate(dateString) {
 
 
 // Функция для расчета
-function Calc() {
-	var targetValue = target.options[target.selectedIndex].value;
+function Calc(print) {
+	
+	// Print определяет вывод в консоль или нет
+
+	
 	console.log(TargetEducationProcent)
+	var targetValue = target.options[target.selectedIndex].value;
 	results = (insuranceSumMonth * currency) * insuranceSumSportCoefficient;
-	if (targetValue == '3') {
-		console.log('Студент')
+	if (targetValue == 3) {
 		TargetEducationProcent = results * 20 / 100;
 		results = (insuranceSumMonth * currency) * insuranceSumSportCoefficient - TargetEducationProcent;
 	}
@@ -144,12 +147,15 @@ function Calc() {
 
 	//проверка на ошибку с негативной датой со знаком минус (-)
 
-	if (results >= 0) {
+	if (results >= 0 ) {
 		//Вывод финальной даты окончания действия страхового полиса
-		if (results > 500) {
+		if (results > 500 && print ) {
 			endNum.innerHTML = endresultsSum + ' ' + '₸';
 			//Вывод промежуточной даты окончания действия страхового полиса
 			priceNum.innerHTML = resultsSum + ' ' + '₸';
+		}else{
+			endNum.innerHTML = "0" + ' ' + '₸';
+			priceNum.innerHTML = "0" + ' ' + '₸';
 		}
 		//Вывод финальной даты окончания действия страхового полиса в блок итога
 
@@ -157,7 +163,9 @@ function Calc() {
 		endNum.innerHTML = 'Ошибка'
 		priceNum.innerHTML = 'Ошибка'
 	}
+	
 }
+
 // Функция Расчета коэффициентов для выбранной опции "Спорт" 
 function CalcSport() {
 	console.log(targetValue)
@@ -201,7 +209,7 @@ function CalcSport() {
 				insuranceSumSportCoefficient = '1.20';
 			}
 
-			Calc()
+			Calc(print)
 
 		} else if (sportCategoryValue == 'professional') {
 
@@ -232,25 +240,27 @@ function CalcSport() {
 			} else if (sportTypeValue == 'other') {
 				insuranceSumSportCoefficient = '1.50';
 			}
-			Calc()
+			Calc(print)
 
 		} else if (sportCategoryValue == 'invalid') {
-
 			insuranceSumSportCoefficient = '0.50';
-			Calc()
+			
+			Calc(print)
 
 		}
 	} else if (targetValue == '1') {
 		console.log('1')
 		insuranceSumSportCoefficient = 1;
 		TargetEducationProcent = 0
-		Calc()
+		Calc(print)
 
 	} else if (targetValue == '3') {
+		
+		
 		console.log('3')
 		insuranceSumSportCoefficient = 1;
 
-		Calc()
+		Calc(print)
 
 	}
 
@@ -280,6 +290,7 @@ function nextmonths() {
 			insuranceSumMonth = '18'
 		}
 		next_date_unformatted.setDate(end_multi.getDate() + 31);
+		Calc(print)
 	}
 	else if (months == "3") {
 		if (insuranceSum.value == '30k') {
@@ -290,6 +301,7 @@ function nextmonths() {
 			insuranceSumMonth = '33'
 		}
 		next_date_unformatted.setDate(end_multi.getDate() + 92);
+		Calc(print)
 	}
 	else if (months == "6") {
 		if (insuranceSum.value == '30k') {
@@ -300,6 +312,7 @@ function nextmonths() {
 			insuranceSumMonth = '50'
 		}
 		next_date_unformatted.setDate(end_multi.getDate() + 184);
+		Calc(print)
 	}
 	else if (months == "6p") {
 		if (insuranceSum.value == '30k') {
@@ -310,6 +323,7 @@ function nextmonths() {
 			insuranceSumMonth = '90'
 		}
 		next_date_unformatted.setDate(end_multi.getDate() + 184);
+		Calc(print)
 	}
 	else if (months == "12") {
 		if (insuranceSum.value == '30k') {
@@ -320,6 +334,7 @@ function nextmonths() {
 			insuranceSumMonth = '90'
 		}
 		next_date_unformatted.setDate(end_multi.getDate() + 366);
+		Calc(print)
 	}
 	else if (months == "12p") {
 		if (insuranceSum.value == '30k') {
@@ -330,6 +345,7 @@ function nextmonths() {
 			insuranceSumMonth = '162'
 		}
 		next_date_unformatted.setDate(end_multi.getDate() + 366);
+		Calc(print)
 	}
 	console.log(insuranceSumMonth)
 	// Получаю дату и преобразую в формат DD.MM.YYYY
@@ -346,7 +362,8 @@ function nextmonths() {
 	} else {
 		dateSelected.innerHTML = 'С' + '  ' + start_multi.toLocaleDateString() + ' ' + 'по' + ' ' + end_multi.toLocaleDateString()
 	}
-	Calc()
+
+	
 }
 // Функция для подсчета количества дней  при тарифе Base Trip
 function CalcInsuranceDays() {
@@ -423,27 +440,29 @@ function Resident() {
 	var resident = document.getElementById("country-people0");
 	var residentButton = document.getElementById("RK");
 	residentButton.addEventListener("change", function () {
-		document.querySelector('.sel').setAttribute("selected", true);
-		get_countries('ru', 'true', '0');
+		if (document.querySelector('.sel')){
+			document.querySelector('.sel').setAttribute("selected", true);
+		}
+		
 		if (residentButton.options[residentButton.selectedIndex].value == 1) {
 			//Если резидент, то добавлять в value Казахстан и убирать возможность редактировать
 			//console.log(resident)
 			//resident = resident.options[resident.selectedIndex].setAttribute('data-name-lat', 'Kazakhstan')
 			//resident = resident.options[resident.selectedIndex].setAttribute('data-flag-name', 'kz')
-			$('#country-people0').addClass('disabled-select');
-			$('#country-people0').prop('disabled', true);
-			var select2 = $('#country-people0')
-			var newOption = new Option();
-			select2.append(newOption).trigger('change');
+			var a = getCookie('lang')
+			if (a == 'undefined') {
+				get_countries('ru', 'true', '0');
+			} else {
+				get_countries(a, 'true', '0');
+			}
+		
 
 
 
-		} else {
-
+		} else if (residentButton.options[residentButton.selectedIndex].value == 2 ) {
+			
 			// Удалить созданные блоки
-			var select2 = $('#country-people0');
-			select2.removeAttr('disabled'); // Сделать Select2 снова доступным для редактирования
-			$('#select2-country-people0-container').html(''); // Очистить контейнер Select2
+			
 		}
 	});
 }
@@ -464,7 +483,6 @@ function StartFuncSelectProgram() {
 				visiblyInput.style.display = 'none';
 
 			}
-			console.log('a')
 			countrySelect.innerHTML = "Не выбрана"
 			dateStart.value = ''; dateStart.setAttribute('disabled', true);
 			dateEnd.value = ''; dateEnd.setAttribute('disabled', true);
@@ -503,8 +521,10 @@ document.getElementById("section1").addEventListener("change", function () {
 	CalcSport()
 
 	if (program.value == '2') {
-
-		document.querySelector('.sel').removeAttribute("selected", false);
+		if (document.querySelector('.sel')){
+			document.querySelector('.sel').removeAttribute("selected", false);
+		}
+		
 		console.log(document.querySelector('.sel'))
 		document.getElementById('months').setAttribute("required", true);
 		// Если выбран Multi Trip:
@@ -661,10 +681,16 @@ document.getElementById("section1").addEventListener("change", function () {
 
 
 	} else if (program.value == '1') {
-		document.querySelector('.sel').setAttribute("selected", true);
+		if (document.querySelector('.sel')){
+			document.querySelector('.sel').setAttribute("selected", true);
+		}
+
 		document.getElementById('months').removeAttribute("required");
-		// Если выбран Base Trip:
-		CalcInsuranceDays()
+		// Если выбран Base Trip:\
+		insuranceSum.addEventListener('change', function () {
+			CalcInsuranceDays()
+		})
+		
 		$('.select-country').prop('multiple', false);
 		$('.select-country').select2({
 			placeholder: 'Выберите страну',
@@ -738,7 +764,6 @@ document.getElementById("section1").addEventListener("change", function () {
 
 function Logic() {
 	document.getElementById("section1").addEventListener("change", function (e) {
-		console.log(e.target)
 		if (e.target == program) {
 			country.removeAttribute('disabled')
 		} else if (e.target == insuranceSum) {

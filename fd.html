@@ -29,7 +29,7 @@
 									<label class="insurance__program-label mb-lg-1 mb-1 form-label"
 										for="for">ИИН</label><input
 										class="insurance__program-aria changeid form-control" placeholder="000000000000"
-										oninput="this.value = this.value.replace(/\D/g, '').slice(0, 12)" id="IIN0"
+										minlength="12" maxlength="12" id="IIN0"
 										data-itog="itog-iin" type="text" required />
 									<div class="invalid-feedback">
 										Пожалуйста, введите иин для застрахованного.
@@ -51,7 +51,7 @@
 										<label for="" class=" insurance__program-label  mb-lg-1 mb-1">Копии
 											документов:</label>
 										<input class=" field__file form-label  changeid" type="file" id="uploaddocs1"
-											required>
+											required accept="image/*">
 										<label for="file"
 											class="insurance__program-aria insurance-upload d-flex align-items-center justify-content-between pe-0 form-control">
 

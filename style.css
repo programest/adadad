@@ -634,7 +634,7 @@ p {
 
 
 .block__insurance-form2 {
- 
+ display: none;
 }
 .block__insurance-form3{
   display: none;
@@ -738,6 +738,12 @@ p {
 
 .mult-select-tag .input-container {
   padding: 0 !important;
+}
+.puy{
+  cursor: pointer;
+}
+.insurance__checkbox-checkbox{
+  cursor: pointer;
 }
 
 .mult-select-tag .body {
