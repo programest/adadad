@@ -31,8 +31,8 @@ if (dateStart) {
 	datepickerModificedStart = new AirDatepicker('#date__start', {
 		autoClose: true,
 		onSelect: function (formattedDate, date) {
-			console.log(dateStart.value);
-			console.log(document.getElementById('date__start').value);
+
+
 			maskDateInput(dateStart)
 			target.removeAttribute('disabled')
 			dateSelected.innerHTML = 'С' + '  ' + dateStart.value + ' ' + 'по' + ' ' + dateEnd.value;
@@ -40,7 +40,7 @@ if (dateStart) {
 			if (program.value == '2') {
 				// Если выбран Multi Trip:
 				nextmonths()
-			
+
 			} else {
 				// Если выбран Base Trip:
 				dateEnd.removeAttribute('disabled')
@@ -52,7 +52,7 @@ if (dateStart) {
 
 				datepickerModificedEnd = new AirDatepicker('#date__end', {
 					autoClose: true,
-					
+
 					onSelect: function (formattedDate, date) {
 						maskDateInput(dateEnd)
 						dateSelected.innerHTML = 'С' + '  ' + dateStart.value + ' ' + 'по' + ' ' + dateEnd.value;
@@ -124,11 +124,11 @@ function convertDate(dateString) {
 
 // Функция для расчета
 function Calc(print) {
-	
+
 	// Print определяет вывод в консоль или нет
 
-	
-	console.log(TargetEducationProcent)
+
+
 	var targetValue = target.options[target.selectedIndex].value;
 	results = (insuranceSumMonth * currency) * insuranceSumSportCoefficient;
 	if (targetValue == 3) {
@@ -147,13 +147,13 @@ function Calc(print) {
 
 	//проверка на ошибку с негативной датой со знаком минус (-)
 
-	if (results >= 0 ) {
+	if (results >= 0) {
 		//Вывод финальной даты окончания действия страхового полиса
-		if (results > 500 && print ) {
+		if (results > 500 && print) {
 			endNum.innerHTML = endresultsSum + ' ' + '₸';
 			//Вывод промежуточной даты окончания действия страхового полиса
 			priceNum.innerHTML = resultsSum + ' ' + '₸';
-		}else{
+		} else {
 			endNum.innerHTML = "0" + ' ' + '₸';
 			priceNum.innerHTML = "0" + ' ' + '₸';
 		}
@@ -163,12 +163,12 @@ function Calc(print) {
 		endNum.innerHTML = 'Ошибка'
 		priceNum.innerHTML = 'Ошибка'
 	}
-	
+
 }
 
 // Функция Расчета коэффициентов для выбранной опции "Спорт" 
 function CalcSport() {
-	console.log(targetValue)
+
 	var sportType = document.getElementById("sporttype");
 	var sportCategory = document.getElementById("categorysporttype");
 	var targetValue = target.options[target.selectedIndex].value;
@@ -244,20 +244,20 @@ function CalcSport() {
 
 		} else if (sportCategoryValue == 'invalid') {
 			insuranceSumSportCoefficient = '0.50';
-			
+
 			Calc(print)
 
 		}
 	} else if (targetValue == '1') {
-		console.log('1')
+
 		insuranceSumSportCoefficient = 1;
 		TargetEducationProcent = 0
 		Calc(print)
 
 	} else if (targetValue == '3') {
-		
-		
-		console.log('3')
+
+
+
 		insuranceSumSportCoefficient = 1;
 
 		Calc(print)
@@ -347,7 +347,7 @@ function nextmonths() {
 		next_date_unformatted.setDate(end_multi.getDate() + 366);
 		Calc(print)
 	}
-	console.log(insuranceSumMonth)
+
 	// Получаю дату и преобразую в формат DD.MM.YYYY
 
 	// Преобразую
@@ -357,13 +357,13 @@ function nextmonths() {
 		document.getElementById("date__end").value = "dd.mm.yyyy";
 	} else { }
 	// Вывожу результат в блок
-	console.log(start_multi)
+
 	if (start_multi == 'Invalid Date') {
 	} else {
 		dateSelected.innerHTML = 'С' + '  ' + start_multi.toLocaleDateString() + ' ' + 'по' + ' ' + end_multi.toLocaleDateString()
 	}
 
-	
+
 }
 // Функция для подсчета количества дней  при тарифе Base Trip
 function CalcInsuranceDays() {
@@ -378,7 +378,7 @@ function CalcInsuranceDays() {
 	var days = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24));
 
 	if (days <= '14') {
-		console.log('14')
+
 		if (insuranceSum.value == '30k') {
 			if (tarif == 3) {
 				insuranceSumMonth = '1.4' * days
@@ -439,34 +439,33 @@ function CalcInsuranceDays() {
 function Resident() {
 	var resident = document.getElementById("country-people0");
 	var residentButton = document.getElementById("RK");
-	residentButton.addEventListener("change", function () {
-		if (document.querySelector('.sel')){
-			document.querySelector('.sel').setAttribute("selected", true);
+	if (residentButton.options[residentButton.selectedIndex].value == 1) {
+		//Если резидент, то добавлять в value Казахстан и убирать возможность редактировать
+
+		//resident = resident.options[resident.selectedIndex].setAttribute('data-name-lat', 'Kazakhstan')
+		//resident = resident.options[resident.selectedIndex].setAttribute('data-flag-name', 'kz')
+		var a = getCookie('lang')
+		if (a == 'undefined') {
+			get_countries('ru', 'true');
+		} else {
+			get_countries(a, 'true');
 		}
-		
-		if (residentButton.options[residentButton.selectedIndex].value == 1) {
-			//Если резидент, то добавлять в value Казахстан и убирать возможность редактировать
-			//console.log(resident)
-			//resident = resident.options[resident.selectedIndex].setAttribute('data-name-lat', 'Kazakhstan')
-			//resident = resident.options[resident.selectedIndex].setAttribute('data-flag-name', 'kz')
-			var a = getCookie('lang')
-			if (a == 'undefined') {
-				get_countries('ru', 'true', '0');
-			} else {
-				get_countries(a, 'true', '0');
-			}
-		
 
 
 
-		} else if (residentButton.options[residentButton.selectedIndex].value == 2 ) {
-			
-			// Удалить созданные блоки
-			
+
+	} else if (residentButton.options[residentButton.selectedIndex].value == 2) {
+		var a = getCookie('lang')
+		if (a == 'undefined') {
+			get_countries('ru');
+		} else {
+			get_countries(a);
 		}
-	});
+		// Удалить созданные блоки
+
+	}
 }
-Resident()
+
 // Функция выбора программы страхования Multi Trip и Base Trip
 function StartFuncSelectProgram() {
 	var program = document.getElementById("program");
@@ -477,9 +476,11 @@ function StartFuncSelectProgram() {
 			if (program.value == '2') {
 				// Если выбран Multi Trip:
 				visiblyInput.style.display = 'block';
+				dateEnd.style.backgroundColor = '#f5f5f5';
 
 			} else {
 				// Если выбран Base Trip:
+				dateEnd.style.backgroundColor = '#fff';
 				visiblyInput.style.display = 'none';
 
 			}
@@ -521,11 +522,11 @@ document.getElementById("section1").addEventListener("change", function () {
 	CalcSport()
 
 	if (program.value == '2') {
-		if (document.querySelector('.sel')){
+		if (document.querySelector('.sel')) {
 			document.querySelector('.sel').removeAttribute("selected", false);
 		}
-		
-		console.log(document.querySelector('.sel'))
+
+
 		document.getElementById('months').setAttribute("required", true);
 		// Если выбран Multi Trip:
 		nextmonths()
@@ -545,15 +546,15 @@ document.getElementById("section1").addEventListener("change", function () {
 				var index = allZone.indexOf(removedZone);
 				if (index > -1) {
 					allZone.splice(index, 1);
-					console.log("Удален элемент с зоной " + removedZone);
+
 				}
 
 			});
-			console.log(selectedTextss.length)
+
 			if (selectedTextss.length > 1) {
 
 				for (var item = 0; item < allZone.length; item++) {
-					console.log(allZone[item])
+
 					if (allZone.length == 1) {
 						if (allZone.includes("3")) {
 							tarif = "3";
@@ -681,7 +682,7 @@ document.getElementById("section1").addEventListener("change", function () {
 
 
 	} else if (program.value == '1') {
-		if (document.querySelector('.sel')){
+		if (document.querySelector('.sel')) {
 			document.querySelector('.sel').setAttribute("selected", true);
 		}
 
@@ -690,7 +691,7 @@ document.getElementById("section1").addEventListener("change", function () {
 		insuranceSum.addEventListener('change', function () {
 			CalcInsuranceDays()
 		})
-		
+
 		$('.select-country').prop('multiple', false);
 		$('.select-country').select2({
 			placeholder: 'Выберите страну',
@@ -794,7 +795,7 @@ function formatState(state) {
 	var $state = $(
 		'<span><img class="img-flag" /> <span></span></span>'
 	);
-	//console.log(state);
+	//  
 	//var selectElement = document.getElementById("country"); 
 	//var selectedOptions = selectElement.selectedOptions; 
 	//for (var j = 0; j < selectedOptions.length; j++) {
@@ -802,7 +803,7 @@ function formatState(state) {
 
 	//    var attributes = option.getAttribute("data-name-flag")
 	//    console.log(attributes)
-	//    console.log(selectedOptions[j]);
+	//      
 	//}
 	var name = $('#country option[value="' + state.id + '"]').attr('data-flag-name')
 	// Use .text() instead of HTML string concatenation to avoid script injection issues
@@ -823,7 +824,7 @@ function formatStatePerson(state) {
 	var $state = $(
 		'<span><img class="img-flag" /> <span></span></span>'
 	);
-	//console.log(state);
+	//  
 	//var selectElement = document.getElementById("country"); 
 	//var selectedOptions = selectElement.selectedOptions; 
 	//for (var j = 0; j < selectedOptions.length; j++) {
@@ -831,7 +832,7 @@ function formatStatePerson(state) {
 
 	//    var attributes = option.getAttribute("data-name-flag")
 	//    console.log(attributes)
-	//    console.log(selectedOptions[j]);
+	//      
 	//}
 
 	var name = $('#country-people0 option[value="' + state.id + '"]').attr('data-flag-name')
@@ -866,8 +867,12 @@ $('.select-country').on("change", function (e) {
 	var selectedTexts = $(this).select2('data').map(function (option) {
 		return option.text;
 	});
-	console.log(selectedTexts)
-	countrySelect.innerHTML = selectedTexts.join(',  ');
+	if (selectedTexts.length === 0) {
+		countrySelect.innerHTML = "Не выбранa"
+	} else {
+		countrySelect.innerHTML = selectedTexts.join(',  ');
+	}
+
 
 });
 
@@ -890,12 +895,12 @@ $('.select-country').on("change", function (e) {
 //          const index = item.getElementsByTagName("index")[0].childNodes[0].nodeValue;
 //          const change = item.getElementsByTagName("change")[0].childNodes[0].nodeValue;
 //
-//          console.log("title: " + title);
-//          console.log("pubDate: " + pubDate);
-//          console.log("description: " + description);
-//          console.log("quant: " + quant);
-//          console.log("index: " + index);
-//          console.log("change: " + change);
+//            
+//            
+//            
+//            
+//            
+//            
 //        }
 //      }
 //    };
@@ -905,114 +910,3 @@ $('.select-country').on("change", function (e) {
 //getRates()
 
 
-
-
-
-
-
-
-// Функция "Добавление новых стран в список" при выбраном тарифе Multi Trip
-
-//function AddCountryMultiTrip(){
-//    if (countryInput){
-//        d.innerHTML = 'Выбрать страну'
-//        countryInput.addEventListener("click", function() {
-//            console.log(countryAll)
-//            var ListCountry = document.querySelectorAll('.item-label')
-//
-//            for (var i = 0; i < ListCountry.length; i++) {
-//                var content = ListCountry[i].innerHTML.trim();
-//                if (countryAll.includes(ListCountry[i].textContent)){
-//                    console.log(countryAll)
-//                }else{
-//                        console.log('Объект не найден в массиве');
-//                        countryAll.push(content)
-//                        countrySelect.innerHTML = countryAll.join(',  ');
-//                    if (countryAll.length >= '2'){
-//                        console.log('Объект найден в массиве');
-//                        d.setAttribute('disabled', 'true');
-//                        d.innerHTML = 'Максимум 10 стран'
-//                        console.log(countryAll)
-//
-//                    }
-//                }
-//                console.log(countryAll)
-                //const hasDuplicates2 = new Set(countryAllName).size !== countryAllName.length;
-               //const haveCommonElement = countryAllName.some(element => countryAll.includes(element));
-               //console.log(haveCommonElement)
-               //console.log(countryAll)
-               //console.log(countryAllName)
-               //if (hasDuplicates2 == false){
-               //    countryAllName.push(ListCountry[i].textContent)
-               //    if (haveCommonElement == false){
-               //        var content = ListCountry[i].innerHTML.trim()
-               //        countryAll.push(content)
-               //        countrySelect.innerHTML = countryAll.join(',  ');
-               //        ListCountry[i].style.display = 'none';
-               //    }else if (haveCommonElement == true){
-               //        ListCountry[i].style.display = 'block';
-               //        var content = ListCountry[i].innerHTML.trim()
-               //        countryAll.pop(content)
-               //    }
-               //}else{
-               //    countryAllName.pop(ListCountry[i].textContent)
-               //}
-
-
-                //for (var j = 0; j < countryAll.length; j++) {
-                //    if (countryAll[j] === ListCountry[i].textContent){
-                //        console.log('asd')
-                //        var content = ListCountry[i].innerHTML.trim()
-                //        countryAll.pop(content)
-                //        console.log('sad')
-                //    }
-                //    else{
-                //        countrySelect.innerHTML = countryAll.join(',  ');
-                //        var content = ListCountry[i].innerHTML.trim()
-                //        countryAll.push(content)
-                //        console.log(countryAll)
-                //            if (countryAll.length >= 10) {
-                //                d.setAttribute('disabled', 'true');
-                //                d.innerHTML = 'Максимум 10 стран'
-                //            }
-                //            else{
-                //                d.removeAttribute('disabled');
-                //                }
-                //            }
-                //    }
-                //}\
-//           }
-//        })
-//    }
-//}
-// Функция "Добавление новых стран в список" при выбраном тарифе Base Trip
-//function AddCountryBaseTrip(){
-//
-//    if (countryInput){
-//        d.innerHTML = 'Выбрать страну'
-//        countryInput.addEventListener("click", function() {
-//            d.innerHTML = 'Выбрать страну'
-//
-//            var ListCountry = document.querySelectorAll('.item-label')
-//
-//            for (var i = 0; i < ListCountry.length; i++) {
-//                var content = ListCountry[i].innerHTML.trim()
-//                    countryAll.push(content)
-//                if (countryAll.length > 1) {
-//                    d.setAttribute('disabled', 'true');
-//                    d.innerHTML = 'Максимум 10 стран'
-//                }
-//                else{
-//                    d.removeAttribute('disabled');
-//                    }
-//
-//
-//
-//
-//
-//            countrySelect.innerHTML = countryAll.join(',  ');
-//
-//        }
-//        })
-//    }
-//}

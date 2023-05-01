@@ -29,8 +29,8 @@
 									<label class="insurance__program-label mb-lg-1 mb-1 form-label"
 										for="for">ИИН</label><input
 										class="insurance__program-aria changeid form-control" placeholder="000000000000"
-										minlength="12" maxlength="12" id="IIN0"
-										data-itog="itog-iin" type="text" required />
+										minlength="12" maxlength="12" pattern="\d{12}$" id="IIN0" data-itog="itog-iin"
+										type="text" required />
 									<div class="invalid-feedback">
 										Пожалуйста, введите иин для застрахованного.
 									</div>
@@ -54,8 +54,10 @@
 											required accept="image/*">
 										<label for="file"
 											class="insurance__program-aria insurance-upload d-flex align-items-center justify-content-between pe-0 form-control">
+											<div class="file-block_text">
+												<span class="file-text changeid" id="fileText0">Выбрать файл</span>
+											</div>
 
-											<span class="file-text changeid" id="fileText0">Выбрать файл</span>
 											<div class="file-img"
 												style="background: #0172B7; border-left: 1px solid #000000;">
 												<img src="img/upload.svg" alt="">
@@ -86,8 +88,9 @@
 									выдачи паспорта:</label>
 								<input type="text" class="dates__form insurance__program-aria custom-dates changeid"
 									autocomplete="off" placeholder="XX.XX.XXXX" id="datePasportStart1"
-									oninput="maskDateInput(this, 'plus' , 'secondInput')" onpaste="return false"
-									ondrop="return false" required>
+									oninput="maskDateInput(this, 'minus')" maxlength="10"
+									pattern="^(0?[1-9]|[12][0-9]|3[01])\.(0?[1-9]|1[0-2])\.\d{2}\d{2}$" minlength="10"
+									onpaste="return false" ondrop="return false" required>
 								<div class="invalid-feedback">
 									Пожалуйста, укажите дату выдачи паспорта
 								</div>
@@ -98,7 +101,8 @@
 
 								<input type="text"
 									class="dates__form datebirthday insurance__program-aria changeid custom-dates"
-									autocomplete="off" oninput="maskDateInput(this, 'plus',  'secondInput')"
+									autocomplete="off" oninput="maskDateInput(this, 'minus')" maxlength="10"
+									pattern="^(0?[1-9]|[12][0-9]|3[01])\.(0?[1-9]|1[0-2])\.\d{2}\d{2}$" minlength="10"
 									onpaste="return false" ondrop="return false" data-itog="itog-datebirtghday"
 									id="dateBirthday1" placeholder="XX.XX.XXXX" required>
 								<div class="invalid-feedback">

@@ -4,8 +4,9 @@ var needle = "";
 var block;
 var form = document.querySelector('.needs-validation2')
 const addsValidation = document.querySelector('.needs-validation-addblock')
+const preloader = document.querySelector('.preloader')
 window.addEventListener('load', () => {
-	const preloader = document.querySelector('.preloader')
+
 	if (preloader) {
 		preloader.classList.add('preloader_hidden')
 	}
@@ -38,30 +39,32 @@ function show() {
 	}
 }
 function ValidateMaskPhone(input) {
-	var modInput = input.value.replace(/\D/g, "");
-	  if (modInput.length < 11) {
+	input.addEventListener('input', function (e) {
+		var modInput = input.value.replace(/\D/g, "");
+		if (modInput.length < 11) {
 
-		input.classList.add('is-invalid');
-		input.classList.add('custom-phone');
-		ValidateInJs_UNCORRECT(input)
-		if (document.querySelector('.needs-validation2').classList.contains('was-validated')) {
-		  input.classList.add('is-invalid');
-		  input.classList.add('custom-phone');
-		  ValidateInJs_UNCORRECT(input)
+			input.classList.add('is-invalid');
+			input.classList.add('custom-phone');
+			ValidateInJs_UNCORRECT(input)
+			if (document.querySelector('.needs-validation2').classList.contains('was-validated')) {
+				input.classList.add('is-invalid');
+				console.log('1')
+				ValidateInJs_UNCORRECT(input)
+			}
+		} else {
+			if (document.querySelector('.needs-validation2').classList.contains('was-validated')) {
+				input.classList.remove('is-invalid');
+				console.log('2')
+				ValidateInJs_CORRECT(input)
+			}
 		}
-	  } else {
-		if (document.querySelector('.needs-validation2').classList.contains('was-validated')) {
-		  input.classList.remove('is-invalid');
-		  input.classList.add('custom-phone');
-		  ValidateInJs_CORRECT(input)
-		}
-	  }
-	
-  }
-  
+	})
+
+}
+
 function MaskPhone() {
 	var phoneInputs = document.querySelectorAll("input[data-tel-input]");
-	console.log(phoneInputs)
+
 	var getInputNumbersValue = function (input) {
 		return input.value.replace(/\D/g, "");
 	};
@@ -77,9 +80,9 @@ function MaskPhone() {
 		}
 	};
 	var onPhoneInput = function (e) {
-	
+
 		var input = e.target, inputNumbersValue = getInputNumbersValue(input), selectionStart = input.selectionStart, formattedInputValue = "";
-		
+
 		if (input.value.length != selectionStart) {
 			if (e.data && /\D/g.test(e.data)) input.value = inputNumbersValue;
 
@@ -130,12 +133,13 @@ if (dateBirthday) {
 		maxDate: new Date(),
 		onSelect: function (formattedDate, date) {
 			if (checkAge() == false) {
-				console.log(this)
-				document.getElementById('dateBirthday0').classList.add('is-invalid')
+
+
 				document.getElementById('dateBirthday0').value = ''
 				document.getElementById('dateBirthday0').placeholder = 'Страхователь может быть не младше 18 лет'
+				document.getElementById('dateBirthday0').style.fontSize = '16px'
 			} else if (checkAge() == true) {
-				document.getElementById('dateBirthday0').classList.remove('is-invalid')
+
 			}
 			maskDateInput(dateBirthday, undefined, 'mySecondInput');
 
@@ -147,7 +151,7 @@ if (datePasport) {
 		autoClose: true,
 		maxDate: new Date(),
 		onSelect: function (formattedDate, date) {
-			maskDateInput(datePasport , undefined, 'mySecondInput');
+			maskDateInput(datePasport, undefined, 'mySecondInput');
 		},
 	})
 }
@@ -160,12 +164,25 @@ var block3 = document.querySelector('.block__insurance-form3');
 
 function Pages() {
 
-	if (buttonReplace) {
+	if (document.querySelector('.back')) {
 
 
 		document.querySelector('.back').addEventListener("click", function () {
-			block2.style.display = 'block';
-			block3.style.display = 'none';
+			loadBlocks()
+				.then(() => {
+					// Скрыть прелоадер
+					if (preloader) {
+						preloader.classList.add('preloader_hidden');
+					}
+
+					// Показать загруженные блоки
+					block2.style.display = 'block';
+					block3.style.display = 'none';
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+
 		})
 	}
 
@@ -179,7 +196,7 @@ var infpPerson = document.querySelectorAll('.infoperson')
 var infpPerson = document.querySelectorAll('.infoperson')
 if (document.querySelector('.puy')) {
 	document.querySelector('.puy').addEventListener('click', function () {
-		
+
 		var otherPeople = 0;
 		var attributes = document.querySelectorAll('.datebirthday')
 		//attributes.forEach(function(item){
@@ -190,7 +207,7 @@ if (document.querySelector('.puy')) {
 		for (let i = 0; i < attributes.length; i++) {
 			otherPeople += Number(attributes[i].getAttribute('data-other'));
 			otherCoefficient = otherPeople;
-			console.log(otherCoefficient)
+
 			Calc()
 		}
 
@@ -206,7 +223,7 @@ if (document.querySelector('.puy')) {
 
 		// collectMainInfoForInsurance()
 		collectSubInsurance()
-		
+
 	})
 }
 var nm = document.querySelector('.add-classlist')
@@ -214,16 +231,16 @@ var checkbox = document.getElementById("uniqueID");
 if (checkbox) {
 	checkbox.onchange = function () {
 		if (this.checked) {
-			console.log('asds')
+
 			nm.classList.add('insurance-block-add-subinsurance')
 
 		} else {
 
-			console.log('asd')
+
 			nm.classList.remove('insurance-block-add-subinsurance')
 
 		}
-		console.log(nm)
+
 	};
 }
 function collectSubInsurance() {
@@ -275,14 +292,14 @@ var changeLocaleService = (function () {
 		var xhr = new XMLHttpRequest();
 		xhr.open("GET", 'lang.json', true);
 		xhr.onreadystatechange = saveLocale.bind(this);
-		xhr.onerror = function () { console.log("no found page"); };
+		xhr.onerror = function () { };
 		xhr.send();
 		let cookie = getCookie('lang')
-	
+
 		function saveLocale() {
 			if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
 				locale = JSON.parse(xhr.responseText);
-				console.log("locale loaded");
+
 				if (defLang) changeLocale(defLang);
 				if (cookie === 'kz') {
 					get_countries('kz')
@@ -308,7 +325,7 @@ var changeLocaleService = (function () {
 	}
 
 	function changeLocale(lang) {
-		if (!locale[lang]) return console.log("no found language");
+		if (!locale[lang]) return
 		else changeText('locale', locale[lang]);
 
 		function changeText(name, object, startIndex) {
@@ -579,22 +596,22 @@ function Add() {
 			newBlock.setAttribute('class', 'block');
 			container.appendChild(newBlock);
 			var n = newBlock.querySelectorAll('.changeid')
-			console.log('sad')
+
 			block = newBlock.querySelectorAll('.needs-validation-addblock');
 
 			for (let i = 0; i < n.length; i++) {
 				var motg = n[i].id.slice(0, -1)
 				n[i].setAttribute('id', `${motg}${blockCount}`)
-				console.log('Инициализированно')
+
 
 				new AirDatepicker('#dateBirthday' + blockCount, {
 					autoClose: true,
 
 					onSelect: function (formattedDate, date) {
 						var ininput = formattedDate.datepicker.$el
-					
+
 						OtherCoficent(ininput);
-	
+
 						maskDateInput(ininput, undefined, 'asd')
 
 					},
@@ -606,7 +623,7 @@ function Add() {
 
 					onSelect: function (formattedDate, date) {
 						var ininput = formattedDate.datepicker.$el
-					
+
 						maskDateInput(ininput, undefined, 'asd')
 					},
 
@@ -614,35 +631,34 @@ function Add() {
 
 				});
 			}
-			
 
-			
+
+
 			blockCount++;
 			numCount++;
-			console.log(numCount)
-			console.log(blockCount)
+
 			var residentButton = document.getElementById("RK")
-			
-				if (residentButton.options[residentButton.selectedIndex].value == 1) {
-				
-					console.log('1')
-					
-					var a = getCookie('lang')
-					if (a == 'undefined') {
-						get_countries('ru', 'true');
-					} else {
-						get_countries(a, 'true');
-					}
-				}else if (residentButton.options[residentButton.selectedIndex].value == 2) {
-					console.log('2')
-					var a = getCookie('lang')
-					if (a == 'undefined') {
-						get_countries('ru', 'true');
-					} else {
-						get_countries(a);
-					}
-					
-		}
+
+			if (residentButton.options[residentButton.selectedIndex].value == 1) {
+
+
+
+				var a = getCookie('lang')
+				if (a == 'undefined') {
+					get_countries('ru', 'true');
+				} else {
+					get_countries(a, 'true');
+				}
+			} else if (residentButton.options[residentButton.selectedIndex].value == 2) {
+
+				var a = getCookie('lang')
+				if (a == 'undefined') {
+					get_countries('ru');
+				} else {
+					get_countries(a);
+				}
+
+			}
 			$('#country-people' + numCount).select2({
 				placeholder: "Выберите страну",
 				templateSelection: formatStateInsurancePeople,
@@ -657,26 +673,26 @@ function Add() {
 			});
 
 			$('#country-people' + numCount).on("change", function (e) {
-				console.log('change');
+
 				var selectElementThree = document.getElementById("country-people" + numCount);
 				xml(selectElementThree)
 			})
 			const blockNumber = newBlock.querySelector('.number');
 			const blocks = document.querySelectorAll('.block');
-			blocks.forEach(function(item, index) {
-			const itemNumber = item.querySelector('.number');
-			if (checkbox.checked) {
-				itemNumber.textContent = index + 2;
-			} else {
-				itemNumber.textContent = index + 1;
-			}
+			blocks.forEach(function (item, index) {
+				const itemNumber = item.querySelector('.number');
+				if (checkbox.checked) {
+					itemNumber.textContent = index + 2;
+				} else {
+					itemNumber.textContent = index + 1;
+				}
 			});
 			checkbox.onchange = function () {
-			const startingNumber = checkbox.checked ? 2 : 1;
-			blocks.forEach(function(item, index) {
-				const itemNumber = item.querySelector('.number');
-				itemNumber.textContent = startingNumber + index;
-			});
+				const startingNumber = checkbox.checked ? 2 : 1;
+				blocks.forEach(function (item, index) {
+					const itemNumber = item.querySelector('.number');
+					itemNumber.textContent = startingNumber + index;
+				});
 			};
 
 		} else if (blockCount > 5) {
@@ -715,30 +731,27 @@ function AddPeoples() {
 	if (!isBlockAdded) {
 		if (!isBlockAdded) {
 			Add();
-			console.log(block);
+
 			isBlockAdded = true;
 
 
 		} else {
-			console.log('Не валидно');
+
 		}
 	} else if (isBlockAdded) {
-		console.log(block);
-		console.log('Блок уже добавлен');
+
+
 		if (block === undefined) {
 			Add();
 		}
 		for (let i = 0; i < block.length; i++) {
 			block[i].classList.add('was-validated');
-			console.log(block[i - 1])
+
 			if (block[i].checkValidity()) {
-				console.log('Проходит валидацию')
+
 				Add();
 
 			} else {
-				console.log(document.getElementById('kostil'))
-
-				console.log('Не проходит валидацию')
 
 			}
 		}
@@ -758,7 +771,7 @@ function formatStateInsurancePeople(state) {
 	var $state = $(
 		'<span><img class="img-flag" /> <span></span></span>'
 	);
-	//console.log(state);
+	//  
 	//var selectElement = document.getElementById("country"); 
 	//var selectedOptions = selectElement.selectedOptions; 
 	//for (var j = 0; j < selectedOptions.length; j++) {
@@ -766,7 +779,7 @@ function formatStateInsurancePeople(state) {
 
 	//    var attributes = option.getAttribute("data-name-flag")
 	//    console.log(attributes)
-	//    console.log(selectedOptions[j]);
+	//      
 	//}
 	var name = $('#country-people' + numCount + ' option[value="' + state.id + '"]').attr('data-flag-name');
 	// Use .text() instead of HTML string concatenation to avoid script injection issues
@@ -794,7 +807,7 @@ function OtherCoficent(a) {
 	var millisecondsPerYear = 365.25 * 24 * 60 * 60 * 1000;
 	var resultDate = (today.getTime() - birthday.getTime()) / millisecondsPerYear;
 	days = Math.floor(resultDate);
-	console.log(resultDate)
+
 	if (resultDate >= 65 && resultDate <= 75) {
 		a.setAttribute('data-other', 3);
 	} else if (resultDate > 75) {
@@ -816,17 +829,31 @@ function OtherCoficent(a) {
 	if (button) {
 		// Добавьте обработчик событий на кнопку
 		button.addEventListener('click', function (event) {
+			Resident()
 			// Получите ссылку на форму, связанную с кнопкой
 			var item = document.querySelector('.needs-validation')
 
 			// Проверьте форму на валидность
 			if (item.checkValidity() && results >= 500) {
-				block2.style.display = 'flex';
-				block1.style.display = 'none';
+				loadBlocks()
+					.then(() => {
+						// Скрыть прелоадер
+						if (preloader) {
+							preloader.classList.add('preloader_hidden');
+						}
+
+						// Показать загруженные блоки
+						block2.style.display = 'flex';
+						block1.style.display = 'none';
+					})
+					.catch((error) => {
+						console.error(error);
+					});
+
 			} else {
 				event.preventDefault();
 				event.stopPropagation();
-				console.log('Не валидно');
+
 			}
 
 			// Добавьте класс 'was-validated' к форме
@@ -840,123 +867,18 @@ function OtherCoficent(a) {
 
 })();
 
+function loadBlocks() {
+	return new Promise((resolve, reject) => {
+		// Здесь должна быть ваша логика загрузки блоков
+		// ...
+		preloader.classList.remove('preloader_hidden');
+		// В этом примере, мы просто задерживаем выполнение на 2 секунды
+		setTimeout(() => {
+			resolve();
+		}, 1000);
+	});
+}
 
-
-
-
-// function getFormData(formSelector1, formSelector2) {
-// 	console.log('getFormData');
-// 	console.log(formSelector1);
-// 	console.log(formSelector2);
-// 	const forms = [document.querySelector(formSelector1), document.querySelector(formSelector2)];
-// 	const result = [];
-
-// 	forms.forEach(form => {
-// 	  const formData = new FormData(form);
-// 	  const newFormData = new FormData();
-
-// 	  for (let [name, value] of formData.entries()) {
-// 		const element = form.querySelector(`[name="${name}"]`);
-// 		console.log(element);
-// 		const selectedIndex = element.selectedIndex;
-// 		const selectedOption = element.options[selectedIndex];
-// 		if (selectedOption !== undefined && selectedOption.hasAttribute('data-responce')) {
-// 		  const dataResponse = selectedOption.getAttribute('data-responce');
-// 		  console.log(`Name: ${name}, Data-Response: ${dataResponse}`);
-// 		  // ваш код для выполнения при наличии атрибута data-responce
-// 		  newFormData.append(name, dataResponse);
-
-// 		} else if (element.getAttribute('data-responce-list-people')) {
-// 		  console.log(value)
-// 		  const insuredList = [
-// 			{
-// 			  fname: 'aaa',
-// 			  age: 24,
-// 			},
-// 			{
-// 			  fname: 'bbb',
-// 			  age: 25,
-// 			},
-// 		  ];
-// 		  newFormData.append('insured_list', JSON.stringify(insuredList));
-// 		} else {
-// 		  console.log(`Name: ${name}`);
-// 		  // ваш код для выполнения при отсутствии атрибута data-responce или элемента selectedOption
-
-// 		  newFormData.append(name, value);
-// 		}
-// 	  }
-// 	  const json = JSON.stringify(Object.fromEntries(newFormData.entries()));
-// 	  result.push(JSON.parse(json));
-// 	  console.log(result);
-// 	});
-
-// 	return result;
-//   }
-
-
-// const insuredList = [];
-// function getFormData(formSelector1, formSelector2) {
-
-//   console.log('getFormData');
-//   console.log(formSelector1);
-//   console.log(formSelector2);
-//   const forms = [document.querySelector(formSelector1), document.querySelector(formSelector2)];
-//   const newFormData = new FormData();
-
-//   forms.forEach(form => {
-//     const formData = new FormData(form);
-//     for (let [name, value] of formData.entries()) {
-//       const element = form.querySelector(`[name="${name}"]`);
-//       console.log(element);
-//       if (element.tagName === 'SELECT') {
-//         const selectedIndex = element.selectedIndex;
-//         const selectedOption = element.options[selectedIndex];
-//         if (selectedOption !== undefined && selectedOption.hasAttribute('data-responce')) {
-//           const dataResponse = selectedOption.getAttribute('data-responce');
-//           console.log(`Name: ${name}, Data-Response: ${dataResponse}`);
-//           newFormData.append(name, dataResponse);
-//         } else {
-//           console.log(`Name: ${name}`);
-//           newFormData.append(name, 0);
-//         }
-//       } 
-
-
-
-//     } 
-//   });
-
-
-
-
-//   const insuredListName = document.getElementById('dateBirthday0').value
-//   const insuredListBirthday = document.getElementById('insurance__name-list').value;
-//   const diffDays = dateCouf(insuredListName);
-//   console.log(diffDays);
-//   insuredList.push({'fname': insuredListBirthday}, {'age': diffDays});
-
-
-
-
-
-//   console.log(document.getElementById('date__start').value);
-//   const days = CalcInsuranceDays();
-//   newFormData.append('days', days);
-//   newFormData.append('discount', 0);
-//   const insurant = {
-// 	"FirstName": "Адиль"
-//   };
-//   newFormData.append('insured_list', JSON.stringify(insuredList));
-//   newFormData.append('insurant', JSON.stringify(insurant));
-
-//   console.log(newFormData);
-
-
-
-
-
-// }
 
 
 
@@ -974,9 +896,9 @@ function OtherCoficent(a) {
 
 	;
 	button.addEventListener('click', function (event) {
-		
-		
-		
+
+
+
 		if (!document.querySelector('.block') && !checkbox.checked) {
 			document.querySelector('.hidden-attentional-sec').style.display = 'flex'
 			setTimeout(function () {
@@ -988,28 +910,45 @@ function OtherCoficent(a) {
 					// Получите ссылку на форму, связанную с кнопкой
 					if (form.checkValidity() && item.checkValidity()) {
 
-						block2.style.display = 'none';
-						block3.style.display = 'block';
-						console.log('Валидно');
-						append()
+						loadBlocks()
+							.then(() => {
+								// Скрыть прелоадер
+								if (preloader) {
+									preloader.classList.add('preloader_hidden');
+								}
+
+								// Показать загруженные блоки
+								block2.style.display = 'none';
+								block3.style.display = 'block';
+							})
+							.catch((error) => {
+								console.error(error);
+							});
 					} else {
 
 
 						event.preventDefault();
 						event.stopPropagation();
-						console.log('Не валидно');
+
 					}
 				})
 			} else {
 				if (form.checkValidity()) {
-					block2.style.display = 'none';
-					block3.style.display = 'block';
-					console.log('Валидно');
-					append()
+					loadBlocks()
+						.then(() => {
+							// Скрыть прелоадер
+							if (preloader) {
+								preloader.classList.add('preloader_hidden');
+							}
+
+							// Показать загруженные блоки
+							block2.style.display = 'none';
+							block3.style.display = 'block';
+						})
 				} else {
 					event.preventDefault();
 					event.stopPropagation();
-					console.log('Не валидно');
+
 
 				}
 			}
@@ -1017,15 +956,12 @@ function OtherCoficent(a) {
 
 		form.classList.add('was-validated');
 		document.querySelectorAll('.custom-dates').forEach(function (item) {
-			maskDateInput(item)
+			maskDateInput(item, undefined, '324234')
 		})
 		document.querySelectorAll('.phone-insuarance').forEach(function (item) {
 			ValidateMaskPhone(item)
-			item.addEventListener('input', function (e) {
-				ValidateMaskPhone(item)
-			});
 		});
-	
+
 	}, false);
 
 })();
@@ -1065,7 +1001,7 @@ function checkAge() {
 
 
 function append() {
-	console.log('append');
+
 	if (checkbox.checked) {
 		var country0Res = "Kazakhstan"
 	} else {
@@ -1089,7 +1025,7 @@ function append() {
 			"Passport": document.getElementById('pasport0').value,
 			"DOB": document.getElementById('dateBirthday0').value,
 			"PassportDate": document.getElementById('datePasportStart0').value,
-			
+
 			"ResidentCountry": country0Res,
 			"Phone": document.getElementById('Phone0').value,
 			"Address": document.getElementById('adress0').value
@@ -1100,7 +1036,7 @@ function append() {
 	//Цикл для  добавления всех застрахованных в OBJ
 	var allBlock = document.querySelectorAll('.block')
 	if (checkbox.checked) {
-		console.log('checked');
+
 		for (var i = 0; i <= allBlock.length; i++) {
 			var lname = document.getElementById('LastName' + [i]).value;
 			var pasport = document.getElementById('pasport' + [i]).value;
@@ -1111,11 +1047,11 @@ function append() {
 			var age = calculateAgeInYears(document.getElementById('dateBirthday' + [i]).value)
 			var PassportDate = document.getElementById('datePasportStart' + [i]).value;
 			var country = "Kazakhstan"
-			console.log(i);
+
 			obj.insured_list.push({ "FirstName": fname, "LastName": lname, "IIN": iin, "Passport": pasport, "DOB": dob, "PassportDate": PassportDate, "ResidentCountry": country, "Phone": phone, "age": age })
 		}
 	} else {
-		console.log('unchecked');
+
 		if (allBlock.length >= 1) {
 			for (var i = 1; i <= allBlock.length; i++) {
 				var lname = document.getElementById('LastName' + [i]).value;
@@ -1127,7 +1063,7 @@ function append() {
 				var age = calculateAgeInYears(document.getElementById('dateBirthday' + [i]).value)
 				var PassportDate = document.getElementById('datePasportStart' + [i]).value;
 				var country = selectaInCountry('country-people' + [i])
-				console.log(i);
+
 				obj.insured_list.push({ "FirstName": fname, "LastName": lname, "IIN": iin, "Passport": pasport, "DOB": dob, "PassportDate": PassportDate, "ResidentCountry": country, "Phone": phone, "age": age })
 			}
 		} else {
@@ -1155,10 +1091,10 @@ function append() {
 
 	var ter = [];
 	selectedOptions.forEach(function (option) {
-		var atributes =option.element.value;
+		var atributes = option.element.value;
 		ter.push(atributes);
 	});
-	console.log(ter)
+
 	if (ter.length > 1) {
 		obj.territory = ter.map(function (item) {
 			return item;
@@ -1179,18 +1115,18 @@ function append() {
 	const str = JSON.stringify(obj);
 	// formData.append('file', input.files[0]);
 	for (var i = 0; i <= numCount; i++) {
-		console.log(i);
+
 		var input = document.getElementById('uploaddocs' + i);
 		var formDataIin = document.getElementById('IIN' + i).value; // получаем значение из элемента формы
 
 		formData.append(`file[${formDataIin}]`, input.files[0]);
 	}
-	console.log(formData);
+
 	// for (var pair of formData.entries()) {
-	// 	console.log(pair[0]+ ', '+ pair[1]); 
+	// 	   
 	// }
 	let files = formData.getAll('file');
-	console.log(files);
+
 
 	formData.append('json', str);
 
@@ -1206,14 +1142,14 @@ function append() {
 
 
 document.querySelector('.targetTextCss').addEventListener('click', function () {
-	console.log('click');
-	console.log(numCount);
+
+
 	for (var i = 0; i <= numCount; i++) {
-		console.log(i);
+
 		var input = document.getElementById('uploaddocs' + i);
 		var formDataIin = document.getElementById('IIN' + i)
-		console.log(formDataIin);
-		console.log(input.files[0]);
+
+
 		//  formData.append(`file[${formDataIin}]`, input.files[0]);
 	}
 });
@@ -1223,8 +1159,8 @@ document.querySelector('.targetTextCss').addEventListener('click', function () {
 
 //Считает разницу в днях между датами
 function calculateDaysDiff(dateString1, dateString2) {
-	console.log(dateString1);
-	console.log(dateString2);
+
+
 	const parts = dateString1.split('.');
 	const dateStrings1 = `${parts[2]}-${parts[1]}-${parts[0]}`;
 	const parts2 = dateString2.split('.');
@@ -1346,7 +1282,7 @@ function convert(data) {
 
 	const itogSum = data.insurance_premium;
 	document.querySelector('.total__text-num').innerHTML = itogSum
-	console.log(data);
+
 	const insurantData = data.insurant;
 
 	Object.entries(insurantData).forEach(([key, value]) => {
@@ -1355,16 +1291,16 @@ function convert(data) {
 			if (element.getAttribute('data-beckend-response') === key) element.innerHTML = value;
 			else if (element.getAttribute('data-beckend-response') === 'LastName') element.innerHTML = insurantData.LastName + ' ' + insurantData.FirstName;
 		});
-		console.log(`${key}: ${value}`);
+
 	});
-	console.log(data.insured_list.length);
+
 	for (let i = 0; i < data.insured_list.length; i++) {
-		console.log(`Это: insured_list ${i}`);
+
 		const insuredList = data.insured_list[i];
-		console.log(i);
+
 		collectInsurance(i);
 		const elements = document.querySelectorAll(`[data-beckend-response-insured][data-insured-index="${i}"]`);
-		console.log(elements);
+
 		Object.entries(insuredList).forEach(([key, value]) => {
 
 			let element;
@@ -1373,13 +1309,13 @@ function convert(data) {
 					element = el;
 				}
 			});
-			console.log();
+
 			if (element) {
 				element.innerHTML = value;
 				if (key === 'LastName') {
-					console.log('LastName');
+
 					const nameElements = document.querySelectorAll(`[data-beckend-response-insured][data-insured-index="${i}"][data-beckend-response-insured="LastName"]`);
-					console.log(nameElements);
+
 					nameElements.forEach(nameElement => {
 						nameElement.innerHTML = insuredList.LastName + ' ' + insuredList.FirstName;
 					});
@@ -1403,7 +1339,7 @@ function convert(data) {
 
 function collectInsurance(index) {
 	var container = document.querySelector('.accordion-subinsuarnce');
-	console.log(index);
+
 	if (index >= 0) {
 		document.getElementById('delete-acc').style.display = 'block';
 	}
@@ -1469,9 +1405,9 @@ function collectInsurance(index) {
 
 	inputBlocks.forEach((inputBlock) => {
 		const insuredIndex = inputBlock.dataset.insuredIndex;
-		console.log(inputBlock.querySelector('.number'));
+
 		if (inputBlock.querySelector('.number') === index) {
-			console.log('Дубликат');
+
 			isDuplicate = true; // если индексы совпадают, значит застрахованный уже существует
 		}
 	});
@@ -1519,242 +1455,242 @@ function ClearInputNameLastName(a) {
 
 let datepicker;
 function maskDateInput(input, values, secondInput) {
-	
+
 
 	input.addEventListener('keydown', event => {
 		const value = input.value;
 		const cursorPos = input.selectionStart;
-	  
+
 		if (event.key === 'Backspace' && value && cursorPos === value.length) {
-		  // Разрешить удаление
+			// Разрешить удаление
 		} else if (event.key === 'Delete' && value && cursorPos === value.length) {
-		  // Разрешить удаление
+			// Разрешить удаление
 		} else if (!event.key.match(/^[a-zA-Z0-9а-яА-ЯёЁ]$/)) {
-		  // Запретить ввод других символов
-		  event.preventDefault();
+			// Запретить ввод других символов
+			event.preventDefault();
 		}
-	  });
-		const value = input.value.replace(/\D/g, '');
+	});
+	const value = input.value.replace(/\D/g, '');
 
-		const datePattern = /^(\d{1,2})(\d{0,2})(\d{0,4})$/;
-		const letterPattern = /[^\d]/; // matches any character that is not a digit
-		if (datePattern.test(value) && !letterPattern.test(value)) {
-			const day = value.slice(0, 2);
-			const month = value.slice(2, 4);
-			const year = value.slice(4, 8);
+	const datePattern = /^(\d{1,2})(\d{0,2})(\d{0,4})$/;
+	const letterPattern = /[^\d]/; // matches any character that is not a digit
+	if (datePattern.test(value) && !letterPattern.test(value)) {
+		const day = value.slice(0, 2);
+		const month = value.slice(2, 4);
+		const year = value.slice(4, 8);
 
-			function isLeapYear(year) {
-				return typeof year === 'number' && ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0);
-			}
-
-
-			const currentDate = new Date();
-			const inputDate = new Date(year, month - 1, day);
-			inputDate.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
-
-			const firstInputInput = dateStart.value;
-			const [dayFirst, monthFirst, yearFirst] = firstInputInput.split('.');
-			const firstInput = new Date(yearFirst, monthFirst - 1, dayFirst);
-			firstInput.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
-
-			const currentYear = currentDate.getFullYear();
-			const currentMonth = String(currentDate.getMonth() + 1).padStart(2, '0');
-			const currentDay = String(currentDate.getDate()).padStart(2, '0');
-
-			const currentDateFormatted = `${currentYear}-${currentMonth}-${currentDay}`;
-			const currentDateObj = new Date(currentDateFormatted);
-			currentDateObj.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
+		function isLeapYear(year) {
+			return typeof year === 'number' && ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0);
+		}
 
 
-			const birthdayDate = new Date();
+		const currentDate = new Date();
+		const inputDate = new Date(year, month - 1, day);
+		inputDate.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
 
-			// Set the date when the person turns 18
-			const birthYear = birthdayDate.getFullYear() - 18;
-			const birthMonth = birthdayDate.getMonth() + 1; // January is 0
-			const birthDay = birthdayDate.getDate();
-			const birthDate = new Date(birthYear, birthMonth - 1, birthDay, 0, 0, 0, 0);
-			birthDate.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
+		const firstInputInput = dateStart.value;
+		const [dayFirst, monthFirst, yearFirst] = firstInputInput.split('.');
+		const firstInput = new Date(yearFirst, monthFirst - 1, dayFirst);
+		firstInput.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
+
+		const currentYear = currentDate.getFullYear();
+		const currentMonth = String(currentDate.getMonth() + 1).padStart(2, '0');
+		const currentDay = String(currentDate.getDate()).padStart(2, '0');
+
+		const currentDateFormatted = `${currentYear}-${currentMonth}-${currentDay}`;
+		const currentDateObj = new Date(currentDateFormatted);
+		currentDateObj.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
 
 
+		const birthdayDate = new Date();
+
+		// Set the date when the person turns 18
+		const birthYear = birthdayDate.getFullYear() - 18;
+		const birthMonth = birthdayDate.getMonth() + 1; // January is 0
+		const birthDay = birthdayDate.getDate();
+		const birthDate = new Date(birthYear, birthMonth - 1, birthDay, 0, 0, 0, 0);
+		birthDate.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
 
 
 
-			let formattedDate = '';
-			if (values === 'plus') {
-				if (value.length === 8) {
-					if (inputDate > currentDateObj || inputDate.getTime() === currentDateObj.getTime()) {
-						input.value = '';
-						return;
-					} else {
-						if (input.id = 'datePasportStart0') {
-							if (inputDate < currentDateObj || inputDate.getTime() === currentDateObj.getTime()) {
-
-								//datePasportAll
-								//datePasport0
-								if (datePasport0) {
-
-									datePasport0.selectDate(inputDate);
-								}
-								//  if (datePasportAll) {
-								// 		dateBirthdayAll.selectDate(inputDate);
-								// 	  }
-							}
-						}
-					}
-				}
-			} else if (values === 'minus') {
-				if (value.length === 8) {
-
-					if (inputDate < currentDateObj || inputDate.getTime() === currentDateObj.getTime()) {
-						input.value = '';
-						return;
-					} else {
-
-						console.log(document.getElementById('date__start'));
-						if (firstInput > currentDateObj || firstInput.getTime() === currentDateObj.getTime()) {
-							if (datepickerModificedStart) {
-
-								document.getElementById('date__start').value = firstInput
-								datepickerModificedStart.selectDate(firstInput);
-							}
-						}
-
-					}
-				}
-			} else if (values === 'modificed') {
-				if (value.length === 8) {
-
-					if (inputDate < firstInput || inputDate.getTime() === firstInput.getTime()) {
-						input.value = '';
-						return;
-					} else {
-						if ((firstInput > currentDateObj || firstInput.getTime() === currentDateObj.getTime()) && (inputDate > firstInput || inputDate.getTime() === firstInput.getTime())) {
-							if (datepickerModificedEnd && datepickerModificedStart) {
-								datepickerModificedEnd.selectDate(inputDate);
-
-							}
-						}
 
 
-
-						if (target.value == 2) {
-							document.querySelector('.hidden-sportype').style.display = 'none';
-							document.querySelector('.hidden-sportcategory').style.display = 'none';
-							document.getElementById('sporttype').removeAttribute("required");
-							document.getElementById('categorysporttype').removeAttribute("required");
-							target.value = ''
-						} else {
-							target.value = ''
-						}
-
-						endNum.innerHTML = "0" + ' ' + '₸';
-						priceNum.innerHTML = "0" + ' ' + '₸';
-
-						target.removeAttribute('disabled')
-					}
-				}
-			} else if (values === 'birthday') {
-				if (value.length === 8) {
-
-					if (inputDate > birthDate || currentDate.getTime() === birthDate.getTime()) {
-
-						input.value = '';
-						input.placeholder = 'Страхователь может быть не младше 18 лет'
-						return;
-
-					} else {
-						if (input.id = 'dateBirthday' + numCount) {
-							if (inputDate < birthDate || currentDate.getTime() === birthDate.getTime()) {
-
-								//datePasportAll
-								//datePasport0
-								if (dateBirthday0) {
-									var valued = firstInput.getDate().toString().padStart(2, '0') + '.' +
-										(firstInput.getMonth() + 1).toString().padStart(2, '0') + '.' +
-										firstInput.getFullYear();
-									var parts = valued.split('.');
-									var selectedDate = new Date(parts[2], parts[1] - 1, parts[0]);
-
-									dateBirthday0.selectDate(inputDate);
-								}
-
-							}
-						}
-					}
-				}
-			}
-		
+		let formattedDate = '';
+		if (values === 'plus') {
 			if (value.length === 8) {
-				if (inputDate.toString() === "Invalid Date" && typeof day == 'number' && typeof month == 'number' && typeof year == 'number') {
+				if (inputDate > currentDateObj || inputDate.getTime() === currentDateObj.getTime()) {
 					input.value = '';
 					return;
 				} else {
-				
-					if (secondInput) {
-						if (form.classList.contains('was-validated')) {
-							input.classList.remove('is-invalid');
-							ValidateInJs_CORRECT(input)
-						}
-					} else {
-						if (document.querySelector('.needs-validation').classList.contains('was-validated')) {
-							input.classList.remove('is-invalid');
-							ValidateInJs_CORRECT(input)
+					if (input.id = 'datePasportStart0') {
+						if (inputDate < currentDateObj || inputDate.getTime() === currentDateObj.getTime()) {
+
+							//datePasportAll
+							//datePasport0
+							if (datePasport0) {
+
+								datePasport0.selectDate(inputDate);
+							}
+							//  if (datePasportAll) {
+							// 		dateBirthdayAll.selectDate(inputDate);
+							// 	  }
 						}
 					}
-					console.log('else');
+				}
+			}
+		} else if (values === 'minus') {
+			if (value.length === 8) {
+
+				if (inputDate < currentDateObj || inputDate.getTime() === currentDateObj.getTime()) {
+					input.value = '';
+					return;
+				} else {
+
+
+					if (firstInput > currentDateObj || firstInput.getTime() === currentDateObj.getTime()) {
+						if (datepickerModificedStart) {
+
+							document.getElementById('date__start').value = firstInput
+							datepickerModificedStart.selectDate(firstInput);
+						}
+					}
 
 				}
+			}
+		} else if (values === 'modificed') {
+			if (value.length === 8) {
+
+				if (inputDate < firstInput || inputDate.getTime() === firstInput.getTime()) {
+					input.value = '';
+					return;
+				} else {
+					if ((firstInput > currentDateObj || firstInput.getTime() === currentDateObj.getTime()) && (inputDate > firstInput || inputDate.getTime() === firstInput.getTime())) {
+						if (datepickerModificedEnd && datepickerModificedStart) {
+							datepickerModificedEnd.selectDate(inputDate);
+
+						}
+					}
 
 
 
+					if (target.value == 2) {
+						document.querySelector('.hidden-sportype').style.display = 'none';
+						document.querySelector('.hidden-sportcategory').style.display = 'none';
+						document.getElementById('sporttype').removeAttribute("required");
+						document.getElementById('categorysporttype').removeAttribute("required");
+						target.value = ''
+					} else {
+						target.value = ''
+					}
+
+					endNum.innerHTML = "0" + ' ' + '₸';
+					priceNum.innerHTML = "0" + ' ' + '₸';
+
+					target.removeAttribute('disabled')
+				}
+			}
+		} else if (values === 'birthday') {
+			if (value.length === 8) {
+
+				if (inputDate > birthDate || currentDate.getTime() === birthDate.getTime()) {
+
+					input.value = '';
+					input.placeholder = 'Страхователь может быть не младше 18 лет'
+					return;
+
+				} else {
+					if (input.id = 'dateBirthday' + numCount) {
+						if (inputDate < birthDate || currentDate.getTime() === birthDate.getTime()) {
+
+							//datePasportAll
+							//datePasport0
+							if (dateBirthday0) {
+								var valued = firstInput.getDate().toString().padStart(2, '0') + '.' +
+									(firstInput.getMonth() + 1).toString().padStart(2, '0') + '.' +
+									firstInput.getFullYear();
+								var parts = valued.split('.');
+								var selectedDate = new Date(parts[2], parts[1] - 1, parts[0]);
+
+								dateBirthday0.selectDate(inputDate);
+							}
+
+						}
+					}
+				}
+			}
+		}
+
+		if (value.length === 8) {
+			if (inputDate.toString() === "Invalid Date" && typeof day != 'number' && typeof month != 'number' && typeof year != 'number') {
+				input.value = '';
+				return;
 			} else {
-			
+
 				if (secondInput) {
-			
 					if (form.classList.contains('was-validated')) {
-				
-						input.classList.add('is-invalid');
-						ValidateInJs_UNCORRECT(input)
+						input.classList.remove('is-invalid');
+						ValidateInJs_CORRECT(input)
 					}
 				} else {
-					
 					if (document.querySelector('.needs-validation').classList.contains('was-validated')) {
-			
-						input.classList.add('is-invalid');
-						ValidateInJs_UNCORRECT(input)
-						
+						input.classList.remove('is-invalid');
+						ValidateInJs_CORRECT(input)
 					}
 				}
 
-
-				if (day) {
-					formattedDate += day;
-
-					if (day.length === 2 && month) {
-						formattedDate += '.';
-					}
-				}
-
-				if (month) {
-					formattedDate += month;
-
-					if (month.length === 2 && year) {
-						formattedDate += '.';
-					}
-				}
-
-				if (year) {
-					formattedDate += year.slice(0, 4);
-				}
-
-				input.value = formattedDate;
-				
 
 			}
+
+
+
 		} else {
-			input.value = '';
+
+			if (secondInput) {
+				console.log('secondInput')
+				if (form.classList.contains('was-validated')) {
+					console.log('secondInput')
+					input.classList.add('is-invalid');
+					ValidateInJs_UNCORRECT(input)
+				}
+			} else {
+
+				if (document.querySelector('.needs-validation').classList.contains('was-validated')) {
+
+					input.classList.add('is-invalid');
+					ValidateInJs_UNCORRECT(input)
+
+				}
+			}
+
+
+			if (day) {
+				formattedDate += day;
+
+				if (day.length === 2 && month) {
+					formattedDate += '.';
+				}
+			}
+
+			if (month) {
+				formattedDate += month;
+
+				if (month.length === 2 && year) {
+					formattedDate += '.';
+				}
+			}
+
+			if (year) {
+				formattedDate += year.slice(0, 4);
+			}
+
+			input.value = formattedDate;
+
+
 		}
-	
+	} else {
+		input.value = '';
+	}
+
 
 }
 
@@ -1764,64 +1700,64 @@ function get_countries(current_lang, resident) {
 		// url: 'https://dms.interteach.kz/ajax/ajax_get_country.php',
 		dataType: "json",
 		success: function (data) {
-				
-				if (resident) {
-				
-					var option_data_kz = '<option value=""  disabled class="sel" >Выберите страну</option> <option  data-currency="KZT" data-zone="3" data-flag-name="kz"  data-name-lat="Kazakhstan" value="16">Казахстан</option> ';
-				} else {
-					var option_data = '<option value=""  class="selcountry" >Выберите страну</option>'
-				}
-	
-	
-				let name = '';
-				$.each(data, function (i, dat) {
-					switch (current_lang) {
-						case 'ru':
-							name = dat.name;
-							break;
-						case 'kz':
-							name = dat.name_kz;
-							break;
-						case 'lat':
-							name = dat.name_lat;
-							break;
-						case 'en':
-							name = dat.name_en;
-							break;
-						default:
-							name = dat.name;
-							break;
-					}
-					if (resident) {
-						option_data_kz += '<option value="' + dat.country_id + '" data-currency="' + dat.currency + '"data-zone="' + dat.zone + '" data-name-lat="' + dat.name_en + '">' + name + '</option>';
-					} else {
-						option_data += '<option value="' + dat.country_id + '" data-currency="' + dat.currency + '"data-zone="' + dat.zone + '" data-name-lat="' + dat.name_en + '">' + name + '</option>';
-	
-					}
-				});
-	
-				//console.log(option_data);
-				$('#country').html(option_data);
-				console.log(numCount)
-				if (resident) {
-					$('#country-people' + numCount).prop('disabled', true);
-					$('#country-people' + numCount).html(option_data_kz);
-				} else {
-					var countryPeopleElem = $('#country-people' + numCount);
-					console.log(countryPeopleElem);
-				
-					if (countryPeopleElem.html() !== option_data) {
-						countryPeopleElem.prop('disabled', false);
-						countryPeopleElem.removeAttr('disabled');
-						countryPeopleElem.html(option_data);
-					}
-				}
-				
+
+			if (resident) {
+
+				var option_data_kz = '<option value=""  disabled class="sel" >Выберите страну</option> <option  data-currency="KZT" data-zone="3" data-flag-name="kz"  data-name-lat="Kazakhstan" value="16">Казахстан</option> ';
+			} else {
+				var option_data = '<option value=""  class="selcountry" >Выберите страну</option>'
 			}
-		
-			
-		});
-	}
+
+
+			let name = '';
+			$.each(data, function (i, dat) {
+				switch (current_lang) {
+					case 'ru':
+						name = dat.name;
+						break;
+					case 'kz':
+						name = dat.name_kz;
+						break;
+					case 'lat':
+						name = dat.name_lat;
+						break;
+					case 'en':
+						name = dat.name_en;
+						break;
+					default:
+						name = dat.name;
+						break;
+				}
+				if (resident) {
+					option_data_kz += '<option value="' + dat.country_id + '" data-currency="' + dat.currency + '"data-zone="' + dat.zone + '" data-name-lat="' + dat.name_en + '">' + name + '</option>';
+				} else {
+					option_data += '<option value="' + dat.country_id + '" data-currency="' + dat.currency + '"data-zone="' + dat.zone + '" data-name-lat="' + dat.name_en + '">' + name + '</option>';
+
+				}
+			});
+
+			//  
+			$('#country').html(option_data);
+
+			if (resident) {
+				$('#country-people' + numCount).prop('disabled', true);
+				$('#country-people' + numCount).html(option_data_kz);
+			} else {
+				var countryPeopleElem = $('#country-people' + numCount);
+
+
+				if (countryPeopleElem.html() !== option_data) {
+					countryPeopleElem.prop('disabled', false);
+					countryPeopleElem.removeAttr('disabled');
+					countryPeopleElem.html(option_data);
+				}
+			}
+
+		}
+
+
+	});
+}
 
 
 
@@ -1873,7 +1809,7 @@ function get_countries(current_lang, resident) {
 
 // 		select.disabled = false;
 // 	});
-	
+
 // }
 function UploadFiles() {
 
@@ -1883,7 +1819,7 @@ function UploadFiles() {
 	const inputs = document.querySelectorAll('.field__file'); // получаем input элемент по ID
 
 	for (let i = 0; i < inputs.length; i++) {
-		console.log(inputsLabel[i])
+
 		const formInput = document.getElementById('formInputMes' + i);
 		const countEl = document.getElementById('fileText' + i)
 		document.getElementById('invalidfd0').classList.add('changeid')
@@ -1892,14 +1828,14 @@ function UploadFiles() {
 			const files = this.files; // получаем массив выбранных файлов
 
 			let totalSize = 0; // устанавливаем начальное значение суммарного размера файлов
-			console.log(countEl)
+
 			for (let i = 0; i < files.length; i++) {
 				const file = files[i];
 
 				// проверяем тип файла
 				if (!file.type.includes('image')) {
 					event.preventDefault(); // отменяем действие по умолчанию (добавление файла)
-					console.log(invalid)
+
 					invalid.innerHTML = `Файл должен быть изображением`;
 					invalid.style.display = 'block';
 					inputsLabel[i].classList.add('is-invalid');
