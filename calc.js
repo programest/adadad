@@ -40,8 +40,8 @@ if (dateStart) {
 			if (program.value == '2') {
 				// Если выбран Multi Trip:
 				nextmonths()
-
 			} else {
+				
 				// Если выбран Base Trip:
 				dateEnd.removeAttribute('disabled')
 				CalcInsuranceDays()

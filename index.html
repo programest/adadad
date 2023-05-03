@@ -550,7 +550,7 @@
 																	class="insurance__program-label form-label mb-lg-1 mb-1">Адрес</label>
 																<input type="text"
 																	class="insurance__program-aria get-info itsinputs form-control"
-																	required id="adress0"
+																	required id="adress0" maxlength="30"
 																	placeholder="Проспект Назарбаева 269">
 																<div class="invalid-feedback">
 																	Пожалуйста, укажите ваш адрес
@@ -559,8 +559,8 @@
 															<div
 																class="insurance__program insurance__form-block flex-column d-flex mb-lg-4 mb-3 ">
 																<label for="IIN0"
-																	class="insurance__program-label form-label mb-lg-1 mb-1">ИИН</label>
-																<input type="text"
+																	class="insurance__program-label form-label mb-lg-1 mb-1"  >ИИН</label>
+																<input type="text" 
 																	class="insurance__program-aria get-info form-control itsinputs"
 																	id="IIN0" placeholder="000000000000" required=""
 																	minlength="12" maxlength="12" pattern="\d{12}$"
@@ -574,15 +574,15 @@
 
 															<div
 																class="insurance__program insurance__form-block flex-column d-flex mb-lg-4 mb-3 ">
-																<div class="form__input-file" id="formInputMes0">
-																	<label for=""
-																		class=" insurance__program-label  mb-lg-1 mb-1">Копии
+																<div class="form__input-file" id="formInputMes0" >
+																	<label for="uploaddocs0" 
+																		class=" insurance__program-label form-label  mb-lg-1 mb-1" >Копии
 																		документов:</label>
-																	<input class=" field__file form-label" type="file"
-																		id="uploaddocs0" required accept="image/*">
+																	<input class=" field__file " type="file"
+																		id="uploaddocs0" required accept="image/*" >
 																	<label for="file"
-																		class="insurance__program-aria  d-flex align-items-center justify-content-between pe-0 form-control insurance-upload">
-																		<div class="file-block_text">
+																		class="insurance__program-aria  d-flex align-items-center justify-content-between pe-0  insurance-upload form-control changeid" id="uploadid0" required  >
+																		<div class="file-block_text" >
 																			<span class="file-text"
 																				id="fileText0">Выбрать
 																				файл</span>
@@ -717,7 +717,7 @@
 
 
 																		<div class="form__add-people-img form__action-img ms-2 d-flex align-items-center justify-content-center"
-																			id="add-button" onclick='AddPeoples()'>
+																			id="add-button" onclick='AddPeoples(event)'>
 																			<p
 																				class="form__add-people-text form__action-text me-3">
 																				Добавить</p>
@@ -812,21 +812,22 @@
 												class=" insurance__button-second-section insurance__people-button col-8 d-flex  justify-content-center align-items-center puy">
 												Оформить полис</div>
 										</div>
+										
+									</div>
+									<div class="toast   " role="alert" aria-live="assertive"
+									aria-atomic="true">
+									<div class="toast-header justify-content-between" data-bs-autohide="false">
+										<p class="toast-title mb-0">Ошибка!!!</p>
+										<button type="button" class="btn-close" data-bs-dismiss="toast"
+											aria-label="Закрыть"></button>
+									</div>
+									<div class="toast-body">
+										Привет мир! Это тост-сообщение.
 									</div>
 
-									<div class="toast   position-absolute" role="alert" aria-live="assertive"
-										aria-atomic="true">
-										<div class="toast-header justify-content-between" data-bs-autohide="false">
-											<p class="toast-title mb-0">Ошибка!!!</p>
-											<button type="button" class="btn-close" data-bs-dismiss="toast"
-												aria-label="Закрыть"></button>
-										</div>
-										<div class="toast-body">
-											Привет мир! Это тост-сообщение.
-										</div>
 
-
-									</div>
+								</div>
+									
 								</div>
 							</form>
 							<form action="" class=" block__insurance-form3" id="section3">

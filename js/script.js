@@ -584,56 +584,63 @@ const container = document.querySelector('.insurance-block-add')
 const addButtonContainer = document.querySelector('.form__add-people-block')
 const childaddButtonContainer = document.querySelector('.form__action-people')
 
-
+var max = 4;
+checkbox.addEventListener('change', function () {
+	if (checkbox.checked) {
+		console.log('false')
+		max = 4;
+		if (blockCount > max) {
+			
+			const blocks = document.querySelectorAll('.block');
+			const lastBlock = blocks[blocks.length - 1];
+			container.removeChild(lastBlock);
+			blockCount--;
+			numCount--;
+			x--
+			otherCoefficient = 1;
+		}
+	} else {
+		console.log('false')
+		max = 5;
+		if (blockCount > max) {
+			const blocks = document.querySelectorAll('.block');
+			const lastBlock = blocks[blocks.length - 1];
+			container.removeChild(lastBlock);
+			blockCount--;
+			numCount--;
+			x--
+			otherCoefficient = 1;
+		}
+	}
+});
+var x = 0;
 function Add() {
-
 	const xhr = new XMLHttpRequest();
 	xhr.open('GET', 'fd.html', true);
 	xhr.onreadystatechange = function () {
-		if (xhr.readyState === 4 && xhr.status === 200 && blockCount <= 5) {
+		if (xhr.readyState === 4 && xhr.status === 200 && blockCount <= max) {
 			const newBlock = document.createElement('div');
 			newBlock.innerHTML = xhr.responseText.trim();
 			newBlock.setAttribute('class', 'block');
 			container.appendChild(newBlock);
+			const allIds = newBlock.querySelectorAll('[id]');
+			allIds.forEach(function (item) {
+			  const oldId = item.getAttribute('id');
+			  const newId = oldId.replace(/(\d+)/, function(match,number) {
+				var m = parseInt(number) + x;
+				DateAnOBj(m)
+				return parseInt(number) + x;
+			  });
+			
+			  item.setAttribute('id', newId);
+			});
+			block = newBlock.querySelectorAll('.needs-validation-addblock');
+			
 			var n = newBlock.querySelectorAll('.changeid')
 
-			block = newBlock.querySelectorAll('.needs-validation-addblock');
-
-			for (let i = 0; i < n.length; i++) {
-				var motg = n[i].id.slice(0, -1)
-				n[i].setAttribute('id', `${motg}${blockCount}`)
 
 
-				new AirDatepicker('#dateBirthday' + blockCount, {
-					autoClose: true,
-
-					onSelect: function (formattedDate, date) {
-						var ininput = formattedDate.datepicker.$el
-
-						OtherCoficent(ininput);
-
-						maskDateInput(ininput, undefined, 'asd')
-
-					},
-					maxDate: new Date(),
-
-				});
-				datePasportAll = new AirDatepicker('#datePasportStart' + blockCount, {
-					autoClose: true,
-
-					onSelect: function (formattedDate, date) {
-						var ininput = formattedDate.datepicker.$el
-
-						maskDateInput(ininput, undefined, 'asd')
-					},
-
-					maxDate: new Date(),
-
-				});
-			}
-
-
-
+			x++
 			blockCount++;
 			numCount++;
 
@@ -659,24 +666,7 @@ function Add() {
 				}
 
 			}
-			$('#country-people' + numCount).select2({
-				placeholder: "Выберите страну",
-				templateSelection: formatStateInsurancePeople,
-				language: {
-					noResults: function () {
-						return 'Результатов не найдено'; // текст для пустых результатов поиска
-					},
-					maximumSelected: function () {
-						return 'Вы можете выбрать только 10 элементов'; // текст для превышения максимального количества выбранных элементов
-					}
-				}
-			});
-
-			$('#country-people' + numCount).on("change", function (e) {
-
-				var selectElementThree = document.getElementById("country-people" + numCount);
-				xml(selectElementThree)
-			})
+			
 			const blockNumber = newBlock.querySelector('.number');
 			const blocks = document.querySelectorAll('.block');
 			blocks.forEach(function (item, index) {
@@ -695,7 +685,8 @@ function Add() {
 				});
 			};
 
-		} else if (blockCount > 5) {
+		} else if (blockCount >= max) {
+	
 			var toastBody = document.querySelector('.toast-body')
 			toastBody.innerHTML = 'Не может быть больше 5 туристов '
 			BsAlert.show();
@@ -710,13 +701,34 @@ function Add() {
 
 
 }
-function RemovePeoples() {
-	const blocks = document.querySelectorAll('.block');
-	const lastBlock = blocks[blocks.length - 1];
-	container.removeChild(lastBlock);
-	blockCount--;
+
+
+function RemovePeoples(event) {
+	const clickedElement = event.target;
+	const formElement = clickedElement.closest('.block');
+	
+	container.removeChild(formElement);
+	blockCount --;
 	numCount--;
 	otherCoefficient = 1;
+  
+	// Перезаписываем id всех элементов в оставшихся блоках
+	const allBlocks = document.querySelectorAll('.block');
+	allBlocks.forEach(function (block, index) {
+	  const allIds = block.querySelectorAll('[id]');
+	  allIds.forEach(function (item) {
+		const oldId = item.getAttribute('id');
+		const newId = oldId.replace(/(\d+)/, function(match) {
+			DateAnOBj(index)
+		  return index + 1;
+		});
+		item.setAttribute('id', newId);
+	  });
+	  const blockNumber = block.querySelector('.number');
+	  blockNumber.textContent = index + 1;
+	});
+	x--
+	const blocks = document.querySelectorAll('.block');
 	if (blocks.length > 1) {
 		block = blocks[blocks.length - 2] ? blocks[blocks.length - 2].querySelectorAll('.needs-validation-addblock') : null;
 	} else {
@@ -724,35 +736,34 @@ function RemovePeoples() {
 	}
 }
 
+
+
 let isBlockAdded = false;
 
 function AddPeoples() {
-
+	
 	if (!isBlockAdded) {
 		if (!isBlockAdded) {
 			Add();
-
+			
 			isBlockAdded = true;
-
-
 		} else {
-
+			
 		}
 	} else if (isBlockAdded) {
-
-
+	
 		if (block === undefined) {
 			Add();
 		}
 		for (let i = 0; i < block.length; i++) {
 			block[i].classList.add('was-validated');
-
+			
 			if (block[i].checkValidity()) {
 
 				Add();
 
 			} else {
-
+				
 			}
 		}
 	}
@@ -760,8 +771,53 @@ function AddPeoples() {
 
 
 
+function DateAnOBj(a){
 
+	new AirDatepicker('#dateBirthday' + a, {
+		autoClose: true,
 
+		onSelect: function (formattedDate, date) {
+			var ininput = formattedDate.datepicker.$el
+		
+			OtherCoficent(ininput);
+
+			maskDateInput(ininput, undefined, 'asd')
+
+		},
+		maxDate: new Date(),
+
+	});
+	datePasportAll = new AirDatepicker('#datePasportStart' + a, {
+		autoClose: true,
+
+		onSelect: function (formattedDate, date) {
+			var ininput = formattedDate.datepicker.$el
+		
+			maskDateInput(ininput, undefined, 'asd')
+		},
+
+		maxDate: new Date(),
+
+	});
+	$('#country-people' + a).select2({
+		placeholder: "Выберите страну",
+		templateSelection: formatStateInsurancePeople,
+		language: {
+			noResults: function () {
+				return 'Результатов не найдено'; // текст для пустых результатов поиска
+			},
+			maximumSelected: function () {
+				return 'Вы можете выбрать только 10 элементов'; // текст для превышения максимального количества выбранных элементов
+			}
+		}
+	});
+
+	$('#country-people' + a).on("change", function (e) {
+		console.log('change');
+		var selectElementThree = document.getElementById("country-people" + a);
+		xml(selectElementThree)
+	})
+}
 
 
 
@@ -882,7 +938,9 @@ function loadBlocks() {
 
 
 
-(function () {
+
+
+function ValidatePuy(){
 	'use strict'
 
 	// Получите ссылку на кнопку
@@ -893,11 +951,12 @@ function loadBlocks() {
 		button.classList.toggle('active-btn', form.checkValidity());
 
 	});
-
+	
+	
 	;
 	button.addEventListener('click', function (event) {
 
-
+		
 
 		if (!document.querySelector('.block') && !checkbox.checked) {
 			document.querySelector('.hidden-attentional-sec').style.display = 'flex'
@@ -909,24 +968,13 @@ function loadBlocks() {
 				block.forEach(function (item) {
 					// Получите ссылку на форму, связанную с кнопкой
 					if (form.checkValidity() && item.checkValidity()) {
-
-						loadBlocks()
-							.then(() => {
-								// Скрыть прелоадер
-								if (preloader) {
-									preloader.classList.add('preloader_hidden');
-								}
-
-								// Показать загруженные блоки
+						preloader.classList.remove('preloader_hidden');
+						append()
 								block2.style.display = 'none';
 								block3.style.display = 'block';
-							})
-							.catch((error) => {
-								console.error(error);
-							});
 					} else {
 
-
+						
 						event.preventDefault();
 						event.stopPropagation();
 
@@ -934,18 +982,13 @@ function loadBlocks() {
 				})
 			} else {
 				if (form.checkValidity()) {
-					loadBlocks()
-						.then(() => {
-							// Скрыть прелоадер
-							if (preloader) {
-								preloader.classList.add('preloader_hidden');
-							}
-
-							// Показать загруженные блоки
-							block2.style.display = 'none';
-							block3.style.display = 'block';
-						})
+					preloader.classList.remove('preloader_hidden');
+					append()
+					// Показать загруженные блоки
+					block2.style.display = 'none';
+					block3.style.display = 'block';
 				} else {
+					
 					event.preventDefault();
 					event.stopPropagation();
 
@@ -961,15 +1004,34 @@ function loadBlocks() {
 		document.querySelectorAll('.phone-insuarance').forEach(function (item) {
 			ValidateMaskPhone(item)
 		});
-
+		UploadFiles();
 	}, false);
 
-})();
+};
 
+ValidatePuy()
 
+function InvalidUpload() {
+	const inputs = document.querySelectorAll('.field__file');
+	const inputsLabel = document.querySelectorAll('.insurance-upload');
+		for (let i = 0; i < inputs.length; i++) {
+			if (inputs[i].files.length === 0 ) {
+			  const invalid = document.getElementById('invalidfd' + i);
+			  invalid.style.display = 'block';
+			  console.log(inputsLabel[i])
+			  console.log(inputs[i])
+			  inputsLabel[i].classList.add('is-invalid');
+		
+			}else{
+				inputsLabel[i].classList.remove('is-invalid');
+			}
+		  }
+	
+	
 
+  }
 
-
+ 
 function checkAge() {
 	const birthdayInput = document.getElementById('dateBirthday0').value;
 	const birthdayParts = birthdayInput.split('.');
@@ -1002,11 +1064,7 @@ function checkAge() {
 
 function append() {
 
-	if (checkbox.checked) {
-		var country0Res = "Kazakhstan"
-	} else {
-		var country0Res = selectaInCountry('country-people0')
-	}
+
 	var obj = {
 		"insurance_summ": selecta('insurance__sum'),
 		"months": selecta('months'),
@@ -1025,8 +1083,8 @@ function append() {
 			"Passport": document.getElementById('pasport0').value,
 			"DOB": document.getElementById('dateBirthday0').value,
 			"PassportDate": document.getElementById('datePasportStart0').value,
-
-			"ResidentCountry": country0Res,
+			"Email": document.getElementById('email').value,
+			"ResidentCountry": selectaInCountryId('country-people0'),
 			"Phone": document.getElementById('Phone0').value,
 			"Address": document.getElementById('adress0').value
 		},
@@ -1035,42 +1093,25 @@ function append() {
 	}
 	//Цикл для  добавления всех застрахованных в OBJ
 	var allBlock = document.querySelectorAll('.block')
-	if (checkbox.checked) {
 
-		for (var i = 0; i <= allBlock.length; i++) {
-			var lname = document.getElementById('LastName' + [i]).value;
-			var pasport = document.getElementById('pasport' + [i]).value;
-			var iin = document.getElementById('IIN' + [i]).value;
-			var phone = document.getElementById('Phone' + [i]).value;
-			var fname = document.getElementById('Name' + [i]).value;
-			var dob = document.getElementById('dateBirthday' + [i]).value;
-			var age = calculateAgeInYears(document.getElementById('dateBirthday' + [i]).value)
-			var PassportDate = document.getElementById('datePasportStart' + [i]).value;
-			var country = "Kazakhstan"
 
-			obj.insured_list.push({ "FirstName": fname, "LastName": lname, "IIN": iin, "Passport": pasport, "DOB": dob, "PassportDate": PassportDate, "ResidentCountry": country, "Phone": phone, "age": age })
-		}
-	} else {
+	for (var i = 0; i <= allBlock.length; i++) {
+		console.log(i)
+		var lname = document.getElementById('LastName' + [i]).value;
+		var pasport = document.getElementById('pasport' + [i]).value;
+		var iin = document.getElementById('IIN' + [i]).value;
+		var phone = document.getElementById('Phone' + [i]).value;
+		var fname = document.getElementById('Name' + [i]).value;
+		var dob = document.getElementById('dateBirthday' + [i]).value;
+		var age = calculateAgeInYears(document.getElementById('dateBirthday' + [i]).value)
+		var PassportDate = document.getElementById('datePasportStart' + [i]).value;
+		var country = selectaInCountryId('country-people' + [i])
 
-		if (allBlock.length >= 1) {
-			for (var i = 1; i <= allBlock.length; i++) {
-				var lname = document.getElementById('LastName' + [i]).value;
-				var pasport = document.getElementById('pasport' + [i]).value;
-				var iin = document.getElementById('IIN' + [i]).value;
-				var phone = document.getElementById('Phone' + [i]).value;
-				var fname = document.getElementById('Name' + [i]).value;
-				var dob = document.getElementById('dateBirthday' + [i]).value;
-				var age = calculateAgeInYears(document.getElementById('dateBirthday' + [i]).value)
-				var PassportDate = document.getElementById('datePasportStart' + [i]).value;
-				var country = selectaInCountry('country-people' + [i])
-
-				obj.insured_list.push({ "FirstName": fname, "LastName": lname, "IIN": iin, "Passport": pasport, "DOB": dob, "PassportDate": PassportDate, "ResidentCountry": country, "Phone": phone, "age": age })
-			}
-		} else {
-			obj.insured_list = ""
-		}
-
+		obj.insured_list.push({ "FirstName": fname, "LastName": lname, "IIN": iin, "Passport": pasport, "DOB": dob, "PassportDate": PassportDate, "ResidentCountry": country, "Phone": phone, "age": age })
 	}
+
+
+
 	var linkPay = document.getElementById('payment')
 	var residentButton = document.getElementById("RK");
 	if (residentButton.options[residentButton.selectedIndex].value == 1) {
@@ -1130,14 +1171,20 @@ function append() {
 
 	formData.append('json', str);
 
+	
 	fetch("http://10.2.5.16/dmsajax/test.php", {
-		method: 'POST',
-		body: formData
-
-	})
-		.then(response => response.json())
-		.then(convert)
-		.catch(error => console.error(error));
+  method: 'POST',
+  body: formData
+})
+  .then(response => response.json())
+  .then(convert)
+  .catch(error => console.error(error))
+  .finally(() => {
+    // скрываем прелоадер после получения ответа
+	if (preloader) {
+		preloader.classList.add('preloader_hidden');
+	}
+  });
 }
 
 
@@ -1205,6 +1252,16 @@ function selectaInCountry(selectElement) {
 		return 0;
 	}
 	var hh = selectedOption.getAttribute('data-name-lat');
+	return hh;
+}
+//Функция для получения id  у атрибута data-name-lat
+function selectaInCountryId(selectElement) {
+	var sel = document.getElementById(selectElement);
+	var selectedOption = sel.options[sel.selectedIndex];
+	if (selectedOption == null || selectedOption.getAttribute('data-name-lat') == null) {
+		return 0;
+	}
+	var hh = selectedOption.value;
 	return hh;
 }
 
@@ -1281,8 +1338,8 @@ function selectaInZone(selectElement) {
 function convert(data) {
 
 	const itogSum = data.insurance_premium;
-	document.querySelector('.total__text-num').innerHTML = itogSum
-
+	var cc = formatCurrency(itogSum);
+	document.querySelector('.total__text-num').innerHTML = cc ;
 	const insurantData = data.insurant;
 
 	Object.entries(insurantData).forEach(([key, value]) => {
@@ -1335,7 +1392,9 @@ function convert(data) {
 
 }
 
-
+function formatCurrency(amount) {
+	return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  }
 
 function collectInsurance(index) {
 	var container = document.querySelector('.accordion-subinsuarnce');
@@ -1595,7 +1654,12 @@ function maskDateInput(input, values, secondInput) {
 				if (inputDate > birthDate || currentDate.getTime() === birthDate.getTime()) {
 
 					input.value = '';
-					input.placeholder = 'Страхователь может быть не младше 18 лет'
+					if (input.id = 'dateBirthday0'){
+						input.placeholder = 'Страхователь может быть не младше 18 лет'
+					}else{
+						input.placeholder = 'Укажите дату рождения'
+					}
+					
 					return;
 
 				} else {
@@ -1627,14 +1691,18 @@ function maskDateInput(input, values, secondInput) {
 			} else {
 
 				if (secondInput) {
-					if (form.classList.contains('was-validated')) {
-						input.classList.remove('is-invalid');
+					if (form.classList.contains('was-validated') ) {
+						
 						ValidateInJs_CORRECT(input)
 					}
 				} else {
 					if (document.querySelector('.needs-validation').classList.contains('was-validated')) {
-						input.classList.remove('is-invalid');
-						ValidateInJs_CORRECT(input)
+						if (program.value === '2' && input.id === 'date__end') {
+							
+						}else{
+							ValidateInJs_CORRECT(input)
+						}
+						
 					}
 				}
 
@@ -1646,9 +1714,9 @@ function maskDateInput(input, values, secondInput) {
 		} else {
 
 			if (secondInput) {
-				console.log('secondInput')
+		
 				if (form.classList.contains('was-validated')) {
-					console.log('secondInput')
+					
 					input.classList.add('is-invalid');
 					ValidateInJs_UNCORRECT(input)
 				}
@@ -1703,7 +1771,7 @@ function get_countries(current_lang, resident) {
 
 			if (resident) {
 
-				var option_data_kz = '<option value=""  disabled class="sel" >Выберите страну</option> <option  data-currency="KZT" data-zone="3" data-flag-name="kz"  data-name-lat="Kazakhstan" value="16">Казахстан</option> ';
+				var option_data_kz = '<option value=""  disabled class="sel" >Выберите страну</option> <option  data-currency="KZT" data-zone="3" data-flag-name="kz"  data-name-lat="Kazakhstan" value="1" >Казахстан</option> ';
 			} else {
 				var option_data = '<option value=""  class="selcountry" >Выберите страну</option>'
 			}
@@ -1811,6 +1879,18 @@ function get_countries(current_lang, resident) {
 // 	});
 
 // }
+
+
+// function dateSelectedIS(event){
+// 	const clickedElement = event.target
+// 	console.log(clickedElement)
+// 	const mm = clickedElement.closest('.insurance-upload')
+// 	clickedElement.style.border = '1px solid #000000'
+// 	console.log(mm)
+// 	if (form.classList.contains('was-validated') ) {
+// 	}
+// }
+
 function UploadFiles() {
 
 	const maxSize = 5 * 1024 * 1024; // устанавливаем максимальный размер файла в байтах (в данном случае 5 МБ)
@@ -1819,12 +1899,21 @@ function UploadFiles() {
 	const inputs = document.querySelectorAll('.field__file'); // получаем input элемент по ID
 
 	for (let i = 0; i < inputs.length; i++) {
+		// if (document.getElementById('invalidfd' + i).style.display != 'none' && form.classList.contains('was-validated')) {
+		// 	document.getElementById('uploadid' + i).style.border = '1px solid #dc3545';
+		// }else{
+
+		// 	document.getElementById('uploadid' + i).style.border = '1px solid #000000';
+		// }
 
 		const formInput = document.getElementById('formInputMes' + i);
 		const countEl = document.getElementById('fileText' + i)
 		document.getElementById('invalidfd0').classList.add('changeid')
 		const invalid = document.getElementById('invalidfd' + i)
 		inputs[i].addEventListener('change', function (event) {
+			console.log(i)
+			
+			
 			const files = this.files; // получаем массив выбранных файлов
 
 			let totalSize = 0; // устанавливаем начальное значение суммарного размера файлов
@@ -1853,15 +1942,18 @@ function UploadFiles() {
 					countEl.innerText = this.files[0].name;
 					// убираем ошибку, если размер и тип файлов в пределах допустимого
 					inputsLabel[i].classList.remove('is-invalid');
-
+				
 					invalid.style.display = 'none';
 					inputs[i].setCustomValidity('');
+				
+					
 
 				} else {
 					event.preventDefault();
 					inputsLabel[i].classList.add('is-invalid'); // добавляем класс ошибки, если размер и тип файлов в пределах допустимого
 					countEl.innerText = `Ошибка`;
 
+		
 					invalid.style.display = 'block';
 					return
 				}
@@ -1873,6 +1965,7 @@ function UploadFiles() {
 }
 UploadFiles();
 function ValidateInJs_CORRECT(a) {
+	a.classList.remove('is-invalid');
 	if (a.classList.contains('custom-phone')) {
 		a.style.setProperty('background-image', 'url("data:image/svg+xml,%3csvg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 8 8\\"%3e%3cpath fill=\'%23198754\' d=\'M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z\'/%3e%3c/svg%3e")', 'important');
 
@@ -1884,6 +1977,7 @@ function ValidateInJs_CORRECT(a) {
 	a.style.setProperty('box-shadow', 'none');
 }
 function ValidateInJs_UNCORRECT(a) {
+	a.classList.add('is-invalid');
 	if (a.classList.contains('custom-phone')) {
 		a.style.setProperty('background-image', 'url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 12 12\' width=\'12\' height=\'12\' fill=\'none\' stroke=\'%23dc3545\'%3e%3ccircle cx=\'6\' cy=\'6\' r=\'4.5\'/%3e%3cpath stroke-linejoin=\'round\' d=\'M5.8 3.6h.4L6 6.5z\'/%3e%3ccircle cx=\'6\' cy=\'8.2\' r=\'.6\' fill=\'%23dc3545\' stroke=\'none\'/%3e%3c/svg%3e")', 'important');
 	} else {

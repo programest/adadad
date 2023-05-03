@@ -637,7 +637,7 @@ p {
 
 
 .block__insurance-form2 {
-	display: none;
+  display: none;
 }
 .block__insurance-form3{
   display: none;
@@ -1670,7 +1670,10 @@ select:focus {
   
  
 }
-
+.form-check{
+	align-items: center;
+	display: flex;
+  }
 @media (max-width: 764px) {
 	.title__text-title {
 		font-size: 28px;
@@ -1906,13 +1909,20 @@ ul {
   width: 25px;
 }
 
+
+
+.insurance__info {
+  position: relative;
+}
+
+
 .toast {
-  bottom: -15%;
+  bottom: -7%;
   width: 100% !important;
-  height: 5%;
+  position: absolute;
   right: 0%;
   z-index: 100;
-  margin-bottom: 20%;
+  
   background-color: #b62525 !important;
 }
 
@@ -1932,10 +1942,10 @@ ul {
   align-items: center;
   display: flex;
   justify-content: center;
-  padding-top: 10px !important;
-  padding-bottom: 0 !important;
-  background-color: #b62525;
-  font-size: 16px;
+  padding-top: 20px !important;
+  padding-bottom: 30px !important;
+  background-color: #c40f0f;
+  font-size: 18px;
   color: #ffffff;
   font-weight: 600;
 }
