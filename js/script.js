@@ -62,7 +62,7 @@ function ValidateMaskPhone(input) {
 
 }
 function Patterns(phone) {
-	var MAX_PHONE_LENGTH = 16;
+	var MAX_PHONE_LENGTH = 14;
   
 	if (phone.length >= 1) {
 	  const countryCode = phone.match(/^\+?\d{1}/)[0];
@@ -77,11 +77,11 @@ function Patterns(phone) {
 	  } else if (countryCode === '+44') {
 		// UK
 		document.querySelector('.phone-insurance').setAttribute('pattern', '\\+?44[\\s.-]?\\(?\\d{4}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{3}');
-		MAX_PHONE_LENGTH = 15;
+		MAX_PHONE_LENGTH = 10;
 	  } else if (countryCode === '+33') {
 		// France
 		document.querySelector('.phone-insurance').setAttribute('pattern', '\\+?33[\\s.-]?\\(?\\d{1}\\)?[\\s.-]?\\d{2}[\\s.-]?\\d{2}[\\s.-]?\\d{2}[\\s.-]?\\d{2}');
-		MAX_PHONE_LENGTH = 15;
+		MAX_PHONE_LENGTH = 14;
 	  } else {
 		// Default pattern
 		document.querySelector('.phone-insurance').setAttribute('pattern', '\\+?\\d{1,3}[\\s.-]?\\(?\\d{3}\\)?[\s.-]?\\d{3}[\\s.-]?\\d{4}');
