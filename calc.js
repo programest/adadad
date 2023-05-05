@@ -127,7 +127,7 @@ function convertDate(dateString, innde) {
 
 
 // Функция для расчета
-function Calc(print) {
+function Calc(print, backend) {
 
 	// Print определяет вывод в консоль или нет
 
@@ -154,13 +154,17 @@ function Calc(print) {
 	if (results >= 0) {
 		//Вывод финальной даты окончания действия страхового полиса
 		if (print) {
-			document.querySelector('.loadersum').classList.add('load-sum');
-			document.querySelector('.loader__mb').style.display = 'none';
-			document.querySelector('.insurance__more-bottom').classList.add('insurance__more-bottom--active');
-			CalcBeckend()
-			endNum.innerHTML = endresultsSum + ' ' + 'тг';
-			//Вывод промежуточной даты окончания действия страхового полиса
-			priceNum.innerHTML = resultsSum + ' ' + 'тг';
+			if (backend === true) {
+				document.querySelector('.loadersum').classList.add('load-sum');
+				document.querySelector('.loader__mb').style.display = 'none';
+				document.querySelector('.insurance__more-bottom').classList.add('insurance__more-bottom--active');
+				CalcBeckend()
+			}else{
+				endNum.innerHTML = endresultsSum + ' ' + 'тг';
+				//Вывод промежуточной даты окончания действия страхового полиса
+				priceNum.innerHTML = resultsSum + ' ' + 'тг';
+			}
+			
 		}
 		//Вывод финальной даты окончания действия страхового полиса в блок итога
 

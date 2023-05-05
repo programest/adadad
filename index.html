@@ -666,9 +666,10 @@
 																	телефона</label>
 																<input type="tel"
 																	class="insurance__program-aria phone-insurance get-info form-control"
-																	id="Phone0" data-tel-input required minlength="12" maxlength="14"
-																	placeholder="+7(777)777-77-77"
-																	pattern="\+?\d{1,3}[\s-]?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{2}[\s.-]?\d{2}">
+																	id="Phone0" data-tel-input required minlength="12" 
+																	placeholder="+7(777)777-77-77" oninput="Patterns(this.value) "  onpaste="Patterns(this.value)" ondrop="return false"
+															
+>
 																<div class="invalid-feedback">
 																	Пожалуйста, укажите номер телефона
 																</div>

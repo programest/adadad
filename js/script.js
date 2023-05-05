@@ -61,9 +61,36 @@ function ValidateMaskPhone(input) {
 	})
 
 }
-
-
-
+function Patterns(phone) {
+	var MAX_PHONE_LENGTH = 16;
+  
+	if (phone.length >= 1) {
+	  const countryCode = phone.match(/^\+?\d{1}/)[0];
+	  if (countryCode === '+7' || countryCode === '7') {
+		// Russia
+		document.querySelector('.phone-insurance').setAttribute('pattern', '\\+?\\d{1,3}[\\s-]?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{2}[\\s.-]?\\d{2}');
+		MAX_PHONE_LENGTH = 18;
+	  } else if (countryCode === '+1') {
+		// USA and Canada
+		document.querySelector('.phone-insurance').setAttribute('pattern', '\\+?1?[\\s.-]?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}');
+		MAX_PHONE_LENGTH = 14;
+	  } else if (countryCode === '+44') {
+		// UK
+		document.querySelector('.phone-insurance').setAttribute('pattern', '\\+?44[\\s.-]?\\(?\\d{4}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{3}');
+		MAX_PHONE_LENGTH = 15;
+	  } else if (countryCode === '+33') {
+		// France
+		document.querySelector('.phone-insurance').setAttribute('pattern', '\\+?33[\\s.-]?\\(?\\d{1}\\)?[\\s.-]?\\d{2}[\\s.-]?\\d{2}[\\s.-]?\\d{2}[\\s.-]?\\d{2}');
+		MAX_PHONE_LENGTH = 15;
+	  } else {
+		// Default pattern
+		document.querySelector('.phone-insurance').setAttribute('pattern', '\\+?\\d{1,3}[\\s.-]?\\(?\\d{3}\\)?[\s.-]?\\d{3}[\\s.-]?\\d{4}');
+	  }
+	}
+  
+	document.querySelector('.phone-insurance').setAttribute('maxlength', MAX_PHONE_LENGTH);
+  }
+  
 function MaskPhone() {
 	var phoneInputs = document.querySelectorAll("input[data-tel-input]");
 
@@ -1266,9 +1293,11 @@ function CalcBeckend(){
 		  document.querySelector('.loader__mb').style.display = 'block';
 		  document.querySelector('.insurance__more-bottom').classList.remove('insurance__more-bottom--active');
 		}, 1000);
+		Calc("print", true)
 	  })
 	  .catch(error => {
 		console.error(error);
+		Calc("print", false)
 		// скрываем прелоадер при ошибке
 		if (preloader) {
 		  preloader.classList.add('preloader_hidden');
@@ -1283,8 +1312,8 @@ function CalcBeckend(){
 function convertCalc(data){
 	const itogSum = data.premium_discounted_kzt;
 	const Sum = data.premium_kzt;
-	var after = formatCurrency(Sum);
-	var to = formatCurrency(itogSum);
+	var after = formatCurrency(itogSum );
+	var to = formatCurrency(Sum);
 	document.getElementById('toitog').innerHTML =  to ;
 	document.getElementById('itog').innerHTML = after ;
 	// animationSum(itogSum ,document.getElementById('toitog'))
