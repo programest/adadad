@@ -85,8 +85,8 @@ if (dateStart) {
 						priceNum.innerHTML = "0" + ' ' + '₸';
 
 					},
-
-					minDate: convertDate(dateStart.value)
+					maxDate: convertDate(dateStart.value, 'year'),
+					minDate: convertDate(dateStart.value, 'days')
 				})
 
 			}
@@ -94,7 +94,7 @@ if (dateStart) {
 		minDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
 	})
 }
-function convertDate(dateString) {
+function convertDate(dateString, innde) {
 	// if (!dateString) {
 	// 	return '';
 	//   }
@@ -108,7 +108,11 @@ function convertDate(dateString) {
 	const date = new Date(newDate);
 
 	// Добавляем один день к дате
-	date.setDate(date.getDate() + 1);
+	if (innde === 'days'){
+		date.setDate(date.getDate() + 1);
+	}else if(innde === 'year'){
+		date.setDate(date.getDate() + 364);
+	}
 
 	// Получаем новые значения дня, месяца и года
 	const day = date.getDate();
@@ -117,7 +121,7 @@ function convertDate(dateString) {
 
 	// Форматируем дату в строку в нужном формате
 	const formattedDate = `${year}.${month < 10 ? '0' : ''}${month}.${day < 10 ? '0' : ''}${day}`;
-
+	console.log(formattedDate)
 	return formattedDate;
 }
 
@@ -149,13 +153,10 @@ function Calc(print) {
 
 	if (results >= 0) {
 		//Вывод финальной даты окончания действия страхового полиса
-		if (results > 500 && print) {
+		if (print) {
 			endNum.innerHTML = endresultsSum + ' ' + '₸';
 			//Вывод промежуточной даты окончания действия страхового полиса
 			priceNum.innerHTML = resultsSum + ' ' + '₸';
-		} else {
-			endNum.innerHTML = "0" + ' ' + '₸';
-			priceNum.innerHTML = "0" + ' ' + '₸';
 		}
 		//Вывод финальной даты окончания действия страхового полиса в блок итога
 
@@ -174,6 +175,7 @@ function CalcSport() {
 	var targetValue = target.options[target.selectedIndex].value;
 	var sportTypeValue = sportType.options[sportType.selectedIndex].value;
 	var sportCategoryValue = sportCategory.options[sportCategory.selectedIndex].value;
+	
 	// Получаю targetValue с селекта получаю option value
 	if (targetValue == '2') {
 		endNum.innerHTML = "0" + ' ' + '₸';
@@ -208,8 +210,10 @@ function CalcSport() {
 			} else if (sportTypeValue == 'other') {
 				insuranceSumSportCoefficient = '1.20';
 			}
-
-			Calc(print)
+			if (program.value == '1') {
+				Calc(print)
+			}
+			
 
 		} else if (sportCategoryValue == 'professional') {
 
@@ -240,29 +244,35 @@ function CalcSport() {
 			} else if (sportTypeValue == 'other') {
 				insuranceSumSportCoefficient = '1.50';
 			}
-			Calc(print)
+			if (program.value == '1') {
+				Calc(print)
+			}
 
 		} else if (sportCategoryValue == 'invalid') {
 			insuranceSumSportCoefficient = '0.50';
-
-			Calc(print)
+			if (program.value == '1') {
+				Calc(print)
+			}
+			
 
 		}
 	} else if (targetValue == '1') {
 
 		insuranceSumSportCoefficient = 1;
 		TargetEducationProcent = 0
-		Calc(print)
-
+		if (program.value == '1') {
+			Calc(print)
+		}
 	} else if (targetValue == '3') {
 
-
-
 		insuranceSumSportCoefficient = 1;
-
-		Calc(print)
-
+		if (program.value == '1') {
+			Calc(print)
+		}
+		
 	}
+	console.log('Коэфициент на тг ' + insuranceSumMonth)
+
 
 }
 // Функция для автозаполнения даты окончания действия страхового полиса при тарифе Multi Trip
@@ -289,7 +299,7 @@ function nextmonths() {
 		} else if (insuranceSum.value == '15k') {
 			insuranceSumMonth = '18'
 		}
-		next_date_unformatted.setDate(end_multi.getDate() + 31);
+		next_date_unformatted.setDate(end_multi.getDate() + 30);
 		Calc(print)
 	}
 	else if (months == "3") {
@@ -300,7 +310,7 @@ function nextmonths() {
 		} else if (insuranceSum.value == '15k') {
 			insuranceSumMonth = '33'
 		}
-		next_date_unformatted.setDate(end_multi.getDate() + 92);
+		next_date_unformatted.setDate(end_multi.getDate() + 91);
 		Calc(print)
 	}
 	else if (months == "6") {
@@ -311,7 +321,7 @@ function nextmonths() {
 		} else if (insuranceSum.value == '15k') {
 			insuranceSumMonth = '50'
 		}
-		next_date_unformatted.setDate(end_multi.getDate() + 184);
+		next_date_unformatted.setDate(end_multi.getDate() + 183);
 		Calc(print)
 	}
 	else if (months == "6p") {
@@ -322,7 +332,7 @@ function nextmonths() {
 		} else if (insuranceSum.value == '15k') {
 			insuranceSumMonth = '90'
 		}
-		next_date_unformatted.setDate(end_multi.getDate() + 184);
+		next_date_unformatted.setDate(end_multi.getDate() + 183);
 		Calc(print)
 	}
 	else if (months == "12") {
@@ -333,7 +343,7 @@ function nextmonths() {
 		} else if (insuranceSum.value == '15k') {
 			insuranceSumMonth = '90'
 		}
-		next_date_unformatted.setDate(end_multi.getDate() + 366);
+		next_date_unformatted.setDate(end_multi.getDate() + 365);
 		Calc(print)
 	}
 	else if (months == "12p") {
@@ -344,7 +354,7 @@ function nextmonths() {
 		} else if (insuranceSum.value == '15k') {
 			insuranceSumMonth = '162'
 		}
-		next_date_unformatted.setDate(end_multi.getDate() + 366);
+		next_date_unformatted.setDate(end_multi.getDate() + 365);
 		Calc(print)
 	}
 
@@ -374,9 +384,10 @@ function CalcInsuranceDays() {
 	var endDateString = document.getElementById('date__end').value;
 	var endDateParts = endDateString.split(".");
 	var endDate = new Date(endDateParts[2], endDateParts[1] - 1, endDateParts[0]);
-
+	endDate.setDate(endDate.getDate() + 1);
 	var days = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24));
-
+	//var days = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+	console.log(days)
 	if (days <= '14') {
 
 		if (insuranceSum.value == '30k') {
@@ -753,9 +764,9 @@ document.getElementById("section1").addEventListener("change", function () {
 
 
 	if (tarif == "1" || tarif == "3") {
-		currency = "456.18"
+		currency = "445.29"
 	} else {
-		currency = "501.18"
+		currency = "492.22"
 	}
 })
 

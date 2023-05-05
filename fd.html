@@ -86,12 +86,12 @@
 								</div>
 							</div>
 							<div class="insurance__program insurance__form-block flex-column d-flex mb-lg-4 mb-3 ">
-								<label for="datePasportStart0"
+								<label for="datePasportStart1"
 									class=" insurance__program-label form-label mb-lg-1 mb-1">Дата
 									выдачи паспорта:</label>
 								<input type="text" class="dates__form insurance__program-aria custom-dates changeid"
 									autocomplete="off" placeholder="XX.XX.XXXX" id="datePasportStart1"
-									oninput="maskDateInput(this, 'birthday')" maxlength="10"
+									oninput="maskDateInput(this, 'minus')" maxlength="10"
 									pattern="^(0?[1-9]|[12][0-9]|3[01])\.(0?[1-9]|1[0-2])\.\d{2}\d{2}$" minlength="10"
 									onpaste="return false" ondrop="return false" required>
 								<div class="invalid-feedback">
@@ -99,7 +99,7 @@
 								</div>
 							</div>
 							<div class="insurance__program insurance__form-block flex-column d-flex mb-lg-4 mb-3 ">
-								<label for="dateBirthday1" class=" insurance__program-label  mb-lg-1 mb-1 ">Дата
+								<label for="dateBirthday1" class=" insurance__program-label  mb-lg-1 mb-1 form-label">Дата
 									рождения:</label>
 
 								<input type="text"
@@ -111,6 +111,9 @@
 								<div class="invalid-feedback">
 									Пожалуйста, выберите дату для застрахованного.
 								</div>
+
+
+								
 							</div>
 						</div>
 						<div class="row col-md-4 col-12 h-100">

@@ -640,8 +640,10 @@ p {
   display: none;
 }
 .block__insurance-form3{
+  position: relative;
   display: none;
 }
+
 .tourist__info-text {
   word-wrap: break-word !important;
   overflow-wrap: break-word;
@@ -2441,4 +2443,134 @@ ul {
       margin: 0 0px;
   }
 }
+.hidden{
+  display: none;
+}
+.error{
+  padding: 30px;
+  background-color: #fff;
 
+}
+
+.btn-error{
+  width: 200px;
+  height: 50px;
+  font-weight: 600;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  transition: all 0.5s ease;
+}
+.xbutton-error{
+  width: 32px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+.error-text-mes{
+  font-size: 23px;
+  font-weight: 600;
+
+  margin-bottom: 20px;
+  text-align: center;
+}
+.error__block{
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  text-align: center;
+}
+.error__block-button{
+  margin-top: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.error__block-text{
+  margin-top: 25px;
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.error-img{
+  width:300px;
+  margin: 20px;
+}
+.error-text-block{
+  width: 50%;
+}
+.error__block-title-text{
+  font-size: 45px;
+  font-weight: 600;
+  color: #e70707 ;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.call-center{
+  background-color: #28A745;
+  border: #000000;
+  transition: all 0.5s ease;
+}
+.call-center:hover{
+  transition: all 0.5s ease;
+  background-color: #28A745;
+  border: #000000;
+}
+
+
+@media (max-width: 1500px) {
+  .error-text-block{
+    width: 70%;
+  }
+}
+@media (max-width: 748px){
+  .error{
+    padding: 30px 30px 30px 30px;
+  }
+  .error-text-mes{
+    font-size: 22px;
+  }
+  .error-img{
+    width: 200px;
+    margin: 20px;
+  }
+  .btn-error{
+    width: 150px;
+    height: 45px;
+    font-size: 16px;
+  }
+  .error-text-block{
+    width: 100%;
+  }
+}
+@media (max-width: 450px){
+  .error__block-title-text{
+    font-size: 40px;
+  }
+  .error{
+    padding: 0;
+  }
+  .error-text-mes{
+    font-size: 18px;
+  }
+  .error-img{
+    width: 200px;
+    margin: 20px;
+  }
+  .btn-error{
+    font-size: 12px;
+    width: 120px;
+    height: 45px;
+   
+  }
+  .error-text-block{
+    width: 100%;
+  }
+  
+}

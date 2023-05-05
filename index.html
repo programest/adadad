@@ -88,7 +88,7 @@
 			<div class="circle"></div>
 		</div>
 	</div>
-
+	
 	<main>
 		<section class="title">
 			<div class="container">
@@ -165,12 +165,12 @@
 				</div>
 			</div>
 		</section>
-
-
+	
 		<section class="insurance " style="position: relative;" id="insurance">
 			<!-- <div class="allpol" onclick="fillAllFields()">
 				<p>Заполнить все поля</p>
 			</div> -->
+			
 			<hr class="insurance-hr">
 			<div class="container">
 				<div class="insurance__block ">
@@ -259,7 +259,7 @@
 																начала страховки:</label>
 															<input type="text" id="date__start" required
 																autocomplete="off"
-																oninput="maskDateInput(this, 'minus')" maxlength="10"
+																oninput="maskDateInput(this, 'plus')" maxlength="10"
 																pattern="^(0?[1-9]|[12][0-9]|3[01])\.(0?[1-9]|1[0-2])\.\d{2}\d{2}$"
 																minlength="10" onpaste="return false"
 																ondrop="return false"
@@ -350,7 +350,7 @@
 														страховки:</label>
 													<select name="months" id="months"
 														class="insurance__program-aria form-control select itsselect"
-														required>
+														required disabled>
 
 														<option value="" disabled selected data-responce="0">Укажите
 															срок действия
@@ -628,7 +628,7 @@
 																<input type="text" autocomplete="off"
 																	class="dates__form insurance__program-aria custom-dates"
 																	placeholder="XX.XX.XXXX" id="datePasportStart0"
-																	oninput="maskDateInput(this, 'plus', 'secondInput')"
+																	oninput="maskDateInput(this, 'minus')"
 																	maxlength="10" minlength="10"
 																	pattern="^(0?[1-9]|[12][0-9]|3[01])\.(0?[1-9]|1[0-2])\.\d{2}\d{2}$"
 																	onpaste="return false" ondrop="return false"
@@ -644,7 +644,7 @@
 																	паспорта</label>
 																<input type="text"
 																	class="insurance__program-aria get-info form-control"
-																	placeholder="N0395277" pattern="[N]\d{7}" required
+																	placeholder="N0395277" pattern="[N]\d{7}" maxlength="8" required
 																	id="pasport0">
 																<div class="invalid-feedback">
 																	Пожалуйста, укажите номер паспорта
@@ -679,10 +679,10 @@
 																	рождения:</label>
 
 																<input type="text" autocomplete="off"
-																	oninput="maskDateInput(this, 'birthday' , 'secondInput')"
+																oninput="maskDateInput(this, 'birthday')"
 																	maxlength="10" minlength="10" onpaste="return false"
 																	pattern="^(0?[1-9]|[12][0-9]|3[01])\.(0?[1-9]|1[0-2])\.\d{2}\d{2}$"
-																	ondrop="return false"
+																	ondrop="return false" 
 																	class="dates__form custom-dates insurance__program-aria get-info form-control "
 																	id="dateBirthday0" required name="age"
 																	placeholder="XX.XX.XXXX">
@@ -693,8 +693,7 @@
 															<div
 																class="insurance__program  insurance__form-block flex-column d-flex mb-lg-4 mb-3">
 																<label for="country-people0"
-																	class="insurance__program-label form-label mb-lg-1 mb-1">Укажите
-																	страну резеденства</label>
+																	class="insurance__program-label form-label mb-lg-1 mb-1">Страна резеденства</label>
 
 																<select
 																	class="insurance__program-aria select2 custom-select select-user-country get-info form-control"
@@ -832,9 +831,10 @@
 							</form>
 							<form action="" class=" block__insurance-form3" id="section3">
 								<!-- <p class="back">sadasdasdasdasdasdasdasdas</p> -->
-								<h1 class="insurance__info-title text-center mb-lg-5 mb-3">Итоговая стоимость полиса
-								</h1>
-								<div class="col-12  flex-column align-items-center  me-lg-3">
+								<div class="insurance__info-block">
+									<h1 class="insurance__info-title text-center mb-lg-5 mb-3">Итоговая стоимость полиса
+									</h1>
+									<div class="col-12  flex-column align-items-center  me-lg-3">
 									<div
 										class="d-flex justify-content-md-between justify-content-center  flex-wrap p-md-3 p-0">
 										<div class="row col-md-4 col-12" id="country-block-in-itog">
@@ -899,8 +899,8 @@
 
 									</div>
 
-								</div>
-								<div class="accordion col-12" id="accordionAuthorization" data-bs-parent="">
+									</div>
+									<div class="accordion col-12" id="accordionAuthorization" data-bs-parent="">
 									<div class="accordion-item mb-lg-4 mb-4">
 										<h2 class="accordion-header" id="headingOne">
 											<button class="accordion-button rel collapsed" type="button"
@@ -942,7 +942,7 @@
 																id="itog-datebirtghday-insuarance"></p>
 														</div>
 														<div class="accordion-body-block">
-															<h3 class="accordion-body-title">Место рождения:</h3>
+															<h3 class="accordion-body-title ">Страна резидентства:</h3>
 															<p class="accordion-body-text"
 																data-beckend-response="ResidentCountry"
 																id="itog-datebirtghday"></p>
@@ -973,12 +973,23 @@
 										</div>
 									</div>
 
-								</div>
-								<div class="w-100 col-12 justify-content-between d-flex flex-column">
+									</div>
+									<div class="w-100 col-12 justify-content-between d-flex flex-column">
+									<div
+										class="d-flex justify-content-between align-items-center mb-lg-4 mb-1 total__block-price">
+										<p class="total__text-total">Стоимость полиса:</p>
+										<p class="total__text-num" id="insurance__to">15,576<span
+												class="notranslate locale-insurance-price">тг</span></p>
+									</div>
+									<div
+										class="d-flex justify-content-between align-items-center mb-lg-4 mb-1 total__block-price">
+										<p class="total__text-total">Скидка:</p>
+										<p class="total__discount-num total__text-num">15%</p>
+									</div>
 									<div
 										class="d-flex justify-content-between align-items-center mb-lg-5 mb-3 total__block-price">
 										<p class="total__text-total">Итого:</p>
-										<p class="total__text-num">15,576 <span
+										<p class="total__text-num" id="insurance__after">15,576 <span
 												class="notranslate locale-insurance-price">тг</span></p>
 									</div>
 									<div class="message-total  justify-content-center align-items-center mb-lg-5 mb-3">
@@ -989,6 +1000,27 @@
 										<a href="index.html" id="payment"
 											class=" insurance__button-second-section insurance__people-button col-8 d-flex  justify-content-center align-items-center">На
 											главную</a>
+									</div>
+									</div>
+								</div>
+								<div class="error hidden">
+									<div class="error__block">
+
+										<div class="error__block-title">
+											<h2 class="error__block-title-text">Ошибка!</h2>
+										</div>
+										<div class="error__block-text">
+											<img src="img/error-mes.svg" alt="" class="error-img">
+											<div class="error-text-block">
+											<p class="error-text-mes">Сервис времено не доступен попробуйте позже.</p>
+										</div>
+										</div>
+
+										<div class="error__block-button">
+											<a href="index.html" class="btn btn-primary btn-error">На главную</a>
+											<a href="tel:+7 727 3200 200" class="btn btn-primary btn-error call-center">Call Center</a>
+										</div>
+							
 									</div>
 								</div>
 							</form>
@@ -1609,9 +1641,10 @@
 				</div>
 			</div>
 	</footer>
+	
 
-
-
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
 	<script src="//translate.google.com/translate_a/element.js?cb=TranslateInit"></script>
 	<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 	<script src="air-datepicker.js"></script>
@@ -1623,6 +1656,7 @@
 		crossorigin="anonymous"></script>
 	<script src="jquery.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	<script src="js/MaskDate.js"></script>
 	<script src="js/script.js"></script>
 	<script src="calc.js"></script>
 	<script>

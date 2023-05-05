@@ -62,6 +62,8 @@ function ValidateMaskPhone(input) {
 
 }
 
+
+
 function MaskPhone() {
 	var phoneInputs = document.querySelectorAll("input[data-tel-input]");
 
@@ -136,7 +138,7 @@ if (dateBirthday) {
 
 
 				document.getElementById('dateBirthday0').value = ''
-				document.getElementById('dateBirthday0').placeholder = 'Страхователь может быть не младше 18 лет'
+
 				document.getElementById('dateBirthday0').style.fontSize = '16px'
 			} else if (checkAge() == true) {
 
@@ -907,6 +909,7 @@ function OtherCoficent(a) {
 					});
 
 			} else {
+
 				event.preventDefault();
 				event.stopPropagation();
 
@@ -988,7 +991,6 @@ function ValidatePuy(){
 					block2.style.display = 'none';
 					block3.style.display = 'block';
 				} else {
-					
 					event.preventDefault();
 					event.stopPropagation();
 
@@ -1172,20 +1174,43 @@ function append() {
 	formData.append('json', str);
 
 	
-	fetch("http://10.2.5.16/dmsajax/test.php", {
-  method: 'POST',
-  body: formData
-})
+	
+  const myBlock = document.querySelector('.error') 
+
+  fetch('https://dms.interteach.kz/classes/Functions.php?f=NewProcessingData', {
+	method: 'POST',
+	body: formData
+  })
+  
   .then(response => response.json())
-  .then(convert)
-  .catch(error => console.error(error))
-  .finally(() => {
+  .then(data => convert(data))
+  .then(() => {
     // скрываем прелоадер после получения ответа
-	if (preloader) {
-		preloader.classList.add('preloader_hidden');
-	}
+    if (preloader) {
+      preloader.classList.add('preloader_hidden');
+    }
+  })
+  .catch(error => {
+    console.error(error);
+    // скрываем прелоадер при ошибке
+    if (preloader) {
+      preloader.classList.add('preloader_hidden');
+    }
+
+    document.querySelector('.insurance__info-block').style.display = 'none';
+    myBlock.classList.remove('hidden');
+
   });
 }
+document.querySelector('.call-center').addEventListener('mouseenter', function () {
+	document.querySelector('.call-center').innerHTML = "+7 727 3200 200";
+	document.querySelector('.call-center').style.color = "#fff";
+});
+document.querySelector('.call-center').addEventListener('mouseleave', function () {
+	document.querySelector('.call-center').innerHTML = "Call Center";
+});
+
+
 
 
 document.querySelector('.targetTextCss').addEventListener('click', function () {
@@ -1277,69 +1302,21 @@ function selectaInZone(selectElement) {
 	return hh;
 }
 
-// fetch("http://10.2.5.16/dmsajax/test.php", {
-// 	  method: 'POST',
-// 	  body: `{
-// 		"insurance_summ":"20000",
-// 		"months":0,
-// 		"program":"base",
-// 		"days":2,
-// 		"purpose": "Tourism",
-// 		"sport_type":"",
-// 		"sport_category":"",
-// 		"country_zone":2,
-// 		"date_start":"17.04.2023",
-// 		"date_end":"16.04.2024",
-// 		"insurant":{
-// 			"FirstName": "Adil",
-// 			"LastName": "Miyermanov",
-// 			"IIN": "777777777777",
-// 			"Passport":"AA123456789",
-// 			"DOB":"01.01.2004",
-// 			"PassportDate":"01.01.2020",
-// 			"ResidentCountry":"Kazakhstan",
-// 			"Phone":"77777777777",
-// 			"Address":"Almaty Nazarbayev ave 269"
-// 		},
-// 		"territory" : ["Australia", "Austria", "Azerbaijan"],
-// 		"insured_list":[
-// 			{
-// 			   "FirstName": "Adil",
-// 				"LastName": "Miyermanov",
-// 				"IIN": "777777777777",
-// 				"Passport":"AA123456789",
-// 				"DOB":"01.01.2004",
-// 				"PassportDate":"01.01.2020",
-// 				"ResidentCountry":"Kazakhstan",
-// 				"Phone":"77777777777"
-// 			},
-// 			{
-// 				"FirstName": "Adil",
-// 				 "LastName": "Miyermanov",
-// 				 "IIN": "777777777777",
-// 				 "Passport":"AA123456789",
-// 				 "DOB":"01.01.2004",
-// 				 "PassportDate":"01.01.2020",
-// 				 "ResidentCountry":"Kazakhstan",
-// 				 "Phone":"77777777777"
-// 			 }
-
-// 		]
-
-
-// 	}`
-// 	})
-
-// 	.then(response => response.json())
-// 	.then(convert)
-// 	.catch(error => console.error(error));
 
 
 function convert(data) {
+	if (data.status === 'error') {
+		document.querySelector('.error-text-mes').innerHTML = data.message
+	}
+	const itogSum = data.insurance_premium_clear;
+	const Sum = data.insurance_premium;
+	var after = formatCurrency(Sum);
+	var to = formatCurrency(itogSum);
+	document.getElementById('insurance__to').innerHTML = to ;
+	document.getElementById('insurance__after').innerHTML = after ;
+	
 
-	const itogSum = data.insurance_premium;
-	var cc = formatCurrency(itogSum);
-	document.querySelector('.total__text-num').innerHTML = cc ;
+	
 	const insurantData = data.insurant;
 
 	Object.entries(insurantData).forEach(([key, value]) => {
@@ -1393,9 +1370,12 @@ function convert(data) {
 }
 
 function formatCurrency(amount) {
-	return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+	if (typeof amount !== 'undefined') {
+	  return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+	} else {
+	  return "";
+	}
   }
-
 function collectInsurance(index) {
 	var container = document.querySelector('.accordion-subinsuarnce');
 
@@ -1424,7 +1404,7 @@ function collectInsurance(index) {
   </div>
   <div class="row justify-content-between">
   <div class="col-lg-4 accordion-body-block">
-  <h3 class="accordion-body-title">Место рождения:</h3>
+  <h3 class="accordion-body-title">Страна резидентства:</h3>
   <p class="accordion-body-text" data-beckend-response-insured="ResidentCountry" data-insured-index="${index}" id="residentCountry${index}"></p>
 </div>
     <div class="col-lg-4 accordion-body-block">
@@ -1513,254 +1493,6 @@ function ClearInputNameLastName(a) {
 }
 
 let datepicker;
-function maskDateInput(input, values, secondInput) {
-
-
-	input.addEventListener('keydown', event => {
-		const value = input.value;
-		const cursorPos = input.selectionStart;
-
-		if (event.key === 'Backspace' && value && cursorPos === value.length) {
-			// Разрешить удаление
-		} else if (event.key === 'Delete' && value && cursorPos === value.length) {
-			// Разрешить удаление
-		} else if (!event.key.match(/^[a-zA-Z0-9а-яА-ЯёЁ]$/)) {
-			// Запретить ввод других символов
-			event.preventDefault();
-		}
-	});
-	const value = input.value.replace(/\D/g, '');
-
-	const datePattern = /^(\d{1,2})(\d{0,2})(\d{0,4})$/;
-	const letterPattern = /[^\d]/; // matches any character that is not a digit
-	if (datePattern.test(value) && !letterPattern.test(value)) {
-		const day = value.slice(0, 2);
-		const month = value.slice(2, 4);
-		const year = value.slice(4, 8);
-
-		function isLeapYear(year) {
-			return typeof year === 'number' && ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0);
-		}
-
-
-		const currentDate = new Date();
-		const inputDate = new Date(year, month - 1, day);
-		inputDate.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
-
-		const firstInputInput = dateStart.value;
-		const [dayFirst, monthFirst, yearFirst] = firstInputInput.split('.');
-		const firstInput = new Date(yearFirst, monthFirst - 1, dayFirst);
-		firstInput.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
-
-		const currentYear = currentDate.getFullYear();
-		const currentMonth = String(currentDate.getMonth() + 1).padStart(2, '0');
-		const currentDay = String(currentDate.getDate()).padStart(2, '0');
-
-		const currentDateFormatted = `${currentYear}-${currentMonth}-${currentDay}`;
-		const currentDateObj = new Date(currentDateFormatted);
-		currentDateObj.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
-
-
-		const birthdayDate = new Date();
-
-		// Set the date when the person turns 18
-		const birthYear = birthdayDate.getFullYear() - 18;
-		const birthMonth = birthdayDate.getMonth() + 1; // January is 0
-		const birthDay = birthdayDate.getDate();
-		const birthDate = new Date(birthYear, birthMonth - 1, birthDay, 0, 0, 0, 0);
-		birthDate.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
-
-
-
-
-
-		let formattedDate = '';
-		if (values === 'plus') {
-			if (value.length === 8) {
-				if (inputDate > currentDateObj || inputDate.getTime() === currentDateObj.getTime()) {
-					input.value = '';
-					return;
-				} else {
-					if (input.id = 'datePasportStart0') {
-						if (inputDate < currentDateObj || inputDate.getTime() === currentDateObj.getTime()) {
-
-							//datePasportAll
-							//datePasport0
-							if (datePasport0) {
-
-								datePasport0.selectDate(inputDate);
-							}
-							//  if (datePasportAll) {
-							// 		dateBirthdayAll.selectDate(inputDate);
-							// 	  }
-						}
-					}
-				}
-			}
-		} else if (values === 'minus') {
-			if (value.length === 8) {
-
-				if (inputDate < currentDateObj || inputDate.getTime() === currentDateObj.getTime()) {
-					input.value = '';
-					return;
-				} else {
-
-
-					if (firstInput > currentDateObj || firstInput.getTime() === currentDateObj.getTime()) {
-						if (datepickerModificedStart) {
-
-							document.getElementById('date__start').value = firstInput
-							datepickerModificedStart.selectDate(firstInput);
-						}
-					}
-
-				}
-			}
-		} else if (values === 'modificed') {
-			if (value.length === 8) {
-
-				if (inputDate < firstInput || inputDate.getTime() === firstInput.getTime()) {
-					input.value = '';
-					return;
-				} else {
-					if ((firstInput > currentDateObj || firstInput.getTime() === currentDateObj.getTime()) && (inputDate > firstInput || inputDate.getTime() === firstInput.getTime())) {
-						if (datepickerModificedEnd && datepickerModificedStart) {
-							datepickerModificedEnd.selectDate(inputDate);
-
-						}
-					}
-
-
-
-					if (target.value == 2) {
-						document.querySelector('.hidden-sportype').style.display = 'none';
-						document.querySelector('.hidden-sportcategory').style.display = 'none';
-						document.getElementById('sporttype').removeAttribute("required");
-						document.getElementById('categorysporttype').removeAttribute("required");
-						target.value = ''
-					} else {
-						target.value = ''
-					}
-
-					endNum.innerHTML = "0" + ' ' + '₸';
-					priceNum.innerHTML = "0" + ' ' + '₸';
-
-					target.removeAttribute('disabled')
-				}
-			}
-		} else if (values === 'birthday') {
-			if (value.length === 8) {
-
-				if (inputDate > birthDate || currentDate.getTime() === birthDate.getTime()) {
-
-					input.value = '';
-					if (input.id = 'dateBirthday0'){
-						input.placeholder = 'Страхователь может быть не младше 18 лет'
-					}else{
-						input.placeholder = 'Укажите дату рождения'
-					}
-					
-					return;
-
-				} else {
-					if (input.id = 'dateBirthday' + numCount) {
-						if (inputDate < birthDate || currentDate.getTime() === birthDate.getTime()) {
-
-							//datePasportAll
-							//datePasport0
-							if (dateBirthday0) {
-								var valued = firstInput.getDate().toString().padStart(2, '0') + '.' +
-									(firstInput.getMonth() + 1).toString().padStart(2, '0') + '.' +
-									firstInput.getFullYear();
-								var parts = valued.split('.');
-								var selectedDate = new Date(parts[2], parts[1] - 1, parts[0]);
-
-								dateBirthday0.selectDate(inputDate);
-							}
-
-						}
-					}
-				}
-			}
-		}
-
-		if (value.length === 8) {
-			if (inputDate.toString() === "Invalid Date" && typeof day != 'number' && typeof month != 'number' && typeof year != 'number') {
-				input.value = '';
-				return;
-			} else {
-
-				if (secondInput) {
-					if (form.classList.contains('was-validated') ) {
-						
-						ValidateInJs_CORRECT(input)
-					}
-				} else {
-					if (document.querySelector('.needs-validation').classList.contains('was-validated')) {
-						if (program.value === '2' && input.id === 'date__end') {
-							
-						}else{
-							ValidateInJs_CORRECT(input)
-						}
-						
-					}
-				}
-
-
-			}
-
-
-
-		} else {
-
-			if (secondInput) {
-		
-				if (form.classList.contains('was-validated')) {
-					
-					input.classList.add('is-invalid');
-					ValidateInJs_UNCORRECT(input)
-				}
-			} else {
-
-				if (document.querySelector('.needs-validation').classList.contains('was-validated')) {
-
-					input.classList.add('is-invalid');
-					ValidateInJs_UNCORRECT(input)
-
-				}
-			}
-
-
-			if (day) {
-				formattedDate += day;
-
-				if (day.length === 2 && month) {
-					formattedDate += '.';
-				}
-			}
-
-			if (month) {
-				formattedDate += month;
-
-				if (month.length === 2 && year) {
-					formattedDate += '.';
-				}
-			}
-
-			if (year) {
-				formattedDate += year.slice(0, 4);
-			}
-
-			input.value = formattedDate;
-
-
-		}
-	} else {
-		input.value = '';
-	}
-
-
-}
 
 function get_countries(current_lang, resident) {
 	$.ajax({
@@ -1881,15 +1613,15 @@ function get_countries(current_lang, resident) {
 // }
 
 
-// function dateSelectedIS(event){
-// 	const clickedElement = event.target
-// 	console.log(clickedElement)
-// 	const mm = clickedElement.closest('.insurance-upload')
-// 	clickedElement.style.border = '1px solid #000000'
-// 	console.log(mm)
-// 	if (form.classList.contains('was-validated') ) {
-// 	}
-// }
+function dateSelectedIS(event){
+	const clickedElement = event.target
+	console.log(clickedElement)
+	const mm = clickedElement.closest('.insurance-upload')
+	clickedElement.style.border = '1px solid #000000'
+	console.log(mm)
+	if (form.classList.contains('was-validated') ) {
+	}
+}
 
 function UploadFiles() {
 
