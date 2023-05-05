@@ -487,24 +487,25 @@
 												<hr class="insurance__more-hr mb-lg-3 mt-lg-3 mt-2 mb-2">
 											</div>
 											<div class="insurance__more-bottom">
-												<div
-													class="insurance__price d-flex justify-content-between align-items-center mb-sm-3 mb-3">
-													<p class="insurance__price-title " id="start-itog">Предварительная
-														стоимость</p>
-													<p class="insurance__price-subtitle ">0 <span
-															class="notranslate locale-insurance-price">тг</span></p>
+												<div class="loader__mb">
+													<div class="insurance__price d-flex justify-content-between align-items-center mb-sm-3 mb-3">
+														<p class="insurance__price-title " id="start-itog">Предварительная
+															стоимость</p>
+
+														<p class="insurance__price-subtitle " id="toitog">0 <span
+																class="notranslate locale-insurance-price">тг</span></p>
+													</div>
+													<div class="insurance__price d-flex justify-content-between align-items-center mb-sm-3 mb-3">
+														<p class="insurance__price-title">Скидка</p>
+														<p class="insurance__price-subtitle ">15% </p>
+													</div>
+													<div class="insurance__price d-flex justify-content-between align-items-center mb-sm-4 mb-3">
+														<p class="insurance__price-title">Итоговая стоимость</p>
+														<p class="insurance__price-subtitle " id="itog">0 <span
+																class="notranslate locale-insurance-price">тг</span></p>
+													</div>
 												</div>
-												<div
-													class="insurance__price d-flex justify-content-between align-items-center mb-sm-3 mb-3">
-													<p class="insurance__price-title">Скидка</p>
-													<p class="insurance__price-subtitle ">15% </p>
-												</div>
-												<div
-													class="insurance__price d-flex justify-content-between align-items-center mb-sm-4 mb-3">
-													<p class="insurance__price-title">Итоговая стоимость</p>
-													<p class="insurance__price-subtitle " id="itog">0 <span
-															class="notranslate locale-insurance-price">тг</span></p>
-												</div>
+												<div class="loadersum" style="margin: auto" id="loadersum"></div>
 											</div>
 											<div class="insurance__button w-100 d-flex justify-content-center align-items-center some-block-polis "
 												type="submit">
@@ -665,7 +666,7 @@
 																	телефона</label>
 																<input type="tel"
 																	class="insurance__program-aria phone-insurance get-info form-control"
-																	id="Phone0" data-tel-input required minlength="12"
+																	id="Phone0" data-tel-input required minlength="12" maxlength="14"
 																	placeholder="+7(777)777-77-77"
 																	pattern="\+?\d{1,3}[\s-]?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{2}[\s.-]?\d{2}">
 																<div class="invalid-feedback">

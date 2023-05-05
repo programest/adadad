@@ -81,8 +81,8 @@ if (dateStart) {
 							target.value = ''
 						}
 
-						endNum.innerHTML = "0" + ' ' + '₸';
-						priceNum.innerHTML = "0" + ' ' + '₸';
+						endNum.innerHTML = "0" + ' ' + 'тг';
+						priceNum.innerHTML = "0" + ' ' + 'тг';
 
 					},
 					maxDate: convertDate(dateStart.value, 'year'),
@@ -154,9 +154,13 @@ function Calc(print) {
 	if (results >= 0) {
 		//Вывод финальной даты окончания действия страхового полиса
 		if (print) {
-			endNum.innerHTML = endresultsSum + ' ' + '₸';
+			document.querySelector('.loadersum').classList.add('load-sum');
+			document.querySelector('.loader__mb').style.display = 'none';
+			document.querySelector('.insurance__more-bottom').classList.add('insurance__more-bottom--active');
+			CalcBeckend()
+			endNum.innerHTML = endresultsSum + ' ' + 'тг';
 			//Вывод промежуточной даты окончания действия страхового полиса
-			priceNum.innerHTML = resultsSum + ' ' + '₸';
+			priceNum.innerHTML = resultsSum + ' ' + 'тг';
 		}
 		//Вывод финальной даты окончания действия страхового полиса в блок итога
 
@@ -178,8 +182,8 @@ function CalcSport() {
 	
 	// Получаю targetValue с селекта получаю option value
 	if (targetValue == '2') {
-		endNum.innerHTML = "0" + ' ' + '₸';
-		priceNum.innerHTML = "0" + ' ' + '₸';
+		endNum.innerHTML = "0" + ' ' + 'тг';
+		priceNum.innerHTML = "0" + ' ' + 'тг';
 		TargetEducationProcent = 0
 		if (sportCategoryValue == 'kid') {
 
@@ -501,8 +505,8 @@ function StartFuncSelectProgram() {
 			insuranceSum.value = ''; insuranceSum.setAttribute('disabled', true);
 			target.value = ''; target.setAttribute('disabled', true);
 			$("#country").val(0).trigger("change");
-			endNum.innerHTML = "0" + ' ' + '₸';
-			priceNum.innerHTML = "0" + ' ' + '₸';
+			endNum.innerHTML = "0" + ' ' + 'тг';
+			priceNum.innerHTML = "0" + ' ' + 'тг';
 
 
 
@@ -636,8 +640,8 @@ document.getElementById("section1").addEventListener("change", function () {
 
 					insuranceSumMonth = 1;
 					insuranceSum.value = ''
-					endNum.innerHTML = "0" + ' ' + '₸';
-					priceNum.innerHTML = "0" + ' ' + '₸';
+					endNum.innerHTML = "0" + ' ' + 'тг';
+					priceNum.innerHTML = "0" + ' ' + 'тг';
 					Calc()
 
 
@@ -757,8 +761,8 @@ document.getElementById("section1").addEventListener("change", function () {
 				insuranceSum.value = ''
 				Calc()
 			});
-			endNum.innerHTML = "0" + ' ' + '₸';
-			priceNum.innerHTML = "0" + ' ' + '₸';
+			endNum.innerHTML = "0" + ' ' + 'тг';
+			priceNum.innerHTML = "0" + ' ' + 'тг';
 		});
 	}
 

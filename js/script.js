@@ -135,13 +135,13 @@ if (dateBirthday) {
 		maxDate: new Date(),
 		onSelect: function (formattedDate, date) {
 			if (checkAge() == false) {
+				document.getElementById('dateBirthday0').placeholder = 'Возраст не может быть меньше 18 лет'
+				document.getElementById('dateBirthday0').classList.add('redPlaceholder')
 
-
-				document.getElementById('dateBirthday0').value = ''
-
+				document.getElementById('dateBirthday0').value =''
 				document.getElementById('dateBirthday0').style.fontSize = '16px'
 			} else if (checkAge() == true) {
-
+				document.getElementById('dateBirthday0').classList.remove('redPlaceholder')
 			}
 			maskDateInput(dateBirthday, undefined, 'mySecondInput');
 
@@ -892,7 +892,7 @@ function OtherCoficent(a) {
 			var item = document.querySelector('.needs-validation')
 
 			// Проверьте форму на валидность
-			if (item.checkValidity() && results >= 500) {
+			if (item.checkValidity() ) {
 				loadBlocks()
 					.then(() => {
 						// Скрыть прелоадер
@@ -907,7 +907,8 @@ function OtherCoficent(a) {
 					.catch((error) => {
 						console.error(error);
 					});
-
+					
+					
 			} else {
 
 				event.preventDefault();
@@ -1120,7 +1121,7 @@ function append() {
 		obj.isresident = "1";
 		document.querySelector('.message-total').style.display = 'none';
 		linkPay.innerHTML = "Оплатить";
-		linkPay.href = "https://www.sberbank.kz/ru/person/credit_cards/credit_cards/credit_cards_for_individuals/visa_gold";
+		
 
 	} else {
 		obj.isresident = "2";
@@ -1228,6 +1229,90 @@ document.querySelector('.targetTextCss').addEventListener('click', function () {
 
 
 
+function CalcBeckend(){
+	const formData = new FormData();
+	const myBlock = document.querySelector('.error') 
+	var obj = {
+		"insurance_summ": selecta('insurance__sum'),
+    	"months": selecta('months'),
+    	"program": selecta('program'),
+    	"purpose": selecta('target'),
+    	"sport_type": selecta('sporttype'),
+		"sport_category": selecta('categorysporttype'),
+    	"isresident": 1,
+    	"country_zone": selectaInZone('country'),
+		"date_start": dateStart.value,
+		"date_end": dateEnd.value,
+	}
+	var residentButton = document.getElementById("RK");
+	if (residentButton.options[residentButton.selectedIndex].value == 1) {
+		obj.isresident = "1";
+	} else {
+		obj.isresident = "2";
+	}
+	const str = JSON.stringify(obj);
+	formData.append('json', str);
+
+	fetch('https://dms.interteach.kz/classes/Functions.php?f=NewPreProcessing', {
+		method: 'POST',
+		body: formData
+	  })
+	  .then(response => response.json())
+	  .then(data => convertCalc(data))
+	  .then(() => {
+		// скрываем прелоадер после получения ответа через 4 секунды
+		setTimeout(() => {
+		  document.querySelector('.loadersum').classList.remove('load-sum');
+		  document.querySelector('.loader__mb').style.display = 'block';
+		  document.querySelector('.insurance__more-bottom').classList.remove('insurance__more-bottom--active');
+		}, 1000);
+	  })
+	  .catch(error => {
+		console.error(error);
+		// скрываем прелоадер при ошибке
+		if (preloader) {
+		  preloader.classList.add('preloader_hidden');
+		}
+	  document.querySelector('.loadersum').classList.remove('load-sum');
+		  document.querySelector('.loader__mb').style.display = 'block';
+		  document.querySelector('.insurance__more-bottom').classList.remove('insurance__more-bottom--active');
+	  });
+
+}
+
+function convertCalc(data){
+	const itogSum = data.premium_discounted_kzt;
+	const Sum = data.premium_kzt;
+	var after = formatCurrency(Sum);
+	var to = formatCurrency(itogSum);
+	document.getElementById('toitog').innerHTML =  to ;
+	document.getElementById('itog').innerHTML = after ;
+	// animationSum(itogSum ,document.getElementById('toitog'))
+	// animationSum(Sum ,document.getElementById('itog'))
+
+}
+// function animationSum(a, b){
+// 	console.log(typeof a)
+// 	const countElement = b;
+// 	let count = 0;
+// 	const targetCount =parseInt(a);
+// 	const increment = Math.ceil(targetCount / 100); // изменяем значение цифры на 1% от конечного значения
+// 	let currentCount = 0;
+  
+// 	function animate() {
+// 	  currentCount += increment;
+// 	  if (currentCount > targetCount) {
+// 		currentCount = targetCount;
+// 	  }
+
+// 	  countElement.innerText = parseInt(currentCount) ; // выводим значение цифры на страницу, преобразуя число в строку с разделением групп разрядов
+// 	  if (currentCount < targetCount) {
+// 		requestAnimationFrame(animate); // продолжаем анимацию, пока не достигнем конечного значения
+// 	  }
+// 	}
+  
+// 	animate(); // запускаем анимацию
+//   }
 
 //Считает разницу в днях между датами
 function calculateDaysDiff(dateString1, dateString2) {
@@ -1328,6 +1413,14 @@ function convert(data) {
 
 	});
 
+
+	if (data.payment_url.status === 'success') {
+		document.getElementById('payment').setAttribute('href', data.payment_url.url);
+		
+	}
+
+
+
 	for (let i = 0; i < data.insured_list.length; i++) {
 
 		const insuredList = data.insured_list[i];
@@ -1369,13 +1462,23 @@ function convert(data) {
 
 }
 
+window.addEventListener('pageshow', function(event) {
+	var historyTraversal = event.persisted || 
+						   (typeof window.performance != 'undefined' && 
+								window.performance.navigation.type === 2);
+	if (historyTraversal) {
+	  // Обновляем страницу
+	  location.reload();
+	}
+  });
 function formatCurrency(amount) {
 	if (typeof amount !== 'undefined') {
-	  return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+	  const formattedAmount = amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+	  return formattedAmount;
 	} else {
 	  return "";
 	}
-  }
+}
 function collectInsurance(index) {
 	var container = document.querySelector('.accordion-subinsuarnce');
 
