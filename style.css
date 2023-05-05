@@ -639,7 +639,7 @@ p {
   color: rgb(245, 21, 21);
 }
 .block__insurance-form2 {
-  
+  display: none;
 }
 .block__insurance-form3{
   position: relative;
