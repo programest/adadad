@@ -4,7 +4,7 @@
 // При вводе даты в поле ввода, дата автоматически форматируется в формат dd.mm.yyyy
 
 function maskDateInput(input, values) {
-    //value бывают типов: minus, plus, modificed, birthday
+    //value бывают типов: minus, plus, modificed, birthday - это режим при котором будет работать валидация
 
 
 

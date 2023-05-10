@@ -154,12 +154,18 @@ function Calc(print, backend) {
 	if (results >= 0) {
 		//Вывод финальной даты окончания действия страхового полиса
 		if (print) {
+			document.querySelector('.loadersum').classList.remove('load-sum');
+				document.querySelector('.loader__mb').style.display = 'block';
+				document.querySelector('.insurance__more-bottom').classList.remove('insurance__more-bottom--active');
 			if (backend === true) {
+				CalcBeckend()
 				document.querySelector('.loadersum').classList.add('load-sum');
 				document.querySelector('.loader__mb').style.display = 'none';
 				document.querySelector('.insurance__more-bottom').classList.add('insurance__more-bottom--active');
-				CalcBeckend()
-			}else{
+			
+				
+			}else if (backend === false){
+				
 				endNum.innerHTML = endresultsSum + ' ' + 'тг';
 				//Вывод промежуточной даты окончания действия страхового полиса
 				priceNum.innerHTML = resultsSum + ' ' + 'тг';
@@ -219,7 +225,7 @@ function CalcSport() {
 				insuranceSumSportCoefficient = '1.20';
 			}
 			if (program.value == '1') {
-				Calc(print)
+				Calc(print, true)
 			}
 			
 
@@ -253,13 +259,13 @@ function CalcSport() {
 				insuranceSumSportCoefficient = '1.50';
 			}
 			if (program.value == '1') {
-				Calc(print)
+				Calc(print, true)
 			}
 
 		} else if (sportCategoryValue == 'invalid') {
 			insuranceSumSportCoefficient = '0.50';
 			if (program.value == '1') {
-				Calc(print)
+				Calc(print, true)
 			}
 			
 
@@ -269,13 +275,13 @@ function CalcSport() {
 		insuranceSumSportCoefficient = 1;
 		TargetEducationProcent = 0
 		if (program.value == '1') {
-			Calc(print)
+			Calc(print, true)
 		}
 	} else if (targetValue == '3') {
 
 		insuranceSumSportCoefficient = 1;
 		if (program.value == '1') {
-			Calc(print)
+			Calc(print, true)
 		}
 		
 	}
@@ -308,7 +314,7 @@ function nextmonths() {
 			insuranceSumMonth = '18'
 		}
 		next_date_unformatted.setDate(end_multi.getDate() + 30);
-		Calc(print)
+		Calc(print, true)
 	}
 	else if (months == "3") {
 		if (insuranceSum.value == '30k') {
@@ -319,7 +325,7 @@ function nextmonths() {
 			insuranceSumMonth = '33'
 		}
 		next_date_unformatted.setDate(end_multi.getDate() + 91);
-		Calc(print)
+		Calc(print, true)
 	}
 	else if (months == "6") {
 		if (insuranceSum.value == '30k') {
@@ -330,7 +336,7 @@ function nextmonths() {
 			insuranceSumMonth = '50'
 		}
 		next_date_unformatted.setDate(end_multi.getDate() + 183);
-		Calc(print)
+		Calc(print, true)
 	}
 	else if (months == "6p") {
 		if (insuranceSum.value == '30k') {
@@ -341,7 +347,7 @@ function nextmonths() {
 			insuranceSumMonth = '90'
 		}
 		next_date_unformatted.setDate(end_multi.getDate() + 183);
-		Calc(print)
+		Calc(print, true)
 	}
 	else if (months == "12") {
 		if (insuranceSum.value == '30k') {
@@ -352,7 +358,7 @@ function nextmonths() {
 			insuranceSumMonth = '90'
 		}
 		next_date_unformatted.setDate(end_multi.getDate() + 365);
-		Calc(print)
+		Calc(print, true)
 	}
 	else if (months == "12p") {
 		if (insuranceSum.value == '30k') {
@@ -363,7 +369,7 @@ function nextmonths() {
 			insuranceSumMonth = '162'
 		}
 		next_date_unformatted.setDate(end_multi.getDate() + 365);
-		Calc(print)
+		Calc(print, true)
 	}
 
 	// Получаю дату и преобразую в формат DD.MM.YYYY
