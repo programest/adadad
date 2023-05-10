@@ -88,40 +88,28 @@
 	<main>
 		<div class="container ">
 			<div class="authorization__container ">
-				<div class="authorization__block d-flex   justify-content-between">
+				<div class="authorization__block d-flex  justify-content-lg-between">
 					<div class="authorization__info me-lg-5">
-						<h2 class="authorization-title mb-xxl-5 mb-4">Вход в личный кабинет</h2>
+						<h2 class="authorization-title mb-xxl-5 mb-4">Востановление пароля</h2>
 						<form class="authorization__form needs-validation" method="" action="">
 							<div class="authorization__form-block mb-lg-4 mb-3">
-								<p class="authorization-text mb-2 form-label" >Введите номер телефона:</p>
-								<input type="tel" class="authorization-input form-control "  minlength="5" data-tel-input required minlength="12" 
-								placeholder="+7(777)777-77-77" oninput="Patterns(this.value, this) "  onpaste="Patterns(this.value, this)" ondrop="return false">
+								<p class="authorization-text mb-2 form-label" >Введите email:</p>
+								<input type="email" class="authorization-input form-control "   required 
+								placeholder="example@mail.ru" >
+				
 								<div class="invalid-feedback">
-									Пожалуйста, укажите номер телефона
+									Пожалуйста, укажите email
 								</div>
 							</div>
-							<div class="authorization__form-block password__hidden-visible mb-lg-4 mb-4  ">
-								<p class="authorization-text mb-2 form-labe l">Введите пароль:</p>
-								<div class="input-group "    >
-								<input type="password" class="authorization-input form-control  "  placeholder="XXXXX" id="pwd" required src="../img/card__img-1.png">
-								<span class="input-group-text"  onclick="show()"><div class="password__img" ><img src="../img/eye_show.svg" alt="" id="eye"
-									class="authorization-eye"></div></span>
-							</div>
-								
-										<div class="invalid-feedback">
-											Пожалуйста, введите пароль
-										</div>
-							</div>
+							
 							
 							<div class="authorization__submit mb-lg-0 mb-3">
 								<div type="submit"
-									class="authorization-button   notranslate locale-authorization-button">Войти</div>
-								<a href="../cabinet/reset.html" class="authorization-link"  >Забыли пароль?</a>
-								
-								<div class="invalid-feedback">
-									Пожалуйста, выберите начала страховки
-								</div>
+									class="authorization-button  authorization-button-blue  notranslate me-lg-5 ">Сбросить</div>
+                                    <a href="../cabinet/login.html" 
+									class="authorization-button   notranslate ">Войти</a>
 							</div>
+							
 						</form>
 						<div class="authorization__attention d-flex mt-lg-4">
 							<img src="../img/attention.svg" alt="" class="authorization__attention-icon me-lg-3 me-3">
@@ -130,8 +118,8 @@
 								в компании “INTERTEACH”</p>
 						</div>
 					</div>
-					<div class="authorization__img ">
-						<img src="../img/login__img.png" alt="" class="w-100">
+					<div class="authorization__img-forgot">
+						<img src="../img/undraw_forgot_password.svg" alt="" class="w-100">
 
 					</div>
 				</div>
@@ -142,15 +130,14 @@
 							<h2 class="accordion-header" id="headingOne">
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 									data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-									Почему нет кнопки регистрации?
+									Где я могу взять email для сброса?
 								</button>
 							</h2>
 							<div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne"
 								data-bs-parent="#accordionExample">
 								<div class="accordion-body">
-									<strong>Личный кабинет доступен только для тех, кто
-										застрахован в компании “INTERTEACH”, для того что бы оформить страховку
-										нажмите<a href="../index.html" class="authorization__spollers-body-red">сюда</a>
+									<strong>После оформления полиса на указанную вами почту или телефон придет SMS с
+										успешным оформлением, и именно там будет ваш email от личного кабинета.
 								</div>
 							</div>
 						</div>
@@ -158,14 +145,13 @@
 							<h2 class="accordion-header" id="headingTwo">
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 									data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-									Где мне взять пароль?
+									Что делать если не помню email
 								</button>
 							</h2>
 							<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
 								data-bs-parent="#accordionExample">
 								<div class="accordion-body">
-									<strong>После оформления полиса на указанную вами почту или телефон придет SMS с
-										успешным оформлением, и именно там будет ваш пароль от личного кабинета.
+									<strong>Если вы забыли email, то попробуйте посмотреть SMS с успешным оформлением. Если же по какой-то причине SMS не найден обратитесь в CallCenter по номеру <a href="tel:+7 7273200 200" class="authorization__spollers-body-red">+7 727 3200 200</a>
 								</div>
 							</div>
 						</div>
@@ -188,17 +174,14 @@
 							<h2 class="accordion-header" id="headingFour">
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 									data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-									Какой номер телефона мне указывать?
+									Что делать после того как email отправиться?
+
 								</button>
 							</h2>
 							<div id="collapseFour" class="accordion-collapse collapse " aria-labelledby="headingFour"
 								data-bs-parent="#accordionExample">
 								<div class="accordion-body">
-									<strong>После оформления полиса на указанную вами почту или
-										телефон придет SMS с успешным оформлением, и именно там будет ваш номер телефона
-										на
-										который зарегистрирован полис, это и будет ваш номер от личного
-										кабинета.
+									<strong>После отправки email. Вам нужно будет зайти в личную почту и уже там будет ваш новый пороль,полсе этого нужно зайти на сайт и войти уже с новым паролем.
 								</div>
 							</div>
 						</div>

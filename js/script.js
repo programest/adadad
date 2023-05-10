@@ -32,12 +32,19 @@ function show() {
 	var b = document.getElementById("eye");
 	if (a.type == "password") {
 		a.type = "text";
-		b.src = "img/eye_hide.svg";
+		b.src = "../img/eye_hide.svg";
 	} else {
 		a.type = "password";
-		b.src = "img/eye_show.svg";
+		b.src = "../img/eye_show.svg";
 	}
 }
+
+
+
+
+
+
+
 function ValidateMaskPhone(input) {
 	input.addEventListener('input', function (e) {
 		var modInput = input.value.replace(/\D/g, "");

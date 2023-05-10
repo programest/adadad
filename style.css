@@ -20,7 +20,9 @@ ul {
   margin : 0 auto;
 }
 
-
+a {
+  text-decoration: none;
+}
 p {
   margin-bottom: 0 !important;
 }
@@ -1196,36 +1198,36 @@ select:focus {
 .authorization-input {
   position: relative;
   font-family: 'Montserrat', sans-serif;
-  width: 400px;
+  width: 100%;
   font-size: 18px;
   padding-left: 10px;
-  padding-right: 55px;
+ 
   font-weight: 600;
   height: 50px;
   border: 2px solid #2D3E50;
   border-radius: 5px;
 }
 
-@media (max-width: 1200px) {
-  .authorization-input {
-    width: 350px;
-    height: 40px;
-    padding-right: 35px;
-  }
+
+.input-group-text{
+  border-top: 2px solid rgb(8, 8, 8);
+  border-bottom: 2px solid rgb(8, 8, 8);
+  border-right: 2px solid rgb(8, 8, 8);;
+}
+.authorization-button-blue{
+  background-color: #1b9ad1 !important;
 }
 .authorization__submit{
-  
+  justify-content: space-between;
   display: flex;
   align-items: center;
 }
-@media (max-width: 768px) {
-  .authorization-input {
-    width: 100%;
-    padding-right: 45px;
-  }
-}
+
 
 @media (max-width: 768px) {
+  .authorization__container {
+    padding: 0 15px;
+  }
   .authorization__submit {
     justify-content: space-between;
     display: flex;
@@ -1234,18 +1236,19 @@ select:focus {
 }
 
 .authorization-button {
-  margin-right: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
   background: #28A745;
   border-radius: 10px;
-  width: 200px;
-  height: 50px;
+  width: 160px;
+  height: 45px;
   border: none;
   color: #FFFFFF;
 }
-
+.authorization__form{
+  width: 100%;
+}
 @media (max-width: 1200px) {
   .authorization-button {
     width: 180px;
@@ -1257,6 +1260,9 @@ select:focus {
   .authorization-button {
     width: 270px;
     height: 45px;
+  }
+  .authorization__form{
+    width: 100%;
   }
 }
 
@@ -1280,7 +1286,7 @@ select:focus {
 }
 
 .authorization__info {
-  width: 45%;
+  width: 42%;
 }
 
 @media (max-width: 768px) {
@@ -1288,12 +1294,18 @@ select:focus {
     width: 100%;
   }
 }
+.authorization__attention{
+  margin-bottom: 20px;
+ 
 
+}
 .authorization__attention-text {
+
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   font-size: 16px;
   color: #FF0000;
+  padding-top: 2px;
 }
 
 @media (max-width: 1200px) {
@@ -1307,7 +1319,9 @@ select:focus {
     font-size: 11px;
   }
 }
-
+.authorization__img-forgot{
+  width: 40%;
+}
 .authorization__img {
   width: 600px;
 }
@@ -1316,46 +1330,48 @@ select:focus {
   .authorization__img {
     width: 500px;
   }
+  .authorization__img-forgot{
+    width: 30%;
+  }
 }
 
 @media (max-width: 768px) {
   .authorization__img {
     display: none;
   }
+  .authorization__img-forgot{
+    width: 30%;
+  }
+}
+.authorization-button-modal{
+  margin-right: 0;
 }
 
 .authorization-eye {
   width: 30px;
-  position: absolute;
-  top: 50%;
-  right: 29%;
+}
+.input-group-text{
   cursor: pointer;
-}
-.authorization-input.is-valid, .was-validated .form-control:valid {
-  background-position: right calc(2.375em + 0.1875rem) center !important;
-}
-.authorization-input.is-invalid, .was-validated .form-control:invalid {
-  background-position: right calc(2.375em + 0.1875rem) center !important;
-}
-@media (max-width: 1400px) {
-  .authorization-eye {
-    right: 19%;
-  }
+  padding: 0rem 0.75rem !important;
 }
 
-@media (max-width: 990px) {
-  .authorization-eye {
-    top: 50%;
-    right: 3%;
-  }
+
+
+
+.authorization-input.is-valid + .input-group-text,
+.was-validated .authorization-input:valid + .input-group-text {
+  border-color: #198754;
+
 }
 
-@media (max-width: 768px) {
-  .authorization-eye {
-    top: 49%;
-    right: 2%;
-  }
+.authorization-input.is-invalid + .input-group-text,
+.was-validated .authorization-input:invalid + .input-group-text {
+  border-color: #dc3545;
+
 }
+
+
+
 
 .password__hidden-visible {
   position: relative;
@@ -2152,7 +2168,7 @@ ul {
   transition: opacity 0.3s ease-in-out;
   }
 .authorization__container {
-  padding: 0 15px;
+  
   margin-bottom: 100px;
 }
 .targetTextCss{
