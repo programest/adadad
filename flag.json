@@ -12,6 +12,66 @@
       "name": "Albania"
     },
     {
+      "code": "Schengen",
+      "name": "Schengen"
+    },
+    {
+      "code": "Schengen",
+      "name": "Schengen"
+    },
+    {
+      "code": "czech republic ",
+      "name": "Czech"
+    },
+    {
+      "code": "Vatican",
+      "name": "Vatican"
+    },
+    {
+      "code": "trinidad-and-tobago",
+      "name": "Trinidad and Tobago"
+    },
+    {
+      "code": "serbia",
+      "name": "Serbia Republic"
+    },
+    {
+      "code": "Syria",
+      "name": "Syria"
+    },
+    {
+      "code": "saint-kitts-and-nevis",
+      "name": "Saint Kitts and Nevis"
+    },
+    {
+      "code": "sao-tome-and-principe",
+      "name": "Sao Tome and Principe"
+    },
+    {
+      "code": "Vietnam",
+      "name": "Vietnam"
+    },
+    {
+      "code": "papua new guinea",
+      "name": "New Guinea"
+    },
+    {
+      "code": "san-marino",
+      "name": "San marino"
+    },
+    {
+      "code": "Panama",
+      "name": "panama"
+    },
+    {
+      "code": "palestine",
+      "name": "Palestine"
+    },
+    {
+      "code": "bosnia and herzegovina",
+      "name": "Bosnia and Herzegovina"
+    },
+    {
       "code": "all",
       "name": "undefined"
     },
@@ -725,7 +785,7 @@
     },
     {
       "code": "ru",
-      "name": "Russian Federation"
+      "name": "Russia"
     },
     {
       "code": "rw",
@@ -929,11 +989,11 @@
     },
     {
       "code": "ukk",
-      "name": "UK coast"
+      "name": "UK"
     },
     {
       "code": "us",
-      "name": "United States"
+      "name": "USA"
     },
     {
       "code": "all",

@@ -68,7 +68,7 @@
 							</ul>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="login.html">
+							<a class="nav-link" href="cabinet/login.html">
 								<div class="nav__button d-flex justify-content-center align-items-center">
 									<img src="img/button-nav.svg" alt="" class="nav__button-img me-xl-3 me-lg-1 me-3">
 
@@ -667,7 +667,7 @@
 																<input type="tel"
 																	class="insurance__program-aria phone-insurance get-info form-control"
 																	id="Phone0" data-tel-input required minlength="12" 
-																	placeholder="+7(777)777-77-77" oninput="Patterns(this.value) "  onpaste="Patterns(this.value)" ondrop="return false"
+																	placeholder="+7(777)777-77-77" oninput="Patterns(this.value, this) "  onpaste="Patterns(this.value,this)" ondrop="return false"
 															
 >
 																<div class="invalid-feedback">
@@ -1658,8 +1658,10 @@
 		crossorigin="anonymous"></script>
 	<script src="jquery.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	<script src="js/PatternsPhone.js"></script>
 	<script src="js/MaskDate.js"></script>
 	<script src="js/MaskPhone.js"></script>
+	<script src="js/Translate.js"></script>
 	<script src="js/script.js"></script>
 	<script src="calc.js"></script>
 

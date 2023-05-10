@@ -813,36 +813,36 @@ function Logic() {
 Logic()
 
 
-
 function formatState(state) {
 
 	var baseUrl = "img/flags";
 	var $state = $(
 		'<span><img class="img-flag" /> <span></span></span>'
 	);
-	//  
-	//var selectElement = document.getElementById("country"); 
-	//var selectedOptions = selectElement.selectedOptions; 
-	//for (var j = 0; j < selectedOptions.length; j++) {
-	//    var option = selectedOptions[j];
-
-	//    var attributes = option.getAttribute("data-name-flag")
-	//    console.log(attributes)
-	//      
-	//}
-	var name = $('#country option[value="' + state.id + '"]').attr('data-flag-name')
-	// Use .text() instead of HTML string concatenation to avoid script injection issues
-	$state.find("span").text(state.text);
+	
+	var name = $('#country option[value="' + state.id + '"]').attr('data-flag-name');
+	
+	// Проверяем наличие SVG-изображения
 	try {
-
-		$state.find("img").attr("src", baseUrl + "/" + name + ".svg");
-
+		var img = new Image();
+		img.src = baseUrl + "/" + name + ".svg";
+		img.onload = function() {
+			$state.find("img").attr("src", img.src);
+		};
+		img.onerror = function() {
+			// Если SVG-изображения нет, используем PNG
+			$state.find("img").attr("src", baseUrl + "/" + name + ".png");
+		};
 	} catch (err) {
-
-		// обработка ошибки
+		// Обработка ошибки
 	}
+
+	// Используем .text() вместо конкатенации строк, чтобы избежать проблем с инъекцией скриптов
+	$state.find("span").text(state.text);
+
 	return $state;
 }
+
 function formatStatePerson(state) {
 
 	var baseUrl = "img/flags";

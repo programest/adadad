@@ -1199,6 +1199,7 @@ select:focus {
   width: 400px;
   font-size: 18px;
   padding-left: 10px;
+  padding-right: 55px;
   font-weight: 600;
   height: 50px;
   border: 2px solid #2D3E50;
@@ -1209,12 +1210,18 @@ select:focus {
   .authorization-input {
     width: 350px;
     height: 40px;
+    padding-right: 35px;
   }
 }
-
+.authorization__submit{
+  
+  display: flex;
+  align-items: center;
+}
 @media (max-width: 768px) {
   .authorization-input {
     width: 100%;
+    padding-right: 45px;
   }
 }
 
@@ -1227,10 +1234,14 @@ select:focus {
 }
 
 .authorization-button {
+  margin-right: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: #28A745;
   border-radius: 10px;
-  width: 229px;
-  height: 55px;
+  width: 200px;
+  height: 50px;
   border: none;
   color: #FFFFFF;
 }
@@ -1269,7 +1280,7 @@ select:focus {
 }
 
 .authorization__info {
-  width: 550px;
+  width: 45%;
 }
 
 @media (max-width: 768px) {
@@ -1320,17 +1331,22 @@ select:focus {
   right: 29%;
   cursor: pointer;
 }
-
+.authorization-input.is-valid, .was-validated .form-control:valid {
+  background-position: right calc(2.375em + 0.1875rem) center !important;
+}
+.authorization-input.is-invalid, .was-validated .form-control:invalid {
+  background-position: right calc(2.375em + 0.1875rem) center !important;
+}
 @media (max-width: 1400px) {
   .authorization-eye {
-    right: 25%;
+    right: 19%;
   }
 }
 
 @media (max-width: 990px) {
   .authorization-eye {
-    top: 47%;
-    right: 20%;
+    top: 50%;
+    right: 3%;
   }
 }
 

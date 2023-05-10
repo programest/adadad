@@ -48,49 +48,20 @@ function ValidateMaskPhone(input) {
 			ValidateInJs_UNCORRECT(input)
 			if (document.querySelector('.needs-validation2').classList.contains('was-validated')) {
 				input.classList.add('is-invalid');
-				console.log('1')
+			
 				ValidateInJs_UNCORRECT(input)
 			}
 		} else {
 			if (document.querySelector('.needs-validation2').classList.contains('was-validated')) {
 				input.classList.remove('is-invalid');
-				console.log('2')
+				
 				ValidateInJs_CORRECT(input)
 			}
 		}
 	})
 
 }
-function Patterns(phone) {
-	var MAX_PHONE_LENGTH = 14;
-  
-	if (phone.length >= 1) {
-	  const countryCode = phone.match(/^\+?\d{1}/)[0];
-	  if (countryCode === '+7' || countryCode === '7') {
-		// Russia
-		document.querySelector('.phone-insurance').setAttribute('pattern', '\\+?\\d{1,3}[\\s-]?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{2}[\\s.-]?\\d{2}');
-		MAX_PHONE_LENGTH = 18;
-	  } else if (countryCode === '+1') {
-		// USA and Canada
-		document.querySelector('.phone-insurance').setAttribute('pattern', '\\+?1?[\\s.-]?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}');
-		MAX_PHONE_LENGTH = 14;
-	  } else if (countryCode === '+44') {
-		// UK
-		document.querySelector('.phone-insurance').setAttribute('pattern', '\\+?44[\\s.-]?\\(?\\d{4}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{3}');
-		MAX_PHONE_LENGTH = 10;
-	  } else if (countryCode === '+33') {
-		// France
-		document.querySelector('.phone-insurance').setAttribute('pattern', '\\+?33[\\s.-]?\\(?\\d{1}\\)?[\\s.-]?\\d{2}[\\s.-]?\\d{2}[\\s.-]?\\d{2}[\\s.-]?\\d{2}');
-		MAX_PHONE_LENGTH = 14;
-	  } else {
-		// Default pattern
-		document.querySelector('.phone-insurance').setAttribute('pattern', '\\+?\\d{1,3}[\\s.-]?\\(?\\d{3}\\)?[\s.-]?\\d{3}[\\s.-]?\\d{4}');
-	  }
-	}
-  
-	document.querySelector('.phone-insurance').setAttribute('maxlength', MAX_PHONE_LENGTH);
-  }
-  
+
 
 
 var dateBirthday = document.getElementById("dateBirthday0");
@@ -253,216 +224,6 @@ function collectSubInsurance() {
 
 
 
-//Автоматический перевод
-
-
-let ru = document.getElementById('ru');
-let en = document.getElementById('en');
-
-function coook(a) {
-	let cookie = setCookie('lang', a)
-}
-
-var changeLocaleService = (function () {
-	var locale;
-
-	function loadLocale(defLang) {
-
-		var xhr = new XMLHttpRequest();
-		xhr.open("GET", 'lang.json', true);
-		xhr.onreadystatechange = saveLocale.bind(this);
-		xhr.onerror = function () { };
-		xhr.send();
-		let cookie = getCookie('lang')
-
-		function saveLocale() {
-			if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-				locale = JSON.parse(xhr.responseText);
-
-				if (defLang) changeLocale(defLang);
-				if (cookie === 'kz') {
-					get_countries('kz')
-					changeLocale('kz')
-					document.querySelector('.nav__dropdown-flag').src = 'img/kz.png'
-					document.querySelector('.nav__dropdown-text').innerHTML = 'Қазақша'
-				} else if (cookie === 'ru') {
-					changeLocale('ru')
-					get_countries('ru')
-				} else if (cookie === 'en') {
-					changeLocale('en')
-					get_countries('en')
-					document.querySelector('.nav__dropdown-flag').src = 'img/en.png'
-					document.querySelector('.nav__dropdown-text').innerHTML = 'English'
-				} else {
-					get_countries('ru')
-					changeLocale('ru')
-
-				}
-			}
-		}
-		return cookie
-	}
-
-	function changeLocale(lang) {
-		if (!locale[lang]) return
-		else changeText('locale', locale[lang]);
-
-		function changeText(name, object, startIndex) {
-			for (key in object)
-				if (Array.isArray(object[key]) && typeof object[key] != 'string' && typeof object[key][0] == 'string') getArrayText(key, object, name);
-				else if (typeof object[key] == "object") {
-					if (isNaN(key)) changeText(name + "-" + key, object[key]);
-					else changeText(name, object[key], key);
-				}
-				else getText(key, object, name, startIndex);
-		}
-		function getText(key, object, name, startIndex) {
-			var elementKey = 0;
-			if (startIndex) elementKey = startIndex;
-
-			for (; elementKey < document.getElementsByClassName(name + "-" + key).length; elementKey++)
-				if (!isNaN(elementKey)) document.getElementsByClassName(name + "-" + key)[elementKey].textContent = object[key];
-
-		}
-		function getArrayText(key, object, name, startIndex) {
-			var elementKey = 0;
-			if (startIndex) elementKey = startIndex;
-
-			for (; elementKey < document.getElementsByClassName(name + "-" + key).length; elementKey++)
-				if (!isNaN(elementKey)) document.getElementsByClassName(name + "-" + key)[elementKey].textContent = object[key][elementKey % object[key].length];
-		}
-
-	}
-
-	return {
-		loadLocale: loadLocale,
-		changeLocale: changeLocale
-	}
-})();
-
-
-
-
-
-//Google Translate
-
-
-const googleTranslateConfig = {
-	/* Original language */
-	lang: "ru",
-	/* The language we translate into on the first visit*/
-	/* Язык, на который переводим при первом посещении */
-	// langFirstVisit: 'en',
-	/* Если скрипт не работает на поддомене, 
-	раскомментируйте и
-	укажите основной домен в свойстве domain */
-	/* domain: "Get-Web.Site" */
-};
-document.addEventListener("DOMContentLoaded", (event) => {
-	/* Подключаем виджет google translate */
-	/* Connecting the google translate widget */
-	let script = document.createElement("script");
-	script.src = `//translate.google.com/translate_a/element.js?cb=TranslateWidgetIsLoaded`;
-	document.getElementsByTagName("head")[0].appendChild(script);
-});
-
-function TranslateWidgetIsLoaded() {
-	TranslateInit(googleTranslateConfig);
-}
-function TranslateInit() {
-
-	if (googleTranslateConfig.langFirstVisit && !Cookies.get('googtrans')) {
-		// Если установлен язык перевода для первого посещения и куки не назначены
-		TranslateCookieHandler("/auto/" + googleTranslateConfig.langFirstVisit);
-	}
-
-	let code = TranslateGetCode();
-	// Находим флаг с выбранным языком для перевода и добавляем к нему активный класс
-	if (document.querySelector('[data-google-lang="' + code + '"]') !== null) {
-		document.querySelector('[data-google-lang="' + code + '"]').classList.add('language__img_active');
-	}
-
-	if (code == googleTranslateConfig.lang) {
-		// Если язык по умолчанию, совпадает с языком на который переводим
-		// То очищаем куки
-		TranslateCookieHandler(null, googleTranslateConfig.domain);
-	}
-
-	// Инициализируем виджет с языком по умолчанию
-	new google.translate.TranslateElement({
-		pageLanguage: googleTranslateConfig.lang,
-	});
-	// Вешаем событие  клик на флаги
-	TranslateEventHandler('click', '[data-google-lang]', function (e) {
-		TranslateCookieHandler("/" + googleTranslateConfig.lang + "/" + e.getAttribute("data-google-lang"), googleTranslateConfig.domain);
-		// Перезагружаем страницу
-		window.location.reload();
-	});
-}
-
-function TranslateGetCode() {
-	// Если куки нет, то передаем дефолтный язык
-	let lang = (Cookies.get('googtrans') != undefined && Cookies.get('googtrans') != "null") ? Cookies.get('googtrans') : googleTranslateConfig.lang;
-	return lang.match(/(?!^\/)[^\/]*$/gm)[0];
-}
-
-function TranslateCookieHandler(val, domain) {
-	// Записываем куки /язык_который_переводим/язык_на_который_переводим
-	Cookies.set('googtrans', val);
-	Cookies.set("googtrans", val, {
-		domain: "." + document.domain,
-	});
-
-	if (domain == "undefined") return;
-	// записываем куки для домена, если он назначен в конфиге
-	Cookies.set("googtrans", val, {
-		domain: domain,
-	});
-
-	Cookies.set("googtrans", val, {
-		domain: "." + domain,
-	});
-}
-
-function TranslateEventHandler(event, selector, handler) {
-	document.addEventListener(event, function (e) {
-		let el = e.target.closest(selector);
-		if (el) handler(el);
-	});
-}
-
-
-// if (document.querySelector(".sub-forms")){
-// 	document.querySelector(".sub-forms").addEventListener("click", function (e) {
-// 		const inputs = document.querySelectorAll('input[type="file"]');
-// 		const output = document.querySelector('.file-text');
-
-// 		inputs.forEach((input) => {
-
-// 			input.addEventListener('change', async (event) => {
-
-// 				const files = event.target.files;
-
-// 				for (let i = 0; i < files.length; i++) {
-// 					const file = files[i];
-
-// 					try {
-// 						const response = await fetch('/upload', {
-// 							method: 'POST',
-// 							body: file
-// 						});
-
-// 						if (response.ok) {
-// 							output.textContent = `Загружено ${i} из ${files.length} файлов`;
-// 						}
-// 					} catch (error) {
-// 						console.error(error);
-// 					}
-// 				}
-// 			});
-// 		});
-// 	});
-// }
 
 
 
@@ -514,7 +275,7 @@ function xml(selectElement) {
 
 					document.getElementById("insurance__sum").removeAttribute('disabled')
 					$('.select-country').select2({
-						maximumSelectionLength: 10,
+						maximumSelectionLength: 200,
 						templateSelection: formatState,
 
 						language: {
@@ -564,34 +325,37 @@ const addButtonContainer = document.querySelector('.form__add-people-block')
 const childaddButtonContainer = document.querySelector('.form__action-people')
 
 var max = 4;
-checkbox.addEventListener('change', function () {
-	if (checkbox.checked) {
-		console.log('false')
-		max = 4;
-		if (blockCount > max) {
-			
-			const blocks = document.querySelectorAll('.block');
-			const lastBlock = blocks[blocks.length - 1];
-			container.removeChild(lastBlock);
-			blockCount--;
-			numCount--;
-			x--
-			otherCoefficient = 1;
+if(checkbox){
+	checkbox.addEventListener('change', function () {
+		if (checkbox.checked) {
+			console.log('false')
+			max = 4;
+			if (blockCount > max) {
+				
+				const blocks = document.querySelectorAll('.block');
+				const lastBlock = blocks[blocks.length - 1];
+				container.removeChild(lastBlock);
+				blockCount--;
+				numCount--;
+				x--
+				otherCoefficient = 1;
+			}
+		} else {
+			console.log('false')
+			max = 5;
+			if (blockCount > max) {
+				const blocks = document.querySelectorAll('.block');
+				const lastBlock = blocks[blocks.length - 1];
+				container.removeChild(lastBlock);
+				blockCount--;
+				numCount--;
+				x--
+				otherCoefficient = 1;
+			}
 		}
-	} else {
-		console.log('false')
-		max = 5;
-		if (blockCount > max) {
-			const blocks = document.querySelectorAll('.block');
-			const lastBlock = blocks[blocks.length - 1];
-			container.removeChild(lastBlock);
-			blockCount--;
-			numCount--;
-			x--
-			otherCoefficient = 1;
-		}
-	}
-});
+	});
+}
+
 var x = 0;
 function Add() {
 	const xhr = new XMLHttpRequest();
@@ -802,6 +566,7 @@ function DateAnOBj(a){
 
 
 function formatStateInsurancePeople(state) {
+
 	var baseUrl = "img/flags";
 	var $state = $(
 		'<span><img class="img-flag" /> <span></span></span>'
@@ -926,67 +691,70 @@ function ValidatePuy(){
 
 	// Получите ссылку на кнопку
 	var button = document.querySelector('.puy');
-	// Добавьте обработчик событий на кнопку
-	document.getElementById('dateBirthday0').value
-	form.addEventListener('change', function () {
-		button.classList.toggle('active-btn', form.checkValidity());
-
-	});
+	if (button){
+		document.getElementById('dateBirthday0').value
+		form.addEventListener('change', function () {
+			button.classList.toggle('active-btn', form.checkValidity());
 	
-	
-	;
-	button.addEventListener('click', function (event) {
-
+		});
 		
-
-		if (!document.querySelector('.block') && !checkbox.checked) {
-			document.querySelector('.hidden-attentional-sec').style.display = 'flex'
-			setTimeout(function () {
-				document.querySelector('.hidden-attentional-sec').style.display = 'none';
-			}, 3000);
-		} else {
-			if (block) {
-				block.forEach(function (item) {
-					// Получите ссылку на форму, связанную с кнопкой
-					if (form.checkValidity() && item.checkValidity()) {
+		
+		;
+		button.addEventListener('click', function (event) {
+	
+			
+	
+			if (!document.querySelector('.block') && !checkbox.checked) {
+				document.querySelector('.hidden-attentional-sec').style.display = 'flex'
+				setTimeout(function () {
+					document.querySelector('.hidden-attentional-sec').style.display = 'none';
+				}, 3000);
+			} else {
+				if (block) {
+					block.forEach(function (item) {
+						// Получите ссылку на форму, связанную с кнопкой
+						if (form.checkValidity() && item.checkValidity()) {
+							preloader.classList.remove('preloader_hidden');
+							append()
+									block2.style.display = 'none';
+									block3.style.display = 'block';
+						} else {
+	
+							
+							event.preventDefault();
+							event.stopPropagation();
+	
+						}
+					})
+				} else {
+					if (form.checkValidity()) {
 						preloader.classList.remove('preloader_hidden');
 						append()
-								block2.style.display = 'none';
-								block3.style.display = 'block';
+						// Показать загруженные блоки
+						block2.style.display = 'none';
+						block3.style.display = 'block';
 					} else {
-
-						
 						event.preventDefault();
 						event.stopPropagation();
-
+	
+	
 					}
-				})
-			} else {
-				if (form.checkValidity()) {
-					preloader.classList.remove('preloader_hidden');
-					append()
-					// Показать загруженные блоки
-					block2.style.display = 'none';
-					block3.style.display = 'block';
-				} else {
-					event.preventDefault();
-					event.stopPropagation();
-
-
 				}
 			}
-		}
-
-		form.classList.add('was-validated');
-		document.querySelectorAll('.custom-dates').forEach(function (item) {
-			maskDateInput(item, undefined, '324234')
-		})
-		document.querySelectorAll('.phone-insuarance').forEach(function (item) {
-			ValidateMaskPhone(item)
-		});
-		UploadFiles();
-	}, false);
-
+	
+			form.classList.add('was-validated');
+			document.querySelectorAll('.custom-dates').forEach(function (item) {
+				maskDateInput(item, undefined, '324234')
+			})
+			document.querySelectorAll('.phone-insuarance').forEach(function (item) {
+				ValidateMaskPhone(item)
+			});
+			UploadFiles();
+		}, false);
+	
+	}
+	// Добавьте обработчик событий на кнопку
+	
 };
 
 ValidatePuy()
@@ -1180,29 +948,34 @@ function append() {
 
   });
 }
-document.querySelector('.call-center').addEventListener('mouseenter', function () {
-	document.querySelector('.call-center').innerHTML = "+7 727 3200 200";
-	document.querySelector('.call-center').style.color = "#fff";
-});
-document.querySelector('.call-center').addEventListener('mouseleave', function () {
-	document.querySelector('.call-center').innerHTML = "Call Center";
-});
+if (document.querySelector('.call-center')){
+	document.querySelector('.call-center').addEventListener('mouseenter', function () {
+		document.querySelector('.call-center').innerHTML = "+7 727 3200 200";
+		document.querySelector('.call-center').style.color = "#fff";
+	});
+	document.querySelector('.call-center').addEventListener('mouseleave', function () {
+		document.querySelector('.call-center').innerHTML = "Call Center";
+	});
+}
 
 
 
 
-document.querySelector('.targetTextCss').addEventListener('click', function () {
+if (document.querySelector('.targetTextCss')){
+	document.querySelector('.targetTextCss').addEventListener('click', function () {
 
 
-	for (var i = 0; i <= numCount; i++) {
-
-		var input = document.getElementById('uploaddocs' + i);
-		var formDataIin = document.getElementById('IIN' + i)
-
-
-		//  formData.append(`file[${formDataIin}]`, input.files[0]);
-	}
-});
+		for (var i = 0; i <= numCount; i++) {
+	
+			var input = document.getElementById('uploaddocs' + i);
+			var formDataIin = document.getElementById('IIN' + i)
+	
+	
+			//  formData.append(`file[${formDataIin}]`, input.files[0]);
+		}
+	});
+	
+}
 
 
 
@@ -1587,7 +1360,7 @@ function get_countries(current_lang, resident) {
 
 				var option_data_kz = '<option value=""  disabled class="sel" >Выберите страну</option> <option  data-currency="KZT" data-zone="3" data-flag-name="kz"  data-name-lat="Kazakhstan" value="1" >Казахстан</option> ';
 			} else {
-				var option_data = '<option value=""  class="selcountry" >Выберите страну</option>'
+				var option_data = '<option value=""   disabled class="selcountry" >Выберите страну</option>'
 			}
 
 
