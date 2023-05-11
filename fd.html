@@ -43,7 +43,7 @@
 										class="insurance__program-aria phone-insuarance get-info form-control changeid"
 										id="Phone1" data-tel-input required placeholder="+7(777)777-77-77 " minlength="12"
 										placeholder="+7(777)777-77-77"
-										pattern="\+?\d{1,3}[\s-]?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{2}[\s.-]?\d{2}">
+										oninput="Patterns(this.value, this) "  onpaste="Patterns(this.value,this)" ondrop="return false">
 									<div class="invalid-feedback">
 										Пожалуйста, укажите номер телефона
 									</div>
@@ -121,8 +121,7 @@
 								class="insurance__three insurance-flex justify-content-center flex-column align-items-center">
 								<div
 									class=" insurance__program insurance__form-block flex-column d-flex mb-lg-4 mb-3 mb-xxl-6 ">
-									<label class="insurance__program-label mb-lg-1 mb-1" for="for">Укажите место
-										рождение</label><select
+									<label class="insurance__program-label mb-lg-1 mb-1" for="for">Страна резеденства</label><select
 										class="insurance__program-aria select2 custom-select select-user-country changeid"
 										data-itog="itog-inbirtghday" id="country-people1" name="states[]" required>
 
