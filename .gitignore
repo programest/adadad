@@ -1,6 +1,7 @@
-vscode/
+.vscode/
 node_modules/
 style.css.map
 style.min.css
 package.json
 package-lock.json
+.gitignore

@@ -471,6 +471,7 @@ function Resident() {
 			nn[i].setAttribute('pattern', '[N]\d{7}');
 			nn[i].maxLength = 8;
 		}
+	
 		//Если резидент, то добавлять в value Казахстан и убирать возможность редактировать
 		
 		//resident = resident.options[resident.selectedIndex].setAttribute('data-name-lat', 'Kazakhstan')
@@ -525,7 +526,7 @@ function StartFuncSelectProgram() {
 			dateEnd.value = ''; dateEnd.setAttribute('disabled', true);
 			insuranceSum.value = ''; insuranceSum.setAttribute('disabled', true);
 			target.value = ''; target.setAttribute('disabled', true);
-			//$("#country").val(0).trigger("change");
+			
 			endNum.innerHTML = "0" + ' ' + 'тг';
 			priceNum.innerHTML = "0" + ' ' + 'тг';
 

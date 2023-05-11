@@ -1365,9 +1365,9 @@ function get_countries(current_lang, resident) {
 
 			if (resident) {
 
-				var option_data_kz = '<option value="" selected  disabled class="sel" >Выберите страну</option> <option  data-currency="KZT" data-zone="3" data-flag-name="kz"  data-name-lat="Kazakhstan" value="1" >Казахстан</option> ';
+				var option_data_kz = '<option value=""   disabled class="sel" >Выберите страну</option> <option  data-currency="KZT" data-zone="3" data-flag-name="kz"  data-name-lat="Kazakhstan" value="1" >Казахстан</option> ';
 			} else {
-				var option_data = '<option value="" selected  disabled class="sel" >Выберите страну</option>'
+				var option_data = '<option value=""   disabled class="sel" >Выберите страну</option>'
 			}
 
 
