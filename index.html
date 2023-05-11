@@ -21,7 +21,7 @@
 	<header>
 		<nav class="navbar navbar-expand-lg mb-lg-0 mb-4   ">
 			<div
-				class="container-fluid d-flex justify-content-lg-around justify-content-between align-items-center text-center">
+				class="container-fluid d-flex justify-content-lg-center justify-content-between align-items-center text-center">
 				<a class=" text-center  col-md-4 col-sm-6 col-8 col-lg-3 " href="#"><img src="img/logo.jpg" alt=""
 						class="col-12"></a>
 				<button class="navbar-toggler " type="button" data-bs-toggle="collapse"
@@ -31,7 +31,7 @@
 				</button>
 				<div class="collapse navbar-collapse  text-center justify-content-center " id="navbarSupportedContent">
 					<ul class="navbar-nav  mb-2 mb-lg-0 align-items-center ">
-						<li class="nav-item me-xxl-5 me-2 mb-lg-0 mb-4 mt-lg-0 mt-4">
+						<li class="nav-item nav-item-text   mb-lg-0 mb-4 mt-lg-0 mt-4">
 							<a class="nav-link active  mb-lg-0" aria-current="page" href="files/rules.doc">
 								<p class="nav__link-number">Правила страхования выезжающих за рубеж</p>
 							</a>
@@ -217,7 +217,7 @@
 													<select
 														class="select-country select form-control custom-select itsselect "
 														id="country" required multiple disabled>
-														<option value="" disabled class="sel">Выберите страну</option>
+														<option value="" selected disabled class="sel">Выберите страну</option>
 
 													</select>
 													<div class="invalid-feedback">
@@ -303,13 +303,13 @@
 														<option value="" disabled selected data-responce="">Укажите цель
 															поездки
 														</option>
-														<option value="1" data-responce="tourism">Туризм, деловые
+														<option value="1" data-responce="tourism" data-select="Туризм">Туризм, деловые
 															поездки, гостевые поездки
 														</option>
-														<option value="2" data-responce="sport">Спорт, участие в
+														<option value="2" data-responce="sport" data-select="Спорт">Спорт, участие в
 															спортивных мероприятиях и
 															тренировках</option>
-														<option value="3" data-responce="education">Учеба</option>
+														<option value="3" data-responce="education" data-select="Учеба">Учеба</option>
 													</select>
 													<div class="invalid-feedback">
 														Пожалуйста, выберите цель поездки
@@ -469,8 +469,8 @@
 										<div class="insurance__more">
 											<div class="insurance__more-top">
 												<div class="flex-column d-flex mb-lg-3 mb-2">
-													<p class="insurance__more-title ">Полис</p>
-													<p class="insurance__more-subtitle">Путешествия</p>
+													<p class="insurance__more-title ">Цель поездки</p>
+													<p class="insurance__more-subtitle" id="targetSelected">Не выбрана</p>
 												</div>
 												<div class="flex-column d-flex mb-lg-3 mb-2">
 													<p class="insurance__more-title ">Страна</p>
@@ -643,8 +643,8 @@
 																	class="insurance__program-label form-label mb-lg-1 mb-1 get-info">Номер
 																	паспорта</label>
 																<input type="text"
-																	class="insurance__program-aria get-info form-control"
-																	placeholder="N0395277" pattern="[N]\d{7}" maxlength="8" required
+																	class="insurance__program-aria get-info form-control pasport-pattern"
+																	placeholder="N0395277" required
 																	id="pasport0">
 																<div class="invalid-feedback">
 																	Пожалуйста, укажите номер паспорта

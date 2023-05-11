@@ -1,6 +1,7 @@
 var country = document.getElementById('country');
 var countryInput = document.querySelector('.mult-select-tag')
 var countrySelect = document.getElementById('countrySelected')
+var targetSelected = document.getElementById('targetSelected')
 var totalCountry = document.getElementById("total-country");
 var target = document.getElementById("target");
 var insuranceSum = document.getElementById("insurance__sum");
@@ -465,8 +466,13 @@ function Resident() {
 	var resident = document.getElementById("country-people0");
 	var residentButton = document.getElementById("RK");
 	if (residentButton.options[residentButton.selectedIndex].value == 1) {
+		var nn  = document.querySelectorAll('.pasport-pattern')
+		for (let i = 0; i < nn.length; i++){
+			nn[i].setAttribute('pattern', '[N]\d{7}');
+			nn[i].maxLength = 8;
+		}
 		//Если резидент, то добавлять в value Казахстан и убирать возможность редактировать
-
+		
 		//resident = resident.options[resident.selectedIndex].setAttribute('data-name-lat', 'Kazakhstan')
 		//resident = resident.options[resident.selectedIndex].setAttribute('data-flag-name', 'kz')
 		var a = getCookie('lang')
@@ -480,6 +486,10 @@ function Resident() {
 
 
 	} else if (residentButton.options[residentButton.selectedIndex].value == 2) {
+		var nn  = document.querySelectorAll('.pasport-pattern')
+		for (let i = 0; i < nn.length; i++){
+			nn[i].placeholder  = "Введите номер паспорта"
+		}
 		var a = getCookie('lang')
 		if (a == 'undefined') {
 			get_countries('ru');
@@ -509,12 +519,13 @@ function StartFuncSelectProgram() {
 				visiblyInput.style.display = 'none';
 
 			}
+			targetSelected.innerHTML= "Не выбрана"
 			countrySelect.innerHTML = "Не выбрана"
 			dateStart.value = ''; dateStart.setAttribute('disabled', true);
 			dateEnd.value = ''; dateEnd.setAttribute('disabled', true);
 			insuranceSum.value = ''; insuranceSum.setAttribute('disabled', true);
 			target.value = ''; target.setAttribute('disabled', true);
-			$("#country").val(0).trigger("change");
+			//$("#country").val(0).trigger("change");
 			endNum.innerHTML = "0" + ' ' + 'тг';
 			priceNum.innerHTML = "0" + ' ' + 'тг';
 
@@ -897,9 +908,15 @@ $('.select-country').on("change", function (e) {
 	} else {
 		countrySelect.innerHTML = selectedTexts.join(',  ');
 	}
-
-
 });
+target.addEventListener('change', function (e) {
+	targetSelected.innerHTML = 	e.target.selectedOptions[0].getAttribute('data-select')
+
+  });
+
+
+
+
 
  // Функция получения курса валют с сайта Национального Банка Казахстана
 //function getRates() {
