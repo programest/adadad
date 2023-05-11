@@ -30,7 +30,7 @@ var changeLocaleService = (function () {
 				if (cookie === 'kz') {
 					get_countries('kz')
 					changeLocale('kz')
-					document.querySelector('.nav__dropdown-flag').src = '../img/kz.png'
+					document.querySelector('.nav__dropdown-flag').src = 'img/kz.png'
 					document.querySelector('.nav__dropdown-text').innerHTML = 'Қазақша'
 				} else if (cookie === 'ru') {
 					changeLocale('ru')
@@ -38,7 +38,7 @@ var changeLocaleService = (function () {
 				} else if (cookie === 'en') {
 					changeLocale('en')
 					get_countries('en')
-					document.querySelector('.nav__dropdown-flag').src = '../img/en.png'
+					document.querySelector('.nav__dropdown-flag').src = 'img/en.png'
 					document.querySelector('.nav__dropdown-text').innerHTML = 'English'
 				} else {
 					get_countries('ru')
