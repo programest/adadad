@@ -594,36 +594,39 @@ document.getElementById("section1").addEventListener("change", function () {
 
 					if (allZone.length == 1) {
 						if (allZone.includes("3")) {
-							tarif = "3";
-							$("#15").text("15 000 $");
-							$("#30").text("30 000 $");
-							$("#50").text("50 000 $");
-							$("#15").removeClass(" visible-sum");
-							$("#30").removeClass(" visible-sum");
-							$("#50").removeClass(" visible-sum");
-						} if (allZone.includes("2")) {
-							tarif = "2";
-							$("#15").addClass(" visible-sum");
-							$("#30").removeClass(" visible-sum");
-							$("#50").removeClass(" visible-sum");
-							$("#30").text("30 000 $");
-							$("#50").text("50 000 $");
-						} if (allZone.includes("1")) {
-							tarif = "1";
-							$("#15").removeClass(" visible-sum");
-							$("#30").addClass(" visible-sum");
-							$("#50").addClass(" visible-sum");
-							$("#30").text("30 000 $");
-							$("#50").text("50 000 $");
-							$("#15").text("15 000 $");
+						tarif = "3";
+						document.getElementById("15").textContent = "15 000 $";
+						document.getElementById("30").textContent = "30 000 $";
+						document.getElementById("50").textContent = "50 000 $";
+						document.getElementById("15").classList.remove("visible-sum");
+						document.getElementById("30").classList.remove("visible-sum");
+						document.getElementById("50").classList.remove("visible-sum");
 						}
-					} else {
-						$("#15").addClass(" visible-sum");
-						$("#30").addClass(" visible-sum");
-						$("#50").removeClass(" visible-sum");
-
-						$("#50").text("50 000 $");
-					}
+						
+						if (allZone.includes("2")) {
+						tarif = "2";
+						document.getElementById("15").classList.add("visible-sum");
+						document.getElementById("30").classList.remove("visible-sum");
+						document.getElementById("50").classList.remove("visible-sum");
+						document.getElementById("30").textContent = "30 000 $";
+						document.getElementById("50").textContent = "50 000 $";
+						}
+						
+						if (allZone.includes("1")) {
+						tarif = "1";
+						document.getElementById("15").classList.remove("visible-sum");
+						document.getElementById("30").classList.add("visible-sum");
+						document.getElementById("50").classList.add("visible-sum");
+						document.getElementById("30").textContent = "30 000 $";
+						document.getElementById("50").textContent = "50 000 $";
+						document.getElementById("15").textContent = "15 000 $";
+						}
+						} else {
+						document.getElementById("15").classList.add("visible-sum");
+						document.getElementById("30").classList.add("visible-sum");
+						document.getElementById("50").classList.remove("visible-sum");
+						document.getElementById("50").textContent = "50 000 $";
+						}
 
 
 
@@ -673,40 +676,34 @@ document.getElementById("section1").addEventListener("change", function () {
 			} else if (selectedTextss.length == 1) {
 				var selectedTexts = $(this).select2('data').map(function (option) {
 					var zone = option.element.getAttribute('data-zone')
-					if (zone == "1") {
-
-						console.log("Выбрана зона 1")
+					if (zone === "1") {
+						console.log("Выбрана зона 1");
 						tarif = "1";
-						$("#15").removeClass(" visible-sum");
-						$("#30").addClass(" visible-sum");
-						$("#50").addClass(" visible-sum");
-						$("#15").text("15 000 $");
-
-
+						document.getElementById("15").classList.remove("visible-sum");
+						document.getElementById("30").classList.add("visible-sum");
+						document.getElementById("50").classList.add("visible-sum");
+						document.getElementById("15").textContent = "15 000 $";
 					}
-					else if (zone == "2") {
-
-						console.log("Выбрана зона 2")
+					else if (zone === "2") {
+						console.log("Выбрана зона 2");
 						tarif = "2";
-						$("#15").addClass(" visible-sum");
-						$("#30").removeClass(" visible-sum");
-						$("#50").removeClass(" visible-sum");
-						$("#30").text("30 000 €");
-						$("#50").text("50 000 €");
-
+						document.getElementById("15").classList.add("visible-sum");
+						document.getElementById("30").classList.remove("visible-sum");
+						document.getElementById("50").classList.remove("visible-sum");
+						document.getElementById("30").textContent = "30 000 €";
+						document.getElementById("50").textContent = "50 000 €";
 					}
-					else if (zone == "3") {
-
-						console.log("Выбрана зона 3")
-
+					else if (zone === "3") {
+						console.log("Выбрана зона 3");
 						tarif = "3";
-						$("#15").text("15 000 $");
-						$("#30").text("30 000 $");
-						$("#50").text("50 000 $");
-						$("#15").removeClass(" visible-sum");
-						$("#30").removeClass(" visible-sum");
-						$("#50").removeClass(" visible-sum");
+						document.getElementById("15").textContent = "15 000 $";
+						document.getElementById("30").textContent = "30 000 $";
+						document.getElementById("50").textContent = "50 000 $";
+						document.getElementById("15").classList.remove("visible-sum");
+						document.getElementById("30").classList.remove("visible-sum");
+						document.getElementById("50").classList.remove("visible-sum");
 					}
+					
 					insuranceSumMonth = 1;
 					insuranceSum.value = ''
 					Calc()
@@ -745,40 +742,31 @@ document.getElementById("section1").addEventListener("change", function () {
 
 			var selectedTexts = $(this).select2('data').map(function (option) {
 				var zone = option.element.getAttribute('data-zone')
-				if (zone == "1") {
-
-					console.log("Выбрана зона 1")
+				if (zone === "1") {
+					console.log("Выбрана зона 1");
 					tarif = "1";
-					$("#15").removeClass(" visible-sum");
-					$("#30").addClass(" visible-sum");
-					$("#50").addClass(" visible-sum");
-					$("#15").text("15 000 $");
-
-
-				}
-				else if (zone == "2") {
-
-					console.log("Выбрана зона 2")
+					document.getElementById("15").classList.remove("visible-sum");
+					document.getElementById("30").classList.add("visible-sum");
+					document.getElementById("50").classList.add("visible-sum");
+					document.getElementById("15").textContent = "15 000 $";
+				  } else if (zone === "2") {
+					console.log("Выбрана зона 2");
 					tarif = "2";
-					$("#15").addClass(" visible-sum");
-					$("#30").removeClass(" visible-sum");
-					$("#50").removeClass(" visible-sum");
-					$("#30").text("30 000 €");
-					$("#50").text("50 000 €");
-
-				}
-				else if (zone == "3") {
-
-					console.log("Выбрана зона 3")
-
+					document.getElementById("15").classList.add("visible-sum");
+					document.getElementById("30").classList.remove("visible-sum");
+					document.getElementById("50").classList.remove("visible-sum");
+					document.getElementById("30").textContent = "30 000 €";
+					document.getElementById("50").textContent = "50 000 €";
+				  } else if (zone === "3") {
+					console.log("Выбрана зона 3");
 					tarif = "3";
-					$("#15").text("15 000 $");
-					$("#30").text("30 000 $");
-					$("#50").text("50 000 $");
-					$("#15").removeClass(" visible-sum");
-					$("#30").removeClass(" visible-sum");
-					$("#50").removeClass(" visible-sum");
-				}
+					document.getElementById("15").textContent = "15 000 $";
+					document.getElementById("30").textContent = "30 000 $";
+					document.getElementById("50").textContent = "50 000 $";
+					document.getElementById("15").classList.remove("visible-sum");
+					document.getElementById("30").classList.remove("visible-sum");
+					document.getElementById("50").classList.remove("visible-sum");
+				  }
 				insuranceSumMonth = 1;
 				insuranceSum.value = ''
 				Calc()
