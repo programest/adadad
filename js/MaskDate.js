@@ -30,7 +30,7 @@ function maskDateInput(input, values) {
 		const month = value.slice(2, 4);
 		const year = value.slice(4, 8);
 
-		let formattedDate = '';
+		var formattedDate = '';
         if (value.length === 8) {
             const currentDate = new Date();
             // Преобразую все данные в формат yyyy.mm.dd и записываю в переменную inputDate
@@ -79,7 +79,7 @@ function maskDateInput(input, values) {
 			
                 
                 const firstInputInput = dateStart.value; //*Поменять на тот класс от которого будет зависеть этот input* в формате dd.mm.yyyy
-                const [dayFirst, monthFirst, yearFirst] = firstInputInput.split('.');
+				const [dayFirst, monthFirst, yearFirst] = firstInputInput.split(/\.|\//);
                 const firstInput = new Date(yearFirst, monthFirst - 1, dayFirst);
                 firstInput.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
 
@@ -93,8 +93,7 @@ function maskDateInput(input, values) {
 					if ((firstInput > currentDate || firstInput.getTime() === currentDate.getTime()) && (inputDate > firstInput || inputDate.getTime() === firstInput.getTime())) {
                         //datepickerModificedEnd это экземпляр класса Datepicker (datepickerModificedEnd = new AirDatepicker('#datePasportEnd',)
 						if (datepickerModificedEnd && datepickerModificedStart) {
-							datepickerModificedEnd.selectDate(inputDate);
-
+							datepickerModificedEnd.setValue(inputDate);
 						}
                        
 					}
@@ -104,35 +103,32 @@ function maskDateInput(input, values) {
 				}
 			
 		    } else if (values === 'birthday') {
-                //Метод BIRTHDAY
-                //Проверка на 18 лет
-                currentDate.setFullYear(currentDate.getFullYear() - 18);
-                currentDate.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds()).toLocaleString('ru-RU', datePattern);
-                if (inputDate > currentDate ) {
-                    
+				//Метод BIRTHDAY
+				//Проверка на 18 лет
+				currentDate.setFullYear(currentDate.getFullYear() - 18);
+				const formatter = new Intl.DateTimeFormat('ru-RU', datePattern);
+				const currentDateFormatted = formatter.format(currentDate);
+				currentDate.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
+				if (inputDate > currentDate ) {
 					input.value = '';
 					if (input.id === 'dateBirthday0'){
 						input.placeholder = 'Страхователю должно быть не менее 18 лет'
-					}else{
+					} else {
 						input.placeholder = 'Укажите дату рождения'
 					}
-					
-	
-
 				} else {
-						if (inputDate < currentDate || currentDate.getTime() === currentDate.getTime()) {
-							if (dateBirthday0) {
-								dateBirthday0.selectDate(inputDate);
-							}
+					if (inputDate < currentDate || currentDate.getTime() === currentDate.getTime()) {
+						if (dateBirthday0) {
+							dateBirthday0.selectDate(inputDate);
 						}
+					}
 				}
-			
-		    }
-            if (inputDate.toString() === "Invalid Date" && typeof day != 'number' && typeof month != 'number' && typeof year != 'number') {
+			}
+			if (inputDate.toString() === "Invalid Date" && typeof day != 'number' && typeof month != 'number' && typeof year != 'number') {
 				input.value = '';
 				return;
-            }
-        }else{
+			}
+		}else{
             if (day) {
                 formattedDate += day;
     

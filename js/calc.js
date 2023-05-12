@@ -17,16 +17,16 @@ var sporttype = document.getElementById("sporttype");
 var categorysporttype = document.getElementById("categorysporttype");
 
 //Переменные - счетчики 
-let insuranceSumMonth = 1;
-let insuranceSumSportCoefficient = 1;
-let TargetEducationProcent = 0;
-let countryAll = []
+var insuranceSumMonth = 1;
+var insuranceSumSportCoefficient = 1;
+var TargetEducationProcent = 0;
+var countryAll = []
 window.results = 0;
-let endresults;
-let currency_select;
-let tarif;
-let otherCoefficient = 1;
-let currency = 450.55;
+var endresults;
+var currency_select;
+var tarif;
+var otherCoefficient = 1;
+var currency = 450.55;
 
 if (dateStart) {
 	datepickerModificedStart = new AirDatepicker('#date__start', {
@@ -42,7 +42,7 @@ if (dateStart) {
 				// Если выбран Multi Trip:
 				nextmonths()
 			} else {
-				
+
 				// Если выбран Base Trip:
 				dateEnd.removeAttribute('disabled')
 				CalcInsuranceDays()
@@ -109,9 +109,9 @@ function convertDate(dateString, innde) {
 	const date = new Date(newDate);
 
 	// Добавляем один день к дате
-	if (innde === 'days'){
+	if (innde === 'days') {
 		date.setDate(date.getDate() + 1);
-	}else if(innde === 'year'){
+	} else if (innde === 'year') {
 		date.setDate(date.getDate() + 364);
 	}
 
@@ -147,8 +147,8 @@ function Calc(print, backend) {
 	endresults = results - (results / 100 * 15);
 	results = Math.round(results * 10) / 10;
 	endresults = Math.round(endresults * 10) / 10;
-	let endresultsSum = new Intl.NumberFormat('ru-RU').format(Math.round(endresults)).replace('.', ',');
-	let resultsSum = new Intl.NumberFormat('ru-RU').format(Math.round(results)).replace('.', ',');
+	var endresultsSum = new Intl.NumberFormat('ru-RU').format(Math.round(endresults)).replace('.', ',');
+	var resultsSum = new Intl.NumberFormat('ru-RU').format(Math.round(results)).replace('.', ',');
 
 	//проверка на ошибку с негативной датой со знаком минус (-)
 
@@ -156,22 +156,22 @@ function Calc(print, backend) {
 		//Вывод финальной даты окончания действия страхового полиса
 		if (print) {
 			document.querySelector('.loadersum').classList.remove('load-sum');
-				document.querySelector('.loader__mb').style.display = 'block';
-				document.querySelector('.insurance__more-bottom').classList.remove('insurance__more-bottom--active');
+			document.querySelector('.loader__mb').style.display = 'block';
+			document.querySelector('.insurance__more-bottom').classList.remove('insurance__more-bottom--active');
 			if (backend === true) {
 				CalcBeckend()
 				document.querySelector('.loadersum').classList.add('load-sum');
 				document.querySelector('.loader__mb').style.display = 'none';
 				document.querySelector('.insurance__more-bottom').classList.add('insurance__more-bottom--active');
-			
-				
-			}else if (backend === false){
-				
+
+
+			} else if (backend === false) {
+
 				endNum.innerHTML = endresultsSum + ' ' + 'тг';
 				//Вывод промежуточной даты окончания действия страхового полиса
 				priceNum.innerHTML = resultsSum + ' ' + 'тг';
 			}
-			
+
 		}
 		//Вывод финальной даты окончания действия страхового полиса в блок итога
 
@@ -190,7 +190,7 @@ function CalcSport() {
 	var targetValue = target.options[target.selectedIndex].value;
 	var sportTypeValue = sportType.options[sportType.selectedIndex].value;
 	var sportCategoryValue = sportCategory.options[sportCategory.selectedIndex].value;
-	
+
 	// Получаю targetValue с селекта получаю option value
 	if (targetValue == '2') {
 		endNum.innerHTML = "0" + ' ' + 'тг';
@@ -228,7 +228,7 @@ function CalcSport() {
 			if (program.value == '1') {
 				Calc(print, true)
 			}
-			
+
 
 		} else if (sportCategoryValue == 'professional') {
 
@@ -268,7 +268,7 @@ function CalcSport() {
 			if (program.value == '1') {
 				Calc(print, true)
 			}
-			
+
 
 		}
 	} else if (targetValue == '1') {
@@ -284,7 +284,7 @@ function CalcSport() {
 		if (program.value == '1') {
 			Calc(print, true)
 		}
-		
+
 	}
 	console.log('Коэфициент на тг ' + insuranceSumMonth)
 
@@ -466,14 +466,14 @@ function Resident() {
 	var resident = document.getElementById("country-people0");
 	var residentButton = document.getElementById("RK");
 	if (residentButton.options[residentButton.selectedIndex].value == 1) {
-		var nn  = document.querySelectorAll('.pasport-pattern')
-		for (let i = 0; i < nn.length; i++){
+		var nn = document.querySelectorAll('.pasport-pattern')
+		for (var i = 0; i < nn.length; i++) {
 			nn[i].setAttribute('pattern', '[N]\\d{7}');
 			nn[i].maxLength = 197;
 		}
-	
+
 		//Если резидент, то добавлять в value Казахстан и убирать возможность редактировать
-		
+
 		//resident = resident.options[resident.selectedIndex].setAttribute('data-name-lat', 'Kazakhstan')
 		//resident = resident.options[resident.selectedIndex].setAttribute('data-flag-name', 'kz')
 		var a = getCookie('lang')
@@ -487,9 +487,9 @@ function Resident() {
 
 
 	} else if (residentButton.options[residentButton.selectedIndex].value == 2) {
-		var nn  = document.querySelectorAll('.pasport-pattern')
-		for (let i = 0; i < nn.length; i++){
-			nn[i].placeholder  = "Введите номер паспорта"
+		var nn = document.querySelectorAll('.pasport-pattern')
+		for (var i = 0; i < nn.length; i++) {
+			nn[i].placeholder = "Введите номер паспорта"
 		}
 		var a = getCookie('lang')
 		if (a == 'undefined') {
@@ -520,13 +520,13 @@ function StartFuncSelectProgram() {
 				visiblyInput.style.display = 'none';
 
 			}
-			targetSelected.innerHTML= "Не выбрана"
+			targetSelected.innerHTML = "Не выбрана"
 			countrySelect.innerHTML = "Не выбрана"
 			dateStart.value = ''; dateStart.setAttribute('disabled', true);
 			dateEnd.value = ''; dateEnd.setAttribute('disabled', true);
 			insuranceSum.value = ''; insuranceSum.setAttribute('disabled', true);
 			target.value = ''; target.setAttribute('disabled', true);
-			
+
 			endNum.innerHTML = "0" + ' ' + 'тг';
 			priceNum.innerHTML = "0" + ' ' + 'тг';
 
@@ -594,39 +594,38 @@ document.getElementById("section1").addEventListener("change", function () {
 
 					if (allZone.length == 1) {
 						if (allZone.includes("3")) {
-						tarif = "3";
-						document.getElementById("15").textContent = "15 000 $";
-						document.getElementById("30").textContent = "30 000 $";
-						document.getElementById("50").textContent = "50 000 $";
-						document.getElementById("15").classList.remove("visible-sum");
-						document.getElementById("30").classList.remove("visible-sum");
-						document.getElementById("50").classList.remove("visible-sum");
+							tarif = "3";
+							$("#15").text("15 000 $");
+							$("#30").text("30 000 $");
+							$("#50").text("50 000 $");
+							$("#15").removeClass("visible-sum");
+							$("#30").removeClass("visible-sum");
+							$("#50").removeClass("visible-sum");
+						} if (allZone.includes("2")) {
+							tarif = "2";
+							$("#15").addClass(" visible-sum");
+							$("#30").removeClass("visible-sum");
+							$("#50").removeClass("visible-sum");
+							$("#15").text("");
+							$("#30").text("30 000 $");
+							$("#50").text("50 000 $");
+						} if (allZone.includes("1")) {
+							tarif = "1";
+							$("#15").removeClass("visible-sum");
+							$("#30").addClass("visible-sum");
+							$("#50").addClass("visible-sum");
+							$("#30").text("");
+							$("#50").text("");
+							$("#15").text("15 000 $");
 						}
-						
-						if (allZone.includes("2")) {
-						tarif = "2";
-						document.getElementById("15").classList.add("visible-sum");
-						document.getElementById("30").classList.remove("visible-sum");
-						document.getElementById("50").classList.remove("visible-sum");
-						document.getElementById("30").textContent = "30 000 $";
-						document.getElementById("50").textContent = "50 000 $";
-						}
-						
-						if (allZone.includes("1")) {
-						tarif = "1";
-						document.getElementById("15").classList.remove("visible-sum");
-						document.getElementById("30").classList.add("visible-sum");
-						document.getElementById("50").classList.add("visible-sum");
-						document.getElementById("30").textContent = "30 000 $";
-						document.getElementById("50").textContent = "50 000 $";
-						document.getElementById("15").textContent = "15 000 $";
-						}
-						} else {
-						document.getElementById("15").classList.add("visible-sum");
-						document.getElementById("30").classList.add("visible-sum");
-						document.getElementById("50").classList.remove("visible-sum");
-						document.getElementById("50").textContent = "50 000 $";
-						}
+					} else {
+						$("#15").addClass("visible-sum");
+						$("#30").addClass("visible-sum");
+						$("#50").removeClass("visible-sum");
+						$("#15").text(" ");
+						$("#30").text(" ");
+						$("#50").text("50 000 $");
+					}
 
 
 
@@ -676,34 +675,42 @@ document.getElementById("section1").addEventListener("change", function () {
 			} else if (selectedTextss.length == 1) {
 				var selectedTexts = $(this).select2('data').map(function (option) {
 					var zone = option.element.getAttribute('data-zone')
-					if (zone === "1") {
-						console.log("Выбрана зона 1");
+					if (zone == "1") {
+
+						console.log("Выбрана зона 1")
 						tarif = "1";
-						document.getElementById("15").classList.remove("visible-sum");
-						document.getElementById("30").classList.add("visible-sum");
-						document.getElementById("50").classList.add("visible-sum");
-						document.getElementById("15").textContent = "15 000 $";
+						$("#15").removeClass("visible-sum");
+						$("#30").addClass("visible-sum");
+						$("#50").addClass("visible-sum");
+						$("#15").text("15 000 $");
+						$("#30").text("");
+						$("#50").text("");
+
 					}
-					else if (zone === "2") {
-						console.log("Выбрана зона 2");
+					else if (zone == "2") {
+
+						console.log("Выбрана зона 2")
 						tarif = "2";
-						document.getElementById("15").classList.add("visible-sum");
-						document.getElementById("30").classList.remove("visible-sum");
-						document.getElementById("50").classList.remove("visible-sum");
-						document.getElementById("30").textContent = "30 000 €";
-						document.getElementById("50").textContent = "50 000 €";
+						$("#15").addClass("visible-sum");
+						$("#30").removeClass("visible-sum");
+						$("#50").removeClass("visible-sum");
+						$("#15").text("");
+						$("#30").text("30 000 €");
+						$("#50").text("50 000 €");
+
 					}
-					else if (zone === "3") {
-						console.log("Выбрана зона 3");
+					else if (zone == "3") {
+
+						console.log("Выбрана зона 3")
+
 						tarif = "3";
-						document.getElementById("15").textContent = "15 000 $";
-						document.getElementById("30").textContent = "30 000 $";
-						document.getElementById("50").textContent = "50 000 $";
-						document.getElementById("15").classList.remove("visible-sum");
-						document.getElementById("30").classList.remove("visible-sum");
-						document.getElementById("50").classList.remove("visible-sum");
+						$("#15").text("15 000 $");
+						$("#30").text("30 000 $");
+						$("#50").text("50 000 $");
+						$("#15").removeClass(" visible-sum");
+						$("#30").removeClass(" visible-sum");
+						$("#50").removeClass(" visible-sum");
 					}
-					
 					insuranceSumMonth = 1;
 					insuranceSum.value = ''
 					Calc()
@@ -716,9 +723,7 @@ document.getElementById("section1").addEventListener("change", function () {
 
 
 	} else if (program.value == '1') {
-		if (document.querySelector('.sel')) {
-			document.querySelector('.sel').setAttribute("selected", true);
-		}
+
 
 		document.getElementById('months').removeAttribute("required");
 		// Если выбран Base Trip:\
@@ -726,47 +731,48 @@ document.getElementById("section1").addEventListener("change", function () {
 			CalcInsuranceDays()
 		})
 
-		$('.select-country').prop('multiple', false);
-		$('.select-country').select2({
-			placeholder: 'Выберите страну',
-			theme: "classic",
-			templateSelection: formatState,
-			language: {
-				noResults: function () {
-					return 'Результатов не найдено'; // текст для пустых результатов поиска
-				},
-			},
 
-		});
 		$('.select-country').on("change", function (e) {
 
 			var selectedTexts = $(this).select2('data').map(function (option) {
 				var zone = option.element.getAttribute('data-zone')
-				if (zone === "1") {
-					console.log("Выбрана зона 1");
+				if (zone == "1") {
+
+					console.log("Выбрана зона 1")
 					tarif = "1";
-					document.getElementById("15").classList.remove("visible-sum");
-					document.getElementById("30").classList.add("visible-sum");
-					document.getElementById("50").classList.add("visible-sum");
-					document.getElementById("15").textContent = "15 000 $";
-				  } else if (zone === "2") {
-					console.log("Выбрана зона 2");
+					$("#15").removeClass(" visible-sum");
+					$("#30").addClass(" visible-sum");
+					$("#50").addClass(" visible-sum");
+					$("#15").text("15 000 $");
+					$("#30").text("");
+					$("#50").text("");
+
+
+				}
+				else if (zone == "2") {
+
+					console.log("Выбрана зона 2")
 					tarif = "2";
-					document.getElementById("15").classList.add("visible-sum");
-					document.getElementById("30").classList.remove("visible-sum");
-					document.getElementById("50").classList.remove("visible-sum");
-					document.getElementById("30").textContent = "30 000 €";
-					document.getElementById("50").textContent = "50 000 €";
-				  } else if (zone === "3") {
-					console.log("Выбрана зона 3");
+					$("#15").addClass(" visible-sum");
+					$("#30").removeClass(" visible-sum");
+					$("#50").removeClass(" visible-sum");
+					$("#15").text("");
+					$("#30").text("30 000 €");
+					$("#50").text("50 000 €");
+
+				}
+				else if (zone == "3") {
+
+					console.log("Выбрана зона 3")
+
 					tarif = "3";
-					document.getElementById("15").textContent = "15 000 $";
-					document.getElementById("30").textContent = "30 000 $";
-					document.getElementById("50").textContent = "50 000 $";
-					document.getElementById("15").classList.remove("visible-sum");
-					document.getElementById("30").classList.remove("visible-sum");
-					document.getElementById("50").classList.remove("visible-sum");
-				  }
+					$("#15").text("15 000 $");
+					$("#30").text("30 000 $");
+					$("#50").text("50 000 $");
+					$("#15").removeClass(" visible-sum");
+					$("#30").removeClass(" visible-sum");
+					$("#50").removeClass(" visible-sum");
+				}
 				insuranceSumMonth = 1;
 				insuranceSum.value = ''
 				Calc()
@@ -786,7 +792,23 @@ document.getElementById("section1").addEventListener("change", function () {
 
 
 
+program.addEventListener("change", function () {
+	if (document.querySelector('.sel')) {
+		document.querySelector('.sel').setAttribute("selected", true);
+	}
+	$('.select-country').prop('multiple', false);
+	$('.select-country').select2({
+		placeholder: 'Выберите страну',
+		theme: "classic",
+		templateSelection: formatState,
+		language: {
+			noResults: function () {
+				return 'Результатов не найдено'; // текст для пустых результатов поиска
+			},
+		},
 
+	});
+})
 
 function Logic() {
 	document.getElementById("section1").addEventListener("change", function (e) {
@@ -819,17 +841,17 @@ function formatState(state) {
 	var $state = $(
 		'<span><img class="img-flag" /> <span></span></span>'
 	);
-	
+
 	var name = $('#country option[value="' + state.id + '"]').attr('data-flag-name');
-	
+
 	// Проверяем наличие SVG-изображения
 	try {
 		var img = new Image();
 		img.src = baseUrl + "/" + name + ".svg";
-		img.onload = function() {
+		img.onload = function () {
 			$state.find("img").attr("src", img.src);
 		};
-		img.onerror = function() {
+		img.onerror = function () {
 			// Если SVG-изображения нет, используем PNG
 			$state.find("img").attr("src", baseUrl + "/" + name + ".png");
 		};
@@ -899,9 +921,9 @@ $('.select-country').on("change", function (e) {
 	}
 });
 target.addEventListener('change', function (e) {
-	targetSelected.innerHTML = 	e.target.selectedOptions[0].getAttribute('data-select')
+	targetSelected.innerHTML = e.target.selectedOptions[0].getAttribute('data-select')
 
-  });
+});
 
 
 
@@ -917,7 +939,7 @@ target.addEventListener('change', function (e) {
 //        const dataObj = this.responseXML;
 //
 //        const items = dataObj.getElementsByTagName("item");
-//        for (let i = 0; i < items.length; i++) {
+//        for (var i = 0; i < items.length; i++) {
 //          const item = items[i];
 //          const title = item.getElementsByTagName("title")[0].childNodes[0].nodeValue;
 //          const pubDate = item.getElementsByTagName("pubDate")[0].childNodes[0].nodeValue;
@@ -926,12 +948,12 @@ target.addEventListener('change', function (e) {
 //          const index = item.getElementsByTagName("index")[0].childNodes[0].nodeValue;
 //          const change = item.getElementsByTagName("change")[0].childNodes[0].nodeValue;
 //
-//            
-//            
-//            
-//            
-//            
-//            
+//
+//
+//
+//
+//
+//
 //        }
 //      }
 //    };
@@ -939,5 +961,3 @@ target.addEventListener('change', function (e) {
 //    request.send();
 //  }
 //getRates()
-
-

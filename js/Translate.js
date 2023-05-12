@@ -2,11 +2,11 @@
 //Автоматический перевод
 
 
-let ru = document.getElementById('ru');
-let en = document.getElementById('en');
+var ru = document.getElementById('ru');
+var en = document.getElementById('en');
 
 function coook(a) {
-	let cookie = setCookie('lang', a)
+	var cookie = setCookie('lang', a)
 }
 
 var changeLocaleService = (function () {
@@ -19,7 +19,7 @@ var changeLocaleService = (function () {
 		xhr.onreadystatechange = saveLocale.bind(this);
 		xhr.onerror = function () { };
 		xhr.send();
-		let cookie = getCookie('lang')
+		var cookie = getCookie('lang')
 
 		function saveLocale() {
 			if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
@@ -108,7 +108,7 @@ const googleTranslateConfig = {
 document.addEventListener("DOMContentLoaded", (event) => {
 	/* Подключаем виджет google translate */
 	/* Connecting the google translate widget */
-	let script = document.createElement("script");
+	var script = document.createElement("script");
 	script.src = `//translate.google.com/translate_a/element.js?cb=TranslateWidgetIsLoaded`;
 	document.getElementsByTagName("head")[0].appendChild(script);
 });
@@ -123,7 +123,7 @@ function TranslateInit() {
 		TranslateCookieHandler("/auto/" + googleTranslateConfig.langFirstVisit);
 	}
 
-	let code = TranslateGetCode();
+	var code = TranslateGetCode();
 	// Находим флаг с выбранным языком для перевода и добавляем к нему активный класс
 	if (document.querySelector('[data-google-lang="' + code + '"]') !== null) {
 		document.querySelector('[data-google-lang="' + code + '"]').classList.add('language__img_active');
@@ -149,7 +149,7 @@ function TranslateInit() {
 
 function TranslateGetCode() {
 	// Если куки нет, то передаем дефолтный язык
-	let lang = (Cookies.get('googtrans') != undefined && Cookies.get('googtrans') != "null") ? Cookies.get('googtrans') : googleTranslateConfig.lang;
+	var lang = (Cookies.get('googtrans') != undefined && Cookies.get('googtrans') != "null") ? Cookies.get('googtrans') : googleTranslateConfig.lang;
 	return lang.match(/(?!^\/)[^\/]*$/gm)[0];
 }
 
@@ -173,7 +173,7 @@ function TranslateCookieHandler(val, domain) {
 
 function TranslateEventHandler(event, selector, handler) {
 	document.addEventListener(event, function (e) {
-		let el = e.target.closest(selector);
+		var el = e.target.closest(selector);
 		if (el) handler(el);
 	});
 }

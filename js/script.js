@@ -1,5 +1,5 @@
-let blockCount = 1;
-let numCount = 0;
+var blockCount = 1;
+var numCount = 0;
 var needle = "";
 var block;
 var form = document.querySelector('.needs-validation2')
@@ -14,7 +14,7 @@ window.addEventListener('load', () => {
 })
 const anchors = document.querySelectorAll('a[href*="#"]')
 if (anchors) {
-	for (let anchor of anchors) {
+	for (var anchor of anchors) {
 		anchor.addEventListener('click', function (e) {
 			e.preventDefault()
 
@@ -161,7 +161,7 @@ if (document.querySelector('.puy')) {
 		//    otherCoefficient = otherPeople;
 		//    Calc()
 		//})
-		for (let i = 0; i < attributes.length; i++) {
+		for (var i = 0; i < attributes.length; i++) {
 			otherPeople += Number(attributes[i].getAttribute('data-other'));
 			otherCoefficient = otherPeople;
 
@@ -171,7 +171,7 @@ if (document.querySelector('.puy')) {
 		//addBlockToItog(numCount)
 		//var allID = document.querySelectorAll('.changeid')
 
-		//for (let elem of allID) {
+		//for (var elem of allID) {
 		//    var dataAtr = elem.getAttribute('data-itog')
 		//    console.log(dataAtr + ' ' + elem.value)
 
@@ -488,7 +488,7 @@ function RemovePeoples(event) {
 
 
 
-let isBlockAdded = false;
+var isBlockAdded = false;
 
 function AddPeoples() {
 	
@@ -505,7 +505,7 @@ function AddPeoples() {
 		if (block === undefined) {
 			Add();
 		}
-		for (let i = 0; i < block.length; i++) {
+		for (var i = 0; i < block.length; i++) {
 			block[i].classList.add('was-validated');
 			
 			if (block[i].checkValidity()) {
@@ -769,7 +769,7 @@ ValidatePuy()
 function InvalidUpload() {
 	const inputs = document.querySelectorAll('.field__file');
 	const inputsLabel = document.querySelectorAll('.insurance-upload');
-		for (let i = 0; i < inputs.length; i++) {
+		for (var i = 0; i < inputs.length; i++) {
 			if (inputs[i].files.length === 0 ) {
 			  const invalid = document.getElementById('invalidfd' + i);
 			  invalid.style.display = 'block';
@@ -921,7 +921,7 @@ function append() {
 	// for (var pair of formData.entries()) {
 	// 	   
 	// }
-	let files = formData.getAll('file');
+	var files = formData.getAll('file');
 
 
 	formData.append('json', str);
@@ -1053,10 +1053,10 @@ function convertCalc(data){
 // function animationSum(a, b){
 // 	console.log(typeof a)
 // 	const countElement = b;
-// 	let count = 0;
+// 	var count = 0;
 // 	const targetCount =parseInt(a);
 // 	const increment = Math.ceil(targetCount / 100); // изменяем значение цифры на 1% от конечного значения
-// 	let currentCount = 0;
+// 	var currentCount = 0;
   
 // 	function animate() {
 // 	  currentCount += increment;
@@ -1094,7 +1094,7 @@ function calculateAgeInYears(dateString) {
 
 	const today = new Date();
 	const birthDate = new Date(dateStrings);
-	let age = today.getFullYear() - birthDate.getFullYear();
+	var age = today.getFullYear() - birthDate.getFullYear();
 	const monthDiff = today.getMonth() - birthDate.getMonth();
 
 	if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
@@ -1180,7 +1180,7 @@ function convert(data) {
 
 
 
-	for (let i = 0; i < data.insured_list.length; i++) {
+	for (var i = 0; i < data.insured_list.length; i++) {
 
 		const insuredList = data.insured_list[i];
 
@@ -1189,7 +1189,7 @@ function convert(data) {
 
 		Object.entries(insuredList).forEach(([key, value]) => {
 
-			let element;
+			var element;
 			elements.forEach(el => {
 				if (el.getAttribute('data-beckend-response-insured') === key) {
 					element = el;
@@ -1302,7 +1302,7 @@ function collectInsurance(index) {
 
 
 	const inputBlocks = document.querySelectorAll('.newDiv'); // выбираем все блоки с информацией
-	let isDuplicate = false; // флаг, показывающий, есть ли дубликат застрахованного
+	var isDuplicate = false; // флаг, показывающий, есть ли дубликат застрахованного
 
 	inputBlocks.forEach((inputBlock) => {
 		const insuredIndex = inputBlock.dataset.insuredIndex;
@@ -1346,15 +1346,15 @@ function getSelectedOptionText(selectId) {
 
 function ClearInputNameLastName(a) {
 
-	let fullName = a
-	let nameArray = fullName.split(' ');
-	for (let i = 0; i < nameArray.length; i++) {
+	var fullName = a
+	var nameArray = fullName.split(' ');
+	for (var i = 0; i < nameArray.length; i++) {
 		nameArray[i] = nameArray[i].charAt(0).toUpperCase() + nameArray[i].slice(1).toLowerCase();
 	}
 	return nameArray.join(' ');
 }
 
-let datepicker;
+var datepicker;
 
 function get_countries(current_lang, resident) {
 	$.ajax({
@@ -1371,7 +1371,7 @@ function get_countries(current_lang, resident) {
 			}
 
 
-			let name = '';
+			var name = '';
 			$.each(data, function (i, dat) {
 				switch (current_lang) {
 					case 'ru':
@@ -1492,7 +1492,7 @@ function UploadFiles() {
 	const inputsLabel = document.querySelectorAll('.insurance-upload');
 	const inputs = document.querySelectorAll('.field__file'); // получаем input элемент по ID
 
-	for (let i = 0; i < inputs.length; i++) {
+	for (var i = 0; i < inputs.length; i++) {
 		// if (document.getElementById('invalidfd' + i).style.display != 'none' && form.classList.contains('was-validated')) {
 		// 	document.getElementById('uploadid' + i).style.border = '1px solid #dc3545';
 		// }else{
@@ -1510,9 +1510,9 @@ function UploadFiles() {
 			
 			const files = this.files; // получаем массив выбранных файлов
 
-			let totalSize = 0; // устанавливаем начальное значение суммарного размера файлов
+			var totalSize = 0; // устанавливаем начальное значение суммарного размера файлов
 
-			for (let i = 0; i < files.length; i++) {
+			for (var i = 0; i < files.length; i++) {
 				const file = files[i];
 
 				// проверяем тип файла
