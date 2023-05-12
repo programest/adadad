@@ -791,10 +791,10 @@ function InvalidUpload() {
   }
 
  
-function checkAge() {
+  function checkAge() {
 	const birthdayInput = document.getElementById('dateBirthday0').value;
 	const birthdayParts = birthdayInput.split('.');
-	const birthday = new Date(`${birthdayParts[1]}.${birthdayParts[0]}.${birthdayParts[2]}`);
+	const birthday = new Date(birthdayParts[2], birthdayParts[1] - 1, birthdayParts[0]);
 	const today = new Date();
 	var age = today.getFullYear() - birthday.getFullYear();
 	const monthDiff = today.getMonth() - birthday.getMonth();
@@ -806,9 +806,7 @@ function checkAge() {
 		return true;
 	}
 	return false;
-
 }
-
 
 
 
@@ -1369,7 +1367,7 @@ function get_countries(current_lang, resident) {
 
 			if (resident) {
 
-				var option_data_kz = '<option value=""   disabled class="sel" >Выберите страну</option> <option  data-currency="KZT" data-zone="3" data-flag-name="kz"  data-name-lat="Kazakhstan" value="1" >Казахстан</option> ';
+				var option_data_kz = '<option value=""   disabled class="sel" >Выберите страну</option> <option selected  data-currency="KZT" data-zone="3" data-flag-name="kz"  data-name-lat="Kazakhstan" value="1" >Казахстан</option> ';
 			} else {
 				var option_data = '<option value=""   disabled class="sel" >Выберите страну</option>'
 			}

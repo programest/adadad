@@ -459,8 +459,8 @@ function Resident() {
 	if (residentButton.options[residentButton.selectedIndex].value == 1) {
 		var nn = document.querySelectorAll('.pasport-pattern')
 		for (var i = 0; i < nn.length; i++) {
-			nn[i].setAttribute('pattern', '[N]\\d{7}');
-			nn[i].maxLength = 8;
+			nn[i].setAttribute('pattern', '[N]\\d{8}');
+			nn[i].maxLength = 9;
 		}
 
 		//Если резидент, то добавлять в value Казахстан и убирать возможность редактировать
