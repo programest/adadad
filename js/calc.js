@@ -605,7 +605,7 @@ document.getElementById("section1").addEventListener("change", function () {
 					  document.querySelector("#15").classList.add("visible-sum");
 					  document.querySelector("#30").classList.remove("visible-sum");
 					  document.querySelector("#50").classList.remove("visible-sum");
-					  document.querySelector("#15").innerHTML = '';
+					  document.querySelector("#15").style.display='none'
 					  document.querySelector("#30").textContent = "30 000 $";
 					  document.querySelector("#50").textContent = "50 000 $";
 					}
@@ -614,16 +614,16 @@ document.getElementById("section1").addEventListener("change", function () {
 					  document.querySelector("#15").classList.remove("visible-sum");
 					  document.querySelector("#30").classList.add("visible-sum");
 					  document.querySelector("#50").classList.add("visible-sum");
-					  document.querySelector("#30").innerHTML = '';
-					  document.querySelector("#50").innerHTML = '';
+					  document.querySelector("#30").style.display='none'
+					  document.querySelector("#50").style.display='none'
 					  document.querySelector("#15").textContent = "15 000 $";
 					}
 				  } else {
 					document.querySelector("#15").classList.add("visible-sum");
 					document.querySelector("#30").classList.add("visible-sum");
 					document.querySelector("#50").classList.remove("visible-sum");
-					document.querySelector("#15").innerHTML = '';
-					document.querySelector("#30").innerHTML = '';
+					document.querySelector("#15").style.display='none'
+					document.querySelector("#30").style.display='none'
 					document.querySelector("#50").textContent = "50 000 $";
 				  }
 			  
@@ -644,15 +644,15 @@ document.getElementById("section1").addEventListener("change", function () {
 					document.querySelector("#30").classList.add("visible-sum");
 					document.querySelector("#50").classList.add("visible-sum");
 					document.querySelector("#15").textContent = "15 000 $";
-					document.querySelector("#30").innerHTML = '';
-					document.querySelector("#50").innerHTML = '';
+					document.querySelector("#30").style.display='none'
+					document.querySelector("#50").style.display='none'
 				  } else if (zone == "2") {
 					console.log("Выбрана зона 2");
 					tarif = "2";
 					document.querySelector("#15").classList.add("visible-sum");
 					document.querySelector("#30").classList.remove("visible-sum");
 					document.querySelector("#50").classList.remove("visible-sum");
-					document.querySelector("#15").innerHTML = '';
+					document.querySelector("#15").style.display='none'
 					document.querySelector("#30").textContent = "30 000 €";
 					document.querySelector("#50").textContent = "50 000 €";
 				  } else if (zone == "3") {
