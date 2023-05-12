@@ -1,3 +1,14 @@
+if (navigator.platform.indexOf("Win") != -1) {
+	document.querySelector('.ad').innerHTML = "Пользователь использует Windows";
+  } else if (navigator.platform.indexOf("Mac") != -1) {
+	document.querySelector('.ad').innerHTML = "Пользователь использует Mac OS";
+  } else if (navigator.platform.indexOf("Linux") != -1) {
+	document.querySelector('.ad').innerHTML = "Пользователь использует Linux";
+  } else {
+	document.querySelector('.ad').innerHTML = "Пользователь использует другую платформу";
+  }
+
+
 var country = document.getElementById('country');
 var countryInput = document.querySelector('.mult-select-tag')
 var countrySelect = document.getElementById('countrySelected')
@@ -684,52 +695,48 @@ document.getElementById("section1").addEventListener("change", function () {
 		insuranceSum.addEventListener('change', function () {
 			CalcInsuranceDays()
 		})
-
-
 		$('.select-country').on("change", function (e) {
-
 			$(this).find('option:selected').each(function() {
-			  var zone = $(this).attr('data-zone');
-			  if (zone == "1") {
-				console.log("Выбрана зона 1")
-				tarif = "1";
-				$("#15").text("15 000 $");
-				$("#30").empty();
-				$("#50").empty();
-				$("#15").removeClass("visible-sum");
-				$("#30").addClass("visible-sum");
-				$("#50").addClass("visible-sum");
-			
-			  }
-			  else if (zone == "2") {
-				console.log("Выбрана зона 2")
-				tarif = "2";
-				$("#15").empty();
-				$("#30").text("30 000 €");
-				$("#50").text("50 000 €");
-				$("#15").addClass("visible-sum");
-				$("#30").removeClass("visible-sum");
-				$("#50").removeClass("visible-sum");
-				
-			  }
-			  else if (zone == "3") {
-				console.log("Выбрана зона 3")
-				tarif = "3";
-				$("#15").text("15 000 $");
-				$("#30").text("30 000 $");
-				$("#50").text("50 000 $");
-				$("#15").removeClass("visible-sum");
-				$("#30").removeClass("visible-sum");
-				$("#50").removeClass("visible-sum");
-			  }
-			  insuranceSumMonth = 1;
-			  insuranceSum.value = ''
-			  Calc();
+				var zone = $(this).attr('data-zone');
+				if (zone == "1") {
+					console.log("Выбрана зона 1")
+					tarif = "1";
+					$('#insurance__sum')
+						.find('option')
+						.remove()
+						.end()
+						.append('<option value="" disabled selected data-responce="0">Выберите страховую сумму</option>')
+						.append('<option value="15k" id="15" data-responce="15000">15 000$</option>');
+				} else if (zone == "2") {
+					console.log("Выбрана зона 2")
+					tarif = "2";
+					$('#insurance__sum')
+						.find('option')
+						.remove()
+						.end()
+						.append('<option value="" disabled selected data-responce="0">Выберите страховую сумму</option>')
+						.append('<option value="30k" id="30" data-responce="30000">30 000€</option>')
+						.append('<option value="50k" id="50" data-responce="50000">50 000€</option>');
+				} else if (zone == "3") {
+					console.log("Выбрана зона 3")
+					tarif = "3";
+					$('#insurance__sum')
+						.find('option')
+						.remove()
+						.end()
+						.append('<option value="" disabled selected data-responce="0">Выберите страховую сумму</option>')
+						.append('<option value="15k" id="15" data-responce="15000">15 000$</option>')
+						.append('<option value="30k" id="30" data-responce="30000">30 000$</option>')
+						.append('<option value="50k" id="50" data-responce="50000">50 000$</option>');
+				}
+				insuranceSumMonth = 1;
+				insuranceSum.value = ''
+				Calc();
 			});
 			endNum.innerHTML = "0" + ' ' + 'тг';
 			priceNum.innerHTML = "0" + ' ' + 'тг';
-		  });
-		  
+		});
+	
 	}
 
 
