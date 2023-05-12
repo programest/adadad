@@ -1,15 +1,7 @@
 
-if (navigator.platform.indexOf("Win") != -1) {
-	document.querySelector('.ad').innerHTML = "Пользователь использует Windows";
-  } else if (navigator.platform.indexOf("Mac") != -1) {
-	document.querySelector('.ad').innerHTML = "Пользователь использует Mac OS";
-  } else if (navigator.platform.indexOf("Linux") != -1) {
-	document.querySelector('.ad').innerHTML = "Пользователь использует Linux";
-  } else {
-	
-	document.querySelector('.ad').innerHTML = navigator.platform
-  }
+var isApple = /Mac|iPhone|iPod|iPad/.test(navigator.platform);
 
+// if (isApple)/////
 
 var country = document.getElementById('country');
 var countryInput = document.querySelector('.mult-select-tag')
@@ -109,35 +101,21 @@ if (dateStart) {
 	})
 }
 function convertDate(dateString, innde) {
-	// if (!dateString) {
-	// 	return '';
-	//   }
-	// Разбиваем строку на части, используя точку в качестве разделителя
 	const parts = dateString.split('.');
-
-	// Создаем новую дату в формате "yyyy.mm.dd"
-	const newDate = parts[2] + '.' + parts[1] + '.' + parts[0];
-
-	// Создаем объект Date с помощью новой даты
+	const newDate = parts[2] + '/' + parts[1] + '/' + parts[0];
 	const date = new Date(newDate);
-
-	// Добавляем один день к дате
 	if (innde === 'days') {
-		date.setDate(date.getDate() + 1);
+	  date.setDate(date.getDate() + 1);
 	} else if (innde === 'year') {
-		date.setDate(date.getDate() + 364);
+	  date.setDate(date.getDate() + 364);
 	}
-
-	// Получаем новые значения дня, месяца и года
 	const day = date.getDate();
 	const month = date.getMonth() + 1;
 	const year = date.getFullYear();
-
-	// Форматируем дату в строку в нужном формате
-	const formattedDate = year + '.' + (month < 10 ? '0' : '') + month + '.' + (day < 10 ? '0' : '') + day;
+	const formattedDate = year + '/' + (month < 10 ? '0' : '') + month + '/' + (day < 10 ? '0' : '') + day;
 	console.log(formattedDate)
 	return formattedDate;
-}
+  }
 
 
 // Функция для расчета
