@@ -2244,6 +2244,7 @@ ul {
   display: none;
 }
 .visible-sum{
+  opacity: 0;
   display: none;
 }
 .select2-container--classic .select2-selection--single{

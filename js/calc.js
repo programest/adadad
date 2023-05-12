@@ -589,134 +589,88 @@ document.getElementById("section1").addEventListener("change", function () {
 			});
 
 			if (selectedTextss.length > 1) {
-
 				for (var item = 0; item < allZone.length; item++) {
-
-					if (allZone.length == 1) {
-						if (allZone.includes("3")) {
-							tarif = "3";
-							$("#15").text("15 000 $");
-							$("#30").text("30 000 $");
-							$("#50").text("50 000 $");
-							$("#15").removeClass("visible-sum");
-							$("#30").removeClass("visible-sum");
-							$("#50").removeClass("visible-sum");
-						} if (allZone.includes("2")) {
-							tarif = "2";
-							$("#15").addClass(" visible-sum");
-							$("#30").removeClass("visible-sum");
-							$("#50").removeClass("visible-sum");
-							$("#15").empty();
-							$("#30").text("30 000 $");
-							$("#50").text("50 000 $");
-						} if (allZone.includes("1")) {
-							tarif = "1";
-							$("#15").removeClass("visible-sum");
-							$("#30").addClass("visible-sum");
-							$("#50").addClass("visible-sum");
-							$("#30").empty();
-							$("#50").empty();
-							$("#15").text("15 000 $");
-						}
-					} else {
-						$("#15").addClass("visible-sum");
-						$("#30").addClass("visible-sum");
-						$("#50").removeClass("visible-sum");
-						$("#15").empty();
-						$("#30").empty();
-						$("#50").text("50 000 $");
+				  if (allZone.length == 1) {
+					if (allZone.includes("3")) {
+					  tarif = "3";
+					  document.querySelector("#15").textContent = "15 000 $";
+					  document.querySelector("#30").textContent = "30 000 $";
+					  document.querySelector("#50").textContent = "50 000 $";
+					  document.querySelector("#15").classList.remove("visible-sum");
+					  document.querySelector("#30").classList.remove("visible-sum");
+					  document.querySelector("#50").classList.remove("visible-sum");
 					}
-
-
-
-					// НОРМАЛЬНАЯ ЛОГИКА ДЛЯ ВЫБОРА СТРАН
-					// for (var item = 0; item < allZone.length; item++) {
-					// 	console.log(allZone[item])
-					// 	if (allZone.includes("3")) {
-					// 		tarif = "3";
-					// 		$("#15").text("15 000 $");
-					// 		$("#30").text("30 000 $");
-					// 		$("#50").text("50 000 $");
-					// 		$("#15").addClass(" visible-sum");
-					// 		$("#30").addClass(" visible-sum");
-					// 		$("#50").removeClass(" visible-sum");
-					// 	} else if (allZone.includes("2")) {
-					// 		tarif = "2";
-					// 		$("#15").addClass(" visible-sum");
-					// 		$("#30").addClass(" visible-sum");
-					// 		$("#50").removeClass(" visible-sum");
-					// 		$("#50").text("50 000 €");
-					// 	} else {
-
-					// 		tarif = "1";
-					// 		$("#15").removeClass(" visible-sum");
-					// 		$("#30").addClass(" visible-sum");
-					// 		$("#50").addClass(" visible-sum");
-					// 		$("#30").text("30 000 $");
-					// 		$("#50").text("50 000 $");
-					// 		$("#15").text("15 000 $");
-					// 	}
-
-					// }
-
-
-
-
-					insuranceSumMonth = 1;
-					insuranceSum.value = ''
-					endNum.innerHTML = "0" + ' ' + 'тг';
-					priceNum.innerHTML = "0" + ' ' + 'тг';
-					Calc()
-
-
-
+					if (allZone.includes("2")) {
+					  tarif = "2";
+					  document.querySelector("#15").classList.add("visible-sum");
+					  document.querySelector("#30").classList.remove("visible-sum");
+					  document.querySelector("#50").classList.remove("visible-sum");
+					  document.querySelector("#15").innerHTML = '';
+					  document.querySelector("#30").textContent = "30 000 $";
+					  document.querySelector("#50").textContent = "50 000 $";
+					}
+					if (allZone.includes("1")) {
+					  tarif = "1";
+					  document.querySelector("#15").classList.remove("visible-sum");
+					  document.querySelector("#30").classList.add("visible-sum");
+					  document.querySelector("#50").classList.add("visible-sum");
+					  document.querySelector("#30").innerHTML = '';
+					  document.querySelector("#50").innerHTML = '';
+					  document.querySelector("#15").textContent = "15 000 $";
+					}
+				  } else {
+					document.querySelector("#15").classList.add("visible-sum");
+					document.querySelector("#30").classList.add("visible-sum");
+					document.querySelector("#50").classList.remove("visible-sum");
+					document.querySelector("#15").innerHTML = '';
+					document.querySelector("#30").innerHTML = '';
+					document.querySelector("#50").textContent = "50 000 $";
+				  }
+			  
+				  insuranceSumMonth = 1;
+				  insuranceSum.value = "";
+				  endNum.innerHTML = "0 тг";
+				  priceNum.innerHTML = "0 тг";
+				  Calc();
 				}
-
-			} else if (selectedTextss.length == 1) {
-				var selectedTexts = $(this).select2('data').map(function (option) {
-					var zone = option.element.getAttribute('data-zone')
-					if (zone == "1") {
-
-						console.log("Выбрана зона 1")
-						tarif = "1";
-						$("#15").removeClass("visible-sum");
-						$("#30").addClass("visible-sum");
-						$("#50").addClass("visible-sum");
-						$("#15").text("15 000 $");
-						$("#30").empty();
-						$("#50").empty();
-
-					}
-					else if (zone == "2") {
-
-						console.log("Выбрана зона 2")
-						tarif = "2";
-						$("#15").addClass("visible-sum");
-						$("#30").removeClass("visible-sum");
-						$("#50").removeClass("visible-sum");
-						$("#15").empty();
-						$("#30").text("30 000 €");
-						$("#50").text("50 000 €");
-
-					}
-					else if (zone == "3") {
-
-						console.log("Выбрана зона 3")
-
-						tarif = "3";
-						$("#15").text("15 000 $");
-						$("#30").text("30 000 $");
-						$("#50").text("50 000 $");
-						$("#15").removeClass(" visible-sum");
-						$("#30").removeClass(" visible-sum");
-						$("#50").removeClass(" visible-sum");
-					}
-					insuranceSumMonth = 1;
-					insuranceSum.value = ''
-					Calc()
+			  }  else if (selectedTextss.length == 1) {
+				var selectedTexts = document.querySelectorAll('#select-id option:checked');
+				selectedTexts.forEach(function (option) {
+				  var zone = option.getAttribute('data-zone');
+				  if (zone == "1") {
+					console.log("Выбрана зона 1");
+					tarif = "1";
+					document.querySelector("#15").classList.remove("visible-sum");
+					document.querySelector("#30").classList.add("visible-sum");
+					document.querySelector("#50").classList.add("visible-sum");
+					document.querySelector("#15").textContent = "15 000 $";
+					document.querySelector("#30").innerHTML = '';
+					document.querySelector("#50").innerHTML = '';
+				  } else if (zone == "2") {
+					console.log("Выбрана зона 2");
+					tarif = "2";
+					document.querySelector("#15").classList.add("visible-sum");
+					document.querySelector("#30").classList.remove("visible-sum");
+					document.querySelector("#50").classList.remove("visible-sum");
+					document.querySelector("#15").innerHTML = '';
+					document.querySelector("#30").textContent = "30 000 €";
+					document.querySelector("#50").textContent = "50 000 €";
+				  } else if (zone == "3") {
+					console.log("Выбрана зона 3");
+					tarif = "3";
+					document.querySelector("#15").textContent = "15 000 $";
+					document.querySelector("#30").textContent = "30 000 $";
+					document.querySelector("#50").textContent = "50 000 $";
+					document.querySelector("#15").classList.remove("visible-sum");
+					document.querySelector("#30").classList.remove("visible-sum");
+					document.querySelector("#50").classList.remove("visible-sum");
+				  }
+				  insuranceSumMonth = 1;
+				  insuranceSum.value = '';
+				  Calc();
 				});
-
-			}
+				document.querySelector("#50").style.display = "none";
+			  }
 
 		})
 		$('.select-country').prop('multiple', true);
@@ -739,22 +693,24 @@ document.getElementById("section1").addEventListener("change", function () {
 			  if (zone == "1") {
 				console.log("Выбрана зона 1")
 				tarif = "1";
-				$("#15").removeClass("visible-sum");
-				$("#30").addClass("visible-sum");
-				$("#50").addClass("visible-sum");
 				$("#15").text("15 000 $");
 				$("#30").empty();
 				$("#50").empty();
+				$("#15").removeClass("visible-sum");
+				$("#30").addClass("visible-sum");
+				$("#50").addClass("visible-sum");
+			
 			  }
 			  else if (zone == "2") {
 				console.log("Выбрана зона 2")
 				tarif = "2";
-				$("#15").addClass("visible-sum");
-				$("#30").removeClass("visible-sum");
-				$("#50").removeClass("visible-sum");
 				$("#15").empty();
 				$("#30").text("30 000 €");
 				$("#50").text("50 000 €");
+				$("#15").addClass("visible-sum");
+				$("#30").removeClass("visible-sum");
+				$("#50").removeClass("visible-sum");
+				
 			  }
 			  else if (zone == "3") {
 				console.log("Выбрана зона 3")
