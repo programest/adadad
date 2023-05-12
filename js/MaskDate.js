@@ -106,8 +106,8 @@ function maskDateInput(input, values) {
 				//Метод BIRTHDAY
 				//Проверка на 18 лет
 				currentDate.setFullYear(currentDate.getFullYear() - 18);
-				const formatter = new Intl.DateTimeFormat('ru-RU', datePattern);
-				const currentDateFormatted = formatter.format(currentDate);
+				// const formatter = new Intl.DateTimeFormat('ru-RU', datePattern);
+				// const currentDateFormatted = formatter.format(currentDate);
 				currentDate.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds());
 				if (inputDate > currentDate ) {
 					input.value = '';

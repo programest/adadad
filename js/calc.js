@@ -103,7 +103,7 @@ function convertDate(dateString, innde) {
 	const parts = dateString.split('.');
 
 	// Создаем новую дату в формате "yyyy.mm.dd"
-	const newDate = `${parts[2]}.${parts[1]}.${parts[0]}`;
+	const newDate = parts[2] + '.' + parts[1] + '.' + parts[0];
 
 	// Создаем объект Date с помощью новой даты
 	const date = new Date(newDate);
@@ -121,7 +121,7 @@ function convertDate(dateString, innde) {
 	const year = date.getFullYear();
 
 	// Форматируем дату в строку в нужном формате
-	const formattedDate = `${year}.${month < 10 ? '0' : ''}${month}.${day < 10 ? '0' : ''}${day}`;
+	const formattedDate = year + '.' + (month < 10 ? '0' : '') + month + '.' + (day < 10 ? '0' : '') + day;
 	console.log(formattedDate)
 	return formattedDate;
 }
@@ -606,7 +606,7 @@ document.getElementById("section1").addEventListener("change", function () {
 							$("#15").addClass(" visible-sum");
 							$("#30").removeClass("visible-sum");
 							$("#50").removeClass("visible-sum");
-							$("#15").text("");
+							$("#15").empty();
 							$("#30").text("30 000 $");
 							$("#50").text("50 000 $");
 						} if (allZone.includes("1")) {
@@ -614,16 +614,16 @@ document.getElementById("section1").addEventListener("change", function () {
 							$("#15").removeClass("visible-sum");
 							$("#30").addClass("visible-sum");
 							$("#50").addClass("visible-sum");
-							$("#30").text("");
-							$("#50").text("");
+							$("#30").empty();
+							$("#50").empty();
 							$("#15").text("15 000 $");
 						}
 					} else {
 						$("#15").addClass("visible-sum");
 						$("#30").addClass("visible-sum");
 						$("#50").removeClass("visible-sum");
-						$("#15").text(" ");
-						$("#30").text(" ");
+						$("#15").empty();
+						$("#30").empty();
 						$("#50").text("50 000 $");
 					}
 
@@ -683,8 +683,8 @@ document.getElementById("section1").addEventListener("change", function () {
 						$("#30").addClass("visible-sum");
 						$("#50").addClass("visible-sum");
 						$("#15").text("15 000 $");
-						$("#30").text("");
-						$("#50").text("");
+						$("#30").empty();
+						$("#50").empty();
 
 					}
 					else if (zone == "2") {
@@ -694,7 +694,7 @@ document.getElementById("section1").addEventListener("change", function () {
 						$("#15").addClass("visible-sum");
 						$("#30").removeClass("visible-sum");
 						$("#50").removeClass("visible-sum");
-						$("#15").text("");
+						$("#15").empty();
 						$("#30").text("30 000 €");
 						$("#50").text("50 000 €");
 
@@ -744,8 +744,8 @@ document.getElementById("section1").addEventListener("change", function () {
 					$("#30").addClass(" visible-sum");
 					$("#50").addClass(" visible-sum");
 					$("#15").text("15 000 $");
-					$("#30").text("");
-					$("#50").text("");
+					$("#30").empty();
+					$("#50").empty();
 
 
 				}
@@ -756,7 +756,7 @@ document.getElementById("section1").addEventListener("change", function () {
 					$("#15").addClass(" visible-sum");
 					$("#30").removeClass(" visible-sum");
 					$("#50").removeClass(" visible-sum");
-					$("#15").text("");
+					$("#15").empty();
 					$("#30").text("30 000 €");
 					$("#50").text("50 000 €");
 
