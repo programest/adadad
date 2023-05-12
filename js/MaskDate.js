@@ -36,9 +36,8 @@ function maskDateInput(input, values) {
             // Преобразую все данные в формат yyyy.mm.dd и записываю в переменную inputDate
 		        const inputDate = new Date(year, month - 1, day);
             // Устанавливаю часы и минуты в текущее время (чтобы не было проблем с сортировкой и сравнением дат)
-		        inputDate.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds()).toLocaleString('ru-RU', datePattern);
-                currentDate.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds()).toLocaleString('ru-RU', datePattern);
-
+		        inputDate.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds())
+                currentDate.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds(), currentDate.getMilliseconds())
 		    if (values === 'minus') {
              //Метод MINUS
             //Проверка на ввод меньше даты чем текушая дата
@@ -93,13 +92,9 @@ function maskDateInput(input, values) {
 					if ((firstInput > currentDate || firstInput.getTime() === currentDate.getTime()) && (inputDate > firstInput || inputDate.getTime() === firstInput.getTime())) {
                         //datepickerModificedEnd это экземпляр класса Datepicker (datepickerModificedEnd = new AirDatepicker('#datePasportEnd',)
 						if (datepickerModificedEnd && datepickerModificedStart) {
-							datepickerModificedEnd.setValue(inputDate);
+							datepickerModificedEnd.selectDate(inputDate);
 						}
-                       
 					}
-               
-					
-
 				}
 			
 		    } else if (values === 'birthday') {
