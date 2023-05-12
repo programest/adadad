@@ -734,52 +734,46 @@ document.getElementById("section1").addEventListener("change", function () {
 
 		$('.select-country').on("change", function (e) {
 
-			var selectedTexts = $(this).select2('data').map(function (option) {
-				var zone = option.element.getAttribute('data-zone')
-				if (zone == "1") {
-
-					console.log("Выбрана зона 1")
-					tarif = "1";
-					$("#15").removeClass(" visible-sum");
-					$("#30").addClass(" visible-sum");
-					$("#50").addClass(" visible-sum");
-					$("#15").text("15 000 $");
-					$("#30").empty();
-					$("#50").empty();
-
-
-				}
-				else if (zone == "2") {
-
-					console.log("Выбрана зона 2")
-					tarif = "2";
-					$("#15").addClass(" visible-sum");
-					$("#30").removeClass(" visible-sum");
-					$("#50").removeClass(" visible-sum");
-					$("#15").empty();
-					$("#30").text("30 000 €");
-					$("#50").text("50 000 €");
-
-				}
-				else if (zone == "3") {
-
-					console.log("Выбрана зона 3")
-
-					tarif = "3";
-					$("#15").text("15 000 $");
-					$("#30").text("30 000 $");
-					$("#50").text("50 000 $");
-					$("#15").removeClass(" visible-sum");
-					$("#30").removeClass(" visible-sum");
-					$("#50").removeClass(" visible-sum");
-				}
-				insuranceSumMonth = 1;
-				insuranceSum.value = ''
-				Calc()
+			$(this).find('option:selected').each(function() {
+			  var zone = $(this).attr('data-zone');
+			  if (zone == "1") {
+				console.log("Выбрана зона 1")
+				tarif = "1";
+				$("#15").removeClass("visible-sum");
+				$("#30").addClass("visible-sum");
+				$("#50").addClass("visible-sum");
+				$("#15").text("15 000 $");
+				$("#30").empty();
+				$("#50").empty();
+			  }
+			  else if (zone == "2") {
+				console.log("Выбрана зона 2")
+				tarif = "2";
+				$("#15").addClass("visible-sum");
+				$("#30").removeClass("visible-sum");
+				$("#50").removeClass("visible-sum");
+				$("#15").empty();
+				$("#30").text("30 000 €");
+				$("#50").text("50 000 €");
+			  }
+			  else if (zone == "3") {
+				console.log("Выбрана зона 3")
+				tarif = "3";
+				$("#15").text("15 000 $");
+				$("#30").text("30 000 $");
+				$("#50").text("50 000 $");
+				$("#15").removeClass("visible-sum");
+				$("#30").removeClass("visible-sum");
+				$("#50").removeClass("visible-sum");
+			  }
+			  insuranceSumMonth = 1;
+			  insuranceSum.value = ''
+			  Calc();
 			});
 			endNum.innerHTML = "0" + ' ' + 'тг';
 			priceNum.innerHTML = "0" + ' ' + 'тг';
-		});
+		  });
+		  
 	}
 
 
