@@ -1,3 +1,4 @@
+
 if (navigator.platform.indexOf("Win") != -1) {
 	document.querySelector('.ad').innerHTML = "Пользователь использует Windows";
   } else if (navigator.platform.indexOf("Mac") != -1) {
@@ -5,7 +6,8 @@ if (navigator.platform.indexOf("Win") != -1) {
   } else if (navigator.platform.indexOf("Linux") != -1) {
 	document.querySelector('.ad').innerHTML = "Пользователь использует Linux";
   } else {
-	document.querySelector('.ad').innerHTML = "Пользователь использует другую платформу";
+	
+	document.querySelector('.ad').innerHTML = navigator.platform
   }
 
 
